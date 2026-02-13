@@ -1,0 +1,201 @@
+/* Estilos generales del Wizard */
+.wizard-container-1 {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000000 0%, #000000 100%);
+}
+.wizard-container {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000000 0%, #000000 100%);
+}
+
+/* Indicadores de pasos */
+.steps-indicator {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  position: relative;
+  max-width: 300px;
+  margin: -40px auto;
+}
+
+.step-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.step-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #000000;
+  border: 2px solid rgba(255, 136, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.step-indicator.active {
+  background: #ff8800;
+  color: white;
+  transform: scale(1.1);
+}
+
+.step-indicator.completed {
+  background: #4caf50;
+  border: 2px solid #4caf50;
+  color: white;
+}
+
+.step-indicator.disabled {
+  background: #000000;
+  border: 2px solid rgba(255, 136, 0, 0.4);
+  cursor: not-allowed;
+
+}
+
+.step-number {
+  font-size: 16px;
+    color: #ffffff;
+}
+
+.step-label {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Conector entre pasos */
+.step-wrapper:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  z-index: 1;
+}
+
+.step-wrapper:not(:last-child).completed::after {
+  background: #4caf50;
+}
+
+/* Contenido de los pasos */
+.wizard-content-1 {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 50px;
+}
+.wizard-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.step-content {
+  display: none;
+}
+
+.step-content.active {
+  display: block;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Contenedor de pago */
+.payment-container {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(255, 136, 0, 0.2);
+}
+
+.payment-container h2 {
+  color: #ff8800;
+  margin-bottom: 20px;
+}
+
+.payment-container p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+/* Botones */
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 10px;
+  min-width: 120px;
+}
+
+.btn-primary {
+  background: #ff8800;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #f57c00;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: #666;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #555;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .steps-indicator {
+    margin: 20px 15px;
+  }
+
+  .step-label {
+    font-size: 10px;
+  }
+
+  .step-indicator {
+    width: 30px;
+    height: 30px;
+  }
+
+  .step-number {
+    font-size: 12px;
+  }
+
+  .wizard-content-1 {
+    padding: 15px;
+  }
+    .wizard-content {
+    padding: 15px;
+  }
+
+  .payment-container {
+    padding: 20px;
+  }
+}

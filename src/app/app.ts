@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { WizardComponent } from './features/certificados/pages/wizard.component';
+import { LogoHeaderComponent } from './shared/components/logo-header/logo-header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [WizardComponent, LogoHeaderComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
