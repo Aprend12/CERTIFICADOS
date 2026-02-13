@@ -155,18 +155,21 @@
 }
 
 .btn-primary:hover {
-  background: #f57c00;
+  background: #ff8800;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
 }
 
 .btn-secondary {
-  background: #666;
+  background: #ff8800;
   color: white;
+
 }
 
 .btn-secondary:hover {
-  background: #555;
+  background: #ff8800;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
 }
 
 /* Responsive */
