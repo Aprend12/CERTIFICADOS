@@ -21,7 +21,7 @@ export class StepDatosComponent {
       documento_identidad: ['', [Validators.required]],
       numero_estudiante: ['', [Validators.required]],
       numero_programa: ['', [Validators.required]],
-      tipoCertificado: ['', [Validators.required]]
+      tipo_certificado: ['', [Validators.required]]
     });
   }
 
@@ -38,8 +38,7 @@ export class StepDatosComponent {
         documento_identidad: formValue.documento_identidad,
         numero_estudiante: formValue.numero_estudiante,
         numero_programa: formValue.numero_programa,
-        tipo_certificado: formValue.tipoCertificado,
-        nombre: ''
+        tipo_certificado: formValue.tipo_certificado
       };
       this.datosSubmitted.emit(datos);
     }

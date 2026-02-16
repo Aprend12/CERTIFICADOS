@@ -1,24 +1,20 @@
+
 <div class="preview-layout">
   <div class="content-medio">
     <div class="form-group">
-      <label for="nombre_preview">nombre estudiante<span class="required">*</span></label>
-      <input type="text" id="nombre_preview" name="nombre_preview"
-            [value]="datos.nombre || 'Daniel García Pérez'" readonly>
-    </div>
-    <div class="form-group">
-      <label for="documento_preview">numero documento<span class="required">*</span></label>
-      <input type="text" id="documento_preview" name="documento_preview"
-            [value]="datos.documento_identidad || '10236580'" readonly>
-    </div>
-    <div class="form-group">
-      <label for="precio_preview">precio documento<span class="required">*</span></label>
-      <input type="text" id="precio_preview" name="precio_preview"
-            value="23,000 COL$" readonly>
-    </div>
-    <div class="form-group">
-      <label for="certificado_preview">nombre certificado<span class="required">*</span></label>
+      <label for="certificado_preview">Tipo de certificado</label>
       <input type="text" id="certificado_preview" name="certificado_preview"
-            [value]="getTitulo(datos.tipo_certificado) || 'para pension'" readonly>
+            [value]="titulo" readonly>
+    </div>
+    <div class="form-group">
+      <label for="documento_identidad">Documento de identidad</label>
+      <input type="text" id="documento_identidad" name="documento_identidad"
+            [value]="documentoIdentidad" readonly>
+    </div>
+    <div class="form-group">
+      <label for="numero_estudiante">Número de estudiante</label>
+      <input type="text" id="numero_estudiante" name="numero_estudiante"
+            [value]="numeroEstudiante" readonly>
     </div>
   </div>
 

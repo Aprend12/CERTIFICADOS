@@ -3,11 +3,9 @@ export interface CertificadoDatos {
   numero_estudiante: string;
   numero_programa: string;
   tipo_certificado: string;
-  nombre: string;
 }
 
 export interface DatosCertificado {
-  nombre: string;
   documento: string;
   programa: string;
   snies: string;

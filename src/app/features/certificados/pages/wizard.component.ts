@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { StepDatosComponent } from '../components/step-datos/step-datos.component';
 import { StepPreviewComponent } from '../components/step-preview/step-preview.component';
+import { StepPagosComponent } from '../components/step-pagos/step-pagos.component';
 import { StepDescargaComponent } from '../components/step-descarga/step-descarga.component';
+import { WizardService } from '../../../core/services/wizard.service';
+import { CertificadoService } from '../../../core/services/certificado.service';
+import { CertificadoDatos } from '../../../core/models/certificado.model';
 
 @Component({
   selector: 'app-wizard',
@@ -10,98 +14,64 @@ import { StepDescargaComponent } from '../components/step-descarga/step-descarga
     StepDatosComponent,
     StepPreviewComponent,
     StepDescargaComponent,
+    StepPagosComponent,
   ],
   templateUrl: './wizard.component.html',
   styleUrls: ['./wizard.component.css']
 })
 export class WizardComponent {
-  currentStep: number = 1;
-  totalSteps: number = 4;
-  datosUsuario: any = {};
-  certificadoHTML: string = '';
+  wizardService = inject(WizardService);
+  private certificadoService = inject(CertificadoService);
 
-  constructor() { }
+  datosUsuario: CertificadoDatos = {
+    documento_identidad: '',
+    numero_estudiante: '',
+    numero_programa: '',
+    tipo_certificado: ''
+  };
 
-  prevStep() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-    }
+  getCertificadoHTML(): string {
+    return this.certificadoService.generarPreview(this.datosUsuario);
   }
 
-  setStep(step: number) {
-    // Validar navegación: solo permitir ir a pasos completados o el siguiente paso
-    if (step >= 1 && step <= this.totalSteps) {
-
-      if (step < this.currentStep) {
-        this.currentStep = step;
-      }
-      // Permitir ir al siguiente paso solo si hay datos
-      else if (step === this.currentStep + 1) {
-
-        if (step === 2 && Object.keys(this.datosUsuario).length === 0) {
-          return;
-        }
-        this.currentStep = step;
-      }
-      // Permitir quedarse en el mismo paso
-      else if (step === this.currentStep) {
-        // No hacer nada
-      }
-    }
+  getCertificadoTitulo(): string {
+    return this.certificadoService.getTitulo(this.datosUsuario.tipo_certificado);
   }
 
-  // Método para navegación directa sin restricciones (si se quiere permitir navegación libre)
-  setStepDirect(step: number) {
-    if (step >= 1 && step <= this.totalSteps) {
-      this.currentStep = step;
-    }
-  }
-
-  isStepActive(step: number): boolean {
-    return this.currentStep === step;
-  }
-
-  isStepCompleted(step: number): boolean {
-    return this.currentStep > step;
-  }
-
-  canAccessStep(step: number): boolean {
-    // Permitir siempre ir al paso actual
-    if (step === this.currentStep) {
-      return true;
-    }
-    if (step < this.currentStep) {
-      return true;
-    }
-
-    if (step === this.currentStep + 1) {
-      if (step === 2) {
-        return Object.keys(this.datosUsuario).length > 0;
-      }
-      return true;
-    }
-
-    return false;
+  onDatosSubmitted(datos: CertificadoDatos) {
+    this.datosUsuario = datos;
+    this.certificadoService.setDatos(datos);
+    this.wizardService.next();
   }
 
   getStepTitle(step: number): string {
-    const titles = {
-      1: 'Ingresar datos del certificado',
-      2: 'Vista previa del certificado',
-      3: 'Realizar pago',
-      4: 'Descargar certificado'
-    };
-    return titles[step as keyof typeof titles] || '';
+    return this.wizardService.getStepTitle(step - 1);
+  }
+
+  isStepActive(step: number): boolean {
+    return this.wizardService.isStepActive(step - 1);
+  }
+
+  isStepCompleted(step: number): boolean {
+    return this.wizardService.isStepCompleted(step - 1);
+  }
+
+  canAccessStep(step: number): boolean {
+    return this.wizardService.canAccessStep(step - 1);
+  }
+
+  setStep(step: number): void {
+    this.wizardService.goTo(step - 1);
   }
 
   resetWizard() {
-    this.currentStep = 1;
-    this.datosUsuario = {};
-    this.certificadoHTML = '';
-  }
-
-  onDatosSubmitted(datos: any) {
-    this.datosUsuario = datos;
-    this.setStep(2);
+    this.wizardService.reset();
+    this.datosUsuario = {
+      documento_identidad: '',
+      numero_estudiante: '',
+      numero_programa: '',
+      tipo_certificado: ''
+    };
+    this.certificadoService.limpiar();
   }
 }
