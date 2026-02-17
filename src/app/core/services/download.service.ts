@@ -1,9 +1,13 @@
+// Servicio responsable de manejar la descarga de archivos.
+
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DownloadService {
+
+// Descarga un contenido HTML como archivo en el navegador.
 
   descargar(html: string, nombreArchivo: string = 'certificado.html'): void {
     const elemento = document.createElement('a');

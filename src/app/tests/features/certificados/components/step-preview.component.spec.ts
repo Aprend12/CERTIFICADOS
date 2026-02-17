@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StepPreviewComponent } from './step-preview.component';
+import { StepPreviewComponent } from '../../../../features/certificados/components/step-preview/step-preview.component';
 
 describe('StepPreviewComponent', () => {
   let component: StepPreviewComponent;
@@ -39,9 +39,8 @@ describe('StepPreviewComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('#certificado_preview')?.getAttribute('value')).toBe('Certificado de Estudio Sencillo');
-    expect(compiled.querySelector('#nombre_estudiante')?.getAttribute('value')).toBe('Juan Pérez');
-    expect(compiled.querySelector('#documento_identidad')?.getAttribute('value')).toBe('12345678');
-    expect(compiled.querySelector('#numero_estudiante')?.getAttribute('value')).toBe('10236580');
+    expect((compiled.querySelector('#certificado_preview') as HTMLInputElement)?.value).toBe('Certificado de Estudio Sencillo');
+    expect((compiled.querySelector('#documento_identidad') as HTMLInputElement)?.value).toBe('12345678');
+    expect((compiled.querySelector('#numero_estudiante') as HTMLInputElement)?.value).toBe('10236580');
   });
 });

@@ -1,3 +1,7 @@
+/**
+ * Componente del primer paso del wizard para ingreso de datos del certificado.
+ * Gestiona el formulario de datos del estudiante.
+ */
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -31,6 +35,8 @@ export class StepDatosComponent {
     this.form.get(field)?.setValue(value);
   }
 
+// Emite los datos del formulario al componente padre.
+
   continuar() {
     if (this.form.valid) {
       const formValue = this.form.value;
@@ -38,7 +44,8 @@ export class StepDatosComponent {
         documento_identidad: formValue.documento_identidad,
         numero_estudiante: formValue.numero_estudiante,
         numero_programa: formValue.numero_programa,
-        tipo_certificado: formValue.tipo_certificado
+        tipo_certificado: formValue.tipo_certificado,
+        nombre_estudiante: ''
       };
       this.datosSubmitted.emit(datos);
     }

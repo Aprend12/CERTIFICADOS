@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { WizardComponent } from './wizard.component';
-import { WizardService } from '../../../core/services/wizard.service';
-import { CertificadoService } from '../../../core/services/certificado.service';
+import { WizardComponent } from '../../../../features/certificados/pages/wizard.component';
+import { WizardService } from '../../../../core/services/wizard.service';
+import { CertificadoService } from '../../../../core/services/certificado.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { vi } from 'vitest';
 
@@ -38,21 +38,20 @@ describe('WizardComponent', () => {
   });
 
   it('should call next on datos submitted', () => {
-    const wizardService = TestBed.inject(WizardService);
+    const wizardService = TestBed.inject(WizardService) as any;
     const nextSpy = vi.spyOn(wizardService, 'next');
     component.onDatosSubmitted({
       documento_identidad: '123',
       numero_estudiante: '456',
       numero_programa: '789',
       tipo_certificado: 'sencillo',
-      nombre: 'Test'
     });
     expect(nextSpy).toHaveBeenCalled();
   });
 
   it('should reset wizard', () => {
-    const wizardService = TestBed.inject(WizardService);
-    const certificadoService = TestBed.inject(CertificadoService);
+    const wizardService = TestBed.inject(WizardService) as any;
+    const certificadoService = TestBed.inject(CertificadoService) as any;
     const resetSpy = vi.spyOn(wizardService, 'reset');
     const limpiarSpy = vi.spyOn(certificadoService, 'limpiar');
     component.resetWizard();

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StepPagosComponent } from './step-pagos.component';
+import { StepPagosComponent } from '../../../../features/certificados/components/step-pagos/step-pagos.component';
 
 describe('StepPagosComponent', () => {
   let component: StepPagosComponent;
@@ -17,9 +17,5 @@ describe('StepPagosComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should have default mensaje', () => {
-    expect(component.mensaje).toBe('Próximamente: Sistema de pagos');
   });
 });

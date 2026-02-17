@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StepDatosComponent } from './step-datos.component';
+import { StepDatosComponent } from '../../../../features/certificados/components/step-datos/step-datos.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
@@ -28,7 +28,7 @@ describe('StepDatosComponent', () => {
       documento_identidad: '12345678',
       numero_estudiante: '10236580',
       numero_programa: '123456',
-      tipoCertificado: 'sencillo'
+      tipo_certificado: 'sencillo'
     });
 
     component.continuar();
@@ -38,7 +38,7 @@ describe('StepDatosComponent', () => {
       numero_estudiante: '10236580',
       numero_programa: '123456',
       tipo_certificado: 'sencillo',
-      nombre: ''
+      nombre_estudiante: ''
     });
   });
 

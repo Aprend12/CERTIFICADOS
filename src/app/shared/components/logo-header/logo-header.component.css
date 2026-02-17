@@ -9,7 +9,6 @@
   filter: grayscale(100%) brightness(0.6) contrast(2.0);
 }
 
-/* Logo */
 .logo-container {
   text-align: end;
   padding: 18px 30px;

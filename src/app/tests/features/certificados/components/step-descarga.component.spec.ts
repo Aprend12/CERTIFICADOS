@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StepDescargaComponent } from './step-descarga.component';
+import { StepDescargaComponent } from '../../../../features/certificados/components/step-descarga/step-descarga.component';
 import { CertificadoService } from '../../../../core/services/certificado.service';
 import { DownloadService } from '../../../../core/services/download.service';
 import { CertificadoDatos } from '../../../../core/models/certificado.model';
@@ -17,7 +17,6 @@ describe('StepDescargaComponent', () => {
     numero_estudiante: '10236580',
     numero_programa: '123456',
     tipo_certificado: 'sencillo',
-    nombre: 'Test User'
   };
 
   beforeEach(async () => {
@@ -58,5 +57,28 @@ describe('StepDescargaComponent', () => {
     vi.spyOn(window, 'alert').mockImplementation(() => {});
     component.descargar();
     expect(mockDownloadService.descargar).toHaveBeenCalledWith('<div>Test</div>', 'certificado.html');
+  });
+
+  it('should display certificate in template', () => {
+    component.certificadoFinal = '<div>Test Certificate Content</div>';
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.certificado')?.innerHTML).toContain('Test Certificate Content');
+  });
+
+  it('should have download button', () => {
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.btn-descargar')).toBeTruthy();
+    expect(compiled.querySelector('.btn-descargar')?.textContent).toContain('Descargar');
+  });
+
+  it('should show title', () => {
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Certificado Generado');
   });
 });

@@ -1,3 +1,4 @@
+/** Servidor Express para Angular Universal (SSR - Server Side Rendering).*/
 import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
@@ -7,26 +8,16 @@ import {
 import express from 'express';
 import { join } from 'node:path';
 
+/**Ruta a la carpeta de archivos estáticos del navegador */
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
+/**Instancia de la aplicación Express*/
 const app = express();
+
+/**Motor de aplicación Angular para SSR*/
 const angularApp = new AngularNodeAppEngine();
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
-
-/**
- * Serve static files from /browser
- */
+/**Servir archivos estáticos desde la carpeta /browserConfiguración optimizada para caché a largo plazo*/
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -35,9 +26,7 @@ app.use(
   }),
 );
 
-/**
- * Handle all other requests by rendering the Angular application.
- */
+/**Manejar todas las demás solicitudes renderizando la aplicación Angular.*/
 app.use((req, res, next) => {
   angularApp
     .handle(req)
@@ -47,10 +36,7 @@ app.use((req, res, next) => {
     .catch(next);
 });
 
-/**
- * Start the server if this module is the main entry point, or it is ran via PM2.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
- */
+/**Iniciar el servidor si este módulo es el punto de entrada principalo si se ejecuta a través de PM2.*/
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
   const port = process.env['PORT'] || 4000;
   app.listen(port, (error) => {
@@ -62,7 +48,5 @@ if (isMainModule(import.meta.url) || process.env['pm_id']) {
   });
 }
 
-/**
- * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
- */
+/**Manejador de solicitudes utilizado por la CLI de Angular(para dev-server y durante el build) o Firebase Cloud Functions.*/
 export const reqHandler = createNodeRequestHandler(app);

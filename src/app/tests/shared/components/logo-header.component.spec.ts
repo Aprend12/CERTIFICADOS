@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LogoHeaderComponent } from './logo-header.component';
+import { LogoHeaderComponent } from '../../../shared/components/logo-header/logo-header.component';
 
 describe('LogoHeaderComponent', () => {
   let component: LogoHeaderComponent;
@@ -17,5 +17,15 @@ describe('LogoHeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render logo header template', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.logo-container')).toBeTruthy();
+  });
+
+  it('should contain institution name', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.innerHTML).toContain('tecnologicadeloriente.edu.co');
   });
 });

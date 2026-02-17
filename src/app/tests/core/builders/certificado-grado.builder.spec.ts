@@ -1,0 +1,62 @@
+import { TestBed } from '@angular/core/testing';
+import { CertificadoGradoBuilder } from '../../../core/builders/certificado-grado.builder';
+import { DatosCertificado } from '../../../core/models/certificado.model';
+
+describe('CertificadoGradoBuilder', () => {
+  let builder: CertificadoGradoBuilder;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    builder = new CertificadoGradoBuilder();
+  });
+
+  it('should create', () => {
+    expect(builder).toBeTruthy();
+  });
+
+  it('should build certificate with correct title', () => {
+    const datos: DatosCertificado = createMockDatos();
+    const html = builder.build(datos, false);
+    
+    expect(html).toContain('Certificado Finalización y Próxima Ceremonia');
+  });
+
+  it('should contain grado information', () => {
+    const datos: DatosCertificado = createMockDatos();
+    const html = builder.build(datos, false);
+    
+    expect(html).toContain('GRADO');
+    expect(html).toContain('ceremonia');
+  });
+
+  it('should contain student information', () => {
+    const datos: DatosCertificado = createMockDatos();
+    const html = builder.build(datos, false);
+    
+    expect(html).toContain('Test User');
+    expect(html).toContain('12345678');
+  });
+
+  it('should mask data when preview is true', () => {
+    const datos: DatosCertificado = createMockDatos();
+    const html = builder.build(datos, true);
+    
+    expect(html).not.toContain('Test User');
+  });
+
+  function createMockDatos(): DatosCertificado {
+    return {
+      nombre: 'Test User',
+      documento: '12345678',
+      programa: 'Desarrollo de Software',
+      snies: '12345',
+      semestre: '10',
+      periodo: '2025-1',
+      fecha_expedicion: '2025-01-15',
+      fecha_inicio: '2025-01-01',
+      fecha_fin: '2025-06-30',
+      jornada: 'Diurna',
+      codigo: '10236580'
+    };
+  }
+});
