@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StepPagosComponent } from '../../../../features/certificados/components/step-pagos/step-pagos.component';
+import { StepPagosComponent } from '../../../../features/certificados/compra-certificado/components/step-pagos/step-pagos.component';
 
 describe('StepPagosComponent', () => {
   let component: StepPagosComponent;

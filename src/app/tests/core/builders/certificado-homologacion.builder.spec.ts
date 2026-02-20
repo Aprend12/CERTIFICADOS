@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoHomologacionBuilder } from '../../../core/builders/certificado-homologacion.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoHomologacionBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-homologacion.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoHomologacionBuilder', () => {
   let builder: CertificadoHomologacionBuilder;
@@ -18,15 +18,14 @@ describe('CertificadoHomologacionBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Certificado Primer Ingreso Homologado');
+    expect(html).toContain('CONSTANCIA DE HOMOLOGACIÓN');
   });
 
   it('should contain homologacion content', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('PRIMER INGRESO HOMOLOGADO');
-    expect(html).toContain('homologación');
+    expect(html).toContain('producto del reconocimiento');
   });
 
   it('should contain student information', () => {

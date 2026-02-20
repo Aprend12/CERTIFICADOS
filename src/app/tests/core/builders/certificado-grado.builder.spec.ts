@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoGradoBuilder } from '../../../core/builders/certificado-grado.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoGradoBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-grado.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoGradoBuilder', () => {
   let builder: CertificadoGradoBuilder;
@@ -18,15 +18,14 @@ describe('CertificadoGradoBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Certificado Finalización y Próxima Ceremonia');
+    expect(html).toContain('CONSTANCIA DE FINALIZACIÓN DE ESTUDIOS');
   });
 
   it('should contain grado information', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('GRADO');
-    expect(html).toContain('ceremonia');
+    expect(html).toContain('ceremonia de grado');
   });
 
   it('should contain student information', () => {

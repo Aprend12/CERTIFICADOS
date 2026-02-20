@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StepDescargaComponent } from '../../../../features/certificados/components/step-descarga/step-descarga.component';
-import { CertificadoService } from '../../../../core/services/certificado.service';
-import { DownloadService } from '../../../../core/services/download.service';
-import { CertificadoDatos } from '../../../../core/models/certificado.model';
+import { StepDescargaComponent } from '../../../../features/certificados/compra-certificado/components/step-descarga/step-descarga.component';
+import { CertificadoService } from '../../../../features/certificados/compra-certificado/core/services/certificado.service';
+import { DownloadService } from '../../../../features/certificados/compra-certificado/core/services/download.service';
+import { CertificadoDatos } from '../../../../features/certificados/compra-certificado/core/models/certificado.model';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { vi } from 'vitest';
 
@@ -17,6 +17,7 @@ describe('StepDescargaComponent', () => {
     numero_estudiante: '10236580',
     numero_programa: '123456',
     tipo_certificado: 'sencillo',
+    nombreEstudiante:'juan perez'
   };
 
   beforeEach(async () => {

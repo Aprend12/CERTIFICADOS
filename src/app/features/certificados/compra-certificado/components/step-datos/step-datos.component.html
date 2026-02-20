@@ -1,0 +1,63 @@
+<h2 style="color: #ff8800; text-align: center; margin-bottom: 20px; font-size: 1.2rem;">Ingresar Datos del Estudiante</h2>
+
+<form [formGroup]="form" (ngSubmit)="continuar()" class="content-medio" style="max-width: 500px; margin: 0 auto;">
+
+  <div class="form-group">
+    <label for="documento_identidad">Documento de identidad <span class="required">*</span></label>
+    <input type="text" id="documento_identidad" formControlName="documento_identidad" placeholder="Ingresa su identificación" (input)="filterNumbers($event, 'documento_identidad')" (blur)="verificarCertificado()" required>
+  </div>
+
+  <div class="form-group">
+    <label for="numero_estudiante">Número de estudiante <span class="required">*</span></label>
+    <input type="text" id="numero_estudiante" formControlName="numero_estudiante" placeholder="10236580" (input)="filterNumbers($event, 'numero_estudiante')" (blur)="verificarCertificado()" required>
+  </div>
+
+  <div class="form-group" *ngIf="!tieneMultiplesCarreras">
+    <label for="tipo_certificado">Tipo de Certificado <span class="required">*</span></label>
+    <select id="tipo_certificado" formControlName="tipo_certificado" required>
+      <option value="">Seleccione un tipo...</option>
+      <option value="sencillo">Certificado de Estudio Sencillo</option>
+      <option value="notas">Certificado de Notas</option>
+      <option value="fechas">Certificado con Fechas Académicas</option>
+      <option value="fechas_jornada">Certificado con Fechas y Jornada</option>
+      <option value="pension">Certificado para Pensión</option>
+      <option value="homologacion">Certificado Primer Ingreso Homologado</option>
+      <option value="grado">Certificado Finalización y Próxima Ceremonia</option>
+      <option value="conducta">Certificado de Buena Conducta</option>
+      <option value="horario">Certificado con Horario y Fechas</option>
+      <option value="practica">Certificado de Práctica</option>
+    </select>
+  </div>
+
+  <div class="form-group" *ngIf="tieneMultiplesCarreras">
+    <label for="tipo_certificado_multi">Tipo de Certificado <span class="required">*</span></label>
+    <select id="tipo_certificado_multi" formControlName="tipo_certificado" required>
+      <option value="">Seleccione un tipo...</option>
+      <option value="sencillo">Certificado de Estudio Sencillo</option>
+      <option value="notas">Certificado de Notas</option>
+      <option value="fechas">Certificado con Fechas Académicas</option>
+      <option value="fechas_jornada">Certificado con Fechas y Jornada</option>
+      <option value="pension">Certificado para Pensión</option>
+      <option value="homologacion">Certificado Primer Ingreso Homologado</option>
+      <option value="grado">Certificado Finalización y Próxima Ceremonia</option>
+      <option value="conducta">Certificado de Buena Conducta</option>
+      <option value="horario">Certificado con Horario y Fechas</option>
+      <option value="practica">Certificado de Práctica</option>
+    </select>
+  </div>
+
+    <div class="form-group" *ngIf="tieneMultiplesCarreras">
+    <label for="codigo_carrera">Seleccione la carrera <span class="required">*</span></label>
+    <select id="codigo_carrera" formControlName="codigo_carrera" required>
+      <option value="">Seleccione una carrera...</option>
+      <option *ngFor="let carrera of carrerasDisponibles" [value]="carrera.snies">
+        {{ carrera.programa }} - {{ carrera.semestre }}
+      </option>
+    </select>
+  </div>
+
+  <div class="buttons-container" style="margin-top: 20px;">
+    <button type="submit" class="btn btn-primary" style="width: 100%;" [disabled]="estudianteNoEncontrado || form.invalid">Continuar</button>
+  </div>
+
+</form>

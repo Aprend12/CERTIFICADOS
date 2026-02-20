@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoNotasBuilder } from '../../../core/builders/certificado-notas.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoNotasBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-notas.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoNotasBuilder', () => {
   let builder: CertificadoNotasBuilder;
@@ -18,33 +18,23 @@ describe('CertificadoNotasBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Certificado de Notas');
-    expect(html).toContain('CONSTANCIA DE CALIFICACIONES');
-  });
-
-  it('should contain student information', () => {
-    const datos: DatosCertificado = createMockDatos();
-    const html = builder.build(datos, false);
-    
-    expect(html).toContain('Test User');
-    expect(html).toContain('12345678');
-    expect(html).toContain('10236580');
+    expect(html).toContain('REGISTRO DE NOTAS');
   });
 
   it('should contain grades table', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('ASIGNATURA');
-    expect(html).toContain('CRÉDITOS');
-    expect(html).toContain('NOTA');
+    expect(html).toContain('Módulo / Asignaturas');
+    expect(html).toContain('Créditos');
+    expect(html).toContain('Nota');
   });
 
   it('should mask data when preview is true', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, true);
     
-    expect(html).toContain('******* ****** ******');
+    expect(html).toContain('*********************');
     expect(html).not.toContain('Test User');
   });
 

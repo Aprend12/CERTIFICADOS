@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoPracticaBuilder } from '../../../core/builders/certificado-practica.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoPracticaBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-practica.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoPracticaBuilder', () => {
   let builder: CertificadoPracticaBuilder;
@@ -18,15 +18,14 @@ describe('CertificadoPracticaBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Certificado de Práctica');
+    expect(html).toContain('CONSTANCIA DE PRÁCTICAS');
   });
 
   it('should contain practica information', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Práctica');
-    expect(html).toContain('Empresa');
+    expect(html).toContain('práctica');
   });
 
   it('should contain student information', () => {

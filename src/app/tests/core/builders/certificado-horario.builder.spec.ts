@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoHorarioBuilder } from '../../../core/builders/certificado-horario.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoHorarioBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-horario.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoHorarioBuilder', () => {
   let builder: CertificadoHorarioBuilder;
@@ -18,18 +18,18 @@ describe('CertificadoHorarioBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Certificado con Horario y Fechas');
+    expect(html).toContain('LA VICERRECTORA ACADÉMICA');
   });
 
   it('should contain schedule table', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('HORARIO DE CLASES');
-    expect(html).toContain('DÍA');
-    expect(html).toContain('HORA');
-    expect(html).toContain('ASIGNATURA');
-    expect(html).toContain('AULA');
+    expect(html).toContain('Asignatura');
+    expect(html).toContain('Código');
+    expect(html).toContain('Grupo');
+    expect(html).toContain('Horario');
+    expect(html).toContain('Docente');
   });
 
   it('should contain student information', () => {

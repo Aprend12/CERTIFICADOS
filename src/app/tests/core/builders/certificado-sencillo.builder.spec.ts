@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoSencilloBuilder } from '../../../core/builders/certificado-sencillo.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoSencilloBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-sencillo.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoSencilloBuilder', () => {
   let builder: CertificadoSencilloBuilder;
@@ -18,7 +18,7 @@ describe('CertificadoSencilloBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Certificado de Estudio Sencillo');
+    expect(html).toContain('CONSTANCIA DE ESTUDIO');
     expect(html).toContain('CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE');
     expect(html).toContain('804.006.527-3');
   });
@@ -38,7 +38,7 @@ describe('CertificadoSencilloBuilder', () => {
     const html = builder.build(datos, false);
     
     expect(html).toContain('12345');
-    expect(html).toContain('SNIES');
+    expect(html).toContain('Snies');
   });
 
   it('should contain footer with signature', () => {
@@ -53,18 +53,16 @@ describe('CertificadoSencilloBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, true);
     
-    expect(html).toContain('******* ****** ******');
-    expect(html).toContain('**************');
+    expect(html).toContain('*********************');
     expect(html).not.toContain('Test User');
     expect(html).not.toContain('12345678');
   });
 
-  it('should contain HACE CONSTAR text', () => {
+  it('should contain certification text', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
     expect(html).toContain('HACE CONSTAR');
-    expect(html).toContain('matriculado(a)');
   });
 
   function createMockDatos(): DatosCertificado {

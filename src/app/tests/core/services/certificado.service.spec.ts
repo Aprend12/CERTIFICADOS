@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoService } from '../../../core/services/certificado.service';
-import { HtmlBuilderService } from '../../../core/services/html-builder.service';
-import { CertificadoDatos } from '../../../core/models/certificado.model';
+import { CertificadoService } from '../../../features/certificados/compra-certificado/core/services/certificado.service';
+import { HtmlBuilderService } from '../../../features/certificados/compra-certificado/core/services/html-builder.service';
+import { CertificadoDatos } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 import { vi } from 'vitest';
 
 describe('CertificadoService', () => {
@@ -31,7 +31,8 @@ describe('CertificadoService', () => {
       documento_identidad: '12345678',
       numero_estudiante: '10236580',
       numero_programa: '123456',
-      tipo_certificado: 'sencillo'
+      tipo_certificado: 'sencillo',
+      nombreEstudiante: 'Juan Pérez'
     };
 
     service.setDatos(datos);
@@ -43,7 +44,8 @@ describe('CertificadoService', () => {
       documento_identidad: '12345678',
       numero_estudiante: '10236580',
       numero_programa: '123456',
-      tipo_certificado: 'sencillo'
+      tipo_certificado: 'sencillo',
+      nombreEstudiante: 'Juan Pérez'
     };
 
     service.setDatos(datos);
@@ -66,7 +68,8 @@ describe('CertificadoService', () => {
       documento_identidad: '12345678',
       numero_estudiante: '10236580',
       numero_programa: '123456',
-      tipo_certificado: 'sencillo'
+      tipo_certificado: 'sencillo',
+      nombreEstudiante:'Juan Pérez'
     };
 
     const preview = service.generarPreview(datos);
@@ -80,7 +83,8 @@ describe('CertificadoService', () => {
       documento_identidad: '12345678',
       numero_estudiante: '10236580',
       numero_programa: '123456',
-      tipo_certificado: 'invalid'
+      tipo_certificado: 'invalid',
+      nombreEstudiante: 'Juan Pérez'
     };
 
     const preview = service.generarPreview(datos);
@@ -93,7 +97,8 @@ describe('CertificadoService', () => {
       documento_identidad: '12345678',
       numero_estudiante: '10236580',
       numero_programa: '123456',
-      tipo_certificado: 'sencillo'
+      tipo_certificado: 'sencillo',
+      nombreEstudiante: 'Juan Pérez'
     };
 
     const certificado = service.generarCertificadoFinal(datos);
@@ -107,7 +112,8 @@ describe('CertificadoService', () => {
       documento_identidad: '12345678',
       numero_estudiante: '10236580',
       numero_programa: '123456',
-      tipo_certificado: 'invalid'
+      tipo_certificado: 'invalid',
+      nombreEstudiante:'Juan Pérez'
     };
 
     const certificado = service.generarCertificadoFinal(datos);

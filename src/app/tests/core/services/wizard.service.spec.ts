@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { WizardService } from '../../../core/services/wizard.service';
+import { WizardService } from '../../../features/certificados/compra-certificado/core/services/wizard.service';
 
 describe('WizardService', () => {
   let service: WizardService;

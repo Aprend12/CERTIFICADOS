@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoPensionBuilder } from '../../../core/builders/certificado-pension.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoPensionBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-pension.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoPensionBuilder', () => {
   let builder: CertificadoPensionBuilder;
@@ -18,7 +18,15 @@ describe('CertificadoPensionBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('CERTIFICADO PARA PENSIÓN');
+    expect(html).toContain('HACE CONSTAR');
+  });
+
+  it('should contain pension related content', () => {
+    const datos: DatosCertificado = createMockDatos();
+    const html = builder.build(datos, false);
+    
+    expect(html).toContain('Matrícula Semestral');
+    expect(html).toContain('Cancelado');
   });
 
   it('should contain student information', () => {
@@ -27,13 +35,6 @@ describe('CertificadoPensionBuilder', () => {
     
     expect(html).toContain('Test User');
     expect(html).toContain('12345678');
-  });
-
-  it('should contain pension related content', () => {
-    const datos: DatosCertificado = createMockDatos();
-    const html = builder.build(datos, false);
-    
-    expect(html).toContain('estudiante activo');
   });
 
   it('should mask data when preview is true', () => {

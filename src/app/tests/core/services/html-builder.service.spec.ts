@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { HtmlBuilderService } from '../../../core/services/html-builder.service';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { HtmlBuilderService } from '../../../features/certificados/compra-certificado/core/services/html-builder.service';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('HtmlBuilderService', () => {
   let service: HtmlBuilderService;
@@ -18,7 +18,7 @@ describe('HtmlBuilderService', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = service.build('sencillo', datos, false);
 
-    expect(html).toContain('Certificado de Estudio Sencillo');
+    expect(html).toContain('CONSTANCIA DE ESTUDIO');
     expect(html).toContain('Test User');
     expect(html).toContain('12345678');
   });
@@ -27,15 +27,14 @@ describe('HtmlBuilderService', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = service.build('notas', datos, false);
 
-    expect(html).toContain('Certificado de Notas');
-    expect(html).toContain('CONSTANCIA DE CALIFICACIONES');
+    expect(html).toContain('REGISTRO DE NOTAS');
   });
 
   it('should build dates certificate', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = service.build('fechas', datos, false);
 
-    expect(html).toContain('Certificado con Fechas Académicas');
+    expect(html).toContain('CONSTANCIA DE ESTUDIO CON FECHAS');
     expect(html).toContain('2025-1');
     expect(html).toContain('5');
   });
@@ -44,7 +43,7 @@ describe('HtmlBuilderService', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = service.build('sencillo', datos, true);
 
-    expect(html).toContain('******* ****** ******');
+    expect(html).toContain('*********************');
     expect(html).not.toContain('Test User');
   });
 
@@ -52,7 +51,7 @@ describe('HtmlBuilderService', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = service.build('unknown' as any, datos, false);
 
-    expect(html).toContain('Certificado de Estudio Sencillo');
+    expect(html).toContain('CONSTANCIA DE ESTUDIO');
   });
 
   function createMockDatos(): DatosCertificado {

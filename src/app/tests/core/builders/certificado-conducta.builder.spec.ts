@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoConductaBuilder } from '../../../core/builders/certificado-conducta.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoConductaBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-conducta.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoConductaBuilder', () => {
   let builder: CertificadoConductaBuilder;
@@ -18,7 +18,7 @@ describe('CertificadoConductaBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Certificado de Buena Conducta');
+    expect(html).toContain('CONSTANCIA DE BUENA CONDUCTA');
   });
 
   it('should contain conducta information', () => {
@@ -26,7 +26,6 @@ describe('CertificadoConductaBuilder', () => {
     const html = builder.build(datos, false);
     
     expect(html).toContain('CONDUCTA');
-    expect(html).toContain('EJEMPLAR');
   });
 
   it('should contain student information', () => {

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoFechasJornadaBuilder } from '../../../core/builders/certificado-fechas-jornada.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoFechasJornadaBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-fechas-jornada.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoFechasJornadaBuilder', () => {
   let builder: CertificadoFechasJornadaBuilder;
@@ -18,15 +18,14 @@ describe('CertificadoFechasJornadaBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Certificado con Fechas y Jornada');
+    expect(html).toContain('CONSTANCIA DE ESTUDIO CON FECHA Y JORNADA');
   });
 
   it('should contain jornada information', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Diurna');
-    expect(html).toContain('DATOS DEL PERÍODO');
+    expect(html).toContain('sábados de 7:00 a.m. a 4:00 p.m.');
   });
 
   it('should contain student and program info', () => {

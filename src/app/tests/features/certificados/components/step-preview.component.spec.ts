@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StepPreviewComponent } from '../../../../features/certificados/components/step-preview/step-preview.component';
+import { StepPreviewComponent } from '../../../../features/certificados/compra-certificado/components/step-preview/step-preview.component';
 
 describe('StepPreviewComponent', () => {
   let component: StepPreviewComponent;

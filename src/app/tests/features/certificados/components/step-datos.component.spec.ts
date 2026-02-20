@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StepDatosComponent } from '../../../../features/certificados/components/step-datos/step-datos.component';
+import { StepDatosComponent } from '../../../../features/certificados/compra-certificado/components/step-datos/step-datos.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
@@ -25,20 +25,26 @@ describe('StepDatosComponent', () => {
     const emitSpy = vi.spyOn(component.datosSubmitted, 'emit');
 
     component.form.patchValue({
-      documento_identidad: '12345678',
+      documento_identidad: '1005256864',
       numero_estudiante: '10236580',
-      numero_programa: '123456',
       tipo_certificado: 'sencillo'
     });
+
+    component.estudianteEncontrado = {
+      nombre: 'Test Student',
+      documento: '1005256864',
+      carreras: [{ programa: 'Test Program', snies: '123456', semestre: '5', periodo: '2025-1' }]
+    };
+    component.carreraSeleccionada = { programa: 'Test Program', snies: '123456', semestre: '5', periodo: '2025-1' };
 
     component.continuar();
 
     expect(emitSpy).toHaveBeenCalledWith({
-      documento_identidad: '12345678',
+      documento_identidad: '1005256864',
       numero_estudiante: '10236580',
       numero_programa: '123456',
       tipo_certificado: 'sencillo',
-      nombre_estudiante: ''
+      nombreEstudiante: 'Test Student'
     });
   });
 

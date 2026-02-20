@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { WizardComponent } from '../../../../features/certificados/pages/wizard.component';
-import { WizardService } from '../../../../core/services/wizard.service';
-import { CertificadoService } from '../../../../core/services/certificado.service';
+import { WizardComponent } from '../../../../features/certificados/compra-certificado/pages/wizard.component';
+import { WizardService } from '../../../../features/certificados/compra-certificado/core/services/wizard.service';
+import { CertificadoService } from '../../../../features/certificados/compra-certificado/core/services/certificado.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { vi } from 'vitest';
 
 describe('WizardComponent', () => {
@@ -11,7 +12,7 @@ describe('WizardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WizardComponent],
+      imports: [WizardComponent, RouterModule.forRoot([])],
       providers: [
         WizardService,
         CertificadoService
@@ -45,6 +46,7 @@ describe('WizardComponent', () => {
       numero_estudiante: '456',
       numero_programa: '789',
       tipo_certificado: 'sencillo',
+      nombreEstudiante:'test users'
     });
     expect(nextSpy).toHaveBeenCalled();
   });

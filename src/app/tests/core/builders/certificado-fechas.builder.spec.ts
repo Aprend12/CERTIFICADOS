@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CertificadoFechasBuilder } from '../../../core/builders/certificado-fechas.builder';
-import { DatosCertificado } from '../../../core/models/certificado.model';
+import { CertificadoFechasBuilder } from '../../../features/certificados/compra-certificado/core/builders/certificado-fechas.builder';
+import { DatosCertificado } from '../../../features/certificados/compra-certificado/core/models/certificado.model';
 
 describe('CertificadoFechasBuilder', () => {
   let builder: CertificadoFechasBuilder;
@@ -18,7 +18,7 @@ describe('CertificadoFechasBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Certificado con Fechas Académicas');
+    expect(html).toContain('CONSTANCIA DE ESTUDIO CON FECHAS');
   });
 
   it('should contain date information', () => {
@@ -27,7 +27,7 @@ describe('CertificadoFechasBuilder', () => {
     
     expect(html).toContain('2025-1');
     expect(html).toContain('5');
-    expect(html).toContain('Período Académico');
+    expect(html).toContain('período académico');
   });
 
   it('should contain student information', () => {

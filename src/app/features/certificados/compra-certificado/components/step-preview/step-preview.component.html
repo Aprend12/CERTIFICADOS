@@ -1,0 +1,32 @@
+
+<div class="preview-layout">
+  <div class="content-medio">
+
+    <div class="form-group">
+      <label for="nombre_usuario">nombre usuario</label>
+      <input type="text" id="nombre_usuario" name="nombre_usuario"
+            [value]="nombreEstudiante" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="documento_identidad">Documento de identidad</label>
+      <input type="text" id="documento_identidad" name="documento_identidad"
+            [value]="documentoIdentidad" readonly>
+    </div>
+    <div class="form-group">
+      <label for="numero_estudiante">Número de estudiante</label>
+      <input type="text" id="numero_estudiante" name="numero_estudiante"
+            [value]="numeroEstudiante" readonly>
+    </div>
+      <div class="form-group">
+      <label for="certificado_preview">Tipo de certificado</label>
+      <input type="text" id="certificado_preview" name="certificado_preview"
+            [value]="titulo" readonly>
+    </div>
+  </div>
+
+  <div class="caja__preview">
+    <h2>Vista Previa del Certificado</h2>
+    <div id="certificadoPreviewDemo" class="certificado" [innerHTML]="certificadoHTML"></div>
+  </div>
+</div>
