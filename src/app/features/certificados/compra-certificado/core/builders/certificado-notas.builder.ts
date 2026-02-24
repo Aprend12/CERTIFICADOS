@@ -1,7 +1,5 @@
-/**
- * Constructor del Certificado de Notas.
- * Formato profesional institucional para descarga.
- */
+//Constructor del Certificado de Notas.
+
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 
 export class CertificadoNotasBuilder implements CertificadoBuilder {
@@ -10,13 +8,13 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
   private readonly LOGO = 'https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif';
 
 
-  private readonly COLOR_NARANJA   = '#C55A11';   // texto "TECNOLÓGICA DEL ORIENTE"
-  private readonly COLOR_GRIS_TXT  = '#595959';   // subtítulos institución
-  private readonly COLOR_GRIS_CELL = '#D9D9D9';   // fondo celdas de encabezado
-  private readonly COLOR_BORDE     = '#AEAAAA';   // bordes de tablas
+  private readonly COLOR_NARANJA   = '#C55A11';
+  private readonly COLOR_GRIS_TXT  = '#595959';
+  private readonly COLOR_GRIS_CELL = '#D9D9D9';
+  private readonly COLOR_BORDE     = '#AEAAAA';
 
 
-  build(datos: DatosCertificado): string {
+  build(datos: DatosCertificado, p0: boolean): string {
     const o   = this.getOcultos(datos);
     const mat = this.getMaterias();
     const ta  = this.getTotalesAcumulados();
@@ -209,7 +207,7 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
 </div>`;
   }
 
-  // ─── Materias ─────────────────────────────────────────────────────────────
+  // ─── Materias ─────────
   private getMaterias(): string {
     const B = this.COLOR_BORDE;
     const materias = [
@@ -231,7 +229,7 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
       </tr>`).join('');
   }
 
-  // ─── Totales acumulados históricos ────────────────────────────────────────
+  // ─── Totales acumulados históricos ────
   private getTotalesAcumulados() {
     return {
       creditosCursados:  92,
@@ -240,7 +238,7 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
     };
   }
 
-  // ─── Totales del periodo actual (calculados dinámicamente) ────────────────
+  // ─── Totales del periodo actual (calculados dinámicamente) ─────────
   private getTotalesPeriodo() {
     const materias = [
       { creditos: 3, nota: 4.3 },
@@ -259,7 +257,7 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
     };
   }
 
-  // ─── Datos del certificado ────────────────────────────────────────────────
+  // ─── Datos del certificado ─────────
   private getOcultos(datos: DatosCertificado) {
     return {
       numero:           ' ' + this.sanitize(datos.codigo || '1 123ad32'),
@@ -272,7 +270,7 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
     };
   }
 
-  // ─── Utilidades ───────────────────────────────────────────────────────────
+  // ─── Utilidades ─────────
   private sanitize(value: string): string {
     if (!value) return '';
     return value

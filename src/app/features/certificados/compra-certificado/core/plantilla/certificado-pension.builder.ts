@@ -5,47 +5,67 @@
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 
 export class CertificadoPensionBuilder implements CertificadoBuilder {
-  private readonly INSTITUCION = 'CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE';
-  private readonly NIT = '804.006.527-3';
-  private readonly DIRECCION = 'Bucaramanga, Santander';
+  private readonly INSTITUCION = 'LA VICERRECTORA ACADÉMICA ';
+  private readonly NIT = '804.006';
+  private readonly DIRECCION = 'CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE';
 
   build(datos: DatosCertificado): string {
     return `
-    <div style="width: 100%; min-height: 27.94cm; padding: 25px; font-family: 'Times New Roman', Times, serif; font-size: 10pt; line-height: 1.5; box-sizing: border-box; background: white;">
+    <div style="width: 100%; min-height: 27.94cm; padding: 50px 60px; font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-size: 11pt; line-height: 1.8; box-sizing: border-box; background: #fefefe; position: relative;">
 
-      <div style="text-align: center; margin-bottom: 8px; padding-top: 20px;">
-        <div style="font-size: 10pt; font-weight: bold; text-transform: uppercase;">${this.INSTITUCION}</div>
-        <div style="font-size: 10pt;">NIT: ${this.NIT}</div>
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 8px; background: linear-gradient(90deg, #0d3b66, #1e5f8a, #0d3b66);"></div>
+
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 50px; background: linear-gradient(180deg, rgba(13,59,102,0.03) 0%, transparent 100%);"></div>
+
+      <div style="text-align: center; margin-bottom: 25px; padding-top: 30px; position: relative;">
+        <div style="width: 70px; height: 70px; border: 3px solid #0d3b66; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+        </div>
+        <div style="font-size: 14pt; font-weight: bold; text-transform: uppercase; color: #0d3b66; letter-spacing: 3px;">${this.INSTITUCION}</div>
+        <div style="font-size: 10pt; color: #666; margin-top: 6px; letter-spacing: 1px;">${this.DIRECCION} </div>
+        <div style="font-size: 9pt; color: #888; margin-top: 2px;">NIT: ${this.NIT}</div>
       </div>
 
-      <div style="border-bottom: 2px solid #333; margin-bottom: 8px;"></div>
-
-      <div style="margin-bottom: 12px; text-align: justify; text-indent: 1cm;">
-        <p style="margin: 5px 0;"><strong>HACE CONSTAR:</strong></p>
-        <p style="margin: 5px 0;">Que, *************** ***************, identificado(a) con número de documento **************, se encuentra matriculado(a) en el programa de *********************, Snies ******.</p>
-        <p style="margin: 5px 0;">El semestre académico inicia el 28 de julio de 2025 y finaliza el 29 de noviembre de 2025.</p>
+      <div style="border-bottom: 3px solid #0d3b66; margin-bottom: 30px; position: relative;">
+        <div style="position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; background: #0d3b66; border-radius: 50%;"></div>
       </div>
 
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 8px; font-size: 8pt;">
-        <tr style="background: #e0e0e0;">
-          <th style="padding: 6px; border: 0.5pt solid black; text-align: left;">Concepto</th>
-          <th style="padding: 6px; border: 0.5pt solid black; text-align: center;">Valor</th>
-          <th style="padding: 6px; border: 0.5pt solid black; text-align: center;">Estado</th>
+      <div style="margin-bottom: 20px; text-align: justify; text-indent: 1.5cm;">
+        <p style="margin-bottom: 15px; color: #2c2c2c;">HACE CONSTAR:</p>
+        <p style="margin-bottom: 15px; color: #2c2c2c; text-indent: 0cm;">Que, *************** ***************, identificado(a) con número de documento **************, se encuentra matriculado(a) en el programa de *********************, Snies ******.</p>
+        <p style="margin-bottom: 15px; color: #2c2c2c; padding: 15px; background: #f0f7ff; border-left: 4px solid #0d3b66; border-radius: 0 8px 8px 0;">El semestre académico inicia el <strong style="color: #0d3b66;">28 de julio de 2025</strong> y finaliza el <strong style="color: #0d3b66;">29 de noviembre de 2025</strong>.</p>
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 9pt; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
+        <tr style="background: #0d3b66; color: #fff;">
+          <th style="padding: 10px 6px; border: 1px solid #0a2d4a; text-align: left; font-weight: 600;">Concepto</th>
+          <th style="padding: 10px 6px; border: 1px solid #0a2d4a; text-align: center; font-weight: 600;">Valor</th>
+          <th style="padding: 10px 6px; border: 1px solid #0a2d4a; text-align: center; font-weight: 600;">Estado</th>
         </tr>
-        <tr>
-          <td style="padding: 4px; border: 0.5pt solid black;">Matrícula Semestral</td>
-          <td style="padding: 4px; border: 0.5pt solid black; text-align: center;">$ 4.500.000</td>
-          <td style="padding: 4px; border: 0.5pt solid black; text-align: center;">Cancelado</td>
+        <tr style="background: #fff;">
+          <td style="padding: 8px 6px; border: 1px solid #ddd; color: #333;">Matrícula Semestral</td>
+          <td style="padding: 8px 6px; border: 1px solid #ddd; text-align: center; color: #0d3b66; font-weight: bold;">$ 4.500.000</td>
+          <td style="padding: 8px 6px; border: 1px solid #ddd; text-align: center; color: #198754; font-weight: 600; background: #d1e7dd;">Cancelado</td>
         </tr>
       </table>
 
-      <div style="margin-top: 40px; text-align: left;">
-        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ********************.</p>
+      <div style="margin-top: 50px; text-align: left;">
+        <p style="color: #555; font-style: italic;">Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ********************.</p>
       </div>
 
-      <div style="margin-top: 40px; text-align: left;">
-        <div style="border-top: 1pt solid black; width: 8cm; margin-bottom: 10px;"></div>
-        <p style="margin: 0; font-size: 8pt;">Vicerrectora Académica</p>
+      <div style="margin-top: 50px; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div style="text-align: left;">
+          <div style="border-top: 2px solid #0d3b66; width: 250px; margin-bottom: 8px;"></div>
+          <p style="margin: 0; font-size: 10pt; color: #0d3b66; font-weight: 600;">Rector(a) General</p>
+        </div>
+        <div style="text-align: right;">
+          <div style="border-top: 2px solid #0d3b66; width: 250px; margin-bottom: 8px;"></div>
+          <p style="margin: 0; font-size: 10pt; color: #0d3b66; font-weight: 600;">Vicerrectora Académica</p>
+        </div>
+      </div>
+
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 8px; background: linear-gradient(90deg, #0d3b66, #1e5f8a, #0d3b66);"></div>
+
+      <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); text-align: center; font-size: 7pt; color: #aaa;">
       </div>
 
     </div>`;

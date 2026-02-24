@@ -45,20 +45,20 @@
 }
 
 .step-indicator.active {
-  background: #ff8800;
+  background: #d76e05;
   color: white;
   transform: scale(1.1);
 }
 
 .step-indicator.completed {
-  background: #4caf50;
-  border: 2px solid #4caf50;
+  background: #39a63d;
+  border: 2px solid #39a63d;
   color: white;
 }
 
 .step-indicator.disabled {
   background: #000000;
-  border: 2px solid rgba(255, 136, 0, 0.4);
+  border: 2px solid rgba(255, 136, 0, 0.861);
   cursor: not-allowed;
 
 }
@@ -66,6 +66,7 @@
 .step-number {
   font-size: 16px;
     color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .step-label {
@@ -73,6 +74,7 @@
   font-size: 12px;
   color: #ffffff;
   text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* Conector entre pasos */
@@ -87,7 +89,7 @@
 }
 
 .step-wrapper:not(:last-child).completed::after {
-  background: #4caf50;
+  background: #2c682e;
 }
 
 /* Contenido de los pasos */
@@ -108,12 +110,6 @@
 
 .step-content.active {
   display: block;
-  animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Contenedor de pago */
@@ -128,12 +124,14 @@
 .payment-container h2 {
   color: #ff8800;
   margin-bottom: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .payment-container p {
   font-size: 1.2rem;
   margin-bottom: 30px;
   color: #ccc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* Botones */
@@ -144,32 +142,20 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease;
   margin: 0 10px;
   min-width: 120px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .btn-primary {
   background: #ff8800;
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #ff8800;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+  color: rgb(0, 0, 0);
 }
 
 .btn-secondary {
   background: #ff8800;
-  color: white;
+  color: rgb(0, 0, 0);
 
-}
-
-.btn-secondary:hover {
-  background: #ff8800;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
 }
 
 /* Responsive */
@@ -211,13 +197,13 @@
 }
 
 .verify-link {
-  color: #ff8800;
+  color: #000000;
   text-decoration: none;
   font-weight: 500;
   padding: 10px 20px;
-  border: 1px solid #ff8800;
+  border: 1px solid #d27000;
   border-radius: 5px;
-  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .verify-link:hover {

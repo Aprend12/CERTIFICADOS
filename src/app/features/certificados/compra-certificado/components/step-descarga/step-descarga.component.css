@@ -15,6 +15,7 @@
     text-align: center;
     position: relative;
     padding-bottom: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .title::after {
@@ -39,8 +40,9 @@
     flex-direction: column;
     align-items: center;
     min-height: 300px;
-    width: 100%;
-    max-width: 500px;
+    max-width: 900px;
+    width: 90%;
+    overflow: auto;
 }
 
 .certificado-wrapper {
@@ -48,19 +50,23 @@
     justify-content: center;
     align-items: flex-start;
     width: 100%;
-    overflow-x: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow: hidden;
 }
 
 .certificado {
     background-color: #ffffff;
     color: #000000;
-    min-height: 350px;
+    min-height: 650px;
     padding: 35px;
     border: 2px solid #e0e0e0;
     position: relative;
     box-shadow: 0 4px 12px rgb(0, 0, 0);
     font-size: 0.8rem;
     text-align: center;
+    transform: scale(calc(100vw / 1400));
+    transform-origin: top center;
 }
 
 .btn-container {
@@ -71,25 +77,17 @@
 
 .btn-descargar {
   background-color: #ff8800;
-  color: white;
+  color: rgb(0, 0, 0);
   border: none;
   padding: 12px 30px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.btn-descargar:hover {
-  background-color: #e67a00;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 20px rgb(245, 148, 37);
-
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .btn-descargar:active {
-  transform: translateY(0);
 }
 
 @media (max-width: 1024px) {

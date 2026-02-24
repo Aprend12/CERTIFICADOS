@@ -5,35 +5,55 @@
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 
 export class CertificadoHomologacionBuilder implements CertificadoBuilder {
-  private readonly INSTITUCION = 'CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE';
-  private readonly NIT = '804.006.527-3';
-  private readonly DIRECCION = 'Bucaramanga, Santander';
+  private readonly INSTITUCION = 'LA VICERRECTORA ACADÉMICA ';
+  private readonly NIT = '804.006';
+  private readonly DIRECCION = 'CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE';
 
   build(datos: DatosCertificado): string {
     return `
-    <div style="width: 100%; min-height: 27.94cm; padding: 25px; font-family: 'Times New Roman', Times, serif; font-size: 10pt; line-height: 1.8; box-sizing: border-box; background: white;">
-      
-      <div style="text-align: center; margin-bottom: 8px; padding-top: 20px;">
-        <div style="font-size: 10pt; font-weight: bold; text-transform: uppercase;">${this.INSTITUCION}</div>
-        <div style="font-size: 9pt;">NIT: ${this.NIT}</div>
+    <div style="width: 100%; min-height: 27.94cm; padding: 50px 60px; font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-size: 11pt; line-height: 2; box-sizing: border-box; background: #fefefe; position: relative;">
+
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 8px; background: linear-gradient(90deg, #0d3b66, #1e5f8a, #0d3b66);"></div>
+
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 50px; background: linear-gradient(180deg, rgba(13,59,102,0.03) 0%, transparent 100%);"></div>
+
+      <div style="text-align: center; margin-bottom: 25px; padding-top: 30px; position: relative;">
+        <div style="width: 70px; height: 70px; border: 3px solid #0d3b66; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+        </div>
+        <div style="font-size: 14pt; font-weight: bold; text-transform: uppercase; color: #0d3b66; letter-spacing: 3px;">${this.INSTITUCION}</div>
+        <div style="font-size: 10pt; color: #666; margin-top: 6px; letter-spacing: 1px;">${this.DIRECCION}</div>
+        <div style="font-size: 9pt; color: #888; margin-top: 2px;">NIT: ${this.NIT}</div>
       </div>
 
-      <div style="border-bottom: 2px solid #333; margin-bottom: 8px;"></div>
-
-      <div style="margin-bottom: 12px; text-align: justify; text-indent: 1.5cm;">
-        <p style="margin-bottom: 8px;"><strong>HACE CONSTAR:</strong></p>
-        <p style="margin-bottom: 8px;">Que, <strong>*************** ***************</strong>, identificado(a) con número de documento <strong>**************</strong>, se encuentra matriculado(a) actualmente en el programa de <strong>*********************</strong>, modalidad virtual, aprobado por el Ministerio de Educación según resolución <strong>014875</strong>.</p>
-        <p style="margin-bottom: 8px;">El estudiante cursará el <strong>***</strong> semestre en el período académico <strong>****-*</strong>, producto del reconocimiento de la titulación previa de Tecnólogo en Análisis y Desarrollo de Software del SENA.</p>
-        <p style="margin-bottom: 8px;">El período académico inició el <strong>lunes 15 de septiembre de 2025</strong> y finaliza el <strong>sábado 10 de enero de 2026</strong>.</p>
+      <div style="border-bottom: 3px solid #0d3b66; margin-bottom: 30px; position: relative;">
+        <div style="position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; background: #0d3b66; border-radius: 50%;"></div>
       </div>
 
-      <div style="margin-top: 40px; text-align: left;">
-        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ********************.</p>
+      <div style="margin-bottom: 25px; text-align: justify; text-indent: 2cm;">
+        <p style="margin-bottom: 15px; color: #2c2c2c;">HACE CONSTAR:</p>
+        <p style="margin-bottom: 15px; color: #2c2c2c; text-indent: 0cm;">Que, <strong style="color: #0d3b66;">*************** ***************</strong>, identificado(a) con número de documento <strong style="color: #0d3b66;">**************</strong>, se encuentra matriculado(a) actualmente en el programa de <strong style="color: #0d3b66;">*********************</strong>, modalidad virtual, aprobado por el Ministerio de Educación según resolución <strong style="color: #0d3b66;">014875</strong>.</p>
+        <p style="margin-bottom: 15px; color: #2c2c2c; padding: 15px; background: #f0f7ff; border-left: 4px solid #0d3b66; border-radius: 0 8px 8px 0;">El estudiante cursará el <strong style="color: #0d3b66;">***</strong> semestre en el período académico <strong style="color: #0d3b66;">****-*</strong>, producto del reconocimiento de la titulación previa de Tecnólogo en Análisis y Desarrollo de Software del SENA.</p>
+        <p style="margin-bottom: 15px; color: #2c2c2c;">El período académico inició el <strong style="color: #0d3b66;">lunes 15 de septiembre de 2025</strong> y finaliza el <strong style="color: #0d3b66;">sábado 10 de enero de 2026</strong>.</p>
       </div>
 
-      <div style="margin-top: 40px; text-align: left;">
-        <div style="border-top: 1.5pt solid black; width: 8cm; margin-bottom: 12px;"></div>
-        <p style="margin: 0; font-size: 8pt;">Vicerrectora Académica</p>
+      <div style="margin-top: 60px; text-align: left;">
+        <p style="color: #555; font-style: italic;">Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ********************.</p>
+      </div>
+
+      <div style="margin-top: 60px; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div style="text-align: left;">
+          <div style="border-top: 2px solid #0d3b66; width: 250px; margin-bottom: 8px;"></div>
+          <p style="margin: 0; font-size: 10pt; color: #0d3b66; font-weight: 600;">Rector(a) General</p>
+        </div>
+        <div style="text-align: right;">
+          <div style="border-top: 2px solid #0d3b66; width: 250px; margin-bottom: 8px;"></div>
+          <p style="margin: 0; font-size: 10pt; color: #0d3b66; font-weight: 600;">Vicerrectora Académica</p>
+        </div>
+      </div>
+
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 8px; background: linear-gradient(90deg, #0d3b66, #1e5f8a, #0d3b66);"></div>
+
+      <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); text-align: center; font-size: 7pt; color: #aaa;">
       </div>
 
     </div>`;
