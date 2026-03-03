@@ -17,7 +17,7 @@ export class CertificadoFechasJornadaBuilder implements CertificadoBuilder {
 
     return `
     <div style="width: 21.59cm; min-height: 27.94cm; padding: 3cm 2.5cm 2.5cm 3cm; font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.8; box-sizing: border-box; background: white;">
-      
+
       <table style="width: 100%; margin-bottom: 15px;">
         <tr>
           <td style="width: 100px; vertical-align: top;">
@@ -74,7 +74,6 @@ export class CertificadoFechasJornadaBuilder implements CertificadoBuilder {
     }
     return {
       numero: this.sanitize(datos.codigo || '1234HHZS1'),
-      nombre: this.sanitize(datos.nombre),
       documento: this.sanitize(datos.documento),
       programa: this.sanitize(datos.programa),
       snies: this.sanitize(datos.snies),

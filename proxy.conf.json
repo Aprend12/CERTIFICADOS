@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://georgiann-cleanable-axel.ngrok-free.dev",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

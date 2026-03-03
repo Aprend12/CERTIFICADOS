@@ -4,6 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plantillas de Certificados</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .certificado-wrapper { margin-bottom: 50px; border: 1px solid #ccc; padding: 20px; background: white; }
+        .certificado-titulo { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #333; }
+
+        .certificado {
+            width: 21.59cm;
+            min-height: 27.94cm;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background: white;
+        }
+
+        .marca-agua {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            text-align: center;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .marca-agua-text {
+            font-size: 80px;
+            font-weight: bold;
+            color: #0d3b66;
+            opacity: 0.1;
+            white-space: nowrap;
+            display: block;
+            margin-bottom: 30px;
+        }
+        
+        .marca-agua-text2 {
+            font-size: 60px;
+            font-weight: bold;
+            color: #0d3b66;
+            opacity: 0.1;
+            white-space: nowrap;
+        }
+        
+        .contenido {
+            position: relative;
+            z-index: 1;
+            padding: 2cm 2cm;
+            min-height: 27.94cm;
+        }
+    </style>
 </head>
 <body>
     <h1>Plantillas de Certificados</h1>
@@ -12,99 +62,92 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">1. Certificado de Estudio Sencillo</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Georgia', 'Times New Roman', serif; max-width: 750px; margin: 0 auto; background: #fff; border: 4px double #0d47a1; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <div class="certificado-header" style="background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%); padding: 30px 25px; border-bottom: 3px solid #0d47a1;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 15px;">
-                        <div style="width: 70px; height: 70px; background: #0d47a1; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem;">CET</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.65rem; color: #666; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px;">Institución de Educación Superior</div>
-                            <div style="font-size: 1.1rem; font-weight: bold; color: #0d47a1; text-transform: uppercase; letter-spacing: 1px;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                            <div style="font-size: 0.6rem; color: #666; margin-top: 5px;">NIT: 804.006.527-3</div>
-                        </div>
-                    </div>
+            <div class="marca-agua">
+                <span class="marca-agua-text">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</span>
+                <span class="marca-agua-text2">SNIES 804.006.527-3</span>
+            </div>
+            <div class="contenido">
+                <table style="width: 100%; margin-bottom: 15px;">
+                  <tr>
+                    <td style="width: 120px; vertical-align: top;">
+                      <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" style="width: 6cm; height: auto;">
+                    </td>
+                    <td style="text-align: right; vertical-align: top; font-size: 10pt; padding-top: 10px;">
+                    <div style="font-size: 10pt; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">CONSTANCIA DE ESTUDIO</div>
+                      <strong>Número:</strong> {{NUMERO}}
+                    </td>
+                  </tr>
+                </table>
+                <div style="text-align: center; margin-bottom: 15px;">
+                  <div style="font-size: 12pt; font-weight: bold; text-transform: uppercase;">LA VICERRECTORA ACADÉMICA</div>
+                  <div style="font-size: 12pt; font-weight: bold; text-transform: uppercase;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
+                  <div style="font-size: 11pt;">NIT: 804.006.527-3</div>
                 </div>
-                <div style="background: #0d47a1; color: white; padding: 8px; text-align: center; font-size: 0.75rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">
-                    Certificado de Estudio Sencillo
+                <div style="border-bottom: 2px solid #333; margin-bottom: 15px;"></div>
+                <div style="margin-bottom: 25px; text-align: justify; text-indent: 1.5cm;">
+                  <p style="margin-bottom: 15px; text-align: center;"><strong>HACE CONSTAR:</strong></p>
+                  <p style="margin-bottom: 15px;">Que, <strong>{{NOMBRE}}</strong>, identificado(a) con número de documento <strong>{{DOCUMENTO}}</strong>, se encuentra matriculado(a) actualmente en el programa de <strong>{{PROGRAMA}}</strong>, aprobado por el Ministerio de Educación según Snies <strong>{{SNIES}}</strong>.</p>
+                  <p style="margin-bottom: 15px;">El estudiante cursa actualmente el <strong>{{SEMESTRE}} semestre</strong> en el período académico <strong>{{PERIODO}}</strong>.</p>
+                  <p style="margin-bottom: 15px;">La presente certificación se expide a solicitud del interesado(a) para los fines que considere convenientes, tales como trámites ante entidades bancarias, institucionales, laborales o personales.</p>
                 </div>
-                <div class="certificado-body" style="padding: 35px 40px; font-size: 0.8rem; line-height: 1.8; color: #212121;">
-                    <div style="text-align: center; margin: 25px 0; font-weight: bold; font-size: 0.85rem; color: #0d47a1; text-transform: uppercase; letter-spacing: 2px;">Hace constar</div>
-                    <p style="text-align: justify; margin: 20px 0;">Que, <strong style="color: #0d47a1; font-size: 0.9rem;">JUAN PEDRO PÉREZ GÓMEZ</strong>, identificado(a) con número de documento <strong style="color: #0d47a1;">1234567890</strong> (Código Estudiantil: <strong style="color: #0d47a1;">2021001234</strong>), se encuentra actualmente <strong>matriculado(a)</strong> en el programa de educación superior:</p>
-                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%); border-left: 4px solid #0d47a1; padding: 15px 20px; margin: 20px 0; border-radius: 0 8px 8px 0;">
-                        <strong style="color: #0d47a1; font-size: 0.9rem;">TECNOLOGÍA EN DESARROLLO DE SOFTWARE</strong><br>
-                        <span style="font-size: 0.7rem; color: #666;">Registro SNIES No. <strong>123456</strong></span>
-                    </div>
-                    <p style="text-align: justify; margin: 20px 0;">El presente certificado se expide a solicitud del interesado(a) para los fines que considere convenientes.</p>
-                    <p style="text-align: justify; margin: 25px 0 15px;">Se expide en <strong>Bucaramanga, Santander</strong>, a los <strong>19 de febrero de 2026</strong>.</p>
+                <div style="margin-top: 80px; text-align: left;">
+                  <p>Se expide a solicitud del interesado(a) en Bucaramanga, a los {{FECHA}}.</p>
                 </div>
-                <div class="certificado-footer" style="margin-top: 20px; padding: 25px 40px; background: #f8f9fa; border-top: 2px solid #0d47a1;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div style="text-align: left; font-size: 0.6rem; color: #666;">
-                            <div style="font-weight: bold; color: #0d47a1; margin-bottom: 3px;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                            <div>Bucaramanga, Santander</div>
-                            <div>Tel: (607) 678-9000</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="border-top: 1px solid #333; width: 180px; margin: 0 auto 8px;"></div>
-                            <div style="font-weight: bold; font-size: 0.7rem; color: #0d47a1;">MAGDA CAROLINA REYES RINCÓN</div>
-                            <div style="color: #666; font-size: 0.6rem;">Vicerrectora Académica</div>
-                        </div>
-                        <div style="text-align: right; font-size: 0.55rem; color: #999;">
-                            <div>Documento generado por el</div>
-                            <div>Sistema de Certificados Académicos</div>
-                        </div>
-                    </div>
+                <div style="margin-top: 70px; text-align: center;">
+                  <div style="border-top: 1.5pt solid black; width: 8cm; margin: 0 auto 12px auto;"></div>
+                  <p style="margin: 0; font-weight: bold; font-size: 12pt;">MAGDA CAROLINA REYES RINCÓN</p>
+                  <p style="margin: 0; font-size: 11pt;">Vicerrectora Académica</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 2. CERTIFICADO PENSIÓN -->
+    <!-- 2. CERTIFICADO PENSION -->
     <div class="certificado-wrapper">
         <div class="certificado-titulo">2. Certificado para Pensión</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Georgia', 'Times New Roman', serif; max-width: 750px; margin: 0 auto; background: #fff; border: 4px double #1565c0; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <div class="certificado-header" style="background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%); padding: 25px; border-bottom: 3px solid #1565c0;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-                        <div style="width: 60px; height: 60px; background: #1565c0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">CET</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.6rem; color: #666; letter-spacing: 2px; text-transform: uppercase;">Institución de Educación Superior</div>
-                            <div style="font-size: 1rem; font-weight: bold; color: #1565c0; text-transform: uppercase;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                            <div style="font-size: 0.55rem; color: #666;">NIT: 804.006.527-3</div>
-                        </div>
-                    </div>
-                </div>
-                <div style="background: #1565c0; color: white; padding: 10px; text-align: center; font-size: 0.75rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">
-                    Certificado para Pensión
-                </div>
-                <div class="certificado-body" style="padding: 30px 35px; font-size: 0.8rem; line-height: 1.7; color: #212121;">
-                    <p style="text-align: justify; margin: 15px 0;">El que suscribe, <strong>Vicerrectora Académica</strong> de la <strong>CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</strong>,</p>
-                    <div style="text-align: center; margin: 20px 0; font-weight: bold; font-size: 0.85rem; color: #1565c0; text-transform: uppercase; letter-spacing: 1px;">Certifica</div>
-                    <p style="text-align: justify; margin: 15px 0;">Que <strong style="color: #1565c0; font-size: 0.85rem;">MARÍA LUCIA GONZÁLEZ LÓPEZ</strong>, identificado(a) con documento No. <strong>5432109876</strong>, código estudiantil <strong>2021005678</strong>, es estudiante activo(a) del programa:</p>
-                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%); border-left: 4px solid #1565c0; padding: 12px 18px; margin: 15px 0; border-radius: 0 8px 8px 0;">
-                        <strong style="color: #1565c0; font-size: 0.85rem;">INGENIERÍA DE SISTEMAS</strong><br>
-                        <span style="font-size: 0.65rem; color: #666;">Registro SNIES No. <strong>654321</strong></span>
-                    </div>
-                    <p style="text-align: justify; margin: 15px 0;">Actualmente se encuentra matriculado(a) en el <strong>Quinto Semestre</strong>, período <strong>2025-1</strong>, en jornada <strong>Diurna</strong>.</p>
-                    <p style="text-align: justify; margin: 20px 0 15px;">Se expide para presentar ante <strong>Instituciones de Bienestar Familiar</strong> o demás entidades, en <strong>Bucaramanga, Santander</strong>, a los <strong>19 de febrero de 2026</strong>.</p>
-                </div>
-                <div class="certificado-footer" style="margin-top: 15px; padding: 20px 35px; background: #f8f9fa; border-top: 2px solid #1565c0;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div style="text-align: left; font-size: 0.55rem; color: #666;">
-                            <div style="font-weight: bold; color: #1565c0; margin-bottom: 3px;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                            <div>Bucaramanga, Santander</div>
-                            <div>Tel: (607) 678-9000</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="border-top: 1px solid #333; width: 160px; margin: 0 auto 6px;"></div>
-                            <div style="font-weight: bold; font-size: 0.65rem; color: #1565c0;">MAGDA CAROLINA REYES RINCÓN</div>
-                            <div style="color: #666; font-size: 0.55rem;">Vicerrectora Académica</div>
-                        </div>
-                        <div style="text-align: right; font-size: 0.5rem; color: #999;">
-                            <div>Documento generado por el</div>
-                            <div>Sistema de Certificados</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="marca-agua">
+                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+            </div>
+            <div class="contenido">
+                <p><strong>El que suscribe, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
+                <p>El semestre académico inicia el 28 de julio de 2025 y finaliza el 29 de noviembre de 2025. Durante este período, el estudiante deberá cursar las siguientes asignaturas:</p>
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">Asignatura</th>
+                        <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">HP</th>
+                        <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">HA</th>
+                        <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">CRÉDITOS</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ccc;">Ergonomía</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">6</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ccc;">Investigación de incidentes y accidentes de trabajo</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">6</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ccc;">Peligros biológicos</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">6</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ccc;">Práctica empresarial</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">5</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">10</td>
+                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">5</td>
+                    </tr>
+                </table>
+                <p><strong>HP:</strong> Horas presenciales | <strong>HA:</strong> Horas de trabajo autónomo</p>
+                <p>En total son <strong>14 créditos</strong>, y según el reglamento estudiantil, en el artículo 45: Se define el crédito académico como la unidad de medida del trabajo académico que debe realizar el estudiante en cada una de las actividades formativas establecidas como requisito para la obtención del título en un programa de pregrado o posgrado. Un crédito académico corresponde a 48 horas de trabajo directo o indirecto del estudiante en función del desarrollo del proceso formativo.</p>
+                <p><strong>PARRAFO 2.</strong> El tiempo de trabajo de los estudiantes en los programas de formación titulada se administra por el sistema de créditos académicos así: En pregrado por una hora de trabajo presencial se proyectan dos de trabajo independiente.</p>
+                <p>La estudiante realiza <strong>42 horas semanales</strong> de trabajo académico. Se expide para presentar ante Instituciones de Bienestar Familiar o demás entidades.</p>
             </div>
         </div>
     </div>
@@ -113,60 +156,156 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">3. Certificado de Notas</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Georgia', 'Times New Roman', serif; max-width: 750px; margin: 0 auto; background: #fff; border: 4px double #2e7d32; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <div class="certificado-header" style="background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%); padding: 25px; border-bottom: 3px solid #2e7d32;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-                        <div style="width: 60px; height: 60px; background: #2e7d32; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">CET</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.55rem; color: #666; letter-spacing: 2px; text-transform: uppercase;">Institución de Educación Superior</div>
-                            <div style="font-size: 0.95rem; font-weight: bold; color: #2e7d32; text-transform: uppercase;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                            <div style="font-size: 0.55rem; color: #666;">NIT: 804.006.527-3</div>
-                        </div>
-                    </div>
-                </div>
-                <div style="background: #2e7d32; color: white; padding: 10px; text-align: center; font-size: 0.75rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">
-                    Certificado de Notas
-                </div>
-                <div class="certificado-body" style="padding: 25px 30px; font-size: 0.8rem; line-height: 1.7; color: #212121;">
-                    <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 0.8rem; color: #2e7d32; border-bottom: 2px solid #2e7d32; padding-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Constancia de Calificaciones</div>
-                    <p style="text-align: justify; margin: 15px 0;">El abajo firmante, <strong>Vicerrectora Académica</strong> de la <strong>CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</strong>, certifica que:</p>
-                    <p style="text-align: justify; margin: 15px 0;"><strong style="color: #2e7d32; font-size: 0.85rem;">CARLOS ANDRÉS RUIZ MENDOZA</strong>, identificado(a) con documento de identidad No. <strong>9876543210</strong>, código estudiantil <strong>2020001122</strong>, se encuentra matriculado(a) en el programa:</p>
-                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%); border-left: 4px solid #2e7d32; padding: 12px 18px; margin: 15px 0; border-radius: 0 8px 8px 0;">
-                        <strong style="color: #2e7d32; font-size: 0.85rem;">TECNOLOGÍA EN DESARROLLO DE SOFTWARE</strong><br>
-                        <span style="font-size: 0.65rem; color: #666;">Registro SNIES No. <strong>123456</strong></span>
-                    </div>
-                    <p style="text-align: justify; margin: 15px 0;">Actualmente cursa el <strong>Tercer Semestre</strong> en el período académico <strong>2025-1</strong>.</p>
-                    <p style="text-align: justify; margin: 20px 0 15px;">Se expide la presente certificación en <strong>Bucaramanga, Santander</strong>, a los <strong>19 de febrero de 2026</strong>.</p>
-                </div>
-                <div class="tabla-notas" style="padding: 0 30px 20px;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.7rem; border: 2px solid #2e7d32;">
-                        <tr style="background: #2e7d32; color: white;">
-                            <th style="padding: 10px; border: 1px solid #2e7d32; text-align: center;">ASIGNATURA</th>
-                            <th style="padding: 10px; border: 1px solid #2e7d32; text-align: center;">CRÉDITOS</th>
-                            <th style="padding: 10px; border: 1px solid #2e7d32; text-align: center;">NOTA</th>
-                        </tr>
-                        <tr><td style="padding: 8px; border: 1px solid #ddd;">Programación I</td><td style="padding: 8px; border: 1px solid #ddd; text-align: center;">4</td><td style="padding: 8px; border: 1px solid #ddd; text-align: center; font-weight: bold;">4.2</td></tr>
-                        <tr style="background: #f5f5f5;"><td style="padding: 8px; border: 1px solid #ddd;">Base de Datos I</td><td style="padding: 8px; border: 1px solid #ddd; text-align: center;">3</td><td style="padding: 8px; border: 1px solid #ddd; text-align: center; font-weight: bold;">3.8</td></tr>
-                        <tr><td style="padding: 8px; border: 1px solid #ddd;">Ingeniería de Software</td><td style="padding: 8px; border: 1px solid #ddd; text-align: center;">4</td><td style="padding: 8px; border: 1px solid #ddd; text-align: center; font-weight: bold;">4.5</td></tr>
-                    </table>
-                </div>
-                <div class="certificado-footer" style="margin-top: 15px; padding: 20px 30px; background: #f8f9fa; border-top: 2px solid #2e7d32;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div style="text-align: left; font-size: 0.55rem; color: #666;">
-                            <div style="font-weight: bold; color: #2e7d32; margin-bottom: 3px;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                            <div>Bucaramanga, Santander</div>
-                            <div>Tel: (607) 678-9000</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="border-top: 1px solid #333; width: 160px; margin: 0 auto 6px;"></div>
-                            <div style="font-weight: bold; font-size: 0.65rem; color: #2e7d32;">MAGDA CAROLINA REYES RINCÓN</div>
-                            <div style="color: #666; font-size: 0.55rem;">Vicerrectora Académica</div>
-                        </div>
-                        <div style="text-align: right; font-size: 0.5rem; color: #999;">
-                            <div>Documento generado por el</div>
-                            <div>Sistema de Certificados</div>
-                        </div>
-                    </div>
+            <div class="marca-agua">
+                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+            </div>
+            <div class="contenido" style="font-family: Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.5;">
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 18px;">
+                    <tr>
+                        <td style="width: 55%; vertical-align: middle;">
+                            <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" style="height: 1.8cm; width: auto; display: block;">
+                        </td>
+                        <td style="width: 45%; text-align: right; vertical-align: middle;">
+                            <div style="font-size: 12pt; font-weight: bold; color: #000; line-height: 1.1;">REGISTRO DE NOTAS</div>
+                            <div style="font-size: 10pt; font-weight: bold; color: #000; margin-top: 2px;">Número: {{NUMERO}}</div>
+                        </td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid #AEAAAA; margin-bottom: 18px;">
+                    <tr>
+                        <td style="width: 67%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Estudiante</td>
+                        <td style="width: 33%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Identificación</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 9px 12px; border: 1px solid #AEAAAA; font-size: 11pt; text-align: center;">{{NOMBRE}}</td>
+                        <td style="padding: 9px 12px; border: 1px solid #AEAAAA; font-size: 11pt; text-align: center;">{{DOCUMENTO}}</td>
+                    </tr>
+                    <tr>
+                        <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px 12px; border: 1px solid #AEAAAA; font-size: 10pt;">Programa académico</td>
+                        <td style="padding: 0; border: 1px solid #AEAAAA; background: #D9D9D9;">
+                            <table style="width: 100%; border-collapse: collapse; height: 100%;">
+                                <tr>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; border: none; border-right: 1px solid #AEAAAA; font-size: 10pt;">Período</td>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; border: none; border-right: 1px solid #AEAAAA; font-size: 10pt;">Año</td>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; border: none; font-size: 10pt;">Fecha de expedición</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 9px 12px; border: 1px solid #AEAAAA; font-size: 11pt; text-align: center;">{{PROGRAMA}}</td>
+                        <td style="padding: 0; border: 1px solid #AEAAAA;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="width: 28%; text-align: center; padding: 9px 4px; border-right: 1px solid #AEAAAA; font-size: 11pt;">{{SEMESTRE}}</td>
+                                    <td style="width: 24%; text-align: center; padding: 9px 4px; border-right: 1px solid #AEAAAA; font-size: 11pt;">{{PERIODO}}</td>
+                                    <td style="width: 48%; text-align: center; padding: 9px 4px; font-size: 11pt;">{{FECHA}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid #AEAAAA; margin-bottom: 18px;">
+                    <tr>
+                        <td style="width: 48%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px 10px; border: 1px solid #AEAAAA; font-size: 10pt;">Módulo / Asignaturas</td>
+                        <td style="width: 13%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Código</td>
+                        <td style="width: 10%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Nivel</td>
+                        <td style="width: 13%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Créditos</td>
+                        <td style="width: 16%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Nota</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">DIDÁCTICAS ESPECÍFICAS EN EDUCACIÓN INFANTIL</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI601</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.3</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">HIGIENE Y SEGURIDAD EN EL TRABAJO</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI603</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">2</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.3</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">INGLÉS II</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI600</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">2</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.6</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">INVESTIGACIÓN APLICADA II</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI604</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3.8</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">PRÁCTICA INTEGRAL I</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI605</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3.8</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">TALLER DISEÑO DE MATERIALES I</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI602</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3</td>
+                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.7</td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: auto;">
+                    <tr>
+                        <td style="width: 50%; vertical-align: top; padding-right: 3%;">
+                            <table style="width: 100%; border-collapse: collapse; border: 1px solid #AEAAAA;">
+                                <tr>
+                                    <td colspan="5" style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 9.5pt; letter-spacing: 1.5px;">TOTAL ACUMULADOS</td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CLASE</td>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CRÉDITOS<br>CURSADOS</td>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CRÉDITOS<br>APROBADOS</td>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">PROMEDIO<br>PONDERADO</td>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">NIVEL</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 8.5pt;">NUMÉRICO</td>
+                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">92</td>
+                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">92</td>
+                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3.9</td>
+                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 47%; vertical-align: top;">
+                            <table style="width: 100%; border-collapse: collapse; border: 1px solid #AEAAAA;">
+                                <tr>
+                                    <td colspan="3" style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 9.5pt; letter-spacing: 1.5px;">TOTALES PERIODO</td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CRÉDITOS<br>CURSADOS</td>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CRÉDITOS<br>APROBADOS</td>
+                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">PROMEDIO<br>PONDERADO</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">16</td>
+                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">16</td>
+                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.2</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <div style="text-align: center; margin-top: auto; padding-top: 60px;">
+                    <div style="width: 13cm; border-top: 1.5px solid #000; margin: 0 auto 8px auto;"></div>
+                    <div style="font-size: 11pt; font-weight: bold; letter-spacing: 0.3px;">MAGDA CAROLINA REYES RINCÓN</div>
+                    <div style="font-size: 10pt; margin-top: 5px;">Vicerrectora Académica</div>
                 </div>
             </div>
         </div>
@@ -176,30 +315,17 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">4. Certificado con Fechas Académicas</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Georgia', serif; max-width: 800px; margin: 0 auto; background: #fff; border: 5px solid #6a1b9a; border-radius: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <div class="certificado-header" style="background: #6a1b9a; color: white; padding: 25px; border-bottom: 4px solid #4a148c;">
-                    <div class="certificado-title" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase;">Certificado con Fechas Académicas</div>
-                    <div class="certificado-institution" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 0.8rem;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                    <div style="text-align: center; margin-top: 10px; font-size: 0.7rem;">NIT: 804.006.527-3 - Vicerrectoría Académica</div>
-                </div>
-                <div class="certificado-body" style="padding: 30px; font-size: 0.75rem; line-height: 1.8; color: #212121;">
-                    <div style="text-align: center; margin: 20px 0; font-weight: bold; font-size: 0.9rem; color: #6a1b9a; text-transform: uppercase; letter-spacing: 1px;">Quien Suscribe</div>
-                    <p style="text-align: justify;"><strong>VICERRECTORA ACADÉMICA</strong> de la <strong>CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</strong>, haciendo uso de las facultades conferidas,</p>
-                    <p style="text-align: center; margin: 20px 0; font-weight: bold; font-size: 0.85rem;">HACE CONSTAR</p>
-                    <p style="text-align: justify;">Que <strong>ANA MARÍA CASTRO SANTOS</strong>, identificado(a) con CC/TI No. <strong>1122334455</strong>, código <strong>2019007788</strong>, se encuentra matriculado(a) actualmente en el programa <strong>TECNOLOGÍA EN DESARROLLO DE SOFTWARE</strong>, programa aprobado mediante resolución SNIES No. <strong>123456</strong>.</p>
-                    <div style="background: #f3e5f5; padding: 15px; margin: 20px 0; border-left: 4px solid #6a1b9a;">
-                        <p style="margin: 5px 0;"><strong>Período Académico:</strong> 2025-1</p>
-                        <p style="margin: 5px 0;"><strong>Semestre:</strong> Quinto Semestre</p>
-                        <p style="margin: 5px 0;"><strong>Fecha de Inicio de Matrícula:</strong> 15 de enero de 2025</p>
-                        <p style="margin: 5px 0;"><strong>Fecha de Fin de Período:</strong> 15 de junio de 2025</p>
-                    </div>
-                    <p style="margin-top: 20px; text-align: justify;">La presente certificación se expide en Bucaramanga, a los <strong>19 de febrero de 2026</strong>.</p>
-                </div>
-                <div class="certificado-footer" style="margin-top: 30px; text-align: center; font-size: 0.6rem; padding-top: 20px; border-top: 2px solid #6a1b9a;">
-                    <div class="firma-line" style="border-top: 1px solid #000; width: 180px; margin: 0 auto 8px;"></div>
-                    <div class="firma-nombre" style="font-weight: bold; font-size: 0.7rem;">MAGDA CAROLINA REYES RINCÓN</div>
-                    <div class="firma-cargo" style="color: #666; font-size: 0.6rem;">Vicerrectora Académica</div>
-                </div>
+            <div class="marca-agua">
+                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+            </div>
+            <div class="contenido">
+                <p><strong>Quién Suscribe, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, haciendo uso de las facultades conferidas,</strong></p>
+                <p><strong>HACE CONSTAR:</strong></p>
+                <p>Que el período académico inició el lunes 28 de julio de 2025 y finaliza el sábado 29 de noviembre de 2025. Durante este período, el estudiante desarrollará las actividades académicas correspondientes al semestre.</p>
+                <p><strong>Fecha de inicio de matrícula:</strong> 15 de julio de 2025</p>
+                <p><strong>Fecha límite de cancelación de asignaturas:</strong> 15 de septiembre de 2025</p>
+                <p><strong>Fecha de finalización del período académico:</strong> 29 de noviembre de 2025</p>
+                <p>La presente certificación se expide en Bucaramanga a solicitud del interesado(a).</p>
             </div>
         </div>
     </div>
@@ -208,37 +334,17 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">5. Certificado con Fechas y Jornada</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Verdana', sans-serif; max-width: 800px; margin: 0 auto; background: linear-gradient(to bottom, #e8f5e9, #fff); border: 3px solid #00897b; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <div class="certificado-header" style="background: linear-gradient(135deg, #00897b 0%, #00695c 100%); color: white; padding: 20px; border-radius: 10px 10px 0 0;">
-                    <div class="certificado-title" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 1rem; text-transform: uppercase;">Certificado con Fechas y Jornada</div>
-                    <div class="certificado-institution" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 0.75rem;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                    <div class="certificado-nit" style="text-align: center; margin: 5px 0; font-size: 0.65rem;">NIT: 804.006.527-3</div>
-                </div>
-                <div class="certificado-body" style="padding: 25px; font-size: 0.75rem; line-height: 1.6; color: #333;">
-                    <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 0.85rem; color: #00695c; background: #b2dfdb; padding: 10px; border-radius: 5px;">INFORMACIÓN ACADÉMICA COMPLETA</div>
-                    <p style="text-align: justify;">El suscribiente, Vicerrectora Académica de la <strong>CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</strong>, certifica que:</p>
-                    <p style="text-align: justify; margin-top: 15px; padding: 15px; background: #fff; border-radius: 8px; border: 1px solid #b2dfdb;"><strong>LUIS FERNANDO GÓMEZ PÉREZ</strong>, identificado(a) con documento <strong>5566778899</strong>, código estudiantil <strong>2021003344</strong>, se encuentra matriculado(a) en el programa <strong>INGENIERÍA DE SISTEMAS</strong>, SNIES: <strong>654321</strong>.</p>
-                    <div style="display: flex; gap: 15px; margin-top: 20px;">
-                        <div style="flex: 1; background: #e0f2f1; padding: 15px; border-radius: 8px; border-left: 4px solid #00897b;">
-                            <div style="font-weight: bold; color: #00695c; margin-bottom: 10px;">DATOS DEL PERÍODO</div>
-                            <p style="margin: 5px 0;"><strong>Semestre:</strong> Séptimo Semestre</p>
-                            <p style="margin: 5px 0;"><strong>Período:</strong> 2025-1</p>
-                            <p style="margin: 5px 0;"><strong>Jornada:</strong> Diurna</p>
-                        </div>
-                        <div style="flex: 1; background: #e0f2f1; padding: 15px; border-radius: 8px; border-left: 4px solid #00897b;">
-                            <div style="font-weight: bold; color: #00695c; margin-bottom: 10px;">FECHAS IMPORTANTES</div>
-                            <p style="margin: 5px 0;"><strong>Inicio:</strong> 15 de enero de 2025</p>
-                            <p style="margin: 5px 0;"><strong>Fin:</strong> 15 de junio de 2025</p>
-                            <p style="margin: 5px 0;"><strong>Expedición:</strong> 19 de febrero de 2026</p>
-                        </div>
-                    </div>
-                    <p style="margin-top: 20px; text-align: justify; text-align: center;">Se expide la presente en Bucaramanga, a los <strong>19 de febrero de 2026</strong>.</p>
-                </div>
-                <div class="certificado-footer" style="margin-top: 30px; text-align: center; font-size: 0.6rem; padding-top: 20px; border-top: 2px solid #00897b;">
-                    <div class="firma-line" style="border-top: 1px solid #000; width: 180px; margin: 0 auto 8px;"></div>
-                    <div class="firma-nombre" style="font-weight: bold; font-size: 0.7rem;">MAGDA CAROLINA REYES RINCÓN</div>
-                    <div class="firma-cargo" style="color: #666; font-size: 0.6rem;">Vicerrectora Académica</div>
-                </div>
+            <div class="marca-agua">
+                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+            </div>
+            <div class="contenido">
+                <p><strong>El suscribiente, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
+                <p>Inicio clases el sábado 02 de agosto de 2025 y finaliza el sábado 29 de noviembre de 2026. El estudiante se encuentra matriculado en la siguiente jornada de estudio:</p>
+                <p><strong>Jornada:</strong> Sábados</p>
+                <p><strong>Horario:</strong> 7:00 a.m. a 4:00 p.m.</p>
+                <p><strong>Período académico:</strong> 2025-2</p>
+                <p>Esta jornada permite al estudiante compatibilizar sus actividades laborales con su formación académica, cumpliendo con todas las horas de trabajo presencial requeridas por el programa.</p>
+                <p>Se expide la presente en Bucaramanga a solicitud del interesado(a).</p>
             </div>
         </div>
     </div>
@@ -247,24 +353,16 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">6. Certificado Primer Ingreso Homologado</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Times New Roman', serif; max-width: 800px; margin: 0 auto; background: #fffde7; border: 4px solid #f9a825; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <div class="certificado-header" style="background: linear-gradient(135deg, #f9a825 0%, #f57f17 100%); color: white; padding: 20px; border-radius: 6px 6px 0 0;">
-                    <div class="certificado-title" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 1rem; text-transform: uppercase;">Certificado Primer Ingreso Homologado</div>
-                    <div class="certificado-institution" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 0.75rem;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                    <div class="certificado-nit" style="text-align: center; margin: 5px 0; font-size: 0.65rem;">NIT: 804.006.527-3 - Sistema de Homologación</div>
-                </div>
-                <div class="certificado-body" style="padding: 25px; font-size: 0.75rem; line-height: 1.6; color: #333;">
-                    <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 0.85rem; color: #f57f17; border: 2px dashed #f9a825; padding: 10px;">PRIMER INGRESO HOMOLOGADO</div>
-                    <p style="text-align: justify;">La Vicerrectora Académica de la <strong>CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</strong>, certifica que:</p>
-                    <p style="text-align: justify; margin-top: 15px; background: #fff; padding: 15px; border-radius: 5px; border-left: 4px solid #f9a825;"><strong>SOFIA ANDREA LÓPEZ RUIZ</strong>, identificado(a) con CC/TI No. <strong>6677889900</strong>, código estudiantil <strong>2022005566</strong>, fue admitido(a) mediante proceso de homologación al programa <strong>TECNOLOGÍA EN DESARROLLO DE SOFTWARE</strong> (SNIES: 123456).</p>
-                    <p style="margin-top: 15px; text-align: justify;">El estudiante se encuentra actualmente matriculado(a) en el <strong>Segundo Semestre</strong>, período académico <strong>2025-1</strong>, jornada <strong>Diurna</strong>.</p>
-                    <p style="margin-top: 20px; text-align: justify;">Se expide la presente certificación en Bucaramanga a los <strong>19 de febrero de 2026</strong>.</p>
-                </div>
-                <div class="certificado-footer" style="margin-top: 30px; text-align: center; font-size: 0.6rem; padding-top: 20px; border-top: 2px solid #f9a825;">
-                    <div class="firma-line" style="border-top: 1px solid #000; width: 180px; margin: 0 auto 8px;"></div>
-                    <div class="firma-nombre" style="font-weight: bold; font-size: 0.7rem;">MAGDA CAROLINA REYES RINCÓN</div>
-                    <div class="firma-cargo" style="color: #666; font-size: 0.6rem;">Vicerrectora Académica</div>
-                </div>
+            <div class="marca-agua">
+                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+            </div>
+            <div class="contenido">
+                <p><strong>La Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
+                <p>El estudiante fue admitido(a) mediante proceso de homologación al programa de <strong>{{PROGRAMA}}</strong>, según resolución ministerial SNIES No. <strong>{{SNIES}}</strong>.</p>
+                <p><strong>Período académico:</strong> {{PERIODO}}</p>
+                <p><strong>El período académico inició el lunes 15 de septiembre de 2025 y finaliza el sábado 10 de enero de 2026.</strong></p>
+                <p>El estudiante se encuentra actualmente matriculado(a) en el <strong>{{SEMESTRE}} semestre</strong>, jornada <strong>Diurna</strong>, cumpliendo con todos los requisitos de admisión establecidos por la institución.</p>
+                <p>La presente certificación se expide en Bucaramanga a los {{FECHA}}.</p>
             </div>
         </div>
     </div>
@@ -273,30 +371,16 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">7. Certificado Finalización y Próxima Ceremonia</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Georgia', serif; max-width: 800px; margin: 0 auto; background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%); border: 5px solid #7b1fa2; border-radius: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.15);">
-                <div class="certificado-header" style="background: linear-gradient(135deg, #7b1fa2 0%, #4a148c 100%); color: white; padding: 25px; border-radius: 8px 8px 0 0; text-align: center;">
-                    <div style="font-size: 1.5rem; margin-bottom: 10px;">🎓</div>
-                    <div class="certificado-title" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 1rem; text-transform: uppercase;">Certificado Finalización y Próxima Ceremonia</div>
-                    <div class="certificado-institution" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 0.8rem;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                    <div style="text-align: center; margin-top: 10px; font-size: 0.7rem;">NIT: 804.006.527-3</div>
-                </div>
-                <div class="certificado-body" style="padding: 30px; font-size: 0.75rem; line-height: 1.8; color: #212121;">
-                    <div style="text-align: center; margin: 20px 0; font-weight: bold; font-size: 0.9rem; color: #7b1fa2; text-transform: uppercase; letter-spacing: 2px;">Certificación de Estudios y Grado</div>
-                    <p style="text-align: justify;">El suscribiente, <strong>MAGDA CAROLINA REYES RINCÓN</strong>, Vicerrectora Académica de la <strong>CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</strong>, en uso de sus facultades legales,</p>
-                    <p style="text-align: center; margin: 20px 0; font-weight: bold; font-size: 0.85rem;">CERTIFICA QUE:</p>
-                    <p style="text-align: justify; background: #f3e5f5; padding: 20px; border-radius: 8px; border-left: 5px solid #7b1fa2;"><strong>PEDRO JOSÉ MARTÍNEZ SÁNCHEZ</strong>, identificado(a) con documento de identidad No. <strong>7788990011</strong>, código estudiantil <strong>2018002233</strong>, se encuentra matriculado(a) actualmente en el programa <strong>INGENIERÍA DE SISTEMAS</strong>, programa registrado ante el SNIES con el No. <strong>654321</strong>.</p>
-                    <p style="margin-top: 20px; text-align: justify;">El estudiante ha completado los requisitos académicos del <strong>Décimo Semestre</strong> en el período <strong>2025-1</strong>, encontrándose en proceso de trámite para la próxima ceremonia de grado.</p>
-                    <div style="background: #7b1fa2; color: white; padding: 15px; border-radius: 8px; text-align: center; margin-top: 20px;">
-                        <strong>PRÓXIMA CEREMONIA DE GRADO: 15 de Mayo de 2026</strong>
-                    </div>
-                    <p style="margin-top: 25px; text-align: justify; text-align: center;">Se expide la presente en Bucaramanga, a los <strong>19 de febrero de 2026</strong>.</p>
-                </div>
-                <div class="certificado-footer" style="margin-top: 30px; text-align: center; font-size: 0.65rem; padding: 20px; background: #f5f5f5; border-radius: 0 0 8px 8px;">
-                    <div style="border-top: 2px solid #7b1fa2; width: 200px; margin: 0 auto 10px;"></div>
-                    <div style="font-weight: bold; font-size: 0.75rem; color: #4a148c;">MAGDA CAROLINA REYES RINCÓN</div>
-                    <div style="color: #666;">Vicerrectora Académica</div>
-                    <div style="margin-top: 15px; font-size: 0.55rem; color: #999;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                </div>
+            <div class="marca-agua">
+                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+            </div>
+            <div class="contenido">
+                <p style="text-align: center;"><strong>El suscribiente, MAGDA CAROLINA REYES RINCÓN, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, en uso de sus facultades legales,</strong></p>
+                <p><strong>CERTIFICA QUE:</strong></p>
+                <p>El(la) estudiante <strong>{{NOMBRE}}</strong>, identificado(a) con documento de identidad No. <strong>{{DOCUMENTO}}</strong>, se encuentra matriculado(a) actualmente en el programa <strong>{{PROGRAMA}}</strong>, programa registrado ante el SNIES con el No. <strong>{{SNIES}}</strong>.</p>
+                <p>El estudiante ha completado todos los requisitos académicos del <strong>{{SEMESTRE}} semestre</strong> en el período <strong>{{PERIODO}}</strong>, encontrándose en proceso de trámite para la próxima ceremonia de grado.</p>
+                <p><strong>PRÓXIMA CEREMONIA DE GRADO:</strong> 15 de Mayo de 2026</p>
+                <p>Se expide la presente en Bucaramanga, a los {{FECHA}}.</p>
             </div>
         </div>
     </div>
@@ -305,30 +389,22 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">8. Certificado de Buena Conducta</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Arial', sans-serif; max-width: 800px; margin: 0 auto; background: #fff; border: 3px solid #1565c0; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                <div class="certificado-header" style="background: #1565c0; color: white; padding: 20px; border-radius: 6px 6px 0 0; display: flex; align-items: center; justify-content: center; gap: 20px;">
-                    <div style="font-size: 2rem;">🛡️</div>
-                    <div>
-                        <div class="certificado-title" style="font-weight: bold; font-size: 1rem; text-transform: uppercase;">Certificado de Buena Conducta</div>
-                        <div style="font-size: 0.7rem; margin-top: 5px;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                    </div>
-                </div>
-                <div class="certificado-body" style="padding: 30px; font-size: 0.75rem; line-height: 1.6; color: #333;">
-                    <p style="text-align: justify;">La Vicerrectora Académica de la <strong>CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</strong> (NIT: 804.006.527-3),</p>
-                    <p style="text-align: center; margin: 20px 0; font-weight: bold; font-size: 0.9rem; color: #1565c0;">CERTIFICA</p>
-                    <p style="text-align: justify;">Que <strong>LAURA VANESSA OSORIO GUTIÉRREZ</strong>, identificado(a) con documento de identificación personal No. <strong>8899001122</strong>, código estudiantil <strong>2023007788</strong>, es estudiante del programa <strong>TECNOLOGÍA EN DESARROLLO DE SOFTWARE</strong> (SNIES: 123456).</p>
-                    <div style="background: #e8f5e9; border: 2px solid #4caf50; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center;">
-                        <div style="font-size: 1.2rem; color: #2e7d32; font-weight: bold;">✓ CONSTANCIA DE CONDUCTA</div>
-                        <p style="margin-top: 10px; color: #2e7d32;">Durante su estancia en la institución, el estudiante ha mantenido una conducta <strong>EJEMPLAR</strong> y <strong>RESPETUOSA</strong>, cumpliendo con todas las normas institucionales y demostrando valores éticos positivos.</p>
-                    </div>
-                    <p style="margin-top: 15px; text-align: justify;">Actualmente cursa el <strong>Cuarto Semestre</strong> en el período académico <strong>2025-1</strong>, en jornada <strong>Diurna</strong>.</p>
-                    <p style="margin-top: 20px; text-align: justify;">Se expide la presente a solicitud del interesado(a) en Bucaramanga, a los <strong>19 de febrero de 2026</strong>.</p>
-                </div>
-                <div class="certificado-footer" style="margin-top: 30px; text-align: center; font-size: 0.6rem; padding-top: 20px; border-top: 2px solid #1565c0;">
-                    <div class="firma-line" style="border-top: 1px solid #000; width: 180px; margin: 0 auto 8px;"></div>
-                    <div class="firma-nombre" style="font-weight: bold; font-size: 0.7rem;">MAGDA CAROLINA REYES RINCÓN</div>
-                    <div class="firma-cargo" style="color: #666; font-size: 0.6rem;">Vicerrectora Académica</div>
-                </div>
+            <div class="marca-agua">
+                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+            </div>
+            <div class="contenido">
+                <p><strong>La Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE (NIT: 804.006.527-3),</strong></p>
+                <p><strong>CERTIFICA</strong></p>
+                <p>Que <strong>{{NOMBRE}}</strong>, identificado(a) con documento de identificación personal No. <strong>{{DOCUMENTO}}</strong>, es estudiante del programa <strong>{{PROGRAMA}}</strong> (SNIES: {{SNIES}}).</p>
+                <p>Durante el tiempo de permanencia en nuestra institución, la estudiante presentó una <strong>excelente conducta académica</strong>, cumpliendo con todas las normas institucionales y demostrando valores éticos positivos como:</p>
+                <ul>
+                    <li>Respeto hacia compañeros y personal docente</li>
+                    <li>Puntualidad en la asistencia a clases</li>
+                    <li>Compromiso con el aprendizaje</li>
+                    <li>Integridad académica en sus trabajos y evaluaciones</li>
+                </ul>
+                <p>Actualmente cursa el <strong>{{SEMESTRE}} semestre</strong> en el período académico <strong>{{PERIODO}}</strong>, en jornada <strong>Diurna</strong>.</p>
+                <p>Se expide la presente a solicitud del interesado(a) en Bucaramanga, a los {{FECHA}}.</p>
             </div>
         </div>
     </div>
@@ -337,39 +413,52 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">9. Certificado con Horario y Fechas</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 800px; margin: 0 auto; background: #fff; border: 3px solid #e65100; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                <div class="certificado-header" style="background: linear-gradient(135deg, #e65100 0%, #ef6c00 100%); color: white; padding: 20px; border-radius: 6px 6px 0 0;">
-                    <div class="certificado-title" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 1rem; text-transform: uppercase;">Certificado con Horario y Fechas</div>
-                    <div class="certificado-institution" style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 0.75rem;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                    <div style="text-align: center; margin-top: 5px; font-size: 0.65rem;">NIT: 804.006.527-3</div>
-                </div>
-                <div class="certificado-body" style="padding: 25px; font-size: 0.75rem; line-height: 1.6; color: #333;">
-                    <p style="text-align: justify;">El suscribiente, Vicerrectora Académica de la <strong>CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</strong>, certifica:</p>
-                    <p style="margin-top: 15px; text-align: justify;"><strong>DIEGO ALEJANDRO CRUZ MORALES</strong>, identificado(a) con CC No. <strong>9900112233</strong>, código <strong>2019004455</strong>, estudiante del programa <strong>INGENIERÍA ELECTRÓNICA</strong> (SNIES: 789012).</p>
-                    <p style="margin-top: 15px; text-align: justify;">Se encuentra matriculado(a) en el <strong>Sexto Semestre</strong>, período <strong>2025-1</strong>, jornada <strong>Diurna</strong>.</p>
-
-                    <div style="margin-top: 25px; background: #fff3e0; padding: 15px; border-radius: 8px; border-left: 4px solid #e65100;">
-                        <div style="font-weight: bold; color: #e65100; margin-bottom: 15px; text-align: center;">HORARIO DE CLASES</div>
-                        <table style="width: 100%; border-collapse: collapse; font-size: 0.7rem;">
-                            <tr style="background: #e65100; color: white;">
-                                <th style="padding: 8px; border: 1px solid #e65100;">DÍA</th>
-                                <th style="padding: 8px; border: 1px solid #e65100;">HORA</th>
-                                <th style="padding: 8px; border: 1px solid #e65100;">ASIGNATURA</th>
-                                <th style="padding: 8px; border: 1px solid #e65100;">AULA</th>
-                            </tr>
-                            <tr><td style="padding: 6px; border: 1px solid #ddd;">Lunes</td><td style="padding: 6px; border: 1px solid #ddd;">07:00 - 10:00</td><td style="padding: 6px; border: 1px solid #ddd;">Programación II</td><td style="padding: 6px; border: 1px solid #ddd; text-align: center;">Lab 3</td></tr>
-                            <tr style="background: #f5f5f5;"><td style="padding: 6px; border: 1px solid #ddd;">Martes</td><td style="padding: 6px; border: 1px solid #ddd;">10:00 - 12:00</td><td style="padding: 6px; border: 1px solid #ddd;">Base de Datos II</td><td style="padding: 6px; border: 1px solid #ddd; text-align: center;">Lab 1</td></tr>
-                            <tr><td style="padding: 6px; border: 1px solid #ddd;">Miércoles</td><td style="padding: 6px; border: 1px solid #ddd;">07:00 - 10:00</td><td style="padding: 6px; border: 1px solid #ddd;">Programación II</td><td style="padding: 6px; border: 1px solid #ddd; text-align: center;">Lab 3</td></tr>
-                            <tr style="background: #f5f5f5;"><td style="padding: 6px; border: 1px solid #ddd;">Jueves</td><td style="padding: 6px; border: 1px solid #ddd;">14:00 - 17:00</td><td style="padding: 6px; border: 1px solid #ddd;">Ingeniería de Software</td><td style="padding: 6px; border: 1px solid #ddd; text-align: center;">Aula 205</td></tr>
-                        </table>
-                    </div>
-                    <p style="margin-top: 20px; text-align: justify;">Se expide en Bucaramanga a los <strong>19 de febrero de 2026</strong>.</p>
-                </div>
-                <div class="certificado-footer" style="margin-top: 30px; text-align: center; font-size: 0.6rem; padding-top: 20px; border-top: 2px solid #e65100;">
-                    <div class="firma-line" style="border-top: 1px solid #000; width: 180px; margin: 0 auto 8px;"></div>
-                    <div class="firma-nombre" style="font-weight: bold; font-size: 0.7rem;">MAGDA CAROLINA REYES RINCÓN</div>
-                    <div class="firma-cargo" style="color: #666; font-size: 0.6rem;">Vicerrectora Académica</div>
-                </div>
+            <div class="marca-agua">
+                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+            </div>
+            <div class="contenido">
+                <p><strong>El suscribiente, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica:</strong></p>
+                <p><strong>{{NOMBRE}}</strong>, identificado(a) con CC No. <strong>{{DOCUMENTO}}</strong>, estudiante del programa <strong>{{PROGRAMA}}</strong> (SNIES: {{SNIES}}).</p>
+                <p><strong>El período académico inició el lunes 3 de febrero de 2025 y finalizó el sábado 31 de mayo de 2025;</strong> el estudiante se matriculó en jornada nocturna de lunes a viernes de 6:30 p.m. a 9:45 p.m. y sábados de 7:00 a.m. a 12:00 m.</p>
+                <p><strong>HORARIO DE CLASE:</strong></p>
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0; border: 1px solid #333;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">Asignatura</th>
+                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">Créditos</th>
+                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">Horario de clase</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Anatomía y fisiología</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Miércoles 6:00 pm a 8:00 pm</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Fundamentos y ámbito jurídico de la SST</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Lunes 6:30 p.m. a 9:45 p.m.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Peligros físicos</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Jueves 6:30 p.m. a 9:45 p.m.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Química básica</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Viernes 7:15 p.m. a 9:45 p.m.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Técnicas de expresión oral y escrita</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Sábado 9:30 a.m. a 11:00 a.m. (virtual)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Ética profesional</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Sábado 7:00 am a 9:15 a.m. (virtual)</td>
+                    </tr>
+                </table>
+                <p>Se expide en Bucaramanga a los {{FECHA}}.</p>
             </div>
         </div>
     </div>
@@ -378,53 +467,57 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">10. Certificado de Práctica</div>
         <div class="certificado">
-            <div class="certificado-container" style="font-family: 'Georgia', 'Times New Roman', serif; max-width: 750px; margin: 0 auto; background: #fff; border: 4px double #303f9f; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <div class="certificado-header" style="background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%); padding: 25px; border-bottom: 3px solid #303f9f;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-                        <div style="width: 60px; height: 60px; background: #303f9f; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">CET</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.55rem; color: #666; letter-spacing: 2px; text-transform: uppercase;">Institución de Educación Superior</div>
-                            <div style="font-size: 0.95rem; font-weight: bold; color: #303f9f; text-transform: uppercase;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                            <div style="font-size: 0.55rem; color: #666;">NIT: 804.006.527-3</div>
-                        </div>
-                    </div>
-                </div>
-                <div style="background: #303f9f; color: white; padding: 10px; text-align: center; font-size: 0.75rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">
-                    Certificado de Práctica
-                </div>
-                <div class="certificado-body" style="padding: 30px 35px; font-size: 0.8rem; line-height: 1.7; color: #212121;">
-                    <div style="text-align: center; margin: 20px 0; font-weight: bold; font-size: 0.85rem; color: #303f9f; text-transform: uppercase; letter-spacing: 1px;">Certifica que:</div>
-                    <p style="text-align: justify; margin: 15px 0;"><strong style="color: #303f9f; font-size: 0.85rem;">CARLOS EDUARDO BERMÚDEZ PALACIOS</strong>, identificado(a) con C.C. <strong>1011122233</strong>, estudiante del programa <strong>TECNOLOGÍA EN DESARROLLO DE SOFTWARE</strong>, se encuentra realizando su práctica profesional como requisito de grado.</p>
-                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e8eaf6 100%); border-left: 4px solid #303f9f; padding: 15px 20px; margin: 20px 0; border-radius: 0 8px 8px 0;">
-                        <p style="margin: 5px 0;"><strong>• Programa académico:</strong> TECNOLOGÍA EN DESARROLLO DE SOFTWARE</p>
-                        <p style="margin: 5px 0;"><strong>• SNIES:</strong> 123456</p>
-                        <p style="margin: 5px 0;"><strong>• Semestre de práctica:</strong> Sexto Semestre</p>
-                        <p style="margin: 5px 0;"><strong>• Período:</strong> 2025-1</p>
-                        <p style="margin: 5px 0;"><strong>• Fecha de inicio:</strong> 15 de febrero de 2025</p>
-                        <p style="margin: 5px 0;"><strong>• Fecha estimada de finalización:</strong> 15 de junio de 2025</p>
-                        <p style="margin: 5px 0;"><strong>• Horas requeridas:</strong> 480 horas</p>
-                    </div>
-                    <p style="text-align: justify; margin: 20px 0;">El estudiante está autorizado para realizar su práctica profesional en empresas o entidades legalmente constituidas.</p>
-                    <p style="text-align: justify; margin: 20px 0 15px;">Dado en <strong>Bucaramanga, Santander</strong>, a los <strong>19 de febrero de 2026</strong>.</p>
-                </div>
-                <div class="certificado-footer" style="margin-top: 15px; padding: 20px 35px; background: #f8f9fa; border-top: 2px solid #303f9f;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div style="text-align: left; font-size: 0.55rem; color: #666;">
-                            <div style="font-weight: bold; color: #303f9f; margin-bottom: 3px;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                            <div>Bucaramanga, Santander</div>
-                            <div>Tel: (607) 678-9000</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="border-top: 1px solid #333; width: 160px; margin: 0 auto 6px;"></div>
-                            <div style="font-weight: bold; font-size: 0.65rem; color: #303f9f;">MAGDA CAROLINA REYES RINCÓN</div>
-                            <div style="color: #666; font-size: 0.55rem;">Vicerrectora Académica</div>
-                        </div>
-                        <div style="text-align: right; font-size: 0.5rem; color: #999;">
-                            <div>Documento generado por el</div>
-                            <div>Sistema de Certificados</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="marca-agua">
+                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+            </div>
+            <div class="contenido">
+                <p><strong>El que suscribe, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
+                <p>El(la) estudiante <strong>{{NOMBRE}}</strong>, identificado(a) con C.C. <strong>{{DOCUMENTO}}</strong>, del programa <strong>{{PROGRAMA}}</strong> (SNIES: {{SNIES}}), se encuentra realizando su práctica profesional como requisito de grado.</p>
+                <p>El estudiante ha cursado y aprobado las siguientes prácticas:</p>
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0; border: 1px solid #333;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">Asignatura</th>
+                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">HP</th>
+                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">HA</th>
+                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">CRÉDITOS</th>
+                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">SEMESTRE</th>
+                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">PERIODO</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Práctica integral I</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">6</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">VI</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">2023-1</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Práctica integral II</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">6</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">VII</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">2023-2</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Práctica integral III</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">6</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">VIII</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">2024-1</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333;">Práctica integral IV</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">6</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">IX</td>
+                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">2024-1 intersemestral</td>
+                    </tr>
+                </table>
+                <p>El estudiante está autorizado para realizar su práctica profesional en empresas o entidades legalmente constituidas.</p>
+                <p>Dado en Bucaramanga, {{FECHA}}.</p>
             </div>
         </div>
     </div>

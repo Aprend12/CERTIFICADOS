@@ -1,18 +1,13 @@
-// Modelos de datos para el sistema de certificados académicos.
-
 export interface CertificadoDatos {
-  documento_identidad: string;
-  numero_estudiante: string;
-  numero_programa: string;
+  documento: string;
+  codigo_estudiante: string;
+  snies: string;
   tipo_certificado: string;
-  nombreEstudiante: string;
+  nombre_completo: string;
 }
-
-// Interfaz que representa los datos completos del certificado.
 
 export interface DatosCertificado {
   documento: string;
-  nombre: string;
   programa: string;
   snies: string;
   semestre: string;
@@ -23,8 +18,6 @@ export interface DatosCertificado {
   jornada: string;
   codigo: string;
 }
-
-// Tipos de certificados disponibles en el sistema.
 
 export type TipoCertificado =
   | 'sencillo'
@@ -37,8 +30,6 @@ export type TipoCertificado =
   | 'conducta'
   | 'horario'
   | 'practica';
-
-// Mapeo de tipos de certificado a sus títulos descriptivos.
 
 export const TITULOS_CERTIFICADO: Record<TipoCertificado, string> = {
   sencillo: 'Certificado de Estudio Sencillo',
@@ -53,7 +44,6 @@ export const TITULOS_CERTIFICADO: Record<TipoCertificado, string> = {
   practica: 'Certificado de Práctica'
 };
 
-// Interfaz base para constructores de certificados.
 export interface CertificadoBuilder {
   build(datos: DatosCertificado, esPreview: boolean): string;
 }

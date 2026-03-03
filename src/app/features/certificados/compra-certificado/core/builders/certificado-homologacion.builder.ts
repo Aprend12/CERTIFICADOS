@@ -1,5 +1,3 @@
-// Constructor del Certificado de Homologación.
-
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 
 export class CertificadoHomologacionBuilder implements CertificadoBuilder {
@@ -44,7 +42,7 @@ export class CertificadoHomologacionBuilder implements CertificadoBuilder {
 
       <div style="margin-bottom: ${pSpacing}; text-align: justify; text-indent: 1.5cm;">
         <p style="margin-bottom: ${spacing};"><strong>HACE CONSTAR:</strong></p>
-        <p style="margin-bottom: ${spacing};">Que, <strong>${o.nombre}</strong>, identificado(a) con número de documento <strong>${o.documento}</strong>, se encuentra matriculado(a) actualmente en el programa de <strong>${o.programa}</strong>, modalidad virtual, aprobado por el Ministerio de Educación según resolución <strong>014875</strong>.</p>
+        <p style="margin-bottom: ${spacing};">Que, <strong>asd</strong>, identificado(a) con número de documento <strong>${o.documento}</strong>, se encuentra matriculado(a) actualmente en el programa de <strong>${o.programa}</strong>, modalidad virtual, aprobado por el Ministerio de Educación según resolución <strong>014875</strong>.</p>
         <p style="margin-bottom: ${spacing};">El estudiante cursará el <strong>${o.semestre} semestre</strong> en el período académico <strong>${o.periodo}</strong>, producto del reconocimiento de la titulación previa de Tecnólogo en Análisis y Desarrollo de Software del SENA.</p>
         <p style="margin-bottom: ${spacing};">El período académico inició el <strong>lunes 15 de septiembre de 2025</strong> y finaliza el <strong>sábado 10 de enero de 2026</strong>.</p>
       </div>
@@ -65,7 +63,7 @@ export class CertificadoHomologacionBuilder implements CertificadoBuilder {
   private getOcultos(datos: DatosCertificado, esPreview: boolean) {
     return {
       numero: esPreview ? '*******' : this.sanitize(datos.codigo || '1234HHZS1'),
-      nombre: esPreview ? '******* ****** ******' : this.sanitize(datos.nombre),
+
       documento: esPreview ? '**************' : this.sanitize(datos.documento),
       programa: esPreview ? '***************' : this.sanitize(datos.programa),
       snies: esPreview ? '**********' : this.sanitize(datos.snies),

@@ -63,9 +63,9 @@
     <app-step-preview
       [certificadoHTML]="getCertificadoHTML()"
       [titulo]="getCertificadoTitulo()"
-      [nombreEstudiante]="datosUsuario.nombreEstudiante || ''"
-      [documentoIdentidad]="datosUsuario.documento_identidad || ''"
-      [numeroEstudiante]="datosUsuario.numero_estudiante || ''">
+      [nombreEstudiante]="datosUsuario.nombre_completo || ''"
+      [documentoIdentidad]="datosUsuario.documento || ''"
+      [numeroEstudiante]="datosUsuario.codigo_estudiante || ''">
     </app-step-preview>
     <div style="text-align: center; margin-top: 20px;">
       <button class="btn btn-secondary" (click)="setStep(1)">Atrás</button>

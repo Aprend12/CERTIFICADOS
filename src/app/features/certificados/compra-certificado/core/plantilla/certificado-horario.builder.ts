@@ -3,6 +3,7 @@
  * Versión simplificada sin logo, número ni nombre de rectora.
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
+import { formatFechaCompleta } from './index';
 
 export class CertificadoHorarioBuilder implements CertificadoBuilder {
   private readonly INSTITUCION = 'LA VICERRECTORA ACADÉMICA ';
@@ -10,6 +11,7 @@ export class CertificadoHorarioBuilder implements CertificadoBuilder {
   private readonly DIRECCION = 'CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE';
 
   build(datos: DatosCertificado): string {
+    const fecha = formatFechaCompleta(datos.fecha_expedicion);
     return `
     <div style="width: 100%; min-height: 27.94cm; padding: 50px 60px; font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-size: 11pt; line-height: 1.6; box-sizing: border-box; background: #fefefe; position: relative;">
 
@@ -69,7 +71,7 @@ export class CertificadoHorarioBuilder implements CertificadoBuilder {
       </table>
 
       <div style="margin-top: 50px; text-align: left;">
-        <p style="color: #555; font-style: italic;">Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ********************.</p>
+        <p style="color: #555; font-style: italic;">Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${fecha}.</p>
       </div>
 
       <div style="margin-top: 50px; display: flex; justify-content: space-between; align-items: flex-end;">

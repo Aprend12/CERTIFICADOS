@@ -1,5 +1,3 @@
-//Constructor del Certificado de Notas.
-
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 
 export class CertificadoNotasBuilder implements CertificadoBuilder {
@@ -82,7 +80,7 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
     <!-- Datos fila 1 -->
     <tr>
       <td style="padding:9px 12px; border:1px solid ${B}; font-size:11pt; text-align:center;">
-        ${o.nombre}
+       hjufsasf
       </td>
       <td style="padding:9px 12px; border:1px solid ${B}; font-size:11pt; text-align:center;">
         ${o.documento}
@@ -207,7 +205,6 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
 </div>`;
   }
 
-  // ─── Materias ─────────
   private getMaterias(): string {
     const B = this.COLOR_BORDE;
     const materias = [
@@ -229,7 +226,6 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
       </tr>`).join('');
   }
 
-  // ─── Totales acumulados históricos ────
   private getTotalesAcumulados() {
     return {
       creditosCursados:  92,
@@ -238,7 +234,6 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
     };
   }
 
-  // ─── Totales del periodo actual (calculados dinámicamente) ─────────
   private getTotalesPeriodo() {
     const materias = [
       { creditos: 3, nota: 4.3 },
@@ -257,11 +252,10 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
     };
   }
 
-  // ─── Datos del certificado ─────────
   private getOcultos(datos: DatosCertificado) {
     return {
       numero:           ' ' + this.sanitize(datos.codigo || '1 123ad32'),
-      nombre:           this.sanitize(datos.nombre),
+
       documento:        this.sanitize(datos.documento),
       programa:         this.sanitize(datos.programa),
       semestre:         this.getNumeroRomano(datos.semestre),
@@ -270,7 +264,6 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
     };
   }
 
-  // ─── Utilidades ─────────
   private sanitize(value: string): string {
     if (!value) return '';
     return value

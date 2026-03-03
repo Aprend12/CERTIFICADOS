@@ -98,7 +98,7 @@ export class CertificadoPensionBuilder implements CertificadoBuilder {
     }
     return {
       numero: this.sanitize(datos.codigo || '1234HHZS1'),
-      nombre: this.sanitize(datos.nombre),
+
       documento: this.sanitize(datos.documento),
       programa: this.sanitize(datos.programa),
       snies: this.sanitize(datos.snies),
