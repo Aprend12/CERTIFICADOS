@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { switchMap, catchError } from 'rxjs/operators';
 
 export interface Estudiante {
   codigo_estudiante: string;
@@ -40,6 +41,7 @@ export interface ValidarEstudianteResponse {
     codigo_estudiante?: string;
     documento_identidad?: string;
     programas?: any[];
+    nombre_pdf?: string;
   };
 }
 
@@ -47,13 +49,28 @@ export interface GenerarCertificadoRequest {
   documento_identidad: string;
   tipo_certificado: string[];
   snies?: string;
-  nombre_completo?: string;
 }
 
-export interface GenerarCertificadoResponse {
+// Response when the server provides a download descriptor.
+export interface DescargarCertificado {
   mensaje: string;
-  pdf: string;
-  hash: string;
+  nombre_pdf: string;
+}
+export interface GenerarCertificadoResponse {
+  success?: boolean;               // new backend wraps result
+  mensaje: string;
+  // legacy fields kept for compatibility
+  pdf?: string;
+  hash?: string;
+  data?: {
+    codigo_verificacion?: string;
+    hash?: string;
+    fecha_expedicion?: string;
+    secciones_incluidas?: any;
+    ruta_pdf?: string;
+    nombre_pdf?: string;
+    [key: string]: any;
+  };
 }
 
 export interface VerificarCertificadoResponse {
@@ -69,9 +86,16 @@ export interface VerificarCertificadoResponse {
 export class ApiService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = '/api';
+  private readonly baseDownloadUrl = 'https://georgiann-cleanable-axel.ngrok-free.dev/api/descargar/certificado';
+
+  getDownloadUrl(filename: string): string {
+    if (filename.startsWith('http')) {
+      return filename;
+    }
+    return `${this.baseDownloadUrl}/${filename}`;
+  }
 
   validarEstudiante(documento: string, codigoEstudiante: string, tipoCertificado: string): Observable<ValidarEstudianteResponse> {
-    console.log('Llamando API con documento:', documento, 'codigo:', codigoEstudiante);
     return this.http.post<ValidarEstudianteResponse>(`${this.baseUrl}/estudiante`, {
       documento,
       tipo_certificado: tipoCertificado,
@@ -88,10 +112,13 @@ export class ApiService {
     return this.http.post<GenerarCertificadoResponse>(`${this.baseUrl}/generar/certificado`, data);
   }
 
-  descargarCertificado(nombrePdf: string): Observable<Blob> {
-    return this.http.get(`${this.baseUrl}/descargar/certificado/${nombrePdf}`, {
-      responseType: 'blob'
-    });
+  /**
+   * First step: ask the backend for a download descriptor that contains the
+   * filename or token to fetch the actual PDF.
+   */
+  descargarCertificado(nombre_pdf: string): Observable<DescargarCertificado> {
+    return this.http.get<DescargarCertificado>( `${this.baseUrl}/descargar/certificado/${nombre_pdf}`
+    );
   }
 
   verificarCertificado(hash: string): Observable<VerificarCertificadoResponse> {

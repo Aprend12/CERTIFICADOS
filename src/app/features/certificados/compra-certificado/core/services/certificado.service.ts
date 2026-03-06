@@ -54,9 +54,18 @@ export class CertificadoService {
     return this.htmlBuilder.build(datos.tipo_certificado as TipoCertificado, datosCertificado, false);
   }
 
+  generarCertificadoConDatos(datos: DatosCertificado, tipoCertificado: string): string {
+    if (!tipoCertificado || !this.esTipoValido(tipoCertificado)) {
+      return '';
+    }
+    return this.htmlBuilder.build(tipoCertificado as TipoCertificado, datos, false);
+  }
+
   private mapearDatos(datos: CertificadoDatos): DatosCertificado {
     return {
       documento: datos.documento || '',
+      nombre: datos.nombre_completo || '',
+      nombre_completo: datos.nombre_completo || '',
       programa: this.PROGRAMA,
       snies: datos.snies || '',
       semestre: this.SEMESTRE,

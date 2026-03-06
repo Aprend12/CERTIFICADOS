@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StepDatosComponent } from '../components/step-datos/step-datos.component';
 import { StepPreviewComponent } from '../components/step-preview/step-preview.component';
@@ -11,13 +11,19 @@ import { CertificadoDatos } from '../core/models/certificado.model';
 @Component({
   selector: 'app-wizard',
   standalone: true,
-  imports: [StepDatosComponent, StepPreviewComponent, StepDescargaComponent],
+  imports: [StepDatosComponent, StepPreviewComponent, StepPagosComponent, StepDescargaComponent],
   templateUrl: './wizard.component.html',
   styleUrls: ['./wizard.component.css']
 })
-export class WizardComponent {
+export class WizardComponent implements OnInit {
+  @ViewChild(StepDatosComponent) stepDatos?: StepDatosComponent;
+  
   wizardService: WizardService = inject(WizardService);
   private certificadoService: CertificadoService = inject(CertificadoService);
+
+  ngOnInit() {
+    this.resetWizard();
+  }
 
   datosUsuario: CertificadoDatos = {
     documento: '',
@@ -86,5 +92,6 @@ export class WizardComponent {
       nombre_completo: '',
     };
     this.certificadoService.limpiar();
+    this.stepDatos?.reset();
   }
 }

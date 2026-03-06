@@ -8,6 +8,8 @@ export interface CertificadoDatos {
 
 export interface DatosCertificado {
   documento: string;
+  nombre?: string;
+  nombre_completo?: string;
   programa: string;
   snies: string;
   semestre: string;

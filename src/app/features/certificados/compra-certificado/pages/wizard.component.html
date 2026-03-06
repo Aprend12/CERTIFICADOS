@@ -69,25 +69,21 @@
     </app-step-preview>
     <div style="text-align: center; margin-top: 20px;">
       <button class="btn btn-secondary" (click)="setStep(1)">Atrás</button>
-      <button class="btn btn-primary" (click)="wizardService.isPrevStepCompleted(2) ? setStep(3) : null" [disabled]="!wizardService.isPrevStepCompleted(2)">Continuar</button>
+      <button class="btn btn-primary" (click)="setStep(3)">Continuar</button>
     </div>
   </div>
 
   <!-- Paso 3: Pagar -->
   <div class="step-content" [class.active]="isStepActive(3)">
-    <div class="payment-container">
-      <h2>Pago del Certificado</h2>
-      <p>Valor: $23.000 COL</p>
+    <app-step-pagos></app-step-pagos>
+    <div style="text-align: center; margin-top: 20px;">
       <button class="btn btn-secondary" (click)="setStep(2)">Atrás</button>
-      <button class="btn btn-primary" (click)="wizardService.isPrevStepCompleted(3) ? setStep(4) : null" [disabled]="!wizardService.isPrevStepCompleted(3)">Continuar</button>
+      <button class="btn btn-primary" (click)="setStep(4)">Continuar</button>
     </div>
   </div>
 
   <!-- Paso 4: Descargar -->
   <div class="step-content" [class.active]="isStepActive(4)">
     <app-step-descarga [datos]="datosUsuario"></app-step-descarga>
-    <div style="text-align: center; margin-top: 20px;">
-      <button class="btn btn-primary" (click)="resetWizard()">Nuevo Certificado</button>
-    </div>
   </div>
 </div>

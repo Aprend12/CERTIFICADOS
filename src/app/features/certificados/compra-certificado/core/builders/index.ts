@@ -41,14 +41,15 @@ export function getCertificadoBuilder(tipo: TipoCertificado): CertificadoBuilder
 export function getCertificadoWrapper(contenido: string): string {
   return `
     <div style="
-      width: 21.59cm;
+      width: 100%;
+      max-width: 21.59cm;
       min-height: 27.94cm;
-      padding: 2cm 2cm;
+      padding: 1.5cm 1.5cm;
       box-sizing: border-box;
       background: white;
       margin: 0 auto;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       font-family: 'Times New Roman', Times, serif;
     ">
       <div style="

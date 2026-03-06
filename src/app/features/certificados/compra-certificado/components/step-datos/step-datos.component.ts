@@ -27,12 +27,15 @@ interface EstudianteCertificado {
 export class StepDatosComponent {
   @Output() datosSubmitted = new EventEmitter<CertificadoDatos>();
   @Output() goToStep2 = new EventEmitter<{ estudiante: EstudianteCertificado; carreras: CarreraEstudiante[]; tipoCertificado: string; documento: string; numeroEstudiante: string; codigoCarrera: string }>();
+  @Output() resetComponent = new EventEmitter<void>();
 
   form: FormGroup;
   private fb = inject(FormBuilder);
   private apiService = inject(ApiService);
 
   estudianteEncontrado: EstudianteCertificado | null = null;
+  ultimoDocumentoVerificado: string = '';
+  ultimoCodigoVerificado: string = '';
   estudianteNoEncontrado = false;
   verificando = false;
   nombreEstudiante: string = '';
@@ -67,6 +70,12 @@ export class StepDatosComponent {
       this.estudianteEncontrado = null;
       this.carreraSeleccionada = null;
       this.carrerasDisponibles = [];
+      this.ultimoDocumentoVerificado = '';
+      this.ultimoCodigoVerificado = '';
+      return;
+    }
+
+    if (documento === this.ultimoDocumentoVerificado && codigoEstudiante === this.ultimoCodigoVerificado && this.estudianteEncontrado) {
       return;
     }
 
@@ -74,12 +83,9 @@ export class StepDatosComponent {
 
     this.apiService.validarEstudiante(documento, codigoEstudiante, tipoCertificado).subscribe({
       next: (response) => {
-        console.log('Respuesta API:', response);
 
         if (response.success && (response.programas_disponibles || response.programas || response.data?.programas)) {
           const programas = response.programas_disponibles || response.programas || response.data?.programas || [];
-          console.log('Debug - programas:', programas);
-          console.log('Debug - response.data:', response.data);
           const nombreCompleto = response.nombre_completo || response.data?.nombre_completo || response.estudiante?.nombre || '';
           const estudiante: EstudianteCertificado = {
             documento: documento,
@@ -96,6 +102,8 @@ export class StepDatosComponent {
           this.nombreEstudiante = nombreCompleto;
           this.estudianteNoEncontrado = false;
           this.carrerasDisponibles = estudiante.snies;
+          this.ultimoDocumentoVerificado = documento;
+          this.ultimoCodigoVerificado = codigoEstudiante;
 
           if (estudiante.snies.length === 1) {
             this.carreraSeleccionada = estudiante.snies[0];
@@ -106,21 +114,28 @@ export class StepDatosComponent {
           this.estudianteEncontrado = null;
           this.estudianteNoEncontrado = true;
           this.carrerasDisponibles = [];
+          this.ultimoDocumentoVerificado = '';
+          this.ultimoCodigoVerificado = '';
         }
         this.verificando = false;
       },
       error: (err) => {
-        console.log('Error API:', err);
         this.estudianteEncontrado = null;
         this.estudianteNoEncontrado = true;
         this.carreraSeleccionada = null;
         this.carrerasDisponibles = [];
+        this.ultimoDocumentoVerificado = '';
+        this.ultimoCodigoVerificado = '';
         this.verificando = false;
       }
     });
   }
 
   continuar() {
+    if (this.verificando) {
+      return;
+    }
+
     const documento = this.form.get('documento')?.value;
     const codigoEstudiante = this.form.get('codigo_estudiante')?.value;
     const tipoCertificado = this.form.get('tipo_certificado')?.value;
@@ -129,11 +144,14 @@ export class StepDatosComponent {
       return;
     }
 
-    if (!this.estudianteEncontrado) {
+    const datosSinCambiar = documento === this.ultimoDocumentoVerificado &&
+                            codigoEstudiante === this.ultimoCodigoVerificado &&
+                            this.estudianteEncontrado;
+
+    if (!datosSinCambiar) {
       this.verificando = true;
       this.apiService.validarEstudiante(documento, codigoEstudiante, tipoCertificado).subscribe({
         next: (response) => {
-          console.log('Respuesta API:', response);
 
           if (response.success && (response.programas_disponibles || response.programas || response.data?.programas)) {
             const programas = response.programas_disponibles || response.programas || response.data?.programas || [];
@@ -153,6 +171,8 @@ export class StepDatosComponent {
             this.nombreEstudiante = nombreCompleto;
             this.estudianteNoEncontrado = false;
             this.carrerasDisponibles = estudiante.snies;
+            this.ultimoDocumentoVerificado = documento;
+            this.ultimoCodigoVerificado = codigoEstudiante;
 
             if (estudiante.snies.length === 1) {
               this.carreraSeleccionada = estudiante.snies[0];
@@ -170,7 +190,6 @@ export class StepDatosComponent {
           }
         },
         error: (err) => {
-          console.log('Error API:', err);
           this.estudianteEncontrado = null;
           this.estudianteNoEncontrado = true;
           this.carrerasDisponibles = [];
@@ -183,12 +202,7 @@ export class StepDatosComponent {
   }
 
   procesarContinuar() {
-    console.log('Debug - carrerasDisponibles:', this.carrerasDisponibles.length);
-    console.log('Debug - carreraSeleccionada:', this.carreraSeleccionada);
-    console.log('Debug - tieneMultiplesCarreras:', this.tieneMultiplesCarreras);
-
     if (this.tieneMultiplesCarreras) {
-      console.log('Mostrando modal de carreras');
       this.mostrarModalCarreras = true;
     } else {
       const formValue = this.form.value;
@@ -224,5 +238,20 @@ export class StepDatosComponent {
   cerrarModal() {
     this.mostrarModalCarreras = false;
     this.carreraElegida = '';
+  }
+
+  reset() {
+    this.form.reset();
+    this.estudianteEncontrado = null;
+    this.estudianteNoEncontrado = false;
+    this.verificando = false;
+    this.nombreEstudiante = '';
+    this.carrerasDisponibles = [];
+    this.carreraSeleccionada = null;
+    this.mostrarModalCarreras = false;
+    this.carreraElegida = '';
+    this.ultimoDocumentoVerificado = '';
+    this.ultimoCodigoVerificado = '';
+    this.resetComponent.emit();
   }
 }

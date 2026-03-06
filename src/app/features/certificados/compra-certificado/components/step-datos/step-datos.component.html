@@ -1,59 +1,58 @@
 <h2 style="color: #ff8800; text-align: center; margin-bottom: 20px; font-size: 1.2rem;">Ingresar Datos del Estudiante</h2>
 
-<form [formGroup]="form" (ngSubmit)="continuar()" class="content-medio" style="max-width: 500px; margin: 0 auto;">
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="continuar()" class="content-medio">
+    <div class="form-group">
+      <label for="documento">Documento de identidad <span class="required">*</span></label>
+      <input type="text" id="documento" formControlName="documento" placeholder="Ingresa su identificación" (blur)="verificarCertificado()" required>
+    </div>
 
-  <div class="form-group">
-    <label for="documento">Documento de identidad <span class="required">*</span></label>
-    <input type="text" id="documento" formControlName="documento" placeholder="Ingresa su identificación" (blur)="verificarCertificado()" required>
-  </div>
+    <div class="form-group">
+      <label for="codigo_estudiante">Número de estudiante <span class="required">*</span></label>
+      <input type="text" id="codigo_estudiante" formControlName="codigo_estudiante" placeholder="EST-2024-001" (blur)="verificarCertificado()" required>
+    </div>
 
-  <div class="form-group">
-    <label for="codigo_estudiante">Número de estudiante <span class="required">*</span></label>
-    <input type="text" id="codigo_estudiante" formControlName="codigo_estudiante" placeholder="EST-2024-001" (blur)="verificarCertificado()" required>
-  </div>
+    <div class="form-group">
+      <label for="tipo_certificado">Tipo de Certificado <span class="required">*</span></label>
+      <select id="tipo_certificado" formControlName="tipo_certificado" required>
+        <option value="">Seleccione un tipo...</option>
+        <option value="sencillo">Certificado de Estudio Sencillo</option>
+        <option value="notas">Certificado de Notas</option>
+        <option value="fechas">Certificado con Fechas Académicas</option>
+        <option value="fechas_jornada">Certificado con Fechas y Jornada</option>
+        <option value="pension">Certificado para Pensión</option>
+        <option value="homologacion">Certificado Primer Ingreso Homologado</option>
+        <option value="conducta">Certificado de Buena Conducta</option>
+        <option value="horario">Certificado con Horario y Fechas</option>
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="tipo_certificado">Tipo de Certificado <span class="required">*</span></label>
-    <select id="tipo_certificado" formControlName="tipo_certificado" required>
-      <option value="">Seleccione un tipo...</option>
-      <option value="sencillo">Certificado de Estudio Sencillo</option>
-      <option value="notas">Certificado de Notas</option>
-      <option value="fechas">Certificado con Fechas Académicas</option>
-      <option value="fechas_jornada">Certificado con Fechas y Jornada</option>
-      <option value="pension">Certificado para Pensión</option>
-      <option value="homologacion">Certificado Primer Ingreso Homologado</option>
-      <option value="conducta">Certificado de Buena Conducta</option>
-      <option value="horario">Certificado con Horario y Fechas</option>
-    </select>
-  </div>
+    <div class="buttons-container" style="margin-top: 20px;">
+      <button type="button" class="btn btn-primary" style="width: 100%;" (click)="continuar()">Continuar</button>
+    </div>
+  </form>
 
-  <div class="buttons-container" style="margin-top: 20px;">
-    <button type="button" class="btn btn-primary" style="width: 100%;" (click)="continuar()">Continuar</button>
-  </div>
+  <div class="modal-overlay" *ngIf="mostrarModalCarreras" (click)="cerrarModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <form class="content-medio" style="max-width: 500px;">
+        <h3 style="color: #ff8800; text-align: center; margin-bottom: 20px; font-size: 1.1rem;">Seleccione una carrera</h3>
+        <p style="margin-bottom: 20px; color: #fff; text-align: center;">Hemos identificado que se encuentra en múltiples programas académicos. Ingrese el programa en el que desea realizar la compra del certificado.</p>
 
-</form>
+        <div class="form-group">
+          <label for="carrera">Carrera <span class="required">*</span></label>
+          <select id="carrera" [(ngModel)]="carreraElegida" name="carrera">
+            <option value="">Seleccione una carrera...</option>
+            <option *ngFor="let carrera of carrerasDisponibles" [value]="carrera.snies">
+              {{ carrera.nombre }}
+            </option>
+          </select>
+        </div>
 
-<div class="modal-overlay" *ngIf="mostrarModalCarreras" (click)="cerrarModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <form class="content-medio" style="max-width: 400px; margin: 0 auto;">
-      <h3 style="color: #ff8800; text-align: center; margin-bottom: 20px; font-size: 1.1rem;">Seleccione una carrera</h3>
-      <p style="margin-bottom: 20px; color: #646464; text-align: center;">hemos  identificado que se encuentra  en multiples programas academicos.
-ingrese el programa que quiera realizar la compra del certificado. </p>
-
-      <div class="form-group">
-        <label for="carrera">Carrera <span class="required">*</span></label>
-        <select id="carrera" [(ngModel)]="carreraElegida" name="carrera">
-          <option value="">Seleccione una carrera...</option>
-          <option *ngFor="let carrera of carrerasDisponibles" [value]="carrera.snies">
-            {{ carrera.nombre }}
-          </option>
-        </select>
-      </div>
-
-      <div class="buttons-container" style="display: flex; gap: 10px;">
-        <button type="button" class="btn btn-secondary" (click)="cerrarModal()" style="flex: 1;">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="seleccionarCarrera()" [disabled]="!carreraElegida" style="flex: 1;">Aceptar</button>
-      </div>
-    </form>
+        <div class="buttons-container" style="display: flex; gap: 10px;">
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()" style="flex: 1;">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="seleccionarCarrera()" [disabled]="!carreraElegida" style="flex: 1;">Aceptar</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
