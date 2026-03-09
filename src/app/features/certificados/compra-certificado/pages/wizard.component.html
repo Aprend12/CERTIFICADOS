@@ -75,7 +75,7 @@
 
   <!-- Paso 3: Pagar -->
   <div class="step-content" [class.active]="isStepActive(3)">
-    <app-step-pagos></app-step-pagos>
+    <app-step-pagos (goToDownload)="setStep(4)"></app-step-pagos>
     <div style="text-align: center; margin-top: 20px;">
       <button class="btn btn-secondary" (click)="setStep(2)">Atrás</button>
       <button class="btn btn-primary" (click)="setStep(4)">Continuar</button>

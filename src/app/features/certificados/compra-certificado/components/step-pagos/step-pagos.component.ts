@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -8,6 +8,7 @@ interface Banco {
   e: string;
   bg: string;
   cl: string;
+  tipo?: string;
 }
 
 @Component({
@@ -18,7 +19,10 @@ interface Banco {
   styleUrls: ['./step-pagos.component.css']
 })
 export class StepPagosComponent {
+  @Output() goToDownload = new EventEmitter<void>();
+
   step: number = 1;
+  bancoSeleccionado: boolean = false;
 
   metodoPago: string = '';
   tipoPse: string = 'banco';
@@ -41,18 +45,18 @@ export class StepPagosComponent {
   nombreTarjeta: string = '';
 
   bancos: Banco[] = [
-    { c: '1007', n: 'Bancolombia', e: '🟡', bg: '#1a1500', cl: '#FFD700' },
-    { c: '1022', n: 'Banco de Bogotá', e: '🔵', bg: '#00103a', cl: '#5b9bd5' },
-    { c: '1040', n: 'Banco Agrario', e: '🟢', bg: '#001a00', cl: '#5cb85c' },
-    { c: '1032', n: 'Caja Social', e: '🔴', bg: '#1a0000', cl: '#e05555' },
-    { c: '1062', n: 'Falabella', e: '🟣', bg: '#1a0026', cl: '#9B59B6' },
-    { c: '1006', n: 'Davivienda', e: '❤️', bg: '#1a0000', cl: '#E74C3C' },
-    { c: '1009', n: 'Citibank', e: '🌐', bg: '#001a26', cl: '#3498DB' },
-    { c: '1060', n: 'Bancoomeva', e: '💚', bg: '#001a0a', cl: '#27AE60' },
-    { c: '1551', n: 'Nequi', e: '📱', bg: '#1a0033', cl: '#8E44AD' },
-    { c: '1552', n: 'Daviplata', e: '📲', bg: '#1a0000', cl: '#c0392b' },
-    { c: '1283', n: 'CFA Cooperativa', e: '💎', bg: '#001a16', cl: '#1ABC9C' },
-    { c: '1066', n: 'Bancoop', e: '🟠', bg: '#1a1000', cl: '#F39C12' },
+    { c: '1007', n: 'Bancolombia', e: 'B', bg: '#f4a024', cl: '#000', tipo: 'banco' },
+    { c: '1022', n: 'Banco de Bogotá', e: 'BB', bg: '#003f87', cl: '#fff', tipo: 'banco' },
+    { c: '1040', n: 'Banco Agrario', e: 'BA', bg: '#006400', cl: '#fff', tipo: 'banco' },
+    { c: '1032', n: 'Caja Social', e: 'CS', bg: '#c60c30', cl: '#fff', tipo: 'banco' },
+    { c: '1062', n: 'Falabella', e: 'F', bg: '#ed1c24', cl: '#fff', tipo: 'banco' },
+    { c: '1006', n: 'Davivienda', e: 'D', bg: '#d61f28', cl: '#fff', tipo: 'banco' },
+    { c: '1009', n: 'Citibank', e: 'C', bg: '#003b70', cl: '#fff', tipo: 'banco' },
+    { c: '1060', n: 'Bancoomeva', e: 'BO', bg: '#00a651', cl: '#fff', tipo: 'banco' },
+    { c: '1551', n: 'Nequi', e: 'N', bg: '#8e44ad', cl: '#fff', tipo: 'billetera' },
+    { c: '1552', n: 'Daviplata', e: 'DP', bg: '#c0392b', cl: '#fff', tipo: 'billetera' },
+    { c: '1283', n: 'CFA', e: 'CFA', bg: '#1abc9c', cl: '#fff', tipo: 'banco' },
+    { c: '1066', n: 'Bancoop', e: 'BOP', bg: '#f39c12', cl: '#fff', tipo: 'banco' },
   ];
 
   constructor() {
@@ -143,6 +147,25 @@ export class StepPagosComponent {
 
   elegirBanco(b: Banco) {
     this.selBanco = b;
+    this.bancoSeleccionado = true;
+  }
+
+  continuarBanco() {
+    this.bancoSeleccionado = true;
+    this.irA(2);
+  }
+
+  seleccionarOtroBanco() {
+    this.selBanco = null;
+    this.bancoSeleccionado = false;
+  }
+
+  esBilletera(): boolean {
+    return false;
+  }
+
+  necesitaTipoCuenta(): boolean {
+    return false;
   }
 
   procesarPago() {
@@ -155,5 +178,9 @@ export class StepPagosComponent {
 
   mostrarFallido() {
     this.irA(6);
+  }
+
+  irADescarga() {
+    this.goToDownload.emit();
   }
 }
