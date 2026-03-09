@@ -1,5 +1,5 @@
-<div class="step-pagos">
-  
+<div class="step-pagos-content">
+
   <!-- PANTALLA 1: ELIGE CÓMO PAGAR -->
   <div class="screen on" *ngIf="step === 1">
     <div class="page">
@@ -64,9 +64,9 @@
           <div class="bank-search">
             <input type="text" placeholder="Buscar banco..." (input)="filtrar($event)">
           </div>
-          
+
           <!-- Lista de bancos -->
-          <div class="banco-row" 
+          <div class="banco-row"
                *ngFor="let b of bancosFiltrados"
                [class.on]="selBanco?.c === b.c"
                (click)="elegirBanco(b)">
@@ -80,7 +80,6 @@
 
         <div class="btn-area" style="justify-content:space-between;align-items:center">
           <button class="btn-volver" (click)="irA(1)">← Volver</button>
-          <button class="btn-continuar" (click)="continuarBanco()" [disabled]="!selBanco">Continuar</button>
         </div>
       </div>
 
@@ -251,7 +250,7 @@
               <span>Medio de pago</span>
               <span>{{getMetodoNombre()}}</span>
             </div>
-            
+
             <ng-container *ngIf="metodoPago === 'pse' && selBanco">
               <div class="res-row">
                 <span>Banco</span>
@@ -289,9 +288,6 @@
         <div class="btn-area" style="justify-content:space-between;align-items:center">
           <button class="btn-volver" (click)="irA(2)">← Volver</button>
           <button class="btn-continuar" (click)="procesarPago()">Confirmar y pagar $18.000</button>
-        </div>
-        <div style="text-align:center;margin-top:12px">
-          <button class="btn-volver" style="color:#F57C00" (click)="procesarPago()">Ir directamente a procesar (demo)</button>
         </div>
       </div>
 

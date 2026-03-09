@@ -22,6 +22,7 @@ export class StepPagosComponent {
   @Output() goToDownload = new EventEmitter<void>();
 
   step: number = 1;
+  wizardStep: number = 3;
   bancoSeleccionado: boolean = false;
 
   metodoPago: string = '';
@@ -181,6 +182,7 @@ export class StepPagosComponent {
   }
 
   irADescarga() {
+    this.wizardStep = 4;
     this.goToDownload.emit();
   }
 }
