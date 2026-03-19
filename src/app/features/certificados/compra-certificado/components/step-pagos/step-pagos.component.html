@@ -7,15 +7,15 @@
         <div class="panel-title">Elige cómo pagar</div>
 
         <div class="card">
-          <!-- PSE -->
-          <div class="metodo-item" [class.on]="metodoPago === 'pse'" (click)="metodoPago = 'pse'">
+          <!-- Epayco -->
+          <div class="metodo-item" [class.on]="metodoPago === 'epayco'" (click)="metodoPago = 'epayco'">
             <div class="radio">
-              <div class="radio-dot" *ngIf="metodoPago === 'pse'"></div>
+              <div class="radio-dot" *ngIf="metodoPago === 'epayco'"></div>
             </div>
             <div class="metodo-ico">
-              <div class="banco-ico" style="width:32px;height:32px;font-size:9px">PSE</div>
+              <div class="banco-ico" style="width:32px;height:32px;font-size:9px;background:#8e44ad;color:#fff">EP</div>
             </div>
-            <div class="metodo-label">Transferencia con PSE</div>
+            <div class="metodo-label">Pagar con Epayco</div>
           </div>
 
           <!-- Tarjeta -->
@@ -40,24 +40,24 @@
       <!-- Resumen lateral -->
       <div class="resumen">
         <div class="res-title">Resumen de compra</div>
-        <div class="res-row"><span>Producto</span><span>Certificado académico</span></div>
+        <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
-        <div class="res-total"><span class="lbl">Pagas</span><span class="val">$ 18.000</span></div>
+        <div class="res-total"><span class="lbl">Total</span><span class="val">$ 18.000</span></div>
       </div>
     </div>
   </div>
 
-  <!-- PANTALLA 2A: SELECCIONAR BANCO (PSE) -->
-  <div class="screen on" *ngIf="step === 2 && metodoPago === 'pse' && !bancoSeleccionado">
+  <!-- PANTALLA 2A: SELECCIONAR BANCO (Epayco) -->
+  <div class="screen on" *ngIf="step === 2 && metodoPago === 'epayco' && !bancoSeleccionado">
     <div class="page">
       <div>
         <div class="panel-title">Selecciona el banco</div>
 
         <div class="card">
-          <!-- Header PSE -->
+          <!-- Header Epayco -->
           <div class="pse-header">
-            <div class="banco-ico" style="width:28px;height:28px;font-size:7px">PSE</div>
-            <span class="pse-header-label">Transferencia con PSE</span>
+            <div class="banco-ico" style="width:28px;height:28px;font-size:7px;background:#8e44ad;color:#fff">EP</div>
+            <span class="pse-header-label">Pago con Epayco</span>
           </div>
 
           <!-- Buscador -->
@@ -86,15 +86,15 @@
       <!-- Resumen lateral -->
       <div class="resumen">
         <div class="res-title">Resumen de compra</div>
-        <div class="res-row"><span>Producto</span><span>Certificado académico</span></div>
+        <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
         <div class="res-total"><span class="lbl">Total</span><span class="val">$ 18.000</span></div>
       </div>
     </div>
   </div>
 
-  <!-- PANTALLA 2B: DATOS DEL PAGADOR (PSE) -->
-  <div class="screen on" *ngIf="step === 2 && metodoPago === 'pse' && bancoSeleccionado">
+  <!-- PANTALLA 2B: DATOS DEL PAGADOR (Epayco) -->
+  <div class="screen on" *ngIf="step === 2 && metodoPago === 'epayco' && bancoSeleccionado">
     <div class="page">
       <div>
         <div class="panel-title">Datos del pagador</div>
@@ -150,7 +150,7 @@
       <!-- Resumen lateral -->
       <div class="resumen">
         <div class="res-title">Resumen de compra</div>
-        <div class="res-row"><span>Producto</span><span>Certificado académico</span></div>
+        <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
         <div class="res-total"><span class="lbl">Total</span><span class="val">$ 18.000</span></div>
       </div>
@@ -225,7 +225,7 @@
       <!-- Resumen lateral -->
       <div class="resumen">
         <div class="res-title">Resumen de compra</div>
-        <div class="res-row"><span>Producto</span><span>Certificado académico</span></div>
+        <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
         <div class="res-total"><span class="lbl">Total</span><span class="val">$ 18.000</span></div>
       </div>
@@ -251,7 +251,7 @@
               <span>{{getMetodoNombre()}}</span>
             </div>
 
-            <ng-container *ngIf="metodoPago === 'pse' && selBanco">
+            <ng-container *ngIf="metodoPago === 'epayco' && selBanco">
               <div class="res-row">
                 <span>Banco</span>
                 <span>{{selBanco.n}}</span>
@@ -294,7 +294,7 @@
       <!-- Resumen lateral -->
       <div class="resumen">
         <div class="res-title">Resumen de compra</div>
-        <div class="res-row"><span>Producto</span><span>Certificado académico</span></div>
+        <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
         <div class="res-total"><span class="lbl">Pagas</span><span class="val">$ 18.000</span></div>
       </div>
@@ -322,7 +322,7 @@
       <span class="e-ico">✓</span>
       <div class="e-title c-green">¡Pago aprobado!</div>
       <div class="e-sub">Tu pago fue procesado exitosamente. Recibirás un correo con los detalles.</div>
-      <div class="e-ref">Referencia: EPY-2026-{{getRandomRef()}}</div>
+      <div class="e-ref">Referencia: EPY-2026-{{refPago}}</div>
       <table class="e-tbl">
         <tr><td>Total pagado</td><td class="c-green">$ 18.000</td></tr>
         <tr><td>Medio de pago</td><td>{{getMetodoNombre()}}</td></tr>

@@ -55,39 +55,8 @@ export function getCertificadoWrapper(contenido: string): string {
       margin: 0 auto;
       position: relative;
       overflow: hidden;
-      font-family: 'Times New Roman', Times, serif;
+      font-family: 'Times New Roman', serif;
     ">
-      <div style="
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-45deg);
-        width: 150%;
-        text-align: center;
-        z-index: 0;
-        opacity: 0.08;
-        pointer-events: none;
-      ">
-        <div style="
-          font-size: 60pt;
-          font-weight: bold;
-          color: #0d3b66;
-          white-space: nowrap;
-          letter-spacing: 15px;
-        ">
-          CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE
-        </div>
-        <div style="
-          font-size: 45pt;
-          font-weight: bold;
-          color: #0d3b66;
-          white-space: nowrap;
-          letter-spacing: 15px;
-          margin-top: 80px;
-        ">
-          SNIES 804.006.527-3
-        </div>
-      </div>
       <div style="position: relative; z-index: 1;">
         ${contenido}
       </div>

@@ -1,5 +1,5 @@
 /**
- * Constructor del Certificado de Grado.
+ * Constructor del Certificado de grado.
  * Formato profesional institucional para descarga.
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
@@ -16,12 +16,12 @@ export class CertificadoGradoBuilder implements CertificadoBuilder {
     const o = this.getOcultos(datos, esPreview);
 
     return `
-    <div style="width: 21.59cm; min-height: 27.94cm; padding: 3cm 2.5cm 2.5cm 3cm; font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.8; box-sizing: border-box; background: white;">
+    <div style="width: 21.59cm; min-height: 27.94cm; padding: 3cm 2.5cm 2.5cm 3cm; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.8; box-sizing: border-box; background: white;">
 
       <table style="width: 100%; margin-bottom: 15px;">
         <tr>
           <td style="width: 100px; vertical-align: top;">
-            <img src="${this.LOGO}" alt="Logo" style="width: 4cm; height: auto;">
+            <img src="${this.LOGO}" alt="Logo" style="width: 6cm; height: auto;">
           </td>
           <td style="text-align: right; vertical-align: top; font-size: 10pt; padding-top: 10px;">
             <div style="font-size: 10pt; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">CONSTANCIA DE FINALIZACIÓN DE ESTUDIOS</div>

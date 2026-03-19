@@ -1,7 +1,8 @@
-import { Component, Input, inject, OnChanges, NgZone } from '@angular/core';
+import { Component, Input, inject, OnChanges, NgZone, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CertificadoService } from '../../core/services/certificado.service';
 import { ApiService, ValidarEstudianteResponse, GenerarCertificadoResponse } from '../../core/services/api.service';
 import { CertificadoDatos, DatosCertificado } from '../../core/models/certificado.model';
@@ -11,9 +12,10 @@ import { throwError } from 'rxjs';
 @Component({
   selector: 'app-step-descarga',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './step-descarga.component.html',
-  styleUrls: ['./step-descarga.component.css']
+  styleUrls: ['./step-descarga.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class StepDescargaComponent implements OnChanges {
   @Input() datos: CertificadoDatos = {
@@ -23,6 +25,8 @@ export class StepDescargaComponent implements OnChanges {
     tipo_certificado: '',
     nombre_completo: '',
   };
+
+  form: FormGroup;
 
   certificadoFinal: string = '';
   certificadoFinalSafe: SafeHtml = '' as any;
@@ -43,6 +47,14 @@ export class StepDescargaComponent implements OnChanges {
   private sanitizer = inject(DomSanitizer);
   private ngZone = inject(NgZone);
   private router = inject(Router);
+  private fb = inject(FormBuilder);
+
+  constructor() {
+    this.form = this.fb.group({
+      formato: ['pdf', Validators.required],
+      email: ['', [Validators.email]]
+    });
+  }
 
   ngOnChanges() {
     if (this.datos.documento && this.datos.tipo_certificado) {

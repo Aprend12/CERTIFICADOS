@@ -16,43 +16,49 @@ export class CertificadoConductaBuilder implements CertificadoBuilder {
     const o = this.getOcultos(datos, esPreview);
 
     return `
-    <div style="width: 21.59cm; min-height: 27.94cm; padding: 3cm 2.5cm 2.5cm 3cm; font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.8; box-sizing: border-box; background: white;">
+    <div style="width: 21.59cm; min-height: 27.94cm; padding: 2.5cm 2.5cm; font-family: 'Times New Roman', serif; font-size: 11pt; line-height: 1.8; box-sizing: border-box; background: white; position: relative;">
+      <div style="position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 3px solid #e65100; pointer-events: none;"></div>
+      <div style="position: absolute; top: 22px; left: 22px; right: 22px; bottom: 22px; border: 1px solid #F57C00; pointer-events: none;"></div>
 
-      <table style="width: 100%; margin-bottom: 15px;">
+      <table style="width: 100%; margin-bottom: 20px;">
         <tr>
-          <td style="width: 100px; vertical-align: top;">
-            <img src="${this.LOGO}" alt="Logo" style="width: 4cm; height: auto;">
+          <td style="width: 100px; vertical-align: top; text-align: center;">
+            <img src="${this.LOGO}" alt="Logo" style="width: 6cm; height: auto;">
           </td>
-          <td style="text-align: right; vertical-align: top; font-size: 10pt; padding-top: 10px;">
-            <div style="font-size: 10pt; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">CONSTANCIA DE BUENA CONDUCTA</div>
-            <strong>Número:</strong> ${o.numero}
+          <td style="text-align: right; vertical-align: top; padding-top: 10px;">
+            <div style="font-size: 10pt; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; color: #e65100; letter-spacing: 1px;">CONSTANCIA DE BUENA CONDUCTA</div>
+            <span ${esPreview ? 'style="display:none"' : ''}><strong>Número:</strong> ${o.numero}</span>
           </td>
         </tr>
       </table>
 
-      <div style="text-align: center; margin-bottom: 15px;">
-        <div style="font-size: 12pt; font-weight: bold; text-transform: uppercase;">LA VICERRECTORA ACADÉMICA</div>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="font-size: 13pt; font-weight: bold; text-transform: uppercase; color: #e65100; letter-spacing: 2px; margin-bottom: 8px;">LA VICERRECTORA ACADÉMICA</div>
         <div style="font-size: 12pt; font-weight: bold; text-transform: uppercase;">${this.INSTITUCION}</div>
-        <div style="font-size: 11pt;">NIT: ${this.NIT}</div>
+        <div style="font-size: 10pt; color: #555;">NIT: ${this.NIT}</div>
       </div>
 
-      <div style="border-bottom: 2px solid #333; margin-bottom: 15px;"></div>
+      <div style="border-bottom: 2px solid #e65100; margin-bottom: 20px;"></div>
 
-      <div style="margin-bottom: 25px; text-align: justify; text-indent: 1.5cm;">
-        <p style="margin-bottom: 15px;"><strong>HACE CONSTAR:</strong></p>
+      <div style="margin-bottom: 20px; text-align: justify; text-indent: 1.5cm;">
+        <p style="margin-bottom: 15px; text-align: center;"><strong style="font-size: 12pt; color: #e65100;">HACE CONSTAR:</strong></p>
         <p style="margin-bottom: 15px;">Que, <strong>${o.nombre}</strong>, identificado(a) con cédula de ciudadanía No. <strong>${o.documento}</strong>, cursó el <strong>${o.semestre} semestre</strong> en el programa de <strong>${o.programa}</strong>, según Snies <strong>${o.snies}</strong>.</p>
         <p style="margin-bottom: 15px;">Durante el tiempo de permanencia en nuestra institución, el/la estudiante presentó una <strong>excelente conducta académica y personal</strong>.</p>
       </div>
 
-      <div style="margin-top: 80px; text-align: left;">
+      <div style="margin-top: 40px; text-align: left;">
         <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${o.fecha}.</p>
       </div>
 
-      <div style="margin-top: 70px; text-align: left;">
-        <div style="border-top: 1.5pt solid black; width: 8cm; margin-bottom: 12px;"></div>
-        <p style="margin: 0; font-weight: bold; font-size: 12pt;">${this.FIRMA_NOMBRE}</p>
-        <p style="margin: 0; font-size: 11pt;">${this.FIRMA_CARGO}</p>
-      </div>
+      <table style="width: 100%; margin-top: 40px;">
+        <tr>
+          <td style="width: 50%; text-align: center; vertical-align: bottom;">
+            <div style="border-top: 1.5pt solid #e65100; width: 7cm; margin: 0 auto 10px auto;"></div>
+            <p style="margin: 0; font-weight: bold; font-size: 11pt; color: #e65100;">${this.FIRMA_NOMBRE}</p>
+            <p style="margin: 0; font-size: 10pt; color: #555;">${this.FIRMA_CARGO}</p>
+          </td>
+        </tr>
+      </table>
 
     </div>`;
   }
@@ -71,6 +77,7 @@ export class CertificadoConductaBuilder implements CertificadoBuilder {
     }
     return {
       numero: this.sanitize(datos.codigo || '1234HHZS1'),
+      nombre: this.sanitize(datos.nombre_completo || datos.nombre || 'Nombre Estudiante'),
       documento: this.sanitize(datos.documento),
       programa: this.sanitize(datos.programa),
       snies: this.sanitize(datos.snies),

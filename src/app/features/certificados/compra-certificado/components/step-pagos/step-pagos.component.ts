@@ -1,6 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+declare var ePayco: any;
 
 interface Banco {
   c: string;
@@ -20,10 +22,12 @@ interface Banco {
 })
 export class StepPagosComponent {
   @Output() goToDownload = new EventEmitter<void>();
+  @Input() nombreCertificado: string = '';
 
   step: number = 1;
   wizardStep: number = 3;
   bancoSeleccionado: boolean = false;
+  procesandoPago: boolean = false;
 
   metodoPago: string = '';
   tipoPse: string = 'banco';
@@ -34,6 +38,9 @@ export class StepPagosComponent {
   telefono: string = '';
   tipoDocumento: string = 'CC';
   numeroDocumento: string = '';
+
+  private epaycoPublicKey: string = 'pub_test_123456789012345678901234';
+  refPago: string = '';
 
   selBanco: Banco | null = null;
   selBilletera: string = '';
@@ -88,6 +95,9 @@ export class StepPagosComponent {
   }
 
   getMetodoNombre(): string {
+    if (this.metodoPago === 'epayco') {
+      return 'Epayco';
+    }
     if (this.metodoPago === 'pse') {
       if (this.tipoPse === 'billetera') {
         return this.selBilletera === 'nequi' ? 'Nequi' : 'Daviplata';
@@ -98,7 +108,14 @@ export class StepPagosComponent {
   }
 
   getRandomRef(): string {
-    return Math.random().toString(36).substring(2, 8).toUpperCase();
+    if (!this.refPago) {
+      this.refPago = Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+    return this.refPago;
+  }
+
+  resetRef(): void {
+    this.refPago = '';
   }
 
   getFechaActual(): string {
@@ -138,6 +155,9 @@ export class StepPagosComponent {
 
   irA(n: number) {
     this.step = n;
+    if (n === 1) {
+      this.procesandoPago = false;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -170,14 +190,74 @@ export class StepPagosComponent {
   }
 
   procesarPago() {
+    if (this.procesandoPago) return;
+    this.procesandoPago = true;
+    
+    this.resetRef();
+    this.refPago = this.getRandomRef();
     this.irA(4);
+    this.iniciarPagoEpayco();
+  }
+
+  iniciarPagoEpayco() {
+    const refPago = 'CERT-' + this.refPago;
+    const valor = 18000;
+    const iva = Math.round(valor * 0.19);
+    const valorTotal = valor + iva;
+
+    const dataEpayco: any = {
+      name: 'Certificado Académico',
+      description: 'Certificado académico - Universidad',
+      invoice: refPago,
+      currency: 'cop',
+      amount: valorTotal,
+      tax: iva,
+      tax_base: valor,
+      country: 'CO',
+      lang: 'es',
+      external: 'false',
+      confirmation: '',
+      responseUrl: window.location.href,
+      email: this.email,
+      name_billing: this.nombreCompleto,
+      address_billing: '',
+      mobilephone_billing: this.telefono,
+      document_billing: this.numeroDocumento,
+    };
+
+    if (typeof ePayco !== 'undefined') {
+      ePayco.checkout.open({
+        key: this.epaycoPublicKey,
+        test: true,
+        data: dataEpayco,
+        onConfirm: (response: any) => {
+          if (response.success) {
+            this.mostrarResultado();
+          } else {
+            this.mostrarFallido();
+          }
+        },
+        onError: (response: any) => {
+          this.mostrarFallido();
+        },
+        onCancelled: (response: any) => {
+          this.irA(3);
+        }
+      });
+    } else {
+      setTimeout(() => {
+        this.mostrarResultado();
+      }, 3000);
+    }
   }
 
   mostrarResultado() {
+    this.procesandoPago = false;
     this.irA(5);
   }
 
   mostrarFallido() {
+    this.procesandoPago = false;
     this.irA(6);
   }
 

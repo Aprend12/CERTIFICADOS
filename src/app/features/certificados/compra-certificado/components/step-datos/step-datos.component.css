@@ -1,54 +1,119 @@
-.content-medio {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.step-datos .content-medio {
   background: rgb(0, 0, 0);
-  padding: 30px;
-  border-radius: 15px;
-  max-width: 550px;
+  padding: 45px;
+  border-radius: 16px;
+  max-width: 450px;
   margin: 0 auto;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  display: block;
+  margin-top: 0;
 }
 
-.form-group {
-  margin-bottom: 20px;
+.step-datos .form-group {
+  margin-bottom: 16px !important;
   text-align: left;
 }
 
-.form-group label {
+.step-datos .form-group label {
+  display: block;
+  margin-bottom: 16px !important;
+  color: #F57C00 !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+.step-datos .form-group input,
+.step-datos .form-group select {
+  width: 100% !important;
+  padding: 12px 14px !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 0.75rem !important;
+  background: rgb(255, 255, 255) !important;
+  color: #000 !important;
+  font-weight: 500 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+.step-datos .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #F57C00;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.step-datos .form-group input,
+.step-datos .form-group select {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: rgb(255, 255, 255) !important;
+  color: #000 !important;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.step-datos .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.step-datos .form-group label {
   display: block;
   margin-bottom: 10px;
   color: #F57C00;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.form-group input,
-.form-group select {
+.step-datos .form-group input,
+.step-datos .form-group select {
   width: 100%;
-  padding: 12px 15px;
+  padding: 16px 18px;
   border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  background: rgb(255, 255, 255);
-  color: #000;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgb(255, 255, 255) !important;
+  color: #000 !important;
   font-weight: 500;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.step-datos .form-group input::placeholder {
+  color: #303030 !important;
+  opacity: 1;
+}
+
+.step-datos .form-group select option {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+.step-datos .form-group input:focus,
+.step-datos .form-group select:focus {
   outline: 2px solid #ff8800;
 }
 
-.required {
+.step-datos .required {
   color: red;
 }
 
-.buttons-container {
+.step-datos .buttons-container {
     width: 100%;
   padding: 1px 15px;
   margin-top: 20px;
 }
 
-.btn {
+.step-datos .btn {
   padding: 12px 2px;
   font-size: 1rem;
   font-weight: bold;
@@ -58,23 +123,23 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.btn-primary {
+.step-datos .btn-primary {
   background: #F57C00;
   color: rgb(0, 0, 0);
 }
 
-.btn-secondary {
+.step-datos .btn-secondary {
   background: #F57C00;
   color: rgb(0, 0, 0);
 }
 
-.btn:disabled {
+.step-datos .btn:disabled {
   background: #F57C00;
   cursor: not-allowed;
   transform: none;
 }
 
-.verificando {
+.step-datos .verificando {
   background: #fff3cd;
   color: #856404;
   padding: 12px;
@@ -85,7 +150,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.estudiante-encontrado {
+.step-datos .estudiante-encontrado {
   background: #d4edda;
   color: #155724;
   padding: 15px;
@@ -94,13 +159,13 @@
   border: 1px solid #c3e6cb;
 }
 
-.estudiante-encontrado p {
+.step-datos .estudiante-encontrado p {
   margin: 5px 0;
   font-size: 0.9rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.certificado-si {
+.step-datos .certificado-si {
   color: #155724;
   font-weight: bold;
   font-size: 1rem;
@@ -109,7 +174,7 @@
   border-top: 1px solid #c3e6cb;
 }
 
-.estudiante-no-encontrado {
+.step-datos .estudiante-no-encontrado {
   background: #f8d7da;
   color: #721c24;
   padding: 15px;
@@ -118,12 +183,12 @@
   border: 1px solid #f5c6cb;
 }
 
-.estudiante-no-encontrado p {
+.step-datos .estudiante-no-encontrado p {
   margin: 5px 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.certificado-no {
+.step-datos .certificado-no {
   color: #721c24;
   font-weight: bold;
   font-size: 1rem;
@@ -132,39 +197,37 @@
   border-top: 1px solid #f5c6cb;
 }
 
-.disabled-input {
+.step-datos .disabled-input {
   background: #e9ecef !important;
   color: #7d796c !important;
   cursor: not-allowed;
 }
 
 /* MODAL */
-.form-container {
-  position: relative;
-}
-
-.modal-overlay {
-  position: absolute;
+.step-datos .modal-overlay {
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: transparent;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-.modal-content {
+.step-datos .modal-content {
   border-radius: 15px;
-  width: 100%;
+  width: 90%;
   max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   background: #000;
-  padding: 30px;
 }
 
-.modal-header {
+.step-datos .modal-header {
   background: #F57C00;
   color: white;
   padding: 20px;
@@ -173,13 +236,13 @@
   align-items: center;
 }
 
-.modal-header h2 {
+.step-datos .modal-header h2 {
   margin: 0;
   font-size: 1.3rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.modal-close {
+.step-datos .modal-close {
   background: none;
   border: none;
   color: white;
@@ -188,24 +251,24 @@
   line-height: 1;
 }
 
-.modal-body {
+.step-datos .modal-body {
   padding: 20px;
 }
 
-.modal-info {
-  color: #666;
+.step-datos .modal-info {
+  color: #222222;
   margin-bottom: 20px;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.programas-list {
+.step-datos .programas-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.programa-item {
+.step-datos .programa-item {
   border: 2px solid #e0e0e0;
   border-radius: 10px;
   padding: 15px;
@@ -213,14 +276,14 @@
   transition: all 0.3s;
 }
 
-.programa-item:hover {
+.step-datos .programa-item:hover {
   border-color: #F57C00;
   background: #fff8f0;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 136, 0, 0.3);
 }
 
-.programa-nombre {
+.step-datos .programa-nombre {
   font-weight: bold;
   color: #333;
   font-size: 1rem;
@@ -228,7 +291,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.programa-detalle {
+.step-datos .programa-detalle {
   font-size: 0.85rem;
   color: #666;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

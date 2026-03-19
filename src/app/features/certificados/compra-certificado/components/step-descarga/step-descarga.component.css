@@ -1,98 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 .step-descarga {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  background: #1a1a1a;
-  overflow-x: hidden;
-}
-
-.title {
-    color: #ff8800;
-    margin-bottom: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-.caja__preview {
-    background: #2a2a2a;
-    border-radius: 8px;
     padding: 20px;
-    margin: 8px auto;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    min-height: 100%;
     width: 100%;
-    max-width: 800px;
     box-sizing: border-box;
-    overflow: auto;
+    background: transparent;
+    overflow-x: hidden;
 }
 
-.certificado-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.step-descarga .form-container {
     width: 100%;
-    overflow: auto;
-    padding: 10px;
-}
-
-.certificado {
-    background-color: #ffffff;
-    color: #000000;
-    position: relative;
-    text-align: center;
-    width: 100%;
-    max-width: 650px;
-    min-height: 700px;
-    box-sizing: border-box;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    font-size: 11px;
-    line-height: 1.4;
-    padding: 30px;
+    max-width: 1000px;
     margin: 0 auto;
-    display: block;
+    padding: 35px;
+    background: #000000;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
 }
 
-.btn-container {
+.step-descarga .preview-section {
+    width: 100%;
+}
+
+.step-descarga .preview-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ff8800;
+    margin: 0 0 18px 0;
+    font-family: 'Inter', sans-serif;
     text-align: center;
-    margin-top: 10px;
+}
+
+.step-descarga .cert-stage {
+    position: relative;
     width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step-descarga .cert-frame {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    background: #ffffff;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.step-descarga .cert-scroll-area {
+    width: 100%;
+    max-height: 700px;
+    overflow-y: auto;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,136,0,0.5) transparent;
+    scroll-behavior: smooth;
+}
+
+.step-descarga .cert-scroll-area::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.step-descarga .cert-scroll-area::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+.step-descarga .cert-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(255,136,0,0.5);
+    border-radius: 4px;
+}
+.step-descarga .cert-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,136,0,0.7);
+}
+
+.step-descarga .cert-scaler {
+    width: 100%;
+    transform: scale(1);
+    transform-origin: top left;
+}
+
+.step-descarga .cert-content {
+    background: #ffffff;
+    font-family: 'Times New Roman', serif;
+    overflow: hidden;
+    width: 100%;
+    padding: 30px;
+    transform: scale(1.05);
+    color: #000000;
+}
+
+.step-descarga .cert-content * {
+    box-sizing: border-box;
+    max-width: 100%;
+    color: #000000 !important;
+}
+
+.step-descarga .cert-info-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+    margin-top: 14px;
+}
+
+.step-descarga .buttons-container {
+    display: flex;
+    gap: 16px;
+    width: 100%;
     justify-content: center;
 }
 
-.btn-descargar {
-  background-color: #ff8800;
-  color: #000;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
+.step-descarga .btn {
+    flex: 0 0 auto;
+    padding: 16px 40px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease;
 }
 
-.btn-descargar:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.step-descarga .btn-primary {
+    background: #ff8800;
+    color: #000;
 }
 
-@media (max-width: 768px) {
-    .caja__preview {
-        padding: 10px;
-        min-height: 350px;
+.step-descarga .btn-primary:hover:not(:disabled) {
+    background: #ff9922;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255,136,0,0.4);
+}
+
+.step-descarga .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.step-descarga .error-message {
+    background: rgba(220, 53, 69, 0.15);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #ff6b7a;
+    padding: 14px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+    .step-descarga .form-container {
+        padding: 20px 15px;
         max-width: 100%;
     }
-
-    .certificado-iframe {
-        height: 400px;
+    
+    .step-descarga .buttons-container {
+        flex-direction: column;
+    }
+    
+    .step-descarga .cert-scroll-area {
+        max-height: 400px;
+    }
+    
+    .step-descarga .btn {
+        width: 100%;
     }
 }

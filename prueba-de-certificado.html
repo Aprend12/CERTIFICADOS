@@ -5,9 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plantillas de Certificados</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
-        .certificado-wrapper { margin-bottom: 50px; border: 1px solid #ccc; padding: 20px; background: white; }
-        .certificado-titulo { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #333; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+            margin: 0;
+        }
+
+        .certificado-wrapper {
+            margin-bottom: 60px;
+            border: none;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border-radius: 16px;
+        }
+
+        .certificado-titulo {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #e67300;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #e67300;
+            display: inline-block;
+        }
 
         .certificado {
             width: 21.59cm;
@@ -15,88 +37,2003 @@
             margin: 0 auto;
             position: relative;
             overflow: hidden;
-            background: white;
+            background: #ffffff;
+            font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
         }
 
+        /* Barras decorativas superior e inferior */
+        .barra-superior {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, #e67300, #ff8800, #e67300);
+        }
+
+        .barra-inferior {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, #e67300, #ff8800, #e67300);
+        }
+
+        /* Marca de agua */
         .marca-agua {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120%;
+            width: 140%;
             text-align: center;
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
         }
 
         .marca-agua-text {
-            font-size: 80px;
+            font-size: 65px;
             font-weight: bold;
-            color: #0d3b66;
-            opacity: 0.1;
+            color: #e67300;
+            opacity: 0.05;
             white-space: nowrap;
             display: block;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
         }
 
         .marca-agua-text2 {
-            font-size: 60px;
+            font-size: 45px;
             font-weight: bold;
-            color: #0d3b66;
-            opacity: 0.1;
+            color: #e67300;
+            opacity: 0.05;
             white-space: nowrap;
+            letter-spacing: 5px;
         }
 
+        /* Contenido principal */
         .contenido {
             position: relative;
             z-index: 1;
-            padding: 2cm 2cm;
+            padding: 50px 55px;
             min-height: 27.94cm;
         }
+
+        /* Encabezado */
+        .encabezado {
+            text-align: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid #e67300;
+            position: relative;
+        }
+
+        .encabezado::after {
+            content: '';
+            position: absolute;
+            bottom: -9px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 18px;
+            background: #e67300;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .institucion {
+            font-size: 14pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #e67300;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        .universidad {
+            font-size: 13pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .nit {
+            font-size: 10pt;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        /* Título del certificado */
+        .titulo-certificado {
+            display: inline-block;
+            padding: 12px 35px;
+            border: 2px solid #e67300;
+            border-radius: 6px;
+            font-size: 13pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #e67300;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            background: #fffbf5;
+        }
+
+        /* Contenido textual */
+        .texto-certificado {
+            font-size: 11pt;
+            line-height: 1.9;
+            text-align: justify;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .texto-certificado strong {
+            color: #e67300;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #fffbf5 0%, #fff8e6 100%);
+            border-left: 5px solid #e67300;
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .info-box p {
+            margin: 8px 0;
+            font-size: 10.5pt;
+        }
+
+        /* Tablas */
+        .tabla-datos {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10pt;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .tabla-datos th {
+            background: linear-gradient(180deg, #e67300 0%, #cc6600 100%);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 9pt;
+            letter-spacing: 1px;
+        }
+
+        .tabla-datos td {
+            padding: 12px 15px;
+            border: 1px solid #e6d9cc;
+            color: #444;
+        }
+
+        .tabla-datos tr:nth-child(even) td {
+            background: #fffbf5;
+        }
+
+        .tabla-datos tr:hover td {
+            background: #fff8e6;
+        }
+
+        /* Firmas */
+        .firmas-container {
+            display: flex;
+            justify-content: center;
+            gap: 120px;
+            margin-top: 70px;
+            padding-top: 30px;
+        }
+
+        .firma-item {
+            text-align: center;
+            width: 200px;
+        }
+
+        .firma-linea {
+            border-top: 2px solid #e67300;
+            width: 180px;
+            margin: 0 auto 12px;
+        }
+
+        .firma-nombre {
+            font-weight: bold;
+            font-size: 11pt;
+            color: #e67300;
+            margin-bottom: 4px;
+        }
+
+        .firma-cargo {
+            font-size: 10pt;
+            color: #666;
+        }
+
+        /* Sello institucional */
+        .sello-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .sello-institucional {
+            width: 85px;
+            height: 85px;
+            border: 3px solid #e67300;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fffbf5;
+        }
+
+        .sello-texto {
+            text-align: center;
+            font-size: 7pt;
+            color: #e67300;
+            font-weight: bold;
+        }
+
+        .sello-linea {
+            border-bottom: 1px solid #e67300;
+            padding-bottom: 2px;
+            margin-bottom: 2px;
+            letter-spacing: 2px;
+        }
+
+        /* Código de verificación */
+        .codigo-verificacion {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 9pt;
+            color: #888;
+            border-top: 1px solid #e6e6e6;
+            padding-top: 18px;
+        }
+
+        .codigo-verificacion strong {
+            color: #e67300;
+        }
+
+        /* Placeholders para datos variables */
+        .dato-resaltado {
+            background: linear-gradient(120deg, #fff8e6 0%, #fffbf5 100%);
+            padding: 2px 8px;
+            border-radius: 3px;
+            border-bottom: 1px dashed #e67300;
+        }
+
+        /* ============================================
+           CSS DE COMPONENTES DE CERTIFICADOS (ANGULAR)
+           ============================================ */
+
+        /* --- STEP-PAGOS COMPONENT CSS --- */
+        .step-pagos-content{
+          font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+          background: #000000;
+          color:#333;
+          width:95%;
+          max-width:900px;
+          border-radius:20px;
+          min-height:10vh;
+          padding: 30px 25px;
+          margin: 20px auto;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .page{
+          max-width:850px;
+          margin: 0 auto;
+          padding:20px;
+          display:grid;
+          grid-template-columns:1fr 220px;
+          gap:25px;
+          align-items:start;
+        }
+
+        @media(max-width:720px){
+          .page{grid-template-columns:1fr}
+          .resumen{order:-1}
+        }
+
+        .panel-title{
+          font-size:1.3rem;
+          font-weight:700;
+          color:#ffffff;
+          margin-bottom:20px;
+          text-align:center;
+        }
+
+        .card{
+          background:#ffffff;
+          border:1px solid #e0e0e0;
+          border-radius:12px;
+          margin-bottom:20px;
+          overflow:hidden;
+        }
+
+        .metodo-item{
+          display:flex;
+          align-items:center;
+          gap:14px;
+          padding:16px 20px;
+          border-bottom:1px solid #eee;
+          cursor:pointer;
+          transition:all .2s;
+        }
+
+        .metodo-item:last-of-type{border-bottom:none}
+        .metodo-item:hover{background:#f8f8f8}
+        .metodo-item.on{background:#fff3e0;border-left:3px solid #F57C00}
+
+        .radio{
+          width:20px;
+          height:20px;
+          border-radius:50%;
+          border:2px solid #999;
+          flex-shrink:0;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          transition:border-color .15s;
+        }
+
+        .metodo-item.on .radio{border-color:#F57C00}
+
+        .radio-dot{
+          width:10px;
+          height:10px;
+          border-radius:50%;
+          background:#F57C00;
+          display:none;
+        }
+
+        .metodo-item.on .radio-dot{display:block}
+
+        .metodo-ico{
+          width:40px;
+          height:28px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          flex-shrink:0;
+        }
+
+        .metodo-label{
+          font-size:.95rem;
+          font-weight:600;
+          color:#333;
+        }
+
+        .btn-area{
+          display:flex;
+          justify-content:flex-end;
+          margin-top:20px;
+        }
+
+        .btn-continuar{
+          background:#F57C00;
+          color:#fff;
+          border:none;
+          border-radius:8px;
+          padding:14px 40px;
+          font-size:.95rem;
+          font-weight:700;
+          cursor:pointer;
+          min-width:160px;
+        }
+
+        .btn-continuar:hover{background:#e65100}
+        .btn-continuar:disabled{background:#999;color:#fff;cursor:not-allowed;box-shadow:none}
+
+        .btn-volver{
+          background:none;
+          border:1px solid #666;
+          color:#fff;
+          font-size:.85rem;
+          font-weight:600;
+          cursor:pointer;
+          padding:10px 16px;
+          margin-right:auto;
+          border-radius:6px;
+        }
+
+        .resumen{
+          background:#ffffff;
+          border:1px solid #e0e0e0;
+          border-radius:12px;
+          padding:20px;
+          height:fit-content;
+        }
+
+        .res-title{
+          font-size:.95rem;
+          font-weight:700;
+          margin-bottom:16px;
+          color:#333;
+        }
+
+        .res-row{
+          display:flex;
+          justify-content:space-between;
+          font-size:.85rem;
+          color:#666;
+          padding:6px 0;
+        }
+
+        .res-divider{height:1px solid #eee;margin:14px 0}
+
+        .res-total{
+          display:flex;
+          justify-content:space-between;
+          font-size:1.1rem;
+          padding:8px 0;
+        }
+
+        .res-total .lbl{font-weight:700;color:#333}
+        .res-total .val{font-weight:800;color:#F57C00}
+
+        .pse-header{
+          display:flex;
+          align-items:center;
+          gap:12px;
+          padding:14px 20px;
+          background:#f5f5f5;
+          border-bottom:1px solid #e0e0e0;
+        }
+
+        .pse-header-label{font-size:.9rem;font-weight:600;color:#333}
+
+        .banco-row{
+          display:flex;
+          align-items:center;
+          gap:14px;
+          padding:14px 20px;
+          border-bottom:1px solid #eee;
+          cursor:pointer;
+          transition:all .1s;
+        }
+
+        .banco-row:last-child{border-bottom:none}
+        .banco-row:hover{background:#f8f8f8}
+        .banco-row.on{background:#fff3e0}
+        .banco-row.on .radio{border-color:#F57C00}
+        .banco-row.on .radio-dot{display:block}
+
+        .banco-ico{
+          width:36px;
+          height:36px;
+          border-radius:50%;
+          background:#1A3A6B;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          color:#fff;
+          font-size:10px;
+          font-weight:800;
+          flex-shrink:0;
+        }
+
+        .banco-nm{font-size:.9rem;font-weight:500;color:#333}
+
+        .datos-section{
+          background:#ffffff;
+          border:1px solid #e0e0e0;
+          border-radius:12px;
+          padding:20px;
+          margin-bottom:20px;
+        }
+
+        .datos-section-title{
+          font-size:.95rem;
+          font-weight:700;
+          margin-bottom:16px;
+          color:#333;
+        }
+
+        .info-box-pago{
+          display:flex;
+          align-items:flex-start;
+          gap:12px;
+          background:#fff8e0;
+          border-left:3px solid #F57C00;
+          padding:12px 16px;
+          border-radius:0 8px 8px 0;
+          font-size:.8rem;
+          color:#333;
+          margin-bottom:20px;
+          line-height:1.5;
+        }
+
+        .f-field{margin-bottom:16px}
+
+        .f-field label{
+          display:block;
+          font-size:.8rem;
+          color:#666;
+          margin-bottom:6px;
+          font-weight:600;
+        }
+
+        .f-input{
+          width:100%;
+          padding:12px 14px;
+          border:1px solid #ddd;
+          border-radius:8px;
+          font-size:.9rem;
+          color:#333;
+          background:#fff;
+          transition:all .2s;
+        }
+
+        .f-input::placeholder{color:#999}
+        .f-input:focus{
+          outline:none;
+          border-color:#F57C00;
+          box-shadow:0 0 0 3px rgba(245,124,0,0.2);
+        }
+
+        .f-row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+
+        .tarjeta-header{
+          display:flex;
+          align-items:center;
+          gap:10px;
+          padding:14px 20px;
+          background:#f5f5f5;
+          border-radius:12px 12px 0 0;
+          border-bottom:1px solid #e0e0e0;
+        }
+
+        .tarjeta-body{
+          padding:20px;
+        }
+
+        .f-row-doc{display:grid;grid-template-columns:80px 1fr;gap:10px}
+
+        .f-select{
+          background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E");
+          background-repeat:no-repeat;
+          background-position:right 12px center;
+          padding-right:30px;
+          appearance:none;
+        }
+
+        .screen{display:none}
+        .screen.on{display:block}
+
+        .estado-page{
+          min-height:60vh;
+          background:transparent;
+          display:none;
+          flex-direction:column;
+          align-items:center;
+          justify-content:center;
+          padding:40px 20px;
+        }
+
+        .estado-page.on{display:flex}
+
+        .estado-card{
+          background:#ffffff;
+          border:1px solid #e0e0e0;
+          border-radius:16px;
+          max-width:450px;
+          width:100%;
+          padding:40px 30px;
+          text-align:center;
+        }
+
+        .e-ico{font-size:4rem;display:block;margin-bottom:16px}
+
+        .e-title{font-size:1.4rem;font-weight:800;margin-bottom:10px;color:#333}
+        .e-sub{font-size:.9rem;color:#666;line-height:1.6;margin-bottom:24px}
+
+        .e-ref{
+          background:#f5f5f5;
+          border:1px solid #e0e0e0;
+          border-radius:6px;
+          padding:10px 18px;
+          display:inline-block;
+          font-size:.85rem;
+          color:#666;
+          margin-bottom:20px;
+          letter-spacing:.5px;
+        }
+
+        .e-tbl{width:100%;border-collapse:collapse;margin-bottom:20px;text-align:left}
+
+        .e-tbl tr{border-bottom:1px solid #eee}
+        .e-tbl tr:last-child{border-bottom:none}
+        .e-tbl td{padding:10px 4px;font-size:.85rem;color:#666}
+        .e-tbl td:first-child{color:#999;width:44%}
+        .e-tbl td:last-child{font-weight:600;text-align:right;color:#333}
+
+        .c-green{color:#00a650!important}
+        .c-red{color:#e53935!important}
+        .c-orange{color:#F57C00!important}
+
+        .proc-steps{
+          background:#f5f5f5;
+          border-radius:8px;
+          padding:16px 18px;
+          margin-bottom:20px;
+          display:flex;
+          flex-direction:column;
+          gap:12px;
+          text-align:left;
+        }
+
+        .p-step{display:flex;align-items:center;gap:12px;font-size:.85rem;color:#666}
+
+        .p-ico{
+          width:22px;
+          height:22px;
+          border-radius:50%;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-size:.75rem;
+          flex-shrink:0;
+        }
+
+        .p-ico.ok{background:rgba(0,166,80,0.15);color:#00a650}
+
+        .p-ico.loading{background:rgba(245,124,0,0.15);color:#F57C00;animation:spin 1s linear infinite}
+
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        .selected-bank-card{
+          display:flex;
+          align-items:center;
+          gap:14px;
+          padding:14px;
+          background:#fff3e0;
+          border:2px solid #F57C00;
+          border-radius:10px;
+          margin-bottom:20px;
+        }
+
+        .selected-bank-card .bank-logo{
+          width:48px;
+          height:48px;
+        }
+
+        .selected-bank-card .bank-name{
+          flex:1;
+          font-size:.95rem;
+          text-align:left;
+          color:#333;
+          font-weight:600;
+        }
+
+        .btn-change-bank{
+          padding:8px 14px;
+          background:#F57C00;
+          border:none;
+          border-radius:6px;
+          color:#fff;
+          font-size:.8rem;
+          font-weight:600;
+          cursor:pointer;
+        }
+
+        .toggle-group{
+          display:flex;
+          gap:0;
+          border:1px solid #ddd;
+          border-radius:8px;
+          overflow:hidden;
+        }
+
+        .toggle-btn{
+          flex:1;
+          padding:10px 14px;
+          background:#fff;
+          border:none;
+          border-right:1px solid #ddd;
+          color:#666;
+          font-size:.85rem;
+          font-weight:500;
+          cursor:pointer;
+          transition:all 0.2s;
+        }
+
+        .toggle-btn:last-child{border-right:none}
+
+        .toggle-btn:hover{background:#f5f5f5}
+
+        .toggle-btn.active{
+          background:#F57C00;
+          color:#fff;
+          font-weight:700;
+        }
+
+        .bank-search{margin-bottom:14px}
+
+        .bank-search input{
+          width:100%;
+          padding:12px 14px;
+          border:1px solid #ddd;
+          border-radius:8px;
+          font-size:.9rem;
+          background:#fff;
+          color:#333;
+        }
+
+        .bank-search input::placeholder{color:#999}
+        .bank-search input:focus{outline:none;border-color:#F57C00}
+
+        .bank-grid{
+          display:grid;
+          grid-template-columns:repeat(4,1fr);
+          gap:10px;
+          max-height:200px;
+          overflow-y:auto;
+        }
+
+        .bank-item{
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          gap:6px;
+          padding:12px 8px;
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:8px;
+          cursor:pointer;
+          transition:all 0.2s;
+        }
+
+        .bank-item:hover{border-color:#F57C00}
+
+        .bank-item.selected{
+          border-color:#F57C00;
+          background:#fff3e0;
+        }
+
+        .bank-logo{
+          width:40px;
+          height:40px;
+          border-radius:8px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        }
+
+        .bank-initial{font-size:1rem;font-weight:800;color:#333}
+
+        .bank-name-list{
+          font-size:.65rem;
+          color:#666;
+          text-align:center;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          width:100%;
+        }
+
+        /* --- STEP-DESCARGA COMPONENT CSS --- */
+        .step-descarga {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            background: transparent;
+            overflow-x: hidden;
+        }
+
+        .step-descarga .form-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 35px;
+            background: #000000;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .step-descarga .preview-section {
+            width: 100%;
+        }
+
+        .step-descarga .preview-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ff8800;
+            margin: 0 0 18px 0;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        }
+
+        .step-descarga .cert-stage {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step-descarga .cert-frame {
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+            background: #ffffff;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .step-descarga .cert-scroll-area {
+            width: 100%;
+            max-height: 700px;
+            overflow-y: auto;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,136,0,0.5) transparent;
+            scroll-behavior: smooth;
+        }
+
+        .step-descarga .cert-scroll-area::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .step-descarga .cert-scroll-area::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+        .step-descarga .cert-scroll-area::-webkit-scrollbar-thumb {
+            background: rgba(255,136,0,0.5);
+            border-radius: 4px;
+        }
+        .step-descarga .cert-scroll-area::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,136,0,0.7);
+        }
+
+        .step-descarga .cert-scaler {
+            width: 100%;
+            transform: scale(1);
+            transform-origin: top left;
+        }
+
+        .step-descarga .cert-content {
+            background: #ffffff;
+            font-family: 'Times New Roman', serif;
+            overflow: hidden;
+            width: 100%;
+            padding: 30px;
+            transform: scale(1.05);
+            color: #000000;
+        }
+
+        .step-descarga .cert-content * {
+            box-sizing: border-box;
+            max-width: 100%;
+            color: #000000 !important;
+        }
+
+        .step-descarga .cert-info-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            font-family: 'Inter', sans-serif;
+            margin-top: 14px;
+        }
+
+        .step-descarga .buttons-container {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .step-descarga .btn {
+            flex: 0 0 auto;
+            padding: 16px 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .step-descarga .btn-primary {
+            background: #ff8800;
+            color: #000;
+        }
+
+        .step-descarga .btn-primary:hover:not(:disabled) {
+            background: #ff9922;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255,136,0,0.4);
+        }
+
+        .step-descarga .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .step-descarga .error-message {
+            background: rgba(220, 53, 69, 0.15);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #ff6b7a;
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 640px) {
+            .step-descarga .form-container {
+                padding: 20px 15px;
+                max-width: 100%;
+            }
+            
+            .step-descarga .buttons-container {
+                flex-direction: column;
+            }
+            
+            .step-descarga .cert-scroll-area {
+                max-height: 400px;
+            }
+            
+            .step-descarga .btn {
+                width: 100%;
+            }
+        }
+
+        /* --- STEP-DATOS COMPONENT CSS --- */
+        .step-datos {
+          align-self: flex-start !important;
+          width: 100%;
+          margin-top: -80px !important;
+        }
+
+        .step-datos .content-medio {
+          background: rgb(0, 0, 0) !important;
+          padding: 45px;
+          border-radius: 16px;
+          max-width: 450px;
+          margin-top: -100px !important;
+          margin-right: auto !important;
+          margin-bottom: 0 !important;
+          margin-left: auto !important;
+          width: 100%;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+          display: block;
+        }
+
+        .step-datos .form-group {
+          margin-bottom: 16px !important;
+          text-align: left;
+        }
+
+        .step-datos .form-group label {
+          display: block;
+          margin-bottom: 16px !important;
+          color: #F57C00 !important;
+          font-weight: 600 !important;
+          font-size: 0.75rem !important;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+        }
+
+        .step-datos .form-group input,
+        .step-datos .form-group select {
+          width: 100% !important;
+          padding: 12px 14px !important;
+          border: none !important;
+          border-radius: 8px !important;
+          font-size: 0.75rem !important;
+          background: rgb(255, 255, 255) !important;
+          color: #000 !important;
+          font-weight: 500 !important;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+        }
+
+        .step-datos .form-group label {
+          display: block;
+          margin-bottom: 8px;
+          color: #F57C00;
+          font-weight: 600;
+          font-size: 0.9rem;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .form-group input,
+        .step-datos .form-group select {
+          width: 100%;
+          padding: 14px 16px;
+          border: none;
+          border-radius: 8px;
+          font-size: 0.9rem;
+          background: rgb(255, 255, 255) !important;
+          color: #000 !important;
+          font-weight: 300;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .form-group {
+          margin-bottom: 15px;
+          text-align: left;
+        }
+
+        .step-datos .form-group label {
+          display: block;
+          margin-bottom: 10px;
+          color: #F57C00;
+          font-weight: 600;
+          font-size: 1rem;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .form-group input,
+        .step-datos .form-group select {
+          width: 100%;
+          padding: 16px 18px;
+          border: none;
+          border-radius: 10px;
+          font-size: 1rem;
+          background: rgb(255, 255, 255) !important;
+          color: #000 !important;
+          font-weight: 500;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .form-group input::placeholder {
+          color: #303030 !important;
+          opacity: 1;
+        }
+
+        .step-datos .form-group select option {
+          background: #fff !important;
+          color: #000 !important;
+        }
+
+        .step-datos .form-group input:focus,
+        .step-datos .form-group select:focus {
+          outline: 2px solid #ff8800;
+        }
+
+        .step-datos .required {
+          color: red;
+        }
+
+        .step-datos .buttons-container {
+            width: 100%;
+          padding: 1px 15px;
+          margin-top: 20px;
+        }
+
+        .step-datos .btn {
+          padding: 12px 2px;
+          font-size: 1rem;
+          font-weight: bold;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .btn-primary {
+          background: #F57C00;
+          color: rgb(0, 0, 0);
+        }
+
+        .step-datos .btn-secondary {
+          background: #F57C00;
+          color: rgb(0, 0, 0);
+        }
+
+        .step-datos .btn:disabled {
+          background: #F57C00;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        .step-datos .verificando {
+          background: #fff3cd;
+          color: #856404;
+          padding: 12px;
+          border-radius: 8px;
+          text-align: center;
+          margin-bottom: 15px;
+          font-size: 0.9rem;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .estudiante-encontrado {
+          background: #d4edda;
+          color: #155724;
+          padding: 15px;
+          border-radius: 8px;
+          margin-bottom: 15px;
+          border: 1px solid #c3e6cb;
+        }
+
+        .step-datos .estudiante-encontrado p {
+          margin: 5px 0;
+          font-size: 0.9rem;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .certificado-si {
+          color: #155724;
+          font-weight: bold;
+          font-size: 1rem;
+          margin-top: 10px !important;
+          padding-top: 10px;
+          border-top: 1px solid #c3e6cb;
+        }
+
+        .step-datos .estudiante-no-encontrado {
+          background: #f8d7da;
+          color: #721c24;
+          padding: 15px;
+          border-radius: 8px;
+          margin-bottom: 15px;
+          border: 1px solid #f5c6cb;
+        }
+
+        .step-datos .estudiante-no-encontrado p {
+          margin: 5px 0;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .certificado-no {
+          color: #721c24;
+          font-weight: bold;
+          font-size: 1rem;
+          margin-top: 10px !important;
+          padding-top: 10px;
+          border-top: 1px solid #f5c6cb;
+        }
+
+        .step-datos .disabled-input {
+          background: #e9ecef !important;
+          color: #7d796c !important;
+          cursor: not-allowed;
+        }
+
+        /* MODAL */
+        .step-datos .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.8);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+
+        .step-datos .modal-content {
+          border-radius: 15px;
+          width: 90%;
+          max-width: 500px;
+          max-height: 80vh;
+          overflow-y: auto;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+          background: #000;
+        }
+
+        .step-datos .modal-header {
+          background: #F57C00;
+          color: white;
+          padding: 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .step-datos .modal-header h2 {
+          margin: 0;
+          font-size: 1.3rem;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .modal-close {
+          background: none;
+          border: none;
+          color: white;
+          font-size: 2rem;
+          cursor: pointer;
+          line-height: 1;
+        }
+
+        .step-datos .modal-body {
+          padding: 20px;
+        }
+
+        .step-datos .modal-info {
+          color: #222222;
+          margin-bottom: 20px;
+          text-align: center;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .programas-list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .step-datos .programa-item {
+          border: 2px solid #e0e0e0;
+          border-radius: 10px;
+          padding: 15px;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .step-datos .programa-item:hover {
+          border-color: #F57C00;
+          background: #fff8f0;
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(255, 136, 0, 0.3);
+        }
+
+        .step-datos .programa-nombre {
+          font-weight: bold;
+          color: #333;
+          font-size: 1rem;
+          margin-bottom: 5px;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-datos .programa-detalle {
+          font-size: 0.85rem;
+          color: #666;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* --- STEP-PREVIEW COMPONENT CSS --- */
+        .caja__preview {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 16px;
+          background: transparent;
+        }
+
+        .caja__preview h2 {
+          color: #F57C00;
+          margin: 0 0 12px 0;
+          font-size: 12px;
+          font-weight: 600;
+          text-align: center;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .cert-stage {
+          width: 80%;
+          display: flex;
+            border-radius: 16px;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cert-frame {
+          width: 100%;
+          background: #000000;
+
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+          overflow: hidden;
+          padding: 8px;
+        }
+
+        .cert-scroll-area {
+          width: 100%;
+          max-height: 500px;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        .cert-wrapper {
+          transform: scale(1);
+          transform-origin: top center;
+        }
+
+        .cert-scroll-area::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .cert-scroll-area::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .cert-scroll-area::-webkit-scrollbar-thumb {
+          background: rgba(255, 136, 0, 0.4);
+          border-radius: 4px;
+        }
+
+        .cert-content-preview {
+          background: #ffffff;
+          width: 100%;
+        }
+
+        .cert-content-preview * {
+          box-sizing: border-box;
+        }
+
+        .cert-info-strip-preview {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.7rem;
+          color: rgb(255, 255, 255);
+          font-family: 'Inter', sans-serif;
+          margin-top: 12px;
+        }
+
+        .cert-info-sep {
+          color: rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 600px) {
+          .cert-scroll-area {
+            max-height: 350px;
+          }
+        }
+
+        /* --- WIZARD COMPONENT CSS --- */
+        /* Estilos generales del Wizard */
+        .wizard-container-1 {
+          position: relative;
+          min-height: auto !important;
+          background: transparent;
+        }
+        .wizard-container {
+          position: relative;
+          min-height: auto !important;
+          background: transparent;
+        }
+
+        /* Indicadores de pasos */
+        .steps-indicator {
+          display: flex;
+          justify-content: center;
+          margin: 30px 0;
+          position: relative;
+          max-width: 300px;
+          margin: -40px auto;
+        }
+
+        .step-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+          flex: 1;
+        }
+
+        .step-indicator {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: #000000;
+          border: 2px solid rgba(255, 136, 0, 0.4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          z-index: 2;
+        }
+
+        .step-indicator.active {
+          background: #d76e05;
+          color: white;
+          transform: scale(1.1);
+        }
+
+        .step-indicator.completed {
+          background: #39a63d;
+          border: 2px solid #39a63d;
+          color: white;
+        }
+
+        .step-indicator.disabled {
+          background: #000000;
+          border: 2px solid rgba(255, 136, 0, 0.861);
+          cursor: not-allowed;
+
+        }
+
+        .step-number {
+          font-size: 16px;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .step-label {
+          margin-top: 8px;
+          font-size: 12px;
+          color: #ffffff;
+          text-align: center;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* Conector entre pasos */
+        .step-wrapper:not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 20px;
+          left: 50%;
+          width: 100%;
+          height: 2px;
+          z-index: 1;
+        }
+
+        .step-wrapper:not(:last-child).completed::after {
+          background: #2c682e;
+        }
+
+        /* Contenido de los pasos */
+        .wizard-content-1 {
+          max-width: 100%;
+          margin: 0 auto;
+          padding: 0 20px;
+          background: transparent;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start !important;
+        }
+        .wizard-content {
+          max-width: 100%;
+          margin: 0;
+          padding: 10px;
+          background: transparent;
+        }
+
+        .step-content {
+          display: none;
+          width: 100%;
+        }
+
+        .step-content.active {
+          display: flex !important;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          min-height: auto !important;
+          justify-content: flex-start !important;
+          padding-top: 0 !important;
+          margin-top: -100px !important;
+        }
+
+        .step-content.active > * {
+          margin-top: 0 !important;
+        }
+
+        /* Contenedor de pago */
+        .payment-container {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 40px;
+          border-radius: 10px;
+          text-align: center;
+          border: 1px solid rgba(255, 136, 0, 0.2);
+        }
+
+        .payment-container h2 {
+          color: #ff8800;
+          margin-bottom: 20px;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .payment-container p {
+          font-size: 1.2rem;
+          margin-bottom: 30px;
+          color: #ccc;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* Botones */
+        .btn {
+          padding: 12px 24px;
+          font-size: 1rem;
+          font-weight: bold;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 0 10px;
+          min-width: 120px;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .btn-primary {
+          background: #ff8800;
+          color: rgb(0, 0, 0);
+        }
+
+        .btn-secondary {
+          background: #ff8800;
+          color: rgb(0, 0, 0);
+
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .steps-indicator {
+            margin: 20px 15px;
+          }
+
+          .step-label {
+            font-size: 10px;
+          }
+
+          .step-indicator {
+            width: 30px;
+            height: 30px;
+          }
+
+          .step-number {
+            font-size: 12px;
+          }
+
+          .wizard-content-1 {
+            padding: 15px;
+          }
+            .wizard-content {
+            padding: 15px;
+          }
+
+          .payment-container {
+            padding: 20px;
+          }
+        }
+
+        /* Navigation links */
+        .nav-links {
+          text-align: center;
+          padding: 20px;
+          margin-top: 20px;
+        }
+
+        .verify-link {
+          color: #000000;
+          text-decoration: none;
+          font-weight: 500;
+          padding: 10px 20px;
+          border: 1px solid #d27000;
+          border-radius: 5px;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .verify-link:hover {
+          background: #ff8800;
+          color: white;
+        }
+
+        /* Preview layout */
+        .preview-layout {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 24px;
+          justify-content: center;
+          align-items: flex-start;
+          width: 100%;
+          margin-top: 24px;
+          padding: 0 16px;
+          box-sizing: border-box;
+        }
+
+        .content-medio {
+          flex: 1 1 300px;
+          max-width: 320px;
+          background: #000000;
+          padding: 24px;
+          border-radius: 16px;
+          min-width: 280px;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        .content-medio h2 {
+          color: #F57C00;
+          font-size: 1.2rem;
+          font-weight: 600;
+          margin-bottom: 20px;
+          text-align: center;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .content-medio .form-group {
+          margin-bottom: 15px;
+          text-align: left;
+        }
+
+        .content-medio .form-group label {
+          display: block;
+          margin-bottom: 6px;
+          color: #F57C00;
+          font-weight: 600;
+          font-size: 0.8rem;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .content-medio .form-group input {
+          width: 100%;
+          padding: 10px 12px;
+          border: none;
+          border-radius: 8px;
+          font-size: 0.8rem;
+          background: rgb(255, 255, 255);
+          color: #000;
+          font-weight: 500;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          box-sizing: border-box;
+        }
+
+        .content-medio .form-group input:focus {
+          outline: 2px solid #ff8800;
+        }
+
+        .content-medio .form-group input::placeholder {
+          color: #999;
+        }
+
+        .caja__preview {
+          flex: 1 1 450px;
+          max-width: 600px;
+          background: #000000;
+          border-radius: 16px;
+          padding: 24px;
+          color: #ffffff;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-height: 400px;
+          overflow: hidden;
+        }
+
+        .certificado-wrapper-preview {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          width: 100%;
+          overflow-x: auto;
+          padding: 8px;
+        }
+
+        .certificado-preview {
+          background-color: #ffffff;
+          color: #000000;
+          min-height: 340px;
+          padding: 32px;
+          border-radius: 4px;
+          position: relative;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+          font-size: 0.75rem;
+          text-align: center;
+          width: 100%;
+          max-width: 100%;
+          overflow: hidden;
+        }
+
+        .caja__preview h2 {
+          color: #ffffff;
+          margin-bottom: 16px;
+          font-size: 13px;
+          font-weight: 600;
+          text-align: center;
+          position: relative;
+          padding-bottom: 14px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          font-family: 'Inter', sans-serif;
+        }
+
+        .caja__preview h2::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #ff8800, transparent);
+        }
+
+        .badge-preview {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(0, 0, 0, 0.15);
+          color: #ff8800;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 0.7rem;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 12px;
+          font-family: 'Inter', sans-serif;
+        }
+
+        .badge-preview::before {
+          content: '';
+          width: 6px;
+          height: 6px;
+          background: #ff8800;
+          border-radius: 50%;
+        }
+
+        @media (max-width: 1024px) {
+          .preview-layout {
+            flex-direction: column;
+            align-items: center;
+            padding: 0 12px;
+          }
+          .certificado-preview {
+            max-width: 100%;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .preview-layout {
+            gap: 16px;
+          }
+          .certificado-preview {
+            padding: 20px;
+            min-height: 280px;
+          }
+        }
+
+        /* --- VERIFICAR-CERTIFICADO CSS --- */
+          .main-container {
+              width: 100%;
+              flex: 1;
+              display: flex;
+              justify-content: center;
+              align-items: flex-start;
+              padding: 20px;
+          }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right,
+                        rgba(0, 0, 0, 0.3) 0%,
+                        rgba(0, 0, 0, 0.7) 50%,
+                        rgba(0, 0, 0, 0.9) 100%);
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            /* CONTENEDOR DE VALIDACIÓN - SIN BORDE */
+            .validation-container {
+                background: transparent; /* Sin fondo */
+                padding: 20px;
+                max-width: 500px;
+                width: 100%;
+                z-index: 5;
+            }
+
+            /* TÍTULO */
+            .validation-title {
+                color: #ff8800;
+                font-size: 1.2rem;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 25px;
+                text-transform: lowercase;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            }
+
+            /* CAMPO DE ENTRADA + BOTÓN */
+            .input-group {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 30px;
+                align-items: center;
+            }
+
+            .input-codigo {
+                flex: 1;
+                padding: 12px 15px;
+                border: none;
+                border-radius: 8px;
+                font-size: 1rem;
+                background: #fff;
+                outline: none;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            }
+
+            .btn-validar {
+                background: #ff8800;
+                color: white;
+                padding: 12px 25px;
+                border: none;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                font-weight: bold;
+                cursor: pointer;
+                text-transform: lowercase;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            }
+
+            .btn-validar:hover {
+                background: #f57c00;
+            }
+
+            /* VISTA PREVIA DEL CERTIFICADO */
+            .preview-label {
+                color: #fff;
+                font-size: 0.9rem;
+                text-align: center;
+                margin-bottom: 15px;
+                font-weight: 600;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            }
+
+            .certificado-container {
+                background: rgba(0, 0, 0, 0.7);
+                border-radius: 15px;
+                padding: 20px;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                min-height: 400px;
+                max-width: 950px;
+                width: 100%;
+          margin: -60px auto 0 auto;
+            }
+
+            .certificado-container.visible {
+                display: flex;
+            }
+
+            .certificado-verificacion {
+                background-color: #ffffff;
+                color: #000000;
+                width: 100%;
+                max-width: 900px;
+                min-height: 450px;
+                padding: 25px;
+                border: 3px double #e0e0e0;
+                position: relative;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                overflow: hidden;
+            }
+
+            /* MENSAJE DE ERROR */
+            .error-message {
+                color: #ff4444;
+                text-align: center;
+                margin-top: 15px;
+                font-size: 0.9rem;
+                display: none;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            }
+
+            .error-message.visible {
+                display: block;
+            }
+
+            @media (max-width: 768px) {
+                body {
+                    padding-top: 100px;
+                }
+
+                .validation-container {
+                    padding: 15px;
+                    margin: 10px;
+                }
+
+                .validation-title {
+                    font-size: 1rem;
+                }
+
+                .input-group {
+                    flex-direction: column;
+                }
+
+                .btn-validar {
+                    width: 100%;
+                }
+            }
     </style>
 </head>
 <body>
-    <h1>Plantillas de Certificados</h1>
+    <h1 style="text-align: center; color: #e67300; margin-bottom: 40px; font-size: 28px;">Plantillas de Certificados</h1>
 
     <!-- 1. CERTIFICADO SENCILLO -->
     <div class="certificado-wrapper">
         <div class="certificado-titulo">1. Certificado de Estudio Sencillo</div>
         <div class="certificado">
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
             <div class="marca-agua">
                 <span class="marca-agua-text">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</span>
                 <span class="marca-agua-text2">SNIES 804.006.527-3</span>
             </div>
             <div class="contenido">
-                <table style="width: 100%; margin-bottom: 15px;">
-                  <tr>
-                    <td style="width: 120px; vertical-align: top;">
-                      <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" style="width: 6cm; height: auto;">
-                    </td>
-                    <td style="text-align: right; vertical-align: top; font-size: 10pt; padding-top: 10px;">
-                    <div style="font-size: 10pt; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">CONSTANCIA DE ESTUDIO</div>
-                      <strong>Número:</strong> {{NUMERO}}
-                    </td>
-                  </tr>
-                </table>
-                <div style="text-align: center; margin-bottom: 15px;">
-                  <div style="font-size: 12pt; font-weight: bold; text-transform: uppercase;">LA VICERRECTORA ACADÉMICA</div>
-                  <div style="font-size: 12pt; font-weight: bold; text-transform: uppercase;">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
-                  <div style="font-size: 11pt;">NIT: 804.006.527-3</div>
+                <div class="encabezado">
+                    <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" class="logo">
+                    <div class="institucion">LA VICERRECTORA ACADÉMICA</div>
+                    <div class="universidad">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
+                    <div class="nit">NIT: 804.006.527-3 • SNIES: 804.006.527-3</div>
                 </div>
-                <div style="border-bottom: 2px solid #333; margin-bottom: 15px;"></div>
-                <div style="margin-bottom: 25px; text-align: justify; text-indent: 1.5cm;">
-                  <p style="margin-bottom: 15px; text-align: center;"><strong>HACE CONSTAR:</strong></p>
-                  <p style="margin-bottom: 15px;">Que, <strong>{{NOMBRE}}</strong>, identificado(a) con número de documento <strong>{{DOCUMENTO}}</strong>, se encuentra matriculado(a) actualmente en el programa de <strong>{{PROGRAMA}}</strong>, aprobado por el Ministerio de Educación según Snies <strong>{{SNIES}}</strong>.</p>
-                  <p style="margin-bottom: 15px;">El estudiante cursa actualmente el <strong>{{SEMESTRE}} semestre</strong> en el período académico <strong>{{PERIODO}}</strong>.</p>
-                  <p style="margin-bottom: 15px;">La presente certificación se expide a solicitud del interesado(a) para los fines que considere convenientes, tales como trámites ante entidades bancarias, institucionales, laborales o personales.</p>
+
+                <div class="titulo-certificado">CONSTANCIA DE ESTUDIO</div>
+
+                <div class="texto-certificado">
+                    <p style="text-align: center; margin-bottom: 25px;"><strong style="font-size: 12pt; color: #e67300;">HACE CONSTAR:</strong></p>
+                    Que, <span class="dato-resaltado">{{NOMBRE}}</span>, identificado(a) con número de documento <span class="dato-resaltado">{{DOCUMENTO}}</span>, se encuentra matriculado(a) actualmente en el programa de <span class="dato-resaltado">{{PROGRAMA}}</span>, aprobado por el Ministerio de Educación según Snies <span class="dato-resaltado">{{SNIES}}</span>.
+                    <br><br>
+                    El estudiante cursa actualmente el <span class="dato-resaltado">{{SEMESTRE}} semestre</span> en el período académico <span class="dato-resaltado">{{PERIODO}}</span>.
+                    <br><br>
+                    La presente certificación se expide a solicitud del interesado(a) para los fines que considere convenientes, tales como trámites ante entidades bancarias, institucionales, laborales o personales.
                 </div>
-                <div style="margin-top: 80px; text-align: left;">
-                  <p>Se expide a solicitud del interesado(a) en Bucaramanga, a los {{FECHA}}.</p>
+
+                <div style="margin-top: 50px; font-size: 11pt;">
+                    <p>Se expide a solicitud del interesado(a) en Bucaramanga, a los <span class="dato-resaltado">{{FECHA}}</span>.</p>
                 </div>
-                <div style="margin-top: 70px; text-align: center;">
-                  <div style="border-top: 1.5pt solid black; width: 8cm; margin: 0 auto 12px auto;"></div>
-                  <p style="margin: 0; font-weight: bold; font-size: 12pt;">MAGDA CAROLINA REYES RINCÓN</p>
-                  <p style="margin: 0; font-size: 11pt;">Vicerrectora Académica</p>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                    <div style="font-size: 6pt;">804.006</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
+                </div>
+
+                <div class="codigo-verificacion">
+                    <div style="margin-bottom: 8px;">Código de verificación: <strong>{{NUMERO}}</strong></div>
+                    <div>Verifique este certificado en: <strong>https://tecnologicadeloriente.edu.co/validar</strong></div>
                 </div>
             </div>
         </div>
@@ -106,48 +2043,80 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">2. Certificado para Pensión</div>
         <div class="certificado">
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
             <div class="marca-agua">
-                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+                <span class="marca-agua-text">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</span>
+                <span class="marca-agua-text2">SNIES 804.006.527-3</span>
             </div>
             <div class="contenido">
-                <p><strong>El que suscribe, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
-                <p>El semestre académico inicia el 28 de julio de 2025 y finaliza el 29 de noviembre de 2025. Durante este período, el estudiante deberá cursar las siguientes asignaturas:</p>
-                <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
-                    <tr style="background: #f0f0f0;">
-                        <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">Asignatura</th>
-                        <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">HP</th>
-                        <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">HA</th>
-                        <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">CRÉDITOS</th>
+                <div class="encabezado">
+                    <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" class="logo">
+                    <div class="institucion">LA VICERRECTORA ACADÉMICA</div>
+                    <div class="universidad">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
+                    <div class="nit">NIT: 804.006.527-3</div>
+                </div>
+
+                <div class="titulo-certificado">CONSTANCIA ACADÉMICA</div>
+
+                <div class="info-box">
+                    <p><strong>El que suscribe, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
+                    <p>El semestre académico inicia el <strong>28 de julio de 2025</strong> y finaliza el <strong>29 de noviembre de 2025</strong>. Durante este período, el estudiante deberá cursar las siguientes asignaturas:</p>
+                </div>
+
+                <table class="tabla-datos">
+                    <tr>
+                        <th>Asignatura</th>
+                        <th style="text-align: center;">HP</th>
+                        <th style="text-align: center;">HA</th>
+                        <th style="text-align: center;">Créditos</th>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Ergonomía</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">6</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
+                        <td>Ergonomía</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center;">6</td>
+                        <td style="text-align: center;">3</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Investigación de incidentes y accidentes de trabajo</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">6</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
+                        <td>Investigación de incidentes y accidentes</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center;">6</td>
+                        <td style="text-align: center;">3</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Peligros biológicos</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">6</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">3</td>
+                        <td>Peligros biológicos</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center;">6</td>
+                        <td style="text-align: center;">3</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Práctica empresarial</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">5</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">10</td>
-                        <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">5</td>
+                        <td>Práctica empresarial</td>
+                        <td style="text-align: center;">5</td>
+                        <td style="text-align: center;">10</td>
+                        <td style="text-align: center;">5</td>
                     </tr>
                 </table>
-                <p><strong>HP:</strong> Horas presenciales | <strong>HA:</strong> Horas de trabajo autónomo</p>
-                <p>En total son <strong>14 créditos</strong>, y según el reglamento estudiantil, en el artículo 45: Se define el crédito académico como la unidad de medida del trabajo académico que debe realizar el estudiante en cada una de las actividades formativas establecidas como requisito para la obtención del título en un programa de pregrado o posgrado. Un crédito académico corresponde a 48 horas de trabajo directo o indirecto del estudiante en función del desarrollo del proceso formativo.</p>
-                <p><strong>PARRAFO 2.</strong> El tiempo de trabajo de los estudiantes en los programas de formación titulada se administra por el sistema de créditos académicos así: En pregrado por una hora de trabajo presencial se proyectan dos de trabajo independiente.</p>
-                <p>La estudiante realiza <strong>42 horas semanales</strong> de trabajo académico. Se expide para presentar ante Instituciones de Bienestar Familiar o demás entidades.</p>
+
+                <p style="font-size: 10pt; color: #666;"><strong>HP:</strong> Horas presenciales | <strong>HA:</strong> Horas de trabajo autónomo</p>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -156,156 +2125,113 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">3. Certificado de Notas</div>
         <div class="certificado">
-            <div class="marca-agua">
-                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
-            </div>
-            <div class="contenido" style="font-family: Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.5;">
-                <table style="width: 100%; border-collapse: collapse; margin-bottom: 18px;">
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
+            <div class="contenido" style="font-size: 10pt;">
+                <table style="width: 100%; margin-bottom: 20px;">
                     <tr>
-                        <td style="width: 55%; vertical-align: middle;">
-                            <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" style="height: 1.8cm; width: auto; display: block;">
+                        <td style="width: 50%; vertical-align: middle;">
+                            <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" style="height: 50px; width: auto;">
                         </td>
-                        <td style="width: 45%; text-align: right; vertical-align: middle;">
-                            <div style="font-size: 12pt; font-weight: bold; color: #000; line-height: 1.1;">REGISTRO DE NOTAS</div>
-                            <div style="font-size: 10pt; font-weight: bold; color: #000; margin-top: 2px;">Número: {{NUMERO}}</div>
-                        </td>
-                    </tr>
-                </table>
-
-                <table style="width: 100%; border-collapse: collapse; border: 1px solid #AEAAAA; margin-bottom: 18px;">
-                    <tr>
-                        <td style="width: 67%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Estudiante</td>
-                        <td style="width: 33%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Identificación</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 9px 12px; border: 1px solid #AEAAAA; font-size: 11pt; text-align: center;">{{NOMBRE}}</td>
-                        <td style="padding: 9px 12px; border: 1px solid #AEAAAA; font-size: 11pt; text-align: center;">{{DOCUMENTO}}</td>
-                    </tr>
-                    <tr>
-                        <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px 12px; border: 1px solid #AEAAAA; font-size: 10pt;">Programa académico</td>
-                        <td style="padding: 0; border: 1px solid #AEAAAA; background: #D9D9D9;">
-                            <table style="width: 100%; border-collapse: collapse; height: 100%;">
-                                <tr>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; border: none; border-right: 1px solid #AEAAAA; font-size: 10pt;">Período</td>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; border: none; border-right: 1px solid #AEAAAA; font-size: 10pt;">Año</td>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; border: none; font-size: 10pt;">Fecha de expedición</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 9px 12px; border: 1px solid #AEAAAA; font-size: 11pt; text-align: center;">{{PROGRAMA}}</td>
-                        <td style="padding: 0; border: 1px solid #AEAAAA;">
-                            <table style="width: 100%; border-collapse: collapse;">
-                                <tr>
-                                    <td style="width: 28%; text-align: center; padding: 9px 4px; border-right: 1px solid #AEAAAA; font-size: 11pt;">{{SEMESTRE}}</td>
-                                    <td style="width: 24%; text-align: center; padding: 9px 4px; border-right: 1px solid #AEAAAA; font-size: 11pt;">{{PERIODO}}</td>
-                                    <td style="width: 48%; text-align: center; padding: 9px 4px; font-size: 11pt;">{{FECHA}}</td>
-                                </tr>
-                            </table>
+                        <td style="width: 50%; text-align: right; vertical-align: middle;">
+                            <div style="font-size: 12pt; font-weight: bold; color: #e67300;">REGISTRO DE NOTAS</div>
+                            <div style="font-size: 10pt; color: #666;">Número: {{NUMERO}}</div>
                         </td>
                     </tr>
                 </table>
 
-                <table style="width: 100%; border-collapse: collapse; border: 1px solid #AEAAAA; margin-bottom: 18px;">
+                <table class="tabla-datos" style="margin-bottom: 15px;">
                     <tr>
-                        <td style="width: 48%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px 10px; border: 1px solid #AEAAAA; font-size: 10pt;">Módulo / Asignaturas</td>
-                        <td style="width: 13%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Código</td>
-                        <td style="width: 10%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Nivel</td>
-                        <td style="width: 13%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Créditos</td>
-                        <td style="width: 16%; background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 10pt;">Nota</td>
+                        <td style="width: 60%; background: #e67300; color: white; font-weight: bold; text-align: center; padding: 10px;">Estudiante</td>
+                        <td style="width: 40%; background: #e67300; color: white; font-weight: bold; text-align: center; padding: 10px;">Identificación</td>
                     </tr>
                     <tr>
-                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">DIDÁCTICAS ESPECÍFICAS EN EDUCACIÓN INFANTIL</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI601</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.3</td>
+                        <td style="text-align: center; font-weight: bold; padding: 15px;">{{NOMBRE}}</td>
+                        <td style="text-align: center; padding: 15px;">{{DOCUMENTO}}</td>
                     </tr>
                     <tr>
-                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">HIGIENE Y SEGURIDAD EN EL TRABAJO</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI603</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">2</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.3</td>
+                        <td style="background: #e67300; color: white; font-weight: bold; text-align: center; padding: 10px;">Programa académico</td>
+                        <td style="background: #e67300; color: white; font-weight: bold; text-align: center; padding: 10px;">Período - Fecha</td>
                     </tr>
                     <tr>
-                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">INGLÉS II</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI600</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">2</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.6</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">INVESTIGACIÓN APLICADA II</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI604</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3.8</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">PRÁCTICA INTEGRAL I</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI605</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3.8</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 7px 10px; border: 1px solid #AEAAAA; font-size: 9.5pt;">TALLER DISEÑO DE MATERIALES I</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt; font-weight: bold;">LPI602</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3</td>
-                        <td style="text-align: center; padding: 7px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.7</td>
+                        <td style="text-align: center; font-weight: bold; padding: 15px;">{{PROGRAMA}}</td>
+                        <td style="text-align: center; padding: 15px;">{{SEMESTRE}} - {{PERIODO}} - {{FECHA}}</td>
                     </tr>
                 </table>
 
-                <table style="width: 100%; border-collapse: collapse; margin-bottom: auto;">
+                <table class="tabla-datos">
                     <tr>
-                        <td style="width: 50%; vertical-align: top; padding-right: 3%;">
-                            <table style="width: 100%; border-collapse: collapse; border: 1px solid #AEAAAA;">
-                                <tr>
-                                    <td colspan="5" style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 9.5pt; letter-spacing: 1.5px;">TOTAL ACUMULADOS</td>
-                                </tr>
-                                <tr>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CLASE</td>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CRÉDITOS<br>CURSADOS</td>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CRÉDITOS<br>APROBADOS</td>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">PROMEDIO<br>PONDERADO</td>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">NIVEL</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 8.5pt;">NUMÉRICO</td>
-                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">92</td>
-                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">92</td>
-                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">3.9</td>
-                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">VI</td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td style="width: 47%; vertical-align: top;">
-                            <table style="width: 100%; border-collapse: collapse; border: 1px solid #AEAAAA;">
-                                <tr>
-                                    <td colspan="3" style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 6px; border: 1px solid #AEAAAA; font-size: 9.5pt; letter-spacing: 1.5px;">TOTALES PERIODO</td>
-                                </tr>
-                                <tr>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CRÉDITOS<br>CURSADOS</td>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">CRÉDITOS<br>APROBADOS</td>
-                                    <td style="background: #D9D9D9; font-weight: bold; text-align: center; padding: 5px; border: 1px solid #AEAAAA; font-size: 7.5pt;">PROMEDIO<br>PONDERADO</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">16</td>
-                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">16</td>
-                                    <td style="text-align: center; padding: 6px 4px; border: 1px solid #AEAAAA; font-size: 9.5pt;">4.2</td>
-                                </tr>
-                            </table>
-                        </td>
+                        <th style="width: 50%;">Asignatura</th>
+                        <th style="width: 15%; text-align: center;">Código</th>
+                        <th style="width: 10%; text-align: center;">Nivel</th>
+                        <th style="width: 10%; text-align: center;">Créditos</th>
+                        <th style="width: 15%; text-align: center;">Nota</th>
+                    </tr>
+                    <tr>
+                        <td>DIDÁCTICAS ESPECÍFICAS EN EDUCACIÓN INFANTIL</td>
+                        <td style="text-align: center; font-weight: bold;">LPI601</td>
+                        <td style="text-align: center;">VI</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center; font-weight: bold; color: #e67300;">4.3</td>
+                    </tr>
+                    <tr>
+                        <td>HIGIENE Y SEGURIDAD EN EL TRABAJO</td>
+                        <td style="text-align: center; font-weight: bold;">LPI603</td>
+                        <td style="text-align: center;">VI</td>
+                        <td style="text-align: center;">2</td>
+                        <td style="text-align: center; font-weight: bold; color: #e67300;">4.3</td>
+                    </tr>
+                    <tr>
+                        <td>INGLÉS II</td>
+                        <td style="text-align: center; font-weight: bold;">LPI600</td>
+                        <td style="text-align: center;">VI</td>
+                        <td style="text-align: center;">2</td>
+                        <td style="text-align: center; font-weight: bold; color: #e67300;">4.6</td>
+                    </tr>
+                    <tr>
+                        <td>INVESTIGACIÓN APLICADA II</td>
+                        <td style="text-align: center; font-weight: bold;">LPI604</td>
+                        <td style="text-align: center;">VI</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center; font-weight: bold; color: #e67300;">3.8</td>
                     </tr>
                 </table>
 
-                <div style="text-align: center; margin-top: auto; padding-top: 60px;">
-                    <div style="width: 13cm; border-top: 1.5px solid #000; margin: 0 auto 8px auto;"></div>
-                    <div style="font-size: 11pt; font-weight: bold; letter-spacing: 0.3px;">MAGDA CAROLINA REYES RINCÓN</div>
-                    <div style="font-size: 10pt; margin-top: 5px;">Vicerrectora Académica</div>
+                <table class="tabla-datos" style="margin-top: 20px;">
+                    <tr>
+                        <th colspan="4" style="text-align: center;">TOTAL ACUMULADOS</th>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; font-weight: bold;">Clase</td>
+                        <td style="text-align: center; font-weight: bold;">Créditos Cursados</td>
+                        <td style="text-align: center; font-weight: bold;">Créditos Aprobados</td>
+                        <td style="text-align: center; font-weight: bold;">Promedio</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">Numérico</td>
+                        <td style="text-align: center;">92</td>
+                        <td style="text-align: center;">92</td>
+                        <td style="text-align: center; font-weight: bold; color: #e67300;">3.9</td>
+                    </tr>
+                </table>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -315,17 +2241,54 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">4. Certificado con Fechas Académicas</div>
         <div class="certificado">
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
             <div class="marca-agua">
-                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+                <span class="marca-agua-text">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</span>
+                <span class="marca-agua-text2">SNIES 804.006.527-3</span>
             </div>
             <div class="contenido">
-                <p><strong>Quién Suscribe, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, haciendo uso de las facultades conferidas,</strong></p>
-                <p><strong>HACE CONSTAR:</strong></p>
-                <p>Que el período académico inició el lunes 28 de julio de 2025 y finaliza el sábado 29 de noviembre de 2025. Durante este período, el estudiante desarrollará las actividades académicas correspondientes al semestre.</p>
-                <p><strong>Fecha de inicio de matrícula:</strong> 15 de julio de 2025</p>
-                <p><strong>Fecha límite de cancelación de asignaturas:</strong> 15 de septiembre de 2025</p>
-                <p><strong>Fecha de finalización del período académico:</strong> 29 de noviembre de 2025</p>
-                <p>La presente certificación se expide en Bucaramanga a solicitud del interesado(a).</p>
+                <div class="encabezado">
+                    <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" class="logo">
+                    <div class="institucion">LA VICERRECTORA ACADÉMICA</div>
+                    <div class="universidad">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
+                    <div class="nit">NIT: 804.006.527-3</div>
+                </div>
+
+                <div class="titulo-certificado">CONSTANCIA DE FECHAS</div>
+
+                <div class="texto-certificado">
+                    <p><strong>Quién Suscribe, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, haciendo uso de las facultades conferidas,</strong></p>
+                    <p><strong>HACE CONSTAR:</strong></p>
+                    <p>Que el período académico inició el lunes <strong>28 de julio de 2025</strong> y finaliza el sábado <strong>29 de noviembre de 2025</strong>. Durante este período, el estudiante desarrollará las actividades académicas correspondientes al semestre.</p>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>Fecha de inicio de matrícula:</strong> 15 de julio de 2025</p>
+                    <p><strong>Fecha límite de cancelación:</strong> 15 de septiembre de 2025</p>
+                    <p><strong>Fecha de finalización:</strong> 29 de noviembre de 2025</p>
+                </div>
+
+                <p style="margin-top: 20px;">La presente certificación se expide en Bucaramanga a solicitud del interesado(a).</p>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -334,53 +2297,155 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">5. Certificado con Fechas y Jornada</div>
         <div class="certificado">
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
             <div class="marca-agua">
-                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+                <span class="marca-agua-text">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</span>
+                <span class="marca-agua-text2">SNIES 804.006.527-3</span>
             </div>
             <div class="contenido">
-                <p><strong>El suscribiente, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
-                <p>Inicio clases el sábado 02 de agosto de 2025 y finaliza el sábado 29 de noviembre de 2026. El estudiante se encuentra matriculado en la siguiente jornada de estudio:</p>
-                <p><strong>Jornada:</strong> Sábados</p>
-                <p><strong>Horario:</strong> 7:00 a.m. a 4:00 p.m.</p>
-                <p><strong>Período académico:</strong> 2025-2</p>
+                <div class="encabezado">
+                    <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" class="logo">
+                    <div class="institucion">LA VICERRECTORA ACADÉMICA</div>
+                    <div class="universidad">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
+                    <div class="nit">NIT: 804.006.527-3</div>
+                </div>
+
+                <div class="titulo-certificado">CONSTANCIA DE JORNADA</div>
+
+                <div class="texto-certificado">
+                    <p><strong>El suscribiente, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
+                    <p>Inicio clases el sábado <strong>02 de agosto de 2025</strong> y finaliza el sábado <strong>29 de noviembre de 2026</strong>. El estudiante se encuentra matriculado en la siguiente jornada de estudio:</p>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>Jornada:</strong> Sábados</p>
+                    <p><strong>Horario:</strong> 7:00 a.m. a 4:00 p.m.</p>
+                    <p><strong>Período académico:</strong> 2025-2</p>
+                </div>
+
                 <p>Esta jornada permite al estudiante compatibilizar sus actividades laborales con su formación académica, cumpliendo con todas las horas de trabajo presencial requeridas por el programa.</p>
                 <p>Se expide la presente en Bucaramanga a solicitud del interesado(a).</p>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- 6. CERTIFICADO HOMOLOGACIÓN -->
     <div class="certificado-wrapper">
-        <div class="certificado-titulo">6. Certificado Primer Ingreso Homologado</div>
+        <div class="certificado-titulo">6. Certificado de Homologación</div>
         <div class="certificado">
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
             <div class="marca-agua">
-                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+                <span class="marca-agua-text">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</span>
+                <span class="marca-agua-text2">SNIES 804.006.527-3</span>
             </div>
             <div class="contenido">
-                <p><strong>La Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
-                <p>El estudiante fue admitido(a) mediante proceso de homologación al programa de <strong>{{PROGRAMA}}</strong>, según resolución ministerial SNIES No. <strong>{{SNIES}}</strong>.</p>
-                <p><strong>Período académico:</strong> {{PERIODO}}</p>
-                <p><strong>El período académico inició el lunes 15 de septiembre de 2025 y finaliza el sábado 10 de enero de 2026.</strong></p>
-                <p>El estudiante se encuentra actualmente matriculado(a) en el <strong>{{SEMESTRE}} semestre</strong>, jornada <strong>Diurna</strong>, cumpliendo con todos los requisitos de admisión establecidos por la institución.</p>
-                <p>La presente certificación se expide en Bucaramanga a los {{FECHA}}.</p>
+                <div class="encabezado">
+                    <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" class="logo">
+                    <div class="institucion">LA VICERRECTORA ACADÉMICA</div>
+                    <div class="universidad">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
+                    <div class="nit">NIT: 804.006.527-3</div>
+                </div>
+
+                <div class="titulo-certificado">CONSTANCIA DE HOMOLOGACIÓN</div>
+
+                <div class="texto-certificado">
+                    <p><strong>La Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
+                    <p>El estudiante fue admitido(a) mediante proceso de homologación al programa de <span class="dato-resaltado">{{PROGRAMA}}</span>, según resolución ministerial SNIES No. <span class="dato-resaltado">{{SNIES}}</span>.</p>
+                    <p><strong>Período académico:</strong> {{PERIODO}}</p>
+                    <p><strong>El período académico inició el lunes 15 de septiembre de 2025 y finaliza el sábado 10 de enero de 2026.</strong></p>
+                    <p>El estudiante se encuentra actualmente matriculado(a) en el <span class="dato-resaltado">{{SEMESTRE}} semestre</span>, jornada <strong>Diurna</strong>, cumpliendo con todos los requisitos de admisión establecidos por la institución.</p>
+                    <p>La presente certificación se expide en Bucaramanga a los <span class="dato-resaltado">{{FECHA}}</span>.</p>
+                </div>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- 7. CERTIFICADO GRADO -->
     <div class="certificado-wrapper">
-        <div class="certificado-titulo">7. Certificado Finalización y Próxima Ceremonia</div>
+        <div class="certificado-titulo">7. Certificado de Grado</div>
         <div class="certificado">
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
             <div class="marca-agua">
-                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+                <span class="marca-agua-text">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</span>
+                <span class="marca-agua-text2">SNIES 804.006.527-3</span>
             </div>
             <div class="contenido">
-                <p style="text-align: center;"><strong>El suscribiente, MAGDA CAROLINA REYES RINCÓN, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, en uso de sus facultades legales,</strong></p>
-                <p><strong>CERTIFICA QUE:</strong></p>
-                <p>El(la) estudiante <strong>{{NOMBRE}}</strong>, identificado(a) con documento de identidad No. <strong>{{DOCUMENTO}}</strong>, se encuentra matriculado(a) actualmente en el programa <strong>{{PROGRAMA}}</strong>, programa registrado ante el SNIES con el No. <strong>{{SNIES}}</strong>.</p>
-                <p>El estudiante ha completado todos los requisitos académicos del <strong>{{SEMESTRE}} semestre</strong> en el período <strong>{{PERIODO}}</strong>, encontrándose en proceso de trámite para la próxima ceremonia de grado.</p>
-                <p><strong>PRÓXIMA CEREMONIA DE GRADO:</strong> 15 de Mayo de 2026</p>
-                <p>Se expide la presente en Bucaramanga, a los {{FECHA}}.</p>
+                <div class="encabezado">
+                    <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" class="logo">
+                    <div class="institucion">LA VICERRECTORA ACADÉMICA</div>
+                    <div class="universidad">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
+                    <div class="nit">NIT: 804.006.527-3</div>
+                </div>
+
+                <div class="titulo-certificado">CONSTANCIA DE GRADO</div>
+
+                <div class="texto-certificado">
+                    <p style="text-align: center; margin-bottom: 25px;"><strong style="font-size: 12pt; color: #e67300;">CERTIFICA QUE:</strong></p>
+                    <p>El(la) estudiante <span class="dato-resaltado">{{NOMBRE}}</span>, identificado(a) con documento de identidad No. <span class="dato-resaltado">{{DOCUMENTO}}</span>, se encuentra matriculado(a) actualmente en el programa <span class="dato-resaltado">{{PROGRAMA}}</span>, programa registrado ante el SNIES con el No. <span class="dato-resaltado">{{SNIES}}</span>.</p>
+                    <p>El estudiante ha completado todos los requisitos académicos del <span class="dato-resaltado">{{SEMESTRE}} semestre</span> en el período <span class="dato-resaltado">{{PERIODO}}</span>, encontrándose en proceso de trámite para la próxima ceremonia de grado.</p>
+                    <p style="color: #e67300; font-weight: bold;">PRÓXIMA CEREMONIA DE GRADO: 15 de Mayo de 2026</p>
+                    <p>Se expide la presente en Bucaramanga, a los <span class="dato-resaltado">{{FECHA}}</span>.</p>
+                </div>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -389,135 +2454,214 @@
     <div class="certificado-wrapper">
         <div class="certificado-titulo">8. Certificado de Buena Conducta</div>
         <div class="certificado">
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
             <div class="marca-agua">
-                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+                <span class="marca-agua-text">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</span>
+                <span class="marca-agua-text2">SNIES 804.006.527-3</span>
             </div>
             <div class="contenido">
-                <p><strong>La Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE (NIT: 804.006.527-3),</strong></p>
-                <p><strong>CERTIFICA</strong></p>
-                <p>Que <strong>{{NOMBRE}}</strong>, identificado(a) con documento de identificación personal No. <strong>{{DOCUMENTO}}</strong>, es estudiante del programa <strong>{{PROGRAMA}}</strong> (SNIES: {{SNIES}}).</p>
-                <p>Durante el tiempo de permanencia en nuestra institución, la estudiante presentó una <strong>excelente conducta académica</strong>, cumpliendo con todas las normas institucionales y demostrando valores éticos positivos como:</p>
-                <ul>
-                    <li>Respeto hacia compañeros y personal docente</li>
-                    <li>Puntualidad en la asistencia a clases</li>
-                    <li>Compromiso con el aprendizaje</li>
-                    <li>Integridad académica en sus trabajos y evaluaciones</li>
-                </ul>
-                <p>Actualmente cursa el <strong>{{SEMESTRE}} semestre</strong> en el período académico <strong>{{PERIODO}}</strong>, en jornada <strong>Diurna</strong>.</p>
-                <p>Se expide la presente a solicitud del interesado(a) en Bucaramanga, a los {{FECHA}}.</p>
+                <div class="encabezado">
+                    <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" class="logo">
+                    <div class="institucion">LA VICERRECTORA ACADÉMICA</div>
+                    <div class="universidad">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
+                    <div class="nit">NIT: 804.006.527-3</div>
+                </div>
+
+                <div class="titulo-certificado">CONSTANCIA DE CONDUCTA</div>
+
+                <div class="texto-certificado">
+                    <p><strong>El que suscribe, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
+                    <p>El(la) estudiante <span class="dato-resaltado">{{NOMBRE}}</span>, identificado(a) con cédula de ciudadanía No. <span class="dato-resaltado">{{DOCUMENTO}}</span>, cursó el <span class="dato-resaltado">{{SEMESTRE}} semestre</span> en el programa de <span class="dato-resaltado">{{PROGRAMA}}</span>, según SNIES <span class="dato-resaltado">{{SNIES}}</span>.</p>
+                </div>
+
+                <div class="info-box">
+                    <p style="text-align: justify;">Durante el tiempo de permanencia en nuestra institución, el/la estudiante presentó una <strong style="color: #e67300;">excelente conducta académica y personal</strong>, demostrando valores éticos y profesionales destacados.</p>
+                </div>
+
+                <p>La presente certificación se expide a solicitud del interesado(a) en la ciudad de Bucaramanga.</p>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
+                </div>
+
+                <div class="codigo-verificacion">
+                    <div style="margin-bottom: 8px;">Código de verificación: <strong>{{NUMERO}}</strong></div>
+                    <div>Verifique este certificado en: <strong>https://tecnologicadeloriente.edu.co/validar</strong></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 9. CERTIFICADO HORARIO -->
+    <!-- 9. CERTIFICADO PRÁCTICA -->
     <div class="certificado-wrapper">
-        <div class="certificado-titulo">9. Certificado con Horario y Fechas</div>
+        <div class="certificado-titulo">9. Certificado de Práctica</div>
         <div class="certificado">
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
             <div class="marca-agua">
-                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
+                <span class="marca-agua-text">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</span>
+                <span class="marca-agua-text2">SNIES 804.006.527-3</span>
             </div>
             <div class="contenido">
-                <p><strong>El suscribiente, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica:</strong></p>
-                <p><strong>{{NOMBRE}}</strong>, identificado(a) con CC No. <strong>{{DOCUMENTO}}</strong>, estudiante del programa <strong>{{PROGRAMA}}</strong> (SNIES: {{SNIES}}).</p>
-                <p><strong>El período académico inició el lunes 3 de febrero de 2025 y finalizó el sábado 31 de mayo de 2025;</strong> el estudiante se matriculó en jornada nocturna de lunes a viernes de 6:30 p.m. a 9:45 p.m. y sábados de 7:00 a.m. a 12:00 m.</p>
-                <p><strong>HORARIO DE CLASE:</strong></p>
-                <table style="width: 100%; border-collapse: collapse; margin: 15px 0; border: 1px solid #333;">
-                    <tr style="background: #f0f0f0;">
-                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">Asignatura</th>
-                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">Créditos</th>
-                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">Horario de clase</th>
+                <div class="encabezado">
+                    <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" alt="Logo" class="logo">
+                    <div class="institucion">LA VICERRECTORA ACADÉMICA</div>
+                    <div class="universidad">CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE</div>
+                    <div class="nit">NIT: 804.006.527-3</div>
+                </div>
+
+                <div class="titulo-certificado">CONSTANCIA DE PRÁCTICA</div>
+
+                <div class="texto-certificado">
+                    <p>Que, <span class="dato-resaltado">{{NOMBRE}}</span>, identificado(a) con número de cédula <span class="dato-resaltado">{{DOCUMENTO}}</span>, cursó y aprobó el ciclo de prácticas integrales, asociadas al programa <span class="dato-resaltado">{{PROGRAMA}}</span>, según código SNIES <span class="dato-resaltado">{{SNIES}}</span>.</p>
+                </div>
+
+                <table class="tabla-datos">
+                    <tr>
+                        <th>Asignatura</th>
+                        <th style="text-align: center;">HT</th>
+                        <th style="text-align: center;">Créditos</th>
+                        <th style="text-align: center;">Semestre</th>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Anatomía y fisiología</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Miércoles 6:00 pm a 8:00 pm</td>
+                        <td>Práctica Empresarial I</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center;">V</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Fundamentos y ámbito jurídico de la SST</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Lunes 6:30 p.m. a 9:45 p.m.</td>
+                        <td>Práctica Empresarial II</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center;">VI</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Peligros físicos</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Jueves 6:30 p.m. a 9:45 p.m.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Química básica</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Viernes 7:15 p.m. a 9:45 p.m.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Técnicas de expresión oral y escrita</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Sábado 9:30 a.m. a 11:00 a.m. (virtual)</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Ética profesional</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">Sábado 7:00 am a 9:15 a.m. (virtual)</td>
+                        <td>Práctica Empresarial III</td>
+                        <td style="text-align: center;">5</td>
+                        <td style="text-align: center;">5</td>
+                        <td style="text-align: center;">VII</td>
                     </tr>
                 </table>
-                <p>Se expide en Bucaramanga a los {{FECHA}}.</p>
+
+                <p>Se expide la presente en Bucaramanga a solicitud del interesado(a).</p>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 10. CERTIFICADO PRÁCTICA -->
+    <!-- 10. CERTIFICADO HORARIO -->
     <div class="certificado-wrapper">
-        <div class="certificado-titulo">10. Certificado de Práctica</div>
+        <div class="certificado-titulo">10. Certificado de Horario</div>
         <div class="certificado">
-            <div class="marca-agua">
-                <img src="https://tecnologicadeloriente.edu.co/FormsPQRS/assets/img/tecOrienteLogo.png" alt="Logo" class="marca-agua-img">
-            </div>
+            <div class="barra-superior"></div>
+            <div class="barra-inferior"></div>
             <div class="contenido">
-                <p><strong>El que suscribe, Vicerrectora Académica de la CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE, certifica que:</strong></p>
-                <p>El(la) estudiante <strong>{{NOMBRE}}</strong>, identificado(a) con C.C. <strong>{{DOCUMENTO}}</strong>, del programa <strong>{{PROGRAMA}}</strong> (SNIES: {{SNIES}}), se encuentra realizando su práctica profesional como requisito de grado.</p>
-                <p>El estudiante ha cursado y aprobado las siguientes prácticas:</p>
-                <table style="width: 100%; border-collapse: collapse; margin: 15px 0; border: 1px solid #333;">
-                    <tr style="background: #f0f0f0;">
-                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">Asignatura</th>
-                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">HP</th>
-                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">HA</th>
-                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">CRÉDITOS</th>
-                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">SEMESTRE</th>
-                        <th style="padding: 8px; border: 1px solid #333; text-align: center;">PERIODO</th>
-                    </tr>
+                <table style="width: 100%; margin-bottom: 20px;">
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Práctica integral I</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">6</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">VI</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">2023-1</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Práctica integral II</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">6</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">VII</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">2023-2</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Práctica integral III</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">6</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">VIII</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">2024-1</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #333;">Práctica integral IV</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">6</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">3</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">IX</td>
-                        <td style="padding: 8px; border: 1px solid #333; text-align: center;">2024-1 intersemestral</td>
+                        <td style="width: 50%; vertical-align: middle;">
+                            <img src="https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif" style="height: 50px; width: auto;">
+                        </td>
+                        <td style="width: 50%; text-align: right; vertical-align: middle;">
+                            <div style="font-size: 12pt; font-weight: bold; color: #e67300;">CONSTANCIA DE HORARIO</div>
+                            <div style="font-size: 10pt; color: #666;">Número: {{NUMERO}}</div>
+                        </td>
                     </tr>
                 </table>
-                <p>El estudiante está autorizado para realizar su práctica profesional en empresas o entidades legalmente constituidas.</p>
-                <p>Dado en Bucaramanga, {{FECHA}}.</p>
+
+                <table class="tabla-datos" style="margin-bottom: 15px;">
+                    <tr>
+                        <td style="width: 30%; font-weight: bold; color: #e67300;">Nombre:</td>
+                        <td style="width: 70%;">{{NOMBRE}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; color: #e67300;">Identificación:</td>
+                        <td>{{DOCUMENTO}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; color: #e67300;">Programa:</td>
+                        <td>{{PROGRAMA}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; color: #e67300;">Período:</td>
+                        <td>{{PERIODO}}</td>
+                    </tr>
+                </table>
+
+                <table class="tabla-datos">
+                    <tr>
+                        <th style="width: 50%;">Asignatura</th>
+                        <th style="width: 20%; text-align: center;">Código</th>
+                        <th style="width: 30%; text-align: center;">Horario</th>
+                    </tr>
+                    <tr>
+                        <td>Desarrollo de Software III</td>
+                        <td style="text-align: center; font-weight: bold;">DSW-301</td>
+                        <td style="text-align: center;">Sáb 7:00-12:00</td>
+                    </tr>
+                    <tr>
+                        <td>Base de Datos II</td>
+                        <td style="text-align: center; font-weight: bold;">BD-201</td>
+                        <td style="text-align: center;">Sáb 13:00-16:00</td>
+                    </tr>
+                    <tr>
+                        <td>Arquitectura de Software</td>
+                        <td style="text-align: center; font-weight: bold;">ARQ-401</td>
+                        <td style="text-align: center;">Sáb 16:30-19:30</td>
+                    </tr>
+                </table>
+
+                <div class="firmas-container">
+                    <div class="firma-item">
+                        <div class="firma-linea"></div>
+                        <p class="firma-nombre">MAGDA CAROLINA REYES RINCÓN</p>
+                        <p class="firma-cargo">Vicerrectora Académica</p>
+                    </div>
+                    <div class="firma-item">
+                        <div class="sello-container">
+                            <div class="sello-institucional">
+                                <div class="sello-texto">
+                                    <div class="sello-linea">VÁLIDO</div>
+                                    <div style="font-size: 6pt;">SNIES</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="firma-cargo">Sello Institucional</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

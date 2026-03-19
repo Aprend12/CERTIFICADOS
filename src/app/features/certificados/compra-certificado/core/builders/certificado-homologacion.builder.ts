@@ -11,52 +11,66 @@ export class CertificadoHomologacionBuilder implements CertificadoBuilder {
   build(datos: DatosCertificado, esPreview: boolean): string {
     const o = this.getOcultos(datos, esPreview);
     const escala = esPreview ? 'width: 100%;' : 'width: 21.59cm;';
-    const padding = esPreview ? '25px' : '3cm 2.5cm 2.5cm 3cm';
+    const padding = esPreview ? '25px' : '2.5cm 2.5cm';
     const logoWidth = esPreview ? '60px' : '4cm';
     const spacing = esPreview ? '8px' : '15px';
-    const pSpacing = esPreview ? '12px' : '25px';
+    const pSpacing = esPreview ? '12px' : '20px';
     const hideInPreview = esPreview ? 'display: none;' : '';
 
     return `
-    <div class="certificado-inner" style="${escala} min-height: 27.94cm; padding: ${padding}; font-family: 'Times New Roman', Times, serif; font-size: ${esPreview ? '10pt' : '12pt'}; line-height: 1.8; box-sizing: border-box; background: white;">
+    <div class="certificado-inner" style="${escala} min-height: 27.94cm; padding: ${padding}; font-family: 'Times New Roman', serif; font-size: ${esPreview ? '10pt' : '12pt'}; line-height: 1.8; box-sizing: border-box; background: white; position: relative;">
 
-      <table style="width: 100%; margin-bottom: ${spacing};">
-        <tr>
-          <td style="width: 100px; vertical-align: top; ${hideInPreview}">
-            <img src="${this.LOGO}" alt="Logo" style="width: ${logoWidth}; height: auto;">
-          </td>
-          <td style="text-align: right; vertical-align: top; font-size: ${esPreview ? '8pt' : '10pt'}; padding-top: 10px;">
-            <div style="font-size: ${esPreview ? '9pt' : '10pt'}; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">CONSTANCIA DE HOMOLOGACIÓN</div>
-            <span ${hideInPreview}><strong>Número:</strong> ${o.numero}</span>
-          </td>
-        </tr>
-      </table>
+      ${!esPreview ? `
+      <div style="position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 3px solid #e65100; pointer-events: none;"></div>
+      <div style="position: absolute; top: 22px; left: 22px; right: 22px; bottom: 22px; border: 1px solid #F57C00; pointer-events: none;"></div>
+      <div style="position: absolute; top: 30px; left: 30px; width: 50px; height: 50px; border-top: 4px solid #e65100; border-left: 4px solid #e65100; pointer-events: none;"></div>
+      <div style="position: absolute; top: 30px; right: 30px; width: 50px; height: 50px; border-top: 4px solid #e65100; border-right: 4px solid #e65100; pointer-events: none;"></div>
+      <div style="position: absolute; bottom: 30px; left: 30px; width: 50px; height: 50px; border-bottom: 4px solid #e65100; border-left: 4px solid #e65100; pointer-events: none;"></div>
+      <div style="position: absolute; bottom: 30px; right: 30px; width: 50px; height: 50px; border-bottom: 4px solid #e65100; border-right: 4px solid #e65100; pointer-events: none;"></div>
+      ` : ''}
 
-      <div style="text-align: center; margin-bottom: ${spacing};">
-        <div style="font-size: ${esPreview ? '10pt' : '12pt'}; font-weight: bold; text-transform: uppercase;">LA VICERRECTORA ACADÉMICA</div>
-        <div style="font-size: ${esPreview ? '10pt' : '12pt'}; font-weight: bold; text-transform: uppercase;">${this.INSTITUCION}</div>
-        <div style="font-size: ${esPreview ? '9pt' : '11pt'};">NIT: ${this.NIT}</div>
+      <div style="position: relative; z-index: 1;">
+        <table style="width: 100%; margin-bottom: ${spacing};">
+          <tr>
+            <td style="width: 100px; vertical-align: top; text-align: center; ${hideInPreview}">
+              <img src="${this.LOGO}" alt="Logo" style="width: ${logoWidth}; height: auto;">
+            </td>
+            <td style="text-align: right; vertical-align: top; padding-top: 10px;">
+              <div style="font-size: ${esPreview ? '9pt' : '10pt'}; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; color: #e65100; letter-spacing: 1px;">CONSTANCIA DE HOMOLOGACIÓN</div>
+              <span ${hideInPreview}><strong>Número:</strong> ${o.numero}</span>
+            </td>
+          </tr>
+        </table>
+
+        <div style="text-align: center; margin-bottom: ${pSpacing};">
+          <div style="font-size: ${esPreview ? '10pt' : '13pt'}; font-weight: bold; text-transform: uppercase; color: #e65100; letter-spacing: 2px; margin-bottom: 8px;">LA VICERRECTORA ACADÉMICA</div>
+          <div style="font-size: ${esPreview ? '10pt' : '12pt'}; font-weight: bold; text-transform: uppercase;">${this.INSTITUCION}</div>
+          <div style="font-size: ${esPreview ? '9pt' : '10pt'}; color: #555;">NIT: ${this.NIT}</div>
+        </div>
+
+        <div style="border-bottom: 2px solid #e65100; margin-bottom: ${pSpacing};"></div>
+
+        <div style="margin-bottom: ${pSpacing}; text-align: justify; text-indent: 1.5cm;">
+          <p style="margin-bottom: ${spacing}; text-align: center;"><strong style="font-size: 13pt; color: #e65100;">HACE CONSTAR:</strong></p>
+          <p style="margin-bottom: ${spacing};">Que, <strong>${o.nombre}</strong>, identificado(a) con número de documento <strong>${o.documento}</strong>, se encuentra matriculado(a) actualmente en el programa de <strong>${o.programa}</strong>, modalidad virtual, aprobado por el Ministerio de Educación según resolución <strong>014875</strong>.</p>
+          <p style="margin-bottom: ${spacing};">El estudiante cursará el <strong>${o.semestre} semestre</strong> en el período académico <strong>${o.periodo}</strong>, producto del reconocimiento de la titulación previa de Tecnólogo en Análisis y Desarrollo de Software del SENA.</p>
+          <p style="margin-bottom: ${spacing};">El período académico inició el <strong>lunes 15 de septiembre de 2025</strong> y finaliza el <strong>sábado 10 de enero de 2026</strong>.</p>
+        </div>
+
+        <div style="margin-top: ${esPreview ? '30px' : '50px'}; text-align: left;">
+          <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${o.fecha}.</p>
+        </div>
+
+        <table style="width: 100%; margin-top: ${esPreview ? '30px' : '40px'};">
+          <tr>
+            <td style="width: 50%; text-align: center; vertical-align: bottom;">
+              <div style="border-top: 1.5pt solid #e65100; width: 7cm; margin: 0 auto 10px auto;"></div>
+              <p style="margin: 0; font-weight: bold; font-size: ${esPreview ? '9pt' : '11pt'}; color: #e65100;">${this.FIRMA_NOMBRE}</p>
+              <p style="margin: 0; font-size: ${esPreview ? '8pt' : '10pt'}; color: #555;">${this.FIRMA_CARGO}</p>
+            </td>
+          </tr>
+        </table>
       </div>
-
-      <div style="border-bottom: 2px solid #333; margin-bottom: ${spacing};"></div>
-
-      <div style="margin-bottom: ${pSpacing}; text-align: justify; text-indent: 1.5cm;">
-        <p style="margin-bottom: ${spacing};"><strong>HACE CONSTAR:</strong></p>
-        <p style="margin-bottom: ${spacing};">Que, <strong>${o.nombre}</strong>, identificado(a) con número de documento <strong>${o.documento}</strong>, se encuentra matriculado(a) actualmente en el programa de <strong>${o.programa}</strong>, modalidad virtual, aprobado por el Ministerio de Educación según resolución <strong>014875</strong>.</p>
-        <p style="margin-bottom: ${spacing};">El estudiante cursará el <strong>${o.semestre} semestre</strong> en el período académico <strong>${o.periodo}</strong>, producto del reconocimiento de la titulación previa de Tecnólogo en Análisis y Desarrollo de Software del SENA.</p>
-        <p style="margin-bottom: ${spacing};">El período académico inició el <strong>lunes 15 de septiembre de 2025</strong> y finaliza el <strong>sábado 10 de enero de 2026</strong>.</p>
-      </div>
-
-      <div style="margin-top: ${esPreview ? '40px' : '80px'}; text-align: left;">
-        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${o.fecha}.</p>
-      </div>
-
-      <div style="margin-top: ${esPreview ? '40px' : '70px'}; text-align: left;">
-        <div style="border-top: 1.5pt solid black; width: 8cm; margin-bottom: 12px;"></div>
-        <p style="margin: 0; font-weight: bold; font-size: ${esPreview ? '9pt' : '12pt'};">${this.FIRMA_NOMBRE}</p>
-        <p style="margin: 0; font-size: ${esPreview ? '8pt' : '11pt'};">${this.FIRMA_CARGO}</p>
-      </div>
-
     </div>`;
   }
 

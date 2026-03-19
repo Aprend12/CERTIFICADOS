@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -59,4 +61,443 @@ body {
 
 .btn-secondary:hover {
   background: #555;
+}
+
+/* ═══════════════════════════════════════════════
+   LAYOUT PRINCIPAL - del diseño original
+═══════════════════════════════════════════════ */
+.preview-layout {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  margin-top: 24px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* ═══════════════════════════════════════════════
+   PANEL IZQUIERDO - Datos del certificado (original)
+═══════════════════════════════════════════════ */
+.content-medio {
+  flex: 0 0 360px;
+  background: linear-gradient(145deg, #000000 0%, #000000 100%);
+  padding: 24px;
+  border-radius: 16px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* .content-medio::before {
+  content: 'Datos del Certificado';
+  display: block;
+  color: #ff8800;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 136, 0, 0.3);
+} */
+
+.form-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #ff8800;
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Inter', sans-serif;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  color: #000000;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #ff8800;
+  box-shadow: 0 0 0 3px rgba(255, 136, 0, 0.15);
+}
+
+.form-group input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+/* ═══════════════════════════════════════════════
+   PANEL DERECHO - caja__preview (diseño original fusionado)
+═══════════════════════════════════════════════ */
+.caja__preview {
+  background: linear-gradient(145deg, #000000 0%, #0a0a0a 100%);
+  border-radius: 16px;
+  padding: 20px 24px 24px;
+  color: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1;
+  overflow: hidden;
+  max-width: 780px;
+  gap: 16px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Título del panel preview (del original) ── */
+.caja__preview h2 {
+  color: #ffffff;
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  padding-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: 'Inter', sans-serif;
+}
+
+.caja__preview h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff8800, transparent);
+}
+
+/* ── Badge "Vista Previa" animado (del nuevo) ── */
+.badge-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 136, 0, 0.12);
+  border: 1px solid rgba(255, 136, 0, 0.35);
+  color: #ff8800;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Inter', sans-serif;
+  align-self: center;
+}
+
+.badge-preview::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #ff8800;
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* ── Meta strip (del nuevo) ── */
+.preview-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: 'Inter', sans-serif;
+}
+
+.meta-value {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Inter', sans-serif;
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   ESCENARIO DEL CERTIFICADO (del nuevo, adaptado)
+═══════════════════════════════════════════════ */
+.cert-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Hojas apiladas detrás */
+.paper-stack {
+  position: absolute;
+  border-radius: 4px;
+  background: #ffffff;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.paper-2 {
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1.2deg);
+  width: calc(100% - 16px);
+  height: calc(100% - 40px);
+  opacity: 0.07;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+
+.paper-3 {
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-0.8deg);
+  width: calc(100% - 32px);
+  height: calc(100% - 60px);
+  opacity: 0.04;
+}
+
+/* ── Marco del certificado ── */
+.cert-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 24px 56px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* Área de scroll */
+.cert-scroll-area {
+  width: 100%;
+  max-height: 560px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 136, 0, 0.4) transparent;
+  scroll-behavior: smooth;
+}
+
+.cert-scroll-area::-webkit-scrollbar { width: 5px; }
+.cert-scroll-area::-webkit-scrollbar-track { background: transparent; }
+.cert-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(255, 136, 0, 0.35);
+  border-radius: 4px;
+}
+.cert-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 136, 0, 0.65);
+}
+
+/* ── EL SCALER ──
+   Certificado real = 816px de ancho (21.59cm @ 96dpi).
+   Dentro del panel de max-width ~730px, escalamos al 88%.
+*/
+.cert-scaler {
+  width: 816px;
+  transform: scale(0.88);
+  transform-origin: top left;
+  margin-right: calc(816px * (0.88 - 1));
+}
+
+/* Contenido del certificado inyectado por innerHTML */
+.cert-content {
+  background: #ffffff;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  display: block;
+}
+
+.cert-content * {
+  box-sizing: border-box;
+}
+
+/* Fades scroll */
+.cert-fade-top,
+.cert-fade-bottom {
+  position: absolute;
+  left: 0; right: 0;
+  height: 28px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cert-fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+}
+
+.cert-fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.06), transparent);
+}
+
+/* ── Info strip ── */
+.cert-info-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.2px;
+}
+
+.cert-info-sep {
+  color: rgba(255, 255, 255, 0.12);
+}
+
+/* ── certificado-wrapper (del original, mantenido por compatibilidad) ── */
+.certificado-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ── .certificado legacy (del original, mantenido por compatibilidad) ── */
+.certificado {
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 340px;
+  padding: 32px;
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  font-size: 0.75rem;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .preview-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 12px;
+  }
+
+  .content-medio {
+    flex: none;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .caja__preview {
+    width: 100%;
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 860px) {
+  .cert-scaler {
+    transform: scale(0.72);
+    transform-origin: top left;
+    margin-right: calc(816px * (0.72 - 1));
+  }
+
+  .cert-scroll-area {
+    max-height: 480px;
+  }
+
+  .preview-meta {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .preview-layout {
+    gap: 16px;
+    padding: 0 8px;
+  }
+
+  .cert-scaler {
+    transform: scale(0.48);
+    transform-origin: top left;
+    margin-right: calc(816px * (0.48 - 1));
+  }
+
+  .cert-scroll-area {
+    max-height: 380px;
+  }
+
+  .preview-meta {
+    display: none;
+  }
+
+  .caja__preview {
+    padding: 16px;
+  }
+
+  .certificado {
+    padding: 20px;
+    min-height: 280px;
+  }
 }

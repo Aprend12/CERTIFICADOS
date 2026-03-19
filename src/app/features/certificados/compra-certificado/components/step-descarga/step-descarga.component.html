@@ -1,12 +1,40 @@
-<div class="caja__preview">
-      <h1 class="title">Certificado Generado</h1>
-      <div class="certificado-wrapper">
-        <div class="certificado" #certificadoEl [innerHTML]="certificadoFinalSafe"></div>
+<!-- step-descarga.component.html -->
+<div class="step-descarga">
+
+  <div class="form-container">
+
+    <!-- Vista previa del certificado -->
+    <div class="preview-section">
+      <h3 class="preview-title">Vista Previa</h3>
+      <div class="cert-stage">
+        <div class="cert-frame">
+          <div class="cert-scroll-area">
+            <div class="cert-scaler">
+              <div class="cert-content" [innerHTML]="certificadoFinalSafe"></div>
+            </div>
+          </div>
+        </div>
+        <div class="cert-info-strip">
+          <span>📄</span>
+          <span>Tamaño real: Carta (21.59 × 27.94 cm)</span>
+          <span>·</span>
+          <span>PDF listo para imprimir</span>
+        </div>
       </div>
     </div>
 
-    <div class="btn-container" style="display: flex; justify-content: center; gap: 10px;">
-      <button class="btn-descargar" (click)="descargar()" [disabled]="generando || descargado">
-        {{ descargado ? 'Descargado' : (generando ? 'Descargando...' : (fileName ? 'Descargar '+fileName : 'Descargar Certificado')) }}
+    <!-- Botón de descarga -->
+    <div class="buttons-container">
+      <button type="button" class="btn btn-primary" (click)="descargar()" [disabled]="generando || descargado">
+        {{ descargado ? 'Descargado' : (generando ? 'Descargando...' : 'Descargar Certificado') }}
       </button>
     </div>
+
+    <!-- Mensaje de error -->
+    <div class="error-message" *ngIf="error">
+      {{ error }}
+    </div>
+
+  </div>
+
+</div>

@@ -6,10 +6,10 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
   private readonly LOGO = 'https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif';
 
 
-  private readonly COLOR_NARANJA   = '#C55A11';
+  private readonly COLOR_AZUL    = '#e65100';
   private readonly COLOR_GRIS_TXT  = '#595959';
-  private readonly COLOR_GRIS_CELL = '#D9D9D9';
-  private readonly COLOR_BORDE     = '#AEAAAA';
+  private readonly COLOR_GRIS_CELL = '#f8f9fa';
+  private readonly COLOR_BORDE     = '#e65100';
 
 
   build(datos: DatosCertificado, p0: boolean): string {
@@ -18,25 +18,26 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
     const ta  = this.getTotalesAcumulados();
     const tp  = this.getTotalesPeriodo();
 
-    const G = this.COLOR_GRIS_CELL;
     const B = this.COLOR_BORDE;
-    const cellHead = `background:${G}; font-weight:bold; text-align:center; padding:5px 6px; border:1px solid ${B}; font-size:9pt;`;
-    const cellData = `text-align:center; padding:6px 4px; border:1px solid ${B}; font-size:9.5pt;`;
+    const cellHead = `background:${this.COLOR_AZUL}; color:white; font-weight:bold; text-align:center; padding:8px 6px; border:1px solid ${B}; font-size:9pt;`;
+    const cellData = `text-align:center; padding:8px 4px; border:1px solid ${B}; font-size:9.5pt;`;
 
     return `
 <div style="
   width: 21.59cm;
   min-height: 27.94cm;
-  padding: 1.8cm 1.8cm 2cm 1.8cm;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 2cm 2cm;
+  font-family: 'Times New Roman', serif;
   font-size: 10pt;
   line-height: 1.5;
   background: white;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  position: relative;
 ">
 
+  <!-- Marco decorativo -->
+  <div style="position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 3px solid #e65100; pointer-events: none;"></div>
+  <div style="position: absolute; top: 22px; left: 22px; right: 22px; bottom: 22px; border: 1px solid #F57C00; pointer-events: none;"></div>
 
   <!--  ENCABEZADO -->
 
@@ -56,11 +57,11 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
 
       <!-- Título + número -->
       <td style="width:45%; text-align:right; vertical-align:middle;">
-        <div style="font-size:12pt; font-weight:bold; color:#000; line-height:1.1;">
+        <div style="font-size:12pt; font-weight:bold; color:#e65100; line-height:1.1;">
           REGISTRO DE NOTAS
         </div>
-        <div style="font-size:10pt; font-weight:bold; color:#000; margin-top:2px;">
-          Numero:${o.numero}
+        <div style="font-size:10pt; font-weight:bold; color:#e65100; margin-top:2px;">
+          Número:${o.numero}
         </div>
       </td>
 
@@ -79,10 +80,10 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
 
     <!-- Datos fila 1 -->
     <tr>
-      <td style="padding:9px 12px; border:1px solid ${B}; font-size:11pt; text-align:center;">
-       hjufsasf
+      <td style="padding:10px 12px; border:1px solid ${B}; font-size:11pt; text-align:center; font-weight:bold;">
+       ${o.nombre}
       </td>
-      <td style="padding:9px 12px; border:1px solid ${B}; font-size:11pt; text-align:center;">
+      <td style="padding:10px 12px; border:1px solid ${B}; font-size:11pt; text-align:center;">
         ${o.documento}
       </td>
     </tr>
@@ -92,11 +93,11 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
       <td style="${cellHead} font-size:10pt; text-align:center; padding:5px 12px; border:1px solid ${B};">
         Programa académico
       </td>
-      <td style="padding:0; border:1px solid ${B}; background:${G};">
+      <td style="padding:0; border:1px solid ${B}; background:${this.COLOR_AZUL};">
         <table style="width:100%; border-collapse:collapse; height:100%;">
           <tr>
-            <td style="width:28%; ${cellHead} border:none; border-right:1px solid ${B};">Periodo</td>
-            <td style="width:24%; ${cellHead} border:none; border-right:1px solid ${B};">Año</td>
+            <td style="width:28%; ${cellHead} border:none; border-right:1px solid #F57C00;">Período</td>
+            <td style="width:24%; ${cellHead} border:none; border-right:1px solid #F57C00;">Año</td>
             <td style="width:48%; ${cellHead} border:none;">Fecha de expedición</td>
           </tr>
         </table>
@@ -105,19 +106,19 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
 
     <!-- Datos fila 2 -->
     <tr>
-      <td style="padding:9px 12px; border:1px solid ${B}; font-size:11pt; text-align:center;">
+      <td style="padding:10px 12px; border:1px solid ${B}; font-size:11pt; text-align:center; font-weight:bold;">
         ${o.programa}
       </td>
       <td style="padding:0; border:1px solid ${B};">
         <table style="width:100%; border-collapse:collapse;">
           <tr>
-            <td style="width:28%; text-align:center; padding:9px 4px; border-right:1px solid ${B}; font-size:11pt;">
+            <td style="width:28%; text-align:center; padding:10px 4px; border-right:1px solid ${B}; font-size:11pt; font-weight:bold;">
               ${o.semestre}
             </td>
-            <td style="width:24%; text-align:center; padding:9px 4px; border-right:1px solid ${B}; font-size:11pt;">
+            <td style="width:24%; text-align:center; padding:10px 4px; border-right:1px solid ${B}; font-size:11pt;">
               ${o.periodo}
             </td>
-            <td style="width:48%; text-align:center; padding:9px 4px; font-size:11pt;">
+            <td style="width:48%; text-align:center; padding:10px 4px; font-size:11pt;">
               ${o.fecha_expedicion}
             </td>
           </tr>
@@ -131,7 +132,7 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
 
   <table style="width:100%; border-collapse:collapse; border:1px solid ${B}; margin-bottom:18px;">
     <tr>
-      <td style="width:48%; ${cellHead} font-size:10pt; padding:6px 10px;">Modulo / Asignaturas</td>
+      <td style="width:48%; ${cellHead} font-size:10pt; padding:6px 10px;">Módulo / Asignaturas</td>
       <td style="width:13%; ${cellHead} font-size:10pt;">Código</td>
       <td style="width:10%; ${cellHead} font-size:10pt;">Nivel</td>
       <td style="width:13%; ${cellHead} font-size:10pt;">Créditos</td>
@@ -148,22 +149,22 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
       <td style="width:50%; vertical-align:top; padding-right:3%;">
         <table style="width:100%; border-collapse:collapse; border:1px solid ${B};">
           <tr>
-            <td colspan="5" style="background:${G}; font-weight:bold; text-align:center; padding:6px; border:1px solid ${B}; font-size:9.5pt; letter-spacing:1.5px;">
+            <td colspan="5" style="background:${this.COLOR_AZUL}; color:white; font-weight:bold; text-align:center; padding:6px; border:1px solid ${B}; font-size:9.5pt; letter-spacing:1.5px;">
               TOTAL ACUMULADOS
             </td>
           </tr>
           <tr>
             <td style="${cellHead} font-size:7.5pt;">CLASE</td>
-            <td style="${cellHead} font-size:7.5pt;">CREDITOS<br>CURSADOS</td>
-            <td style="${cellHead} font-size:7.5pt;">CREDITOS<br>APROBADOS</td>
+            <td style="${cellHead} font-size:7.5pt;">CRÉDITOS<br>CURSADOS</td>
+            <td style="${cellHead} font-size:7.5pt;">CRÉDITOS<br>APROBADOS</td>
             <td style="${cellHead} font-size:7.5pt;">PROMEDIO<br>PONDERADO</td>
             <td style="${cellHead} font-size:7.5pt;">NIVEL</td>
           </tr>
           <tr>
-            <td style="${cellData} font-size:8.5pt;">NUMERIC<br>O</td>
+            <td style="${cellData} font-size:8.5pt; font-weight:bold;">NUMÉRICO</td>
             <td style="${cellData}">${ta.creditosCursados}</td>
             <td style="${cellData}">${ta.creditosAprobados}</td>
-            <td style="${cellData}">${ta.promedio}</td>
+            <td style="${cellData}; font-weight:bold; color:#e65100;">${ta.promedio}</td>
             <td style="${cellData}">${o.semestre}</td>
           </tr>
         </table>
@@ -173,19 +174,19 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
       <td style="width:47%; vertical-align:top;">
         <table style="width:100%; border-collapse:collapse; border:1px solid ${B};">
           <tr>
-            <td colspan="3" style="background:${G}; font-weight:bold; text-align:center; padding:6px; border:1px solid ${B}; font-size:9.5pt; letter-spacing:1.5px;">
+            <td colspan="3" style="background:${this.COLOR_AZUL}; color:white; font-weight:bold; text-align:center; padding:6px; border:1px solid ${B}; font-size:9.5pt; letter-spacing:1.5px;">
               TOTALES PERIODO
             </td>
           </tr>
           <tr>
-            <td style="${cellHead} font-size:7.5pt;">CREDITOS<br>CURSADOS</td>
-            <td style="${cellHead} font-size:7.5pt;">CREDITOS<br>APROBADOS</td>
-            <td style="${cellHead} font-size:7.5pt;">PROMEDIO<br>PONDERADO O</td>
+            <td style="${cellHead} font-size:7.5pt;">CRÉDITOS<br>CURSADOS</td>
+            <td style="${cellHead} font-size:7.5pt;">CRÉDITOS<br>APROBADOS</td>
+            <td style="${cellHead} font-size:7.5pt;">PROMEDIO<br>PONDERADO</td>
           </tr>
           <tr>
             <td style="${cellData}">${tp.creditosCursados}</td>
             <td style="${cellData}">${tp.creditosAprobados}</td>
-            <td style="${cellData}">${tp.promedio}</td>
+            <td style="${cellData}; font-weight:bold; color:#e65100;">${tp.promedio}</td>
           </tr>
         </table>
       </td>
@@ -195,12 +196,15 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
 
   <!--  FIRMA (al pie de página)   -->
 
-  <div style="text-align:center; margin-top:auto; padding-top:60px;">
-    <div style="width:13cm; border-top:1.5px solid #000; margin:0 auto 8px auto;"></div>
-    <div style="font-size:11pt; font-weight:bold; letter-spacing:0.3px;">
-      ${this.FIRMA_NOMBRE}
-    </div>
-  </div>
+  <table style="width: 100%; margin-top: 40px;">
+    <tr>
+      <td style="width: 50%; text-align: center; vertical-align: bottom;">
+        <div style="border-top: 1.5pt solid #e65100; width: 7cm; margin: 0 auto 10px auto;"></div>
+        <p style="margin: 0; font-weight: bold; font-size: 11pt; color: #e65100;">${this.FIRMA_NOMBRE}</p>
+        <p style="margin: 0; font-size: 10pt; color: #555;">${this.FIRMA_CARGO}</p>
+      </td>
+    </tr>
+  </table>
 
 </div>`;
   }
@@ -216,13 +220,13 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
       { nombre: 'TALLER DISEÑO DE MATERIALES I',                                           codigo: 'LPI602', nivel: 'VI', creditos: 3, nota: 4.7 },
     ];
 
-    return materias.map(m => `
-      <tr>
-        <td style="padding:7px 10px; border:1px solid ${B}; font-size:9.5pt;">${m.nombre}</td>
-        <td style="text-align:center; padding:7px 4px; border:1px solid ${B}; font-size:9.5pt; font-weight:bold;">${m.codigo}</td>
-        <td style="text-align:center; padding:7px 4px; border:1px solid ${B}; font-size:9.5pt;">${m.nivel}</td>
-        <td style="text-align:center; padding:7px 4px; border:1px solid ${B}; font-size:9.5pt;">${m.creditos}</td>
-        <td style="text-align:center; padding:7px 4px; border:1px solid ${B}; font-size:9.5pt;">${m.nota}</td>
+    return materias.map((m, i) => `
+      <tr style="background: ${i % 2 === 1 ? '#f8f9fa' : 'white'};">
+        <td style="padding:8px 10px; border:1px solid ${B}; font-size:9.5pt;">${m.nombre}</td>
+        <td style="text-align:center; padding:8px 4px; border:1px solid ${B}; font-size:9.5pt; font-weight:bold;">${m.codigo}</td>
+        <td style="text-align:center; padding:8px 4px; border:1px solid ${B}; font-size:9.5pt;">${m.nivel}</td>
+        <td style="text-align:center; padding:8px 4px; border:1px solid ${B}; font-size:9.5pt;">${m.creditos}</td>
+        <td style="text-align:center; padding:8px 4px; border:1px solid ${B}; font-size:9.5pt; font-weight:bold; color:#e65100;">${m.nota}</td>
       </tr>`).join('');
   }
 
@@ -255,7 +259,7 @@ export class CertificadoNotasBuilder implements CertificadoBuilder {
   private getOcultos(datos: DatosCertificado) {
     return {
       numero:           ' ' + this.sanitize(datos.codigo || '1 123ad32'),
-
+      nombre:            this.sanitize(datos.nombre_completo || datos.nombre || 'Nombre Estudiante'),
       documento:        this.sanitize(datos.documento),
       programa:         this.sanitize(datos.programa),
       semestre:         this.getNumeroRomano(datos.semestre),
