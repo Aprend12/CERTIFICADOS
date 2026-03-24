@@ -1,0 +1,21 @@
+<div class="validation-container">
+  <div class="validation-title">validar certificado</div>
+
+  <div class="input-group">
+    <input 
+      type="text" 
+      class="input-codigo" 
+      id="codigoCertificado" 
+      placeholder="Código del certificado" 
+      maxlength="50"
+      [(ngModel)]="codigo"
+      (keyup.enter)="onValidar()"
+      [disabled]="verificando">
+    <button 
+      class="btn-validar" 
+      (click)="onValidar()"
+      [disabled]="verificando || !codigo.trim()">
+      {{ verificando ? 'verificando...' : 'validar' }}
+    </button>
+  </div>
+</div>

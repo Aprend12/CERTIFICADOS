@@ -1,0 +1,163 @@
+.resultado-container {
+  max-width: 1000px;
+  width: 100%;
+  padding: 20px;
+}
+
+.resultado-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.badge-valido,
+.badge-invalido {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.badge-valido {
+  background: #39a63d;
+  color: white;
+}
+
+.badge-invalido {
+  background: #ff4444;
+  color: white;
+}
+
+.badge-icon {
+  font-size: 1.2rem;
+}
+
+.certificado-info {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.certificado-info h3 {
+  color: #ff8800;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-item label {
+  color: #ff8800;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.info-item span {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.codigo-verificacion {
+  font-family: monospace !important;
+  background: rgba(255, 136, 0, 0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+  word-break: break-all;
+}
+
+.preview-label {
+  color: #fff;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.certificado-container {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  max-width: 950px;
+  width: 100%;
+  margin: 0 auto 30px;
+}
+
+.certificado {
+  background-color: #ffffff;
+  color: #000000;
+  width: 100%;
+  max-width: 900px;
+  min-height: 450px;
+  padding: 25px;
+  border: 3px double #e0e0e0;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.botones {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.btn-secondary {
+  background: #ff8800;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #f57c00;
+}
+
+@media (max-width: 768px) {
+  .resultado-container {
+    padding: 15px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certificado-container {
+    padding: 15px;
+    min-height: 300px;
+  }
+
+  .certificado {
+    min-height: 350px;
+    padding: 15px;
+  }
+}

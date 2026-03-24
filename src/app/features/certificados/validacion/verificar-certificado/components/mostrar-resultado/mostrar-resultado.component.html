@@ -1,0 +1,31 @@
+<div class="resultado-container">
+  <div class="resultado-header">
+    <div class="badge-valido" *ngIf="esValido">
+      <span class="badge-icon">✓</span>
+      Certificado encontrado
+    </div>
+    <div class="badge-invalido" *ngIf="!esValido">
+      <span class="badge-icon">✗</span>
+      Certificado no encontrado
+    </div>
+  </div>
+
+  <div class="step-descarga" *ngIf="esValido && downloadUrl">
+    <div class="preview-section">
+      <h3 class="preview-title">Certificado</h3>
+      <p>Código: {{ downloadUrl.split('/').pop() }}</p>
+    </div>
+
+    <div class="buttons-container">
+      <button type="button" class="btn btn-primary" (click)="descargarPdf()">
+        Descargar PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="botones">
+    <button class="btn btn-secondary" (click)="onVolver()">
+      Buscar otro certificado
+    </button>
+  </div>
+</div>

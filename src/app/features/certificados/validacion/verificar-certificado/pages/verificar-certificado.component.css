@@ -1,0 +1,142 @@
+.wizard-container {
+  position: relative;
+  min-height: 100vh;
+  background: transparent;
+}
+
+.steps-indicator {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  position: relative;
+  max-width: 300px;
+  margin: -40px auto;
+}
+
+.step-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.step-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #000000;
+  border: 2px solid rgba(255, 136, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.step-indicator.active {
+  background: #d76e05;
+  color: white;
+  transform: scale(1.1);
+}
+
+.step-indicator.completed {
+  background: #39a63d;
+  border: 2px solid #39a63d;
+  color: white;
+}
+
+.step-indicator.disabled {
+  background: #000000;
+  border: 2px solid rgba(255, 136, 0, 0.861);
+  cursor: not-allowed;
+}
+
+.step-number {
+  font-size: 16px;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.step-label {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.step-wrapper:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  z-index: 1;
+  background: rgba(255, 136, 0, 0.3);
+}
+
+.step-wrapper:not(:last-child).completed::after {
+  background: #2c682e;
+}
+
+.wizard-content {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background: transparent;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.step-content {
+  display: none;
+  width: 100%;
+}
+
+.step-content.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-message {
+  color: #ff4444;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  display: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.error-message.visible {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .steps-indicator {
+    margin: 20px 15px;
+  }
+
+  .step-label {
+    font-size: 10px;
+  }
+
+  .step-indicator {
+    width: 30px;
+    height: 30px;
+  }
+
+  .step-number {
+    font-size: 12px;
+  }
+
+  .wizard-content {
+    padding: 15px;
+  }
+}

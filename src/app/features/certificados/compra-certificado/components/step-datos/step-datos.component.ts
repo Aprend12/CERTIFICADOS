@@ -47,6 +47,10 @@ export class StepDatosComponent {
   mostrarModalCarreras = false;
   carreraElegida: string = '';
 
+  camposVacios = false;
+  errorUsuarioNoEncontrado = false;
+  errorModalCarreraNoSeleccionada = false;
+
   constructor() {
     this.form = this.fb.group({
       documento: ['', [Validators.required]],
@@ -72,6 +76,7 @@ export class StepDatosComponent {
       this.carrerasDisponibles = [];
       this.ultimoDocumentoVerificado = '';
       this.ultimoCodigoVerificado = '';
+      this.camposVacios = true;
       return;
     }
 
@@ -136,11 +141,15 @@ export class StepDatosComponent {
       return;
     }
 
+    this.camposVacios = false;
+    this.errorUsuarioNoEncontrado = false;
+
     const documento = this.form.get('documento')?.value;
     const codigoEstudiante = this.form.get('codigo_estudiante')?.value;
     const tipoCertificado = this.form.get('tipo_certificado')?.value;
 
-    if (!documento || !codigoEstudiante) {
+    if (!documento || !codigoEstudiante || !tipoCertificado) {
+      this.camposVacios = true;
       return;
     }
 
@@ -170,6 +179,8 @@ export class StepDatosComponent {
             this.estudianteEncontrado = estudiante;
             this.nombreEstudiante = nombreCompleto;
             this.estudianteNoEncontrado = false;
+            this.errorUsuarioNoEncontrado = false;
+            this.camposVacios = false;
             this.carrerasDisponibles = estudiante.snies;
             this.ultimoDocumentoVerificado = documento;
             this.ultimoCodigoVerificado = codigoEstudiante;
@@ -185,6 +196,9 @@ export class StepDatosComponent {
           } else {
             this.estudianteEncontrado = null;
             this.estudianteNoEncontrado = true;
+            this.errorUsuarioNoEncontrado = true;
+            this.camposVacios = true;
+            this.form.reset();
             this.carrerasDisponibles = [];
             this.verificando = false;
           }
@@ -192,6 +206,9 @@ export class StepDatosComponent {
         error: (err) => {
           this.estudianteEncontrado = null;
           this.estudianteNoEncontrado = true;
+          this.errorUsuarioNoEncontrado = true;
+          this.camposVacios = true;
+          this.form.reset();
           this.carrerasDisponibles = [];
           this.verificando = false;
         }
@@ -218,6 +235,13 @@ export class StepDatosComponent {
   }
 
   seleccionarCarrera() {
+    this.errorModalCarreraNoSeleccionada = false;
+
+    if (!this.carreraElegida) {
+      this.errorModalCarreraNoSeleccionada = true;
+      return;
+    }
+
     if (this.carreraElegida && this.estudianteEncontrado) {
       const formValue = this.form.value;
 
@@ -238,6 +262,7 @@ export class StepDatosComponent {
   cerrarModal() {
     this.mostrarModalCarreras = false;
     this.carreraElegida = '';
+    this.errorModalCarreraNoSeleccionada = false;
   }
 
   reset() {
@@ -252,6 +277,9 @@ export class StepDatosComponent {
     this.carreraElegida = '';
     this.ultimoDocumentoVerificado = '';
     this.ultimoCodigoVerificado = '';
+    this.camposVacios = false;
+    this.errorUsuarioNoEncontrado = false;
+    this.errorModalCarreraNoSeleccionada = false;
     this.resetComponent.emit();
   }
 }

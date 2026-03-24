@@ -1,0 +1,49 @@
+<!-- Indicadores de pasos -->
+<div class="steps-indicator">
+  <div class="step-wrapper" [class.completed]="isStepCompleted(1)">
+    <div class="step-indicator"
+         [class.active]="isStepActive(1)"
+         [class.completed]="isStepCompleted(1)"
+         (click)="goToStep(1)">
+      <div class="step-number">1</div>
+    </div>
+    <p class="step-label">Ingresar código</p>
+  </div>
+
+  <div class="step-wrapper" [class.completed]="isStepCompleted(2)">
+    <div class="step-indicator"
+         [class.active]="isStepActive(2)"
+         [class.completed]="isStepCompleted(2)"
+         [class.disabled]="!isStepCompleted(1)"
+         (click)="isStepCompleted(1) ? goToStep(2) : null">
+      <div class="step-number">2</div>
+    </div>
+    <p class="step-label">Resultado</p>
+  </div>
+</div>
+
+<!-- Contenido de los pasos -->
+<div class="wizard-content">
+  <!-- Paso 1: Validar código -->
+  <div class="step-content" [class.active]="isStepActive(1)">
+    <app-validar-codigo 
+      (codigoIngresado)="onCodigoIngresado($event)"
+      [verificando]="verificando">
+    </app-validar-codigo>
+    
+    <div class="error-message" [class.visible]="mostrarError">
+      {{ mensajeError }}
+    </div>
+  </div>
+
+  <!-- Paso 2: Mostrar resultado -->
+  <div class="step-content" [class.active]="isStepActive(2)">
+    <app-mostrar-resultado
+      [certificadoData]="certificadoData"
+      [certificadoHTML]="certificadoHTML"
+      [esValido]="certificadoValido"
+      [downloadUrl]="downloadUrl"
+      (volver)="volverABuscar()">
+    </app-mostrar-resultado>
+  </div>
+</div>
