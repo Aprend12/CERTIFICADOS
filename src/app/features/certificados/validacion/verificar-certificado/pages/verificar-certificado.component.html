@@ -47,3 +47,26 @@
     </app-mostrar-resultado>
   </div>
 </div>
+
+<!-- Modal de selección de carrera -->
+<div class="modal-overlay" *ngIf="mostrarModalCarreras" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3 style="color: #ff8800; text-align: center; margin-bottom: 20px;">Seleccione una carrera</h3>
+    <p style="margin-bottom: 20px; text-align: center;">El certificado contiene información de múltiples programas. Seleccione el programa del cual desea ver el certificado.</p>
+    
+    <div class="form-group">
+      <label for="carrera">Programa académico <span class="required">*</span></label>
+      <select id="carrera" [(ngModel)]="carreraElegida" name="carrera">
+        <option value="">Seleccione una carrera...</option>
+        <option *ngFor="let programa of programasDisponibles" [value]="programa.snies">
+          {{ programa.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="buttons-container" style="display: flex; gap: 10px; margin-top: 20px;">
+      <button type="button" class="btn btn-secondary" (click)="cerrarModal()" style="flex: 1;">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="seleccionarCarrera(certificadoData?.hash || '')" [disabled]="!carreraElegida" style="flex: 1;">Aceptar</button>
+    </div>
+  </div>
+</div>

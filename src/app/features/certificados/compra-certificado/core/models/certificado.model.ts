@@ -1,9 +1,31 @@
+export interface Materia {
+  nombre: string;
+  codigo?: string;
+  nivel: string;
+  creditos: number;
+  nota: number;
+  periodo?: string;
+}
+
+export interface PeriodoAcademico {
+  periodo: string;
+  materias: Materia[];
+}
+
 export interface CertificadoDatos {
   documento: string;
   codigo_estudiante: string;
   snies: string;
   tipo_certificado: string;
   nombre_completo: string;
+  hash_code?: string;
+  historial_notas?: PeriodoAcademico[];
+  programa_academico?: string;
+  periodo_activo?: string;
+  semestre_academico?: string;
+  fecha_inicio_periodo?: string;
+  fecha_fin_periodo?: string;
+  jornada?: string;
 }
 
 export interface DatosCertificado {
@@ -19,6 +41,11 @@ export interface DatosCertificado {
   fecha_fin: string;
   jornada: string;
   codigo: string;
+  hash_code?: string;
+  codigo_verificacion?: string;
+  materias?: Materia[];
+  fecha_inicio_periodo?: string;
+  fecha_fin_periodo?: string;
 }
 
 export type TipoCertificado =

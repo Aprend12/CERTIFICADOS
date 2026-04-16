@@ -30,8 +30,8 @@ describe('WizardComponent', () => {
   });
 
   it('should initialize with empty datosUsuario', () => {
-    expect(component.datosUsuario.documento_identidad).toBe('');
-    expect(component.datosUsuario.numero_estudiante).toBe('');
+    expect(component.datosUsuario.documento).toBe('');
+    expect(component.datosUsuario.codigo_estudiante).toBe('');
   });
 
   it('should have wizardService defined', () => {
@@ -42,11 +42,11 @@ describe('WizardComponent', () => {
     const wizardService = TestBed.inject(WizardService) as any;
     const nextSpy = vi.spyOn(wizardService, 'next');
     component.onDatosSubmitted({
-      documento_identidad: '123',
-      numero_estudiante: '456',
-      numero_programa: '789',
+      documento: '123',
+      codigo_estudiante: '456',
+      snies: '789',
       tipo_certificado: 'sencillo',
-      nombreEstudiante:'test users'
+      nombre_completo: 'test users'
     });
     expect(nextSpy).toHaveBeenCalled();
   });

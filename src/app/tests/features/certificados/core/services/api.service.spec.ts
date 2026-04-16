@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ApiService, GenerarCertificadoRequest, GenerarCertificadoResponse, DescargarCertificado } from '../../../../features/certificados/compra-certificado/core/services/api.service';
+import { ApiService, GenerarCertificadoRequest, GenerarCertificadoResponse, DescargarCertificado } from '../../../../../features/certificados/compra-certificado/core/services/api.service';
 
 describe('ApiService', () => {
   let service: ApiService;
@@ -20,79 +20,39 @@ describe('ApiService', () => {
     httpMock.verify();
   });
 
-  it('should fetch a PDF blob through the two-step download flow', (done) => {
-    const request: GenerarCertificadoRequest = {
-      documento_identidad: '1234',
-      tipo_certificado: ['datos_basicos']
-    };
-
-    // subscribe to the helper
-    service.generarYObtenerPdf(request).subscribe({
-      next: blob => {
-        expect(blob instanceof Blob).toBe(true);
-        done();
-      },
-      error: () => {
-        done.fail('should not have errored');
-      }
-    });
-
-    // first call: generarCertificado
-    const req1 = httpMock.expectOne('/api/generar/certificado');
-    expect(req1.request.method).toBe('POST');
-    req1.flush({ mensaje: 'ok', pdf: 'token.pdf', hash: 'abc' } as GenerarCertificadoResponse);
-
-    // second call: descriptor
-    const req2 = httpMock.expectOne('/api/descargar/certificado/token.pdf');
-    expect(req2.request.method).toBe('GET');
-    expect(req2.request.headers.get('Accept')).toContain('application/json');
-    req2.flush({ mensaje: 'ok', nombre_pdf: 'token.pdf' } as DescargarCertificado);
-
-    // third call: actual blob
-    const req3 = httpMock.expectOne('/api/descargar/certificado/token.pdf');
-    expect(req3.request.method).toBe('GET');
-    expect(req3.request.responseType).toBe('blob');
-    req3.flush(new Blob(['foo'], { type: 'application/pdf' }));
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 
-  it('should error if the first response has no pdf token', (done) => {
+  it('should make POST request to generar certificado endpoint', () => {
     const request: GenerarCertificadoRequest = {
-      documento_identidad: '1234',
-      tipo_certificado: ['datos_basicos']
+      hash_code: 'abc123',
+      documento_estudiante: '1234'
     };
 
-    service.generarYObtenerPdf(request).subscribe({
-      next: () => done.fail('should not emit blob'),
-      error: err => {
-        expect(err).toBeInstanceOf(Error);
-        expect((err as Error).message).toContain('identificador de PDF');
-        done();
-      }
-    });
+    service.generarCertificado(request).subscribe();
 
-    const req1 = httpMock.expectOne('/api/generar/certificado');
-    req1.flush({ mensaje: 'ok', pdf: '' } as any);
+    const req = httpMock.expectOne('/certificado/generar');
+    expect(req.request.method).toBe('POST');
+    req.flush({ mensaje: 'ok', pdf: 'token.pdf', hash: 'abc' } as GenerarCertificadoResponse);
   });
 
-  it('should wrap descriptor parsing failures', (done) => {
-    const request: GenerarCertificadoRequest = {
-      documento_identidad: '1234',
-      tipo_certificado: ['datos_basicos']
-    };
+  it('should make POST request to descargar certificado endpoint', () => {
+    service.descargarCertificado('abc123', '1234').subscribe();
 
-    service.generarYObtenerPdf(request).subscribe({
-      next: () => done.fail('should not succeed'),
-      error: err => {
-        expect(err).toBeInstanceOf(Error);
-        expect((err as Error).message).toContain('Respuesta inválida');
-        done();
-      }
+    const req = httpMock.expectOne('/certificado/descargar');
+    expect(req.request.method).toBe('POST');
+    req.flush({ mensaje: 'ok', nombre_pdf: 'token.pdf' } as DescargarCertificado);
+  });
+
+  it('should return verificarCertificado response', () => {
+    service.verificarCertificado('hash123').subscribe((response: { valido: boolean; mensaje: string }) => {
+      expect(response.valido).toBe(true);
+      expect(response.mensaje).toBe('Certificado válido');
     });
 
-    const req1 = httpMock.expectOne('/api/generar/certificado');
-    req1.flush({ mensaje: 'ok', pdf: 'token.pdf', hash: 'abc' } as GenerarCertificadoResponse);
-
-    const req2 = httpMock.expectOne('/api/descargar/certificado/token.pdf');
-    req2.flush('<html>oops</html>', { headers: { 'Content-Type': 'text/html' } });
+    const req = httpMock.expectOne('/certificado/verificar');
+    expect(req.request.method).toBe('GET');
+    req.flush({ valido: true, mensaje: 'Certificado válido' });
   });
 });

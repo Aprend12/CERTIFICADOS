@@ -4,6 +4,14 @@ export interface VerificarCertificadoResponse {
   certificado?: CertificadoData;
 }
 
+export interface Programa {
+  nombre: string;
+  snies: string;
+  nivel?: string;
+  jornada?: string;
+  modalidad?: string;
+}
+
 export interface CertificadoData {
   tipo_certificado: string;
   nombre_completo: string;
@@ -15,4 +23,5 @@ export interface CertificadoData {
   hash: string;
   nombre_pdf: string;
   html?: string;
+  programas?: Programa[];
 }

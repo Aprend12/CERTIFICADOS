@@ -59,7 +59,7 @@
   </div>
 
   <!-- Paso 2: Preview - Datos y Preview lado a lado -->
-  <div class="step-content" [class.active]="isStepActive(2)">
+  <div class="step-content step-preview" [class.active]="isStepActive(2)">
     <div class="preview-layout">
       <!-- Panel izquierdo: Datos del certificado (solo lectura) -->
       <div class="content-medio">
@@ -100,7 +100,7 @@
 
   <!-- Paso 3: Pagar -->
   <div class="step-content" [class.active]="isStepActive(3)">
-    <app-step-pagos (goToDownload)="setStep(4)" [nombreCertificado]="getCertificadoTitulo()"></app-step-pagos>
+    <app-step-pagos (goToDownload)="onPagoCompletado($event)" [nombreCertificado]="getCertificadoTitulo()" [epaycoPublicKey]="epaycoPublicKey" [hashCode]="datosUsuario.hash_code || ''" [documentoEstudiante]="datosUsuario.documento || ''"></app-step-pagos>
   </div>
 
   <!-- Paso 4: Descargar -->

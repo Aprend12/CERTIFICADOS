@@ -1,13 +1,13 @@
-import { Component, Input, inject, OnChanges, NgZone, ViewEncapsulation } from '@angular/core';
+import { Component, Input, inject, OnChanges, NgZone, ViewEncapsulation, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CertificadoService } from '../../core/services/certificado.service';
-import { ApiService, ValidarEstudianteResponse, GenerarCertificadoResponse } from '../../core/services/api.service';
-import { CertificadoDatos, DatosCertificado } from '../../core/models/certificado.model';
-import { switchMap, tap, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { ApiService, GenerarCertificadoResponse } from '../../core/services/api.service';
+import { CertificadoDatos, DatosCertificado, Materia } from '../../core/models/certificado.model';
+import { switchMap, tap, catchError, timeout } from 'rxjs/operators';
+import { throwError, of } from 'rxjs';
 
 @Component({
   selector: 'app-step-descarga',
@@ -15,28 +15,34 @@ import { throwError } from 'rxjs';
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './step-descarga.component.html',
   styleUrls: ['./step-descarga.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepDescargaComponent implements OnChanges {
+export class StepDescargaComponent implements OnChanges, OnDestroy {
   @Input() datos: CertificadoDatos = {
     documento: '',
     codigo_estudiante: '',
     snies: '',
     tipo_certificado: '',
     nombre_completo: '',
+    hash_code: '',
+    historial_notas: [],
+    programa_academico: '',
+    periodo_activo: '',
+    semestre_academico: ''
   };
 
   form: FormGroup;
 
   certificadoFinal: string = '';
-  certificadoFinalSafe: SafeHtml = '' as any;
+  certificadoFinalSafe: SafeHtml = '' as SafeHtml;
   generando = false;
   descargado = false;
   error: string | null = null;
 
-  lastJsonResponse: any = null;
-  jsonHistory: any[] = [];
-  certificadoJson: any = null;
+  lastJsonResponse: GenerarCertificadoResponse | null = null;
+  jsonHistory: { step: string; data: GenerarCertificadoResponse }[] = [];
+  certificadoJson: GenerarCertificadoResponse | null = null;
   fileName: string | null = null;
   lastRequestedUrl: string | null = null;
 
@@ -70,81 +76,57 @@ export class StepDescargaComponent implements OnChanges {
     this.generando = true;
     this.error = null;
 
-    this.apiService.validarEstudiante(
-      this.datos.documento,
-      this.datos.codigo_estudiante,
-      this.datos.tipo_certificado
-    ).pipe(
-      tap((resp: ValidarEstudianteResponse) => {
+    const hashCode = this.datos.hash_code || '';
 
-        const r: any = resp;
+    if (hashCode) {
+      const datosCertificado: DatosCertificado = {
+        documento: this.datos.documento,
+        nombre: this.datos.nombre_completo || '',
+        nombre_completo: this.datos.nombre_completo || '',
+        programa: this.datos.programa_academico || '',
+        snies: this.datos.snies || '',
+        semestre: this.datos.semestre_academico || '',
+        periodo: this.datos.periodo_activo || '',
+        fecha_expedicion: new Date().toISOString().split('T')[0],
+        fecha_inicio: this.datos.fecha_inicio_periodo || '',
+        fecha_fin: this.datos.fecha_fin_periodo || '',
+        jornada: this.datos.jornada || '',
+        codigo: this.datos.codigo_estudiante || '',
+        hash_code: hashCode,
+        codigo_verificacion: hashCode,
+        materias: [],
+        fecha_inicio_periodo: this.datos.fecha_inicio_periodo || '',
+        fecha_fin_periodo: this.datos.fecha_fin_periodo || ''
+      };
 
-        let nombreCompleto = this.datos.nombre_completo || '';
-        let programa = '';
-        let snies = this.datos.snies || '';
-        let periodo = '2025-1';
-        let semestre = 'V';
-
-        if (r.data?.nombre_completo) {
-          nombreCompleto = r.data.nombre_completo;
-        } else if (resp.nombre_completo) {
-          nombreCompleto = resp.nombre_completo;
-        } else if (resp.estudiante?.nombre) {
-          nombreCompleto = resp.estudiante.nombre;
+      if (this.datos.historial_notas && this.datos.historial_notas.length > 0) {
+        const todasLasMaterias: Materia[] = [];
+        
+        for (const periodo of this.datos.historial_notas) {
+          if (periodo.materias && Array.isArray(periodo.materias)) {
+            for (const m of periodo.materias) {
+              todasLasMaterias.push({
+                nombre: m.nombre || '',
+                codigo: '',
+                nivel: m.nivel || '',
+                creditos: Number(m.creditos) || 0,
+                nota: Number(m.nota) || 0,
+                periodo: periodo.periodo || ''
+              });
+            }
+          }
         }
-
-        if (r.data?.programas?.length > 0) {
-          const prog = r.data.programas[0];
-          programa = prog.nombre || prog.programa || '';
-          snies = prog.snies || snies;
-          if (prog.periodo) periodo = prog.periodo;
-          if (prog.nivel) semestre = prog.nivel;
-        } else if (resp.programas_disponibles?.length > 0) {
-          const prog = resp.programas_disponibles[0];
-          programa = prog.nombre || prog.programa || '';
-          snies = prog.snies || snies;
-        }
-
-        if (!nombreCompleto && r.estudiante) {
-          nombreCompleto = r.estudiante.nombre || r.estudiante.codigo_estudiante || '';
-        }
-
-        this.certificadoJson = { snies: snies, programa: programa, nombre: nombreCompleto };
-
-        const datosCertificado: DatosCertificado = {
-          documento: this.datos.documento,
-          nombre: nombreCompleto,
-          nombre_completo: nombreCompleto,
-          programa: programa || 'Tecnología en Desarrollo de Software',
-          snies: snies || '804006527',
-          semestre: semestre,
-          periodo: periodo,
-          fecha_expedicion: new Date().toISOString().split('T')[0],
-          fecha_inicio: '2025-01-15',
-          fecha_fin: '2025-06-15',
-          jornada: 'Diurna',
-          codigo: this.datos.codigo_estudiante || ''
-        };
-
-        const htmlCertificado = this.certificadoService.generarCertificadoConDatos(datosCertificado, this.datos.tipo_certificado);
-        this.certificadoFinal = htmlCertificado;
-        this.certificadoFinalSafe = this.sanitizer.bypassSecurityTrustHtml(htmlCertificado);
-      }),
-      catchError(err => {
-        this.error = 'Error al obtener datos del estudiante';
-        const htmlCertificado = this.certificadoService.generarCertificadoFinal(this.datos);
-        this.certificadoFinal = htmlCertificado;
-        this.certificadoFinalSafe = this.sanitizer.bypassSecurityTrustHtml(htmlCertificado);
-        return throwError(() => err);
-      })
-    ).subscribe({
-      next: () => {
-        this.generando = false;
-      },
-      error: () => {
-        this.generando = false;
+        datosCertificado.materias = todasLasMaterias;
       }
-    });
+
+      const htmlCertificado = this.certificadoService.generarCertificadoConDatos(datosCertificado, this.datos.tipo_certificado);
+      this.certificadoFinal = htmlCertificado;
+      this.certificadoFinalSafe = this.sanitizer.bypassSecurityTrustHtml(htmlCertificado);
+      this.generando = false;
+    } else {
+      this.error = 'No se ha generado el hash_code para este certificado';
+      this.generando = false;
+    }
   }
 
   descargar() {
@@ -153,61 +135,57 @@ export class StepDescargaComponent implements OnChanges {
       return;
     }
 
+    const hashCode = this.datos.hash_code;
+    if (!hashCode) {
+      this.error = 'No se ha generado el hash_code para este certificado';
+      return;
+    }
+
     this.generando = true;
     this.error = null;
 
-    this.ngZone.run(() => {
-      setTimeout(() => {
-        this.generando = false;
-        this.descargado = true;
-      }, 5000);
-    });
-
-    const sniesFromApi = this.certificadoJson?.snies || this.datos.snies || '';
-
-    const request: { documento_identidad: string; tipo_certificado: string[]; snies?: string } = {
-      documento_identidad: this.datos.documento,
-      tipo_certificado: [this.datos.tipo_certificado || ''],
-      snies: sniesFromApi || undefined
+    const request: { hash_code: string; documento_estudiante: string } = {
+      hash_code: hashCode,
+      documento_estudiante: this.datos.documento
     };
 
     this.apiService.generarCertificado(request).pipe(
-      tap((resp: GenerarCertificadoResponse) => {
+      timeout(30000),
+      tap((resp) => {
         this.lastJsonResponse = resp;
         this.jsonHistory.push({ step: 'generarCertificado', data: resp });
 
-        let rutaPdf = '';
-        let nombrePdf = '';
-
-        if (resp.data) {
-          this.certificadoJson = resp.data;
-          rutaPdf = resp.data.ruta_pdf || '';
-          nombrePdf = resp.data.nombre_pdf || '';
-        } else {
-          this.certificadoJson = resp;
-          rutaPdf = resp.pdf || '';
-        }
-
-        this.fileName = nombrePdf;
-
-        if (rutaPdf) {
-          let fileName = rutaPdf;
-          if (rutaPdf.includes('/') || rutaPdf.includes('\\') || rutaPdf.includes(':')) {
-            const parts = rutaPdf.split(/[/\\:]/);
-            fileName = parts[parts.length - 1] || '';
+        if (resp.certificado_pdf) {
+          const binaryString = atob(resp.certificado_pdf);
+          const bytes = new Uint8Array(binaryString.length);
+          for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
           }
+          const blob = new Blob([bytes], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(blob);
+          this.triggerDownload(url);
+          window.URL.revokeObjectURL(url);
+        } else if (resp.data?.hash) {
+          let fileName = `${this.datos.nombre_completo || 'certificado'}.pdf`;
           const fullUrl = this.apiService.getDownloadUrl(fileName);
           this.triggerDownload(fullUrl);
         }
       }),
       catchError(err => {
-        this.error = 'Error al generar el certificado: ' + (err.message || 'Error desconocido');
+        if (err.name === 'TimeoutError') {
+          this.error = 'La solicitud tardó demasiado. Por favor, intenta nuevamente.';
+        } else {
+          this.error = 'Error al generar el certificado: ' + (err.message || 'Error desconocido');
+        }
         this.generando = false;
-        return throwError(() => err);
+        return of(null);
       })
     ).subscribe({
       next: () => {
-        this.generando = false;
+        if (!this.error) {
+          this.generando = false;
+          this.descargado = true;
+        }
       },
       error: () => {
         this.generando = false;
@@ -226,6 +204,8 @@ export class StepDescargaComponent implements OnChanges {
   }
 
   nuevoCertificado() {
-    window.location.href = '/compra-certificado';
+    this.router.navigate(['/compra-certificado']);
   }
+
+  ngOnDestroy() {}
 }

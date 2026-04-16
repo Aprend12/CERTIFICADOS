@@ -9,6 +9,7 @@ import { CertificadoGradoBuilder } from './certificado-grado.builder';
 import { CertificadoConductaBuilder } from './certificado-conducta.builder';
 import { CertificadoHorarioBuilder } from './certificado-horario.builder';
 import { CertificadoPracticaBuilder } from './certificado-practica.builder';
+import { formatFechaCompleta } from './certificado-base.builder';
 
 export { CertificadoSencilloBuilder } from './certificado-sencillo.builder';
 export { CertificadoNotasBuilder } from './certificado-notas.builder';
@@ -20,12 +21,7 @@ export { CertificadoGradoBuilder } from './certificado-grado.builder';
 export { CertificadoConductaBuilder } from './certificado-conducta.builder';
 export { CertificadoHorarioBuilder } from './certificado-horario.builder';
 export { CertificadoPracticaBuilder } from './certificado-practica.builder';
-
-export function formatFechaCompleta(fecha: string): string {
-  if (!fecha) return '';
-  const opciones: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(fecha + 'T00:00:00').toLocaleDateString('es-ES', opciones);
-}
+export { formatFechaCompleta } from './certificado-base.builder';
 
 export function getPlantillaBuilder(tipo: TipoCertificado): CertificadoBuilder {
   const builders: Record<TipoCertificado, CertificadoBuilder> = {

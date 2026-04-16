@@ -10,20 +10,18 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./validar-codigo.component.css']
 })
 export class ValidarCodigoComponent {
-  @Output() codigoIngresado = new EventEmitter<string>();
+  @Output() codigoIngresado = new EventEmitter<{ codigo: string; documento: string }>();
   @Input() verificando: boolean = false;
 
   codigo: string = '';
+  documento: string = '';
 
   onValidar() {
-    if (this.codigo.trim()) {
-      this.codigoIngresado.emit(this.codigo.trim());
-    }
-  }
-
-  onKeyPress(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.onValidar();
+    if (this.codigo.trim() && this.documento.trim()) {
+      this.codigoIngresado.emit({
+        codigo: this.codigo.trim(),
+        documento: this.documento.trim()
+      });
     }
   }
 }

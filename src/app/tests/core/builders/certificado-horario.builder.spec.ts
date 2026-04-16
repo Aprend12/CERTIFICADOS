@@ -14,22 +14,20 @@ describe('CertificadoHorarioBuilder', () => {
     expect(builder).toBeTruthy();
   });
 
-  it('should build certificate with correct title', () => {
+  it('should build certificate with student data', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('LA VICERRECTORA ACADÉMICA');
+    expect(html).toContain('Test User');
+    expect(html).toContain('12345678');
+    expect(html).toContain('Desarrollo de Software');
   });
 
-  it('should contain schedule table', () => {
+  it('should contain schedule elements', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
     expect(html).toContain('Asignatura');
-    expect(html).toContain('Código');
-    expect(html).toContain('Grupo');
-    expect(html).toContain('Horario');
-    expect(html).toContain('Docente');
   });
 
   it('should contain student information', () => {

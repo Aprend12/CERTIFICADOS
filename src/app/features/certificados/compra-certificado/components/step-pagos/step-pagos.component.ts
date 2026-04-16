@@ -1,6 +1,9 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, inject, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ApiService } from '../../core/services/api.service';
+import { catchError, timeout } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 declare var ePayco: any;
 
@@ -18,16 +21,25 @@ interface Banco {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './step-pagos.component.html',
-  styleUrls: ['./step-pagos.component.css']
+  styleUrls: ['./step-pagos.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepPagosComponent {
-  @Output() goToDownload = new EventEmitter<void>();
+export class StepPagosComponent implements OnDestroy {
+  @Output() goToDownload = new EventEmitter<{ hash_code: string; documento_estudiante: string; validado: boolean }>();
   @Input() nombreCertificado: string = '';
+  @Input() epaycoPublicKey: string = '';
+  @Input() hashCode: string = '';
+  @Input() documentoEstudiante: string = '';
+
+  private apiService = inject(ApiService);
+
+  ngOnDestroy() {}
 
   step: number = 1;
   wizardStep: number = 3;
   bancoSeleccionado: boolean = false;
   procesandoPago: boolean = false;
+  mostrarError: boolean = false;
 
   metodoPago: string = '';
   tipoPse: string = 'banco';
@@ -39,7 +51,6 @@ export class StepPagosComponent {
   tipoDocumento: string = 'CC';
   numeroDocumento: string = '';
 
-  private epaycoPublicKey: string = 'pub_test_123456789012345678901234';
   refPago: string = '';
 
   selBanco: Banco | null = null;
@@ -69,6 +80,39 @@ export class StepPagosComponent {
 
   constructor() {
     this.bancosFiltrados = [...this.bancos];
+  }
+
+  get datosPagoEpaycoValidos(): boolean {
+    return !!(
+      this.nombreCompleto.trim() &&
+      this.email.trim() &&
+      this.telefono.trim() &&
+      this.numeroDocumento.trim()
+    );
+  }
+
+  get datosTarjetaValidos(): boolean {
+    const fechaValida = this.validarFechaExpiracion(this.fechaExpiracion);
+    return !!(
+      this.numeroTarjeta.replace(/\s/g, '').length >= 16 &&
+      this.nombreTarjeta.trim() &&
+      fechaValida &&
+      this.cvv.length >= 3 &&
+      this.numeroDocumento.trim()
+    );
+  }
+
+  private validarFechaExpiracion(fecha: string): boolean {
+    if (!fecha || fecha.length !== 5) return false;
+    const match = fecha.match(/^(0[1-9]|1[0-2])\/(\d{2})$/);
+    if (!match) return false;
+    
+    const mes = parseInt(match[1], 10);
+    const anio = parseInt('20' + match[2], 10);
+    const ahora = new Date();
+    const fechaExp = new Date(anio, mes - 1);
+    
+    return fechaExp > ahora;
   }
 
   getStepLabel(): string {
@@ -169,24 +213,48 @@ export class StepPagosComponent {
   elegirBanco(b: Banco) {
     this.selBanco = b;
     this.bancoSeleccionado = true;
+    this.mostrarError = false;
   }
 
   continuarBanco() {
     this.bancoSeleccionado = true;
+    this.mostrarError = false;
     this.irA(2);
+  }
+
+  validarContinuar(step: number): boolean {
+    this.mostrarError = false;
+    if (step === 1 && !this.metodoPago) {
+      this.mostrarError = true;
+      return false;
+    }
+    if (step === 2 && this.metodoPago === 'epayco' && !this.datosPagoEpaycoValidos) {
+      this.mostrarError = true;
+      return false;
+    }
+    if (step === 2 && this.metodoPago === 'tarjeta' && !this.datosTarjetaValidos) {
+      this.mostrarError = true;
+      return false;
+    }
+    return true;
+  }
+
+  irASiguiente(step: number) {
+    if (step === 1) {
+      if (!this.metodoPago) {
+        this.mostrarError = true;
+        return;
+      }
+      this.irA(2);
+    } else if (this.validarContinuar(step)) {
+      this.irA(3);
+    }
   }
 
   seleccionarOtroBanco() {
     this.selBanco = null;
     this.bancoSeleccionado = false;
-  }
-
-  esBilletera(): boolean {
-    return false;
-  }
-
-  necesitaTipoCuenta(): boolean {
-    return false;
+    this.mostrarError = false;
   }
 
   procesarPago() {
@@ -262,7 +330,52 @@ export class StepPagosComponent {
   }
 
   irADescarga() {
-    this.wizardStep = 4;
-    this.goToDownload.emit();
+    if (!this.hashCode || !this.documentoEstudiante) {
+      alert('Faltan datos para validar el pago');
+      return;
+    }
+
+    this.procesandoPago = true;
+    this.apiService.validarPago({
+      hash_code: this.hashCode,
+      documento_estudiante: this.documentoEstudiante,
+      numero_desprendible: this.refPago || 'PAY-' + Date.now()
+    }).pipe(
+      timeout(15000),
+      catchError((err) => {
+        if (err.name === 'TimeoutError') {
+          alert('La validación del pago tardó demasiado. Por favor, intenta nuevamente.');
+        }
+        this.procesandoPago = false;
+        this.wizardStep = 4;
+        this.goToDownload.emit({
+          hash_code: this.hashCode,
+          documento_estudiante: this.documentoEstudiante,
+          validado: false
+        });
+        return of(null);
+      })
+    ).subscribe({
+      next: (response) => {
+        if (!response) return;
+        this.procesandoPago = false;
+        const pagoValidado = response.action_code === 'PAGO_APROBADO';
+        this.wizardStep = 4;
+        this.goToDownload.emit({
+          hash_code: this.hashCode,
+          documento_estudiante: this.documentoEstudiante,
+          validado: pagoValidado
+        });
+      },
+      error: (err) => {
+        this.procesandoPago = false;
+        this.wizardStep = 4;
+        this.goToDownload.emit({
+          hash_code: this.hashCode,
+          documento_estudiante: this.documentoEstudiante,
+          validado: false
+        });
+      }
+    });
   }
 }

@@ -1,20 +1,35 @@
 <div class="validation-container">
-  <div class="validation-title">validar certificado</div>
+  <div class="validation-content">
+    <div class="validation-title">validar certificado</div>
 
-  <div class="input-group">
-    <input 
-      type="text" 
-      class="input-codigo" 
-      id="codigoCertificado" 
-      placeholder="Código del certificado" 
-      maxlength="50"
-      [(ngModel)]="codigo"
-      (keyup.enter)="onValidar()"
-      [disabled]="verificando">
+    <div class="form-group">
+      <label for="codigoCertificado">Código del certificado</label>
+      <input 
+        type="text" 
+        id="codigoCertificado" 
+        placeholder="Ingrese el código" 
+        maxlength="50"
+        [(ngModel)]="codigo"
+        (keyup.enter)="onValidar()"
+        [disabled]="verificando">
+    </div>
+
+    <div class="form-group">
+      <label for="documentoEstudiante">Documento del estudiante</label>
+      <input 
+        type="text" 
+        id="documentoEstudiante" 
+        placeholder="Ingrese el documento" 
+        maxlength="20"
+        [(ngModel)]="documento"
+        (keyup.enter)="onValidar()"
+        [disabled]="verificando">
+    </div>
+
     <button 
       class="btn-validar" 
       (click)="onValidar()"
-      [disabled]="verificando || !codigo.trim()">
+      [disabled]="verificando || !codigo.trim() || !documento.trim()">
       {{ verificando ? 'verificando...' : 'validar' }}
     </button>
   </div>

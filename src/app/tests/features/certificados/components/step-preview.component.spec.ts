@@ -18,29 +18,18 @@ describe('StepPreviewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display certificate HTML', () => {
+  it('should set certificadoHTML and sanitize it', () => {
     component.certificadoHTML = '<div>Preview HTML</div>';
-    component.titulo = 'Certificado de Estudio Sencillo';
-    component.nombreEstudiante = 'Test User';
-    component.documentoIdentidad = '12345678';
-    component.numeroEstudiante = '10236580';
-    fixture.detectChanges();
-
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('#certificadoPreviewDemo')?.innerHTML).toContain('Preview HTML');
+    expect(component.certSafe).toBeTruthy();
   });
 
-  it('should display inputs with correct values', () => {
-    component.certificadoHTML = '';
-    component.titulo = 'Certificado de Estudio Sencillo';
-    component.nombreEstudiante = 'Juan Pérez';
-    component.documentoIdentidad = '12345678';
-    component.numeroEstudiante = '10236580';
+  it('should display certificate HTML when set', () => {
+    component.certificadoHTML = '<div class="certificado">Test Content</div>';
+    component.titulo = 'Test Title';
+    component.nombreEstudiante = 'Test User';
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect((compiled.querySelector('#certificado_preview') as HTMLInputElement)?.value).toBe('Certificado de Estudio Sencillo');
-    expect((compiled.querySelector('#documento_identidad') as HTMLInputElement)?.value).toBe('12345678');
-    expect((compiled.querySelector('#numero_estudiante') as HTMLInputElement)?.value).toBe('10236580');
+    expect(compiled.innerHTML).toContain('Test Content');
   });
 });

@@ -2,22 +2,27 @@
   <div class="form-container">
     <h2 style="color: #ff8800; text-align: center; margin-top: 40px; margin-bottom: 20px; font-size: 1.2rem;">Ingresar Datos del Estudiante</h2>
 
-    <form [formGroup]="form" class="content-medio">
-      <div class="form-group" [class.form-group-error]="camposVacios && !form.get('documento')?.value">
-        <label for="documento">Documento de identidad <span class="required">*</span></label>
-        <input type="text" id="documento" formControlName="documento" placeholder="Ingresa su identificación" required [class.input-error]="camposVacios && !form.get('documento')?.value">
-        <span class="error-text" *ngIf="camposVacios && !form.get('documento')?.value">Debes completar este campo</span>
+    <form [formGroup]="form" class="content-medio" [class.disabled]="verificando">
+      
+      <div *ngIf="verificando" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Verificando estudiante...</p>
+      </div>
+      <div class="form-group" [class.form-group-error]="mostrarErrorCampos && !form.get('documento_estudiante')?.value">
+        <label for="documento_estudiante" [class.label-error]="mostrarErrorUsuario">Documento de identidad <span class="required">*</span></label>
+        <input type="text" id="documento_estudiante" formControlName="documento_estudiante" placeholder="Ingresa su identificación" required [class.input-error]="(mostrarErrorCampos && !form.get('documento_estudiante')?.value) || mostrarErrorUsuario" (input)="onInputChange()">
+        <span class="error-text" *ngIf="(mostrarErrorCampos && !form.get('documento_estudiante')?.value) || mostrarErrorUsuario">Complete los datos</span>
       </div>
 
-      <div class="form-group" [class.form-group-error]="camposVacios && !form.get('codigo_estudiante')?.value">
-        <label for="codigo_estudiante">Número de estudiante <span class="required">*</span></label>
-        <input type="text" id="codigo_estudiante" formControlName="codigo_estudiante" placeholder="EST-2024-001" required [class.input-error]="camposVacios && !form.get('codigo_estudiante')?.value">
-        <span class="error-text" *ngIf="camposVacios && !form.get('codigo_estudiante')?.value">Debes completar este campo</span>
+      <div class="form-group" [class.form-group-error]="mostrarErrorCampos && !form.get('codigo_estudiante')?.value">
+        <label for="codigo_estudiante" [class.label-error]="mostrarErrorUsuario">Número de estudiante <span class="required">*</span></label>
+        <input type="text" id="codigo_estudiante" formControlName="codigo_estudiante" placeholder="EST-2024-001" required [class.input-error]="(mostrarErrorCampos && !form.get('codigo_estudiante')?.value) || mostrarErrorUsuario" (input)="onInputChange()">
+        <span class="error-text" *ngIf="(mostrarErrorCampos && !form.get('codigo_estudiante')?.value) || mostrarErrorUsuario">Complete los datos</span>
       </div>
 
-      <div class="form-group" [class.form-group-error]="camposVacios && !form.get('tipo_certificado')?.value">
-        <label for="tipo_certificado">Tipo de Certificado <span class="required">*</span></label>
-        <select id="tipo_certificado" formControlName="tipo_certificado" required [class.input-error]="camposVacios && !form.get('tipo_certificado')?.value">
+      <div class="form-group" [class.form-group-error]="mostrarErrorCampos && !form.get('tipo_certificado')?.value">
+        <label for="tipo_certificado" [class.label-error]="mostrarErrorUsuario">Tipo de Certificado <span class="required">*</span></label>
+        <select id="tipo_certificado" formControlName="tipo_certificado" required [class.input-error]="(mostrarErrorCampos && !form.get('tipo_certificado')?.value) || mostrarErrorUsuario" (change)="onInputChange()">
           <option value="">Seleccione un tipo...</option>
           <option value="sencillo">Certificado de Estudio Sencillo</option>
           <option value="notas">Certificado de Notas</option>
@@ -28,15 +33,19 @@
           <option value="conducta">Certificado de Buena Conducta</option>
           <option value="horario">Certificado con Horario y Fechas</option>
         </select>
-        <span class="error-text" *ngIf="camposVacios && !form.get('tipo_certificado')?.value">Debes completar este campo</span>
+        <span class="error-text" *ngIf="(mostrarErrorCampos && !form.get('tipo_certificado')?.value) || mostrarErrorUsuario">Complete los datos</span>
       </div>
 
       <div class="buttons-container" style="margin-top: 20px;">
         <button type="button" class="btn btn-primary" style="width: 100%;" (click)="continuar()">Continuar</button>
       </div>
 
-      <div class="error-message" *ngIf="errorUsuarioNoEncontrado">
-        <p>Usuario no existente</p>
+      <div class="error-alert" *ngIf="mostrarErrorUsuario && !verificando">
+        <span>Usuario no existe</span>
+      </div>
+
+      <div class="error-alert" *ngIf="mostrarErrorCampos && !verificando && !mostrarErrorUsuario">
+        <span>Complete todos los campos obligatorios</span>
       </div>
     </form>
 

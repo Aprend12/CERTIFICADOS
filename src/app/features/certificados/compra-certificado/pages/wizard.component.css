@@ -122,12 +122,18 @@
   justify-content: flex-start;
 }
 
+.step-content.active.step-preview {
+  align-items: flex-start;
+}
+
 /* Estilo específico para step-datos en el wizard */
 .step-content.active app-step-datos {
   width: 100%;
   max-width: 100%;
   display: flex;
   justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 /* Estilo específico para step-pagos en el wizard */
@@ -136,6 +142,8 @@
   max-width: 100%;
   display: flex;
   justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 /* Contenedor de pago */
@@ -419,4 +427,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
 }

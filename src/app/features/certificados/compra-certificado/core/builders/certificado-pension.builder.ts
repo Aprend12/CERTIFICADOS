@@ -3,91 +3,103 @@
  * Formato profesional institucional para descarga.
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
+import { CertificadoPlantillaBase } from './certificado-base.builder';
 
-export class CertificadoPensionBuilder implements CertificadoBuilder {
-  private readonly INSTITUCION = 'CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE';
-  private readonly NIT = '804.006.527-3';
-  private readonly DIRECCION = 'Bucaramanga, Santander';
-  private readonly FIRMA_NOMBRE = 'MAGDA CAROLINA REYES RINCÓN';
-  private readonly FIRMA_CARGO = 'Vicerrectora Académica';
-  private readonly LOGO = 'https://tecnologicadeloriente.edu.co/wp-content/uploads/2024/09/cropped-LOGO-ILLUSTRATOR-01-295x59.avif';
+export class CertificadoPensionBuilder extends CertificadoPlantillaBase implements CertificadoBuilder {
 
   build(datos: DatosCertificado, esPreview: boolean): string {
     const o = this.getOcultos(datos, esPreview);
+    const totales = this.getTotales(datos);
+    const hashCode = esPreview ? '' : (o.hash_code || o.numero || 'No disponible');
 
-    return `
-    <div style="width: 21.59cm; min-height: 27.94cm; padding: 2.5cm 2.5cm; font-family: 'Times New Roman', serif; font-size: 11pt; line-height: 1.5; box-sizing: border-box; background: white; position: relative;">
-      <div style="position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 3px solid #e65100; pointer-events: none;"></div>
-      <div style="position: absolute; top: 22px; left: 22px; right: 22px; bottom: 22px; border: 1px solid #F57C00; pointer-events: none;"></div>
-
-      <table style="width: 100%; margin-bottom: 20px;">
-        <tr>
-          <td style="width: 100px; vertical-align: top; text-align: center;">
-            <img src="${this.LOGO}" alt="Logo" style="width: 6cm; height: auto;">
-          </td>
-          <td style="text-align: right; vertical-align: top; padding-top: 10px;">
-            <div style="font-size: 10pt; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; color: #e65100;">CONSTANCIA DE PENSION</div>
-            <span ${esPreview ? 'style="display:none"' : ''}><strong>Número:</strong> ${o.numero}</span>
-          </td>
-        </tr>
-      </table>
-
-      <div style="text-align: center; margin-bottom: 20px;">
-        <div style="font-size: 13pt; font-weight: bold; text-transform: uppercase; color: #e65100; letter-spacing: 2px; margin-bottom: 8px;">LA VICERRECTORA ACADÉMICA</div>
-        <div style="font-size: 12pt; font-weight: bold; text-transform: uppercase;">${this.INSTITUCION}</div>
-        <div style="font-size: 10pt; color: #555;">NIT: ${this.NIT}</div>
+const contenido = `
+      ${this.getEncabezado('Constancia de Pensión', hashCode)}
+      ${this.getTituloPrincipal()}
+      <div style="margin-bottom: 20px; text-align: justify; font-size: 11pt; line-height: 1.8; color: ${this.COLOR_TEXT};">
+        <p style="margin-bottom: 15px; text-align: center;">
+          <span style="font-size: 12pt; font-weight: 700; color: ${this.COLOR_TEXT}; text-transform: uppercase; letter-spacing: 1px;">Hace Constar</span>
+        </p>
+        <p style="margin-bottom: 15px; text-indent: 1cm;">Que, ${o.nombre}, identificado(a) con número de documento ${o.documento}, se encuentra matriculado(a) en el programa de ${o.programa}, SNIES ${o.snies}.</p>
       </div>
-
-      <div style="border-bottom: 2px solid #e65100; margin-bottom: 20px;"></div>
-
-      <div style="margin-bottom: 20px; text-align: justify; text-indent: 1cm; font-size: 11pt;">
-        <p style="margin: 5px 0; text-align: center;"><strong style="font-size: 12pt; color: #e65100;">HACE CONSTAR:</strong></p>
-        <p style="margin: 5px 0;">Que, ${o.nombre}, identificado(a) con número de documento ${o.documento}, se encuentra matriculado(a) en el programa de ${o.programa}, Snies ${o.snies}.</p>
-        <p style="margin: 5px 0;">El semestre académico inicia el <strong>28 de julio de 2025</strong> y finaliza el <strong>29 de noviembre de 2025</strong>.</p>
+      <div style="margin-bottom: 20px; text-align: justify; font-size: 11pt; line-height: 1.8; color: ${this.COLOR_TEXT};">
+        <p>El semestre académico ${o.periodo} inició el <strong>${o.fecha_inicio}</strong> y finaliza el <strong>${o.fecha_fin}</strong>. Durante este período, el/la estudiante desarrolla la siguiente carga académica:</p>
       </div>
-
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 10pt; border: 1px solid #e65100;">
-        <tr style="background: #e65100; color: white;">
-          <th style="padding: 10px; border: 1px solid #e65100; text-align: left; font-weight: bold;">Concepto</th>
-          <th style="padding: 10px; border: 1px solid #e65100; text-align: center; font-weight: bold;">Valor</th>
-          <th style="padding: 10px; border: 1px solid #e65100; text-align: center; font-weight: bold;">Estado</th>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #e65100;">Matrícula Semestral</td>
-          <td style="padding: 10px; border: 1px solid #e65100; text-align: center;">$ 4.500.000</td>
-          <td style="padding: 10px; border: 1px solid #e65100; text-align: center; color: green; font-weight: bold;">Cancelado</td>
-        </tr>
-        <tr style="background: #f8f9fa;">
-          <td style="padding: 10px; border: 1px solid #e65100;">Seguro Estudiantil</td>
-          <td style="padding: 10px; border: 1px solid #e65100; text-align: center;">$ 150.000</td>
-          <td style="padding: 10px; border: 1px solid #e65100; text-align: center; color: green; font-weight: bold;">Cancelado</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #e65100;">Carné</td>
-          <td style="padding: 10px; border: 1px solid #e65100; text-align: center;">$ 25.000</td>
-          <td style="padding: 10px; border: 1px solid #e65100; text-align: center; color: green; font-weight: bold;">Cancelado</td>
-        </tr>
-      </table>
-
-      <div style="margin-bottom: 20px; font-size: 10pt; text-align: justify;">
-        <p>El estudiante se encuentra(a) a paz y salvo con todos los pagos correspondientes al período académico ${o.periodo}.</p>
+      ${this.getTablaAsignaturas(datos)}
+      <div style="margin-bottom: 20px; font-size: 10pt; text-align: justify; color: ${this.COLOR_TEXT};">
+        <p style="margin-bottom: 10px;"><strong>HP:</strong> Horas presenciales semanales | <strong>HA:</strong> Horas de trabajo autónomo semanales</p>
+        <p style="margin-bottom: 10px;">En total son ${totales.creditos} créditos. Según el Artículo 45 del reglamento estudiantil: "Se define el crédito académico como la unidad de medida del trabajo académico. Un crédito académico corresponde a 48 horas de trabajo directo o indirecto del estudiante. Por una hora de trabajo presencial se proyectan dos de trabajo independiente."</p>
+        <p style="margin-bottom: 10px;">El/la estudiante realiza ${totales.horas} horas semanales de trabajo académico (presenciales + autónomo). Se expide para presentar ante Instituciones de Bienestar Familiar o demás entidades.</p>
       </div>
-
-      <div style="margin-top: 40px; text-align: left;">
-        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]} a los ${o.fecha}.</p>
+      <div style="margin-top: 40px; text-align: left; font-size: 11pt; color: ${this.COLOR_MUTED};">
+        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${o.fecha}.</p>
       </div>
+      ${this.getFirma()}
+      ${this.getFooter(o.codigo_verificacion || o.hash_code)}
+    `;
 
-      <table style="width: 100%; margin-top: 40px;">
-        <tr>
-          <td style="width: 50%; text-align: center; vertical-align: bottom;">
-            <div style="border-top: 1.5pt solid #e65100; width: 7cm; margin: 0 auto 10px auto;"></div>
-            <p style="margin: 0; font-weight: bold; font-size: 11pt; color: #e65100;">${this.FIRMA_NOMBRE}</p>
-            <p style="margin: 0; font-size: 10pt; color: #555;">${this.FIRMA_CARGO}</p>
-          </td>
+    return this.getWrapper(contenido);
+  }
+
+  private getTablaAsignaturas(datos: DatosCertificado): string {
+    const materias = datos.materias || [];
+    const periodoActivo = datos.periodo;
+    const materiasPeriodo = materias.filter(m => m.periodo === periodoActivo);
+    const cellHead = `background:${this.COLOR_PRIMARY}; color:white; font-weight:600; text-align:center; padding:8px 6px; border:1px solid ${this.COLOR_PRIMARY}; font-size:9pt;`;
+    const cellData = `text-align:center; padding:8px 4px; border:1px solid ${this.COLOR_PRIMARY}; font-size:9pt;`;
+
+    let html = `
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 9.5pt; border: 1px solid ${this.COLOR_PRIMARY};">
+        <tr style="background: ${this.COLOR_PRIMARY}; color: white;">
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: left; font-weight: 600;">Asignatura</th>
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">HP</th>
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">HA</th>
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">Créditos</th>
         </tr>
-      </table>
+    `;
 
-    </div>`;
+    let totalHP = 0;
+    let totalHA = 0;
+    let totalCreditos = 0;
+
+    for (let i = 0; i < materiasPeriodo.length; i++) {
+      const m = materiasPeriodo[i];
+      const hp = m.creditos || 4;
+      const ha = (m.creditos || 4) * 2;
+      totalHP += hp;
+      totalHA += ha;
+      totalCreditos += m.creditos || 0;
+
+      html += `
+        <tr style="background: ${i % 2 === 1 ? '#f7fafc' : 'white'};">
+          <td style="padding: 8px 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: left;">${m.nombre}</td>
+          <td style="${cellData}">${hp}</td>
+          <td style="${cellData}">${ha}</td>
+          <td style="${cellData} font-weight: 600;">${m.creditos}</td>
+        </tr>
+      `;
+    }
+
+    html += `
+      <tr style="background: ${this.COLOR_PRIMARY}; color: white;">
+        <td style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: left; font-weight: 600;">Total</td>
+        <td style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">${totalHP}</td>
+        <td style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">${totalHA}</td>
+        <td style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">${totalCreditos}</td>
+      </tr>
+    </table>`;
+
+    return html;
+  }
+
+  private getTotales(datos: DatosCertificado) {
+    const materias = datos.materias || [];
+    const periodoActivo = datos.periodo;
+    const materiasPeriodo = materias.filter(m => m.periodo === periodoActivo);
+    const totalCreditos = materiasPeriodo.reduce((s, m) => s + (m.creditos || 0), 0);
+    const totalHP = totalCreditos;
+    const totalHA = totalCreditos * 2;
+    const totalHoras = totalHP + totalHA;
+    return { creditos: totalCreditos, horas: totalHoras };
   }
 
   private getOcultos(datos: DatosCertificado, esPreview: boolean) {
@@ -100,7 +112,11 @@ export class CertificadoPensionBuilder implements CertificadoBuilder {
         snies: '**********',
         semestre: '***',
         periodo: '****-*',
+        fecha_inicio: '**** de *** de ****',
+        fecha_fin: '**** de *** de ****',
         fecha: '*********************',
+        codigo_verificacion: 'PREVIEW-2024-****',
+        hash_code: '**************',
       };
     }
     return {
@@ -111,18 +127,11 @@ export class CertificadoPensionBuilder implements CertificadoBuilder {
       snies: this.sanitize(datos.snies),
       semestre: this.sanitize(datos.semestre),
       periodo: this.sanitize(datos.periodo),
+      fecha_inicio: this.sanitize(datos.fecha_inicio || 'NO REGISTRO'),
+      fecha_fin: this.sanitize(datos.fecha_fin || 'NO REGISTRO'),
       fecha: this.formatFechaCompleta(datos.fecha_expedicion),
+      codigo_verificacion: this.sanitize(datos.codigo_verificacion || datos.hash_code || ''),
+      hash_code: this.sanitize(datos.hash_code || ''),
     };
-  }
-
-  private sanitize(value: string): string {
-    if (!value) return '';
-    return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-  }
-
-  private formatFechaCompleta(fecha: string): string {
-    if (!fecha) return '';
-    const opciones: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(fecha + 'T00:00:00').toLocaleDateString('es-ES', opciones);
   }
 }

@@ -34,9 +34,8 @@
 .cert-frame {
   width: 100%;
   background: #000000;
-
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-  overflow: hidden;
+  overflow: auto;
   padding: 8px;
 }
 
@@ -44,12 +43,40 @@
   width: 100%;
   max-height: 500px;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
+  background: #ffffff;
+}
+
+.cert-scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cert-scroll-area::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.cert-frame {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  overflow: auto;
+  padding: 8px;
 }
 
 .cert-wrapper {
-  transform: scale(1);
-  transform-origin: top center;
+  transform: scale(0.6);
+  transform-origin: top left;
+}
+
+.cert-content {
+  background: #ffffff;
+  width: 21.59cm;
+  min-height: 27.94cm;
+}
+
+.cert-content > div {
+  width: 21.59cm !important;
+  min-height: 27.94cm !important;
 }
 
 .cert-scroll-area::-webkit-scrollbar {
@@ -67,7 +94,8 @@
 
 .cert-content {
   background: #ffffff;
-  width: 100%;
+  width: 21.59cm;
+  min-height: 27.94cm;
 }
 
 .cert-content * {
@@ -90,6 +118,6 @@
 
 @media (max-width: 600px) {
   .cert-scroll-area {
-    max-height: 350px;
+    max-height: 500px;
   }
 }

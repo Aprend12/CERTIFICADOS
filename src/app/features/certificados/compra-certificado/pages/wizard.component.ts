@@ -1,4 +1,5 @@
-import { Component, inject, ViewChild, OnInit } from '@angular/core';
+import { Component, inject, ViewChild, OnInit, Inject, PLATFORM_ID, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { StepDatosComponent } from '../components/step-datos/step-datos.component';
 import { StepPreviewComponent } from '../components/step-preview/step-preview.component';
@@ -13,16 +14,31 @@ import { CertificadoDatos } from '../core/models/certificado.model';
   standalone: true,
   imports: [StepDatosComponent, StepPreviewComponent, StepPagosComponent, StepDescargaComponent],
   templateUrl: './wizard.component.html',
-  styleUrls: ['./wizard.component.css']
+  styleUrls: ['./wizard.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WizardComponent implements OnInit {
+export class WizardComponent implements OnInit, OnDestroy {
   @ViewChild(StepDatosComponent) stepDatos?: StepDatosComponent;
   
   wizardService: WizardService = inject(WizardService);
   private certificadoService: CertificadoService = inject(CertificadoService);
+  private platformId = inject(PLATFORM_ID);
+
+  epaycoPublicKey: string = '';
 
   ngOnInit() {
     this.resetWizard();
+    if (isPlatformBrowser(this.platformId)) {
+      this.epaycoPublicKey = this.getEpaycoKey();
+    }
+  }
+
+  private getEpaycoKey(): string {
+    const metaKey = document.querySelector('meta[name="epayco-key"]');
+    if (metaKey) {
+      return metaKey.getAttribute('content') || '';
+    }
+    return '';
   }
 
   datosUsuario: CertificadoDatos = {
@@ -31,6 +47,14 @@ export class WizardComponent implements OnInit {
     snies: '',
     tipo_certificado: '',
     nombre_completo: '',
+    hash_code: '',
+    historial_notas: [],
+    programa_academico: '',
+    periodo_activo: '',
+    semestre_academico: '',
+    fecha_inicio_periodo: '',
+    fecha_fin_periodo: '',
+    jornada: ''
   };
 
   getCertificadoHTML(): string {
@@ -55,6 +79,13 @@ export class WizardComponent implements OnInit {
       snies: carreraElegida?.snies || '',
       tipo_certificado: data.tipoCertificado,
       nombre_completo: data.estudiante?.nombre_completo || '',
+      programa_academico: carreraElegida?.nombre || '',
+      jornada: carreraElegida?.jornada || '',
+      periodo_activo: data.estudiante?.periodo_activo || '',
+      semestre_academico: data.estudiante?.semestre_academico || '',
+      fecha_inicio_periodo: data.estudiante?.fecha_inicio_periodo || '',
+      fecha_fin_periodo: data.estudiante?.fecha_fin_periodo || '',
+      historial_notas: data.estudiante?.historial_notas || []
     };
 
     this.datosUsuario = datos;
@@ -82,6 +113,14 @@ export class WizardComponent implements OnInit {
     this.wizardService.goTo(step - 1);
   }
 
+  onPagoCompletado(data: { hash_code: string; documento_estudiante: string; validado: boolean }) {
+    if (data.validado) {
+      this.datosUsuario.hash_code = data.hash_code;
+      this.certificadoService.setDatos(this.datosUsuario);
+    }
+    this.setStep(4);
+  }
+
   resetWizard() {
     this.wizardService.reset();
     this.datosUsuario = {
@@ -94,4 +133,6 @@ export class WizardComponent implements OnInit {
     this.certificadoService.limpiar();
     this.stepDatos?.reset();
   }
+
+  ngOnDestroy() {}
 }

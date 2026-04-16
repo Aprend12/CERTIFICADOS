@@ -8,7 +8,7 @@
 
         <div class="card">
           <!-- Epayco -->
-          <div class="metodo-item" [class.on]="metodoPago === 'epayco'" (click)="metodoPago = 'epayco'">
+          <div class="metodo-item" [class.on]="metodoPago === 'epayco'" (click)="metodoPago = 'epayco'; mostrarError = false">
             <div class="radio">
               <div class="radio-dot" *ngIf="metodoPago === 'epayco'"></div>
             </div>
@@ -19,7 +19,7 @@
           </div>
 
           <!-- Tarjeta -->
-          <div class="metodo-item" [class.on]="metodoPago === 'tarjeta'" (click)="metodoPago = 'tarjeta'">
+          <div class="metodo-item" [class.on]="metodoPago === 'tarjeta'" (click)="metodoPago = 'tarjeta'; mostrarError = false">
             <div class="radio">
               <div class="radio-dot" *ngIf="metodoPago === 'tarjeta'"></div>
             </div>
@@ -31,9 +31,10 @@
             <div class="metodo-label">Tarjeta de crédito o débito</div>
           </div>
         </div>
+        <div class="msg-campo-error" *ngIf="mostrarError && !metodoPago" style="padding:0 20px 10px">Selecciona un método de pago</div>
 
         <div class="btn-area">
-          <button class="btn-continuar" (click)="irA(2)" [disabled]="!metodoPago">Continuar</button>
+          <button class="btn-continuar" (click)="irASiguiente(1)">Continuar</button>
         </div>
       </div>
 
@@ -112,17 +113,20 @@
         <div class="datos-section">
           <div class="f-field">
             <label>Nombre completo</label>
-            <input type="text" class="f-input" [(ngModel)]="nombreCompleto" placeholder="Tu nombre completo">
+            <input type="text" class="f-input" [class.invalid]="mostrarError && !nombreCompleto.trim()" [(ngModel)]="nombreCompleto" placeholder="Tu nombre completo">
+            <div class="msg-campo-error" *ngIf="mostrarError && !nombreCompleto.trim()">Este campo es obligatorio</div>
           </div>
 
           <div class="f-row2">
             <div class="f-field">
               <label>Correo electrónico</label>
-              <input type="email" class="f-input" [(ngModel)]="email" placeholder="correo@ejemplo.com">
+              <input type="email" class="f-input" [class.invalid]="mostrarError && !email.trim()" [(ngModel)]="email" placeholder="correo@ejemplo.com">
+              <div class="msg-campo-error" *ngIf="mostrarError && !email.trim()">Este campo es obligatorio</div>
             </div>
             <div class="f-field">
               <label>Teléfono</label>
-              <input type="tel" class="f-input" [(ngModel)]="telefono" placeholder="300 000 0000">
+              <input type="tel" class="f-input" [class.invalid]="mostrarError && !telefono.trim()" [(ngModel)]="telefono" placeholder="300 000 0000">
+              <div class="msg-campo-error" *ngIf="mostrarError && !telefono.trim()">Este campo es obligatorio</div>
             </div>
           </div>
 
@@ -136,14 +140,15 @@
                 <option value="PP">PP</option>
                 <option value="TI">TI</option>
               </select>
-              <input type="text" class="f-input" [(ngModel)]="numeroDocumento" placeholder="Número">
+              <input type="text" class="f-input" [class.invalid]="mostrarError && !numeroDocumento.trim()" [(ngModel)]="numeroDocumento" placeholder="Número">
             </div>
+            <div class="msg-campo-error" *ngIf="mostrarError && !numeroDocumento.trim()">Este campo es obligatorio</div>
           </div>
         </div>
 
         <div class="btn-area" style="justify-content:space-between;align-items:center">
           <button class="btn-volver" (click)="seleccionarOtroBanco()">← Cambiar banco</button>
-          <button class="btn-continuar" (click)="irA(3)">Continuar</button>
+          <button class="btn-continuar" (click)="irASiguiente(2)">Continuar</button>
         </div>
       </div>
 
@@ -174,22 +179,26 @@
           <div class="tarjeta-body">
             <div class="f-field">
               <label>Número de tarjeta</label>
-              <input type="text" class="f-input" [(ngModel)]="numeroTarjeta" placeholder="1234 1234 1234 1234" maxlength="19" (input)="formatTarjeta($event)">
+              <input type="text" class="f-input" [class.invalid]="mostrarError && numeroTarjeta.replace(/\s/g, '').length < 16" [(ngModel)]="numeroTarjeta" placeholder="1234 1234 1234 1234" maxlength="19" (input)="formatTarjeta($event)">
+              <div class="msg-campo-error" *ngIf="mostrarError && numeroTarjeta.replace(/\s/g, '').length < 16">Ingresa los 16 dígitos</div>
             </div>
 
             <div class="f-field">
               <label>Nombre del titular</label>
-              <input type="text" class="f-input" [(ngModel)]="nombreTarjeta" placeholder="Como aparece en la tarjeta">
+              <input type="text" class="f-input" [class.invalid]="mostrarError && !nombreTarjeta.trim()" [(ngModel)]="nombreTarjeta" placeholder="Como aparece en la tarjeta">
+              <div class="msg-campo-error" *ngIf="mostrarError && !nombreTarjeta.trim()">Este campo es obligatorio</div>
             </div>
 
             <div class="f-row2">
               <div class="f-field">
                 <label>Vencimiento</label>
-                <input type="text" class="f-input" [(ngModel)]="fechaExpiracion" placeholder="MM/AA" maxlength="5" (input)="formatFecha($event)">
+                <input type="text" class="f-input" [class.invalid]="mostrarError && fechaExpiracion.length < 5" [(ngModel)]="fechaExpiracion" placeholder="MM/AA" maxlength="5" (input)="formatFecha($event)">
+                <div class="msg-campo-error" *ngIf="mostrarError && fechaExpiracion.length < 5">Formato inválido</div>
               </div>
               <div class="f-field">
                 <label>CVV</label>
-                <input type="text" class="f-input" [(ngModel)]="cvv" placeholder="123" maxlength="4">
+                <input type="text" class="f-input" [class.invalid]="mostrarError && cvv.length < 3" [(ngModel)]="cvv" placeholder="123" maxlength="4">
+                <div class="msg-campo-error" *ngIf="mostrarError && cvv.length < 3">Mínimo 3 dígitos</div>
               </div>
             </div>
 
@@ -210,15 +219,16 @@
                   <option value="NIT">NIT</option>
                   <option value="PP">PP</option>
                 </select>
-                <input type="text" class="f-input" [(ngModel)]="numeroDocumento" placeholder="Número">
+                <input type="text" class="f-input" [class.invalid]="mostrarError && !numeroDocumento.trim()" [(ngModel)]="numeroDocumento" placeholder="Número">
               </div>
+              <div class="msg-campo-error" *ngIf="mostrarError && !numeroDocumento.trim()">Este campo es obligatorio</div>
             </div>
           </div>
         </div>
 
         <div class="btn-area" style="justify-content:space-between;align-items:center">
           <button class="btn-volver" (click)="irA(1)">← Volver</button>
-          <button class="btn-continuar" (click)="irA(3)">Continuar</button>
+          <button class="btn-continuar" (click)="irASiguiente(2)">Continuar</button>
         </div>
       </div>
 
@@ -307,7 +317,7 @@
       <span class="e-ico" style="animation:spin 1s linear infinite">⏳</span>
       <div class="e-title c-orange">Procesando tu pago</div>
       <div class="e-sub">Estamos conectando con tu banco. Por favor no cierres esta ventana.</div>
-      <div class="proc-steps">
+        <div class="proc-steps">
         <div class="p-step"><div class="p-ico ok">✓</div> Datos verificados</div>
         <div class="p-step"><div class="p-ico ok">✓</div> Conexión segura establecida</div>
         <div class="p-step"><div class="p-ico loading">↻</div> Esperando autorización...</div>

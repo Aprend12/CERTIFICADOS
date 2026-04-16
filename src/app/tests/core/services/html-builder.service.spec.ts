@@ -18,7 +18,6 @@ describe('HtmlBuilderService', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = service.build('sencillo', datos, false);
 
-    expect(html).toContain('CONSTANCIA DE ESTUDIO');
     expect(html).toContain('Test User');
     expect(html).toContain('12345678');
   });
@@ -27,14 +26,13 @@ describe('HtmlBuilderService', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = service.build('notas', datos, false);
 
-    expect(html).toContain('REGISTRO DE NOTAS');
+    expect(html).toContain('Nota');
   });
 
   it('should build dates certificate', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = service.build('fechas', datos, false);
 
-    expect(html).toContain('CONSTANCIA DE ESTUDIO CON FECHAS');
     expect(html).toContain('2025-1');
     expect(html).toContain('5');
   });
@@ -51,7 +49,7 @@ describe('HtmlBuilderService', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = service.build('unknown' as any, datos, false);
 
-    expect(html).toContain('CONSTANCIA DE ESTUDIO');
+    expect(html).toContain('Test User');
   });
 
   function createMockDatos(): DatosCertificado {

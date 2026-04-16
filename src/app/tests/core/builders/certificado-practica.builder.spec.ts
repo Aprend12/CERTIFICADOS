@@ -14,18 +14,21 @@ describe('CertificadoPracticaBuilder', () => {
     expect(builder).toBeTruthy();
   });
 
-  it('should build certificate with correct title', () => {
+  it('should build certificate with student data', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('CONSTANCIA DE PRÁCTICAS');
+    expect(html).toContain('Test User');
+    expect(html).toContain('12345678');
+    expect(html).toContain('Desarrollo de Software');
   });
 
-  it('should contain practica information', () => {
+  it('should contain footer with signature', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('práctica');
+    expect(html).toContain('MAGDA CAROLINA REYES RINCÓN');
+    expect(html).toContain('Vicerrectora');
   });
 
   it('should contain student information', () => {

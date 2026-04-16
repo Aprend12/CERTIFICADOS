@@ -5,8 +5,35 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1920&q=80') center/cover no-repeat;
-  filter: grayscale(1000%) brightness(0.3) contrast(1.4);
+  background: 
+    linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(8, 8, 8, 0.98) 100%),
+    linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.4) 50%, rgba(13, 13, 13, 1) 100%);
+  overflow: hidden;
+}
+
+.hero-photo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1920&q=80');
+  background-size: cover;
+  background-position: center 30%;
+  filter: grayscale(100%) brightness(0.7) contrast(1.15) saturate(0);
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0) 100%);
+}
+
+.hero-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.hero-fade {
+  display: none;
 }
 
 .logo-container {

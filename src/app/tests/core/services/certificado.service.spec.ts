@@ -28,11 +28,11 @@ describe('CertificadoService', () => {
 
   it('should set and get datos', () => {
     const datos: CertificadoDatos = {
-      documento_identidad: '12345678',
-      numero_estudiante: '10236580',
-      numero_programa: '123456',
+      documento: '12345678',
+      codigo_estudiante: '10236580',
+      snies: '123456',
       tipo_certificado: 'sencillo',
-      nombreEstudiante: 'Juan Pérez'
+      nombre_completo: 'Juan Pérez'
     };
 
     service.setDatos(datos);
@@ -41,11 +41,11 @@ describe('CertificadoService', () => {
 
   it('should clear datos', () => {
     const datos: CertificadoDatos = {
-      documento_identidad: '12345678',
-      numero_estudiante: '10236580',
-      numero_programa: '123456',
+      documento: '12345678',
+      codigo_estudiante: '10236580',
+      snies: '123456',
       tipo_certificado: 'sencillo',
-      nombreEstudiante: 'Juan Pérez'
+      nombre_completo: 'Juan Pérez'
     };
 
     service.setDatos(datos);
@@ -65,11 +65,11 @@ describe('CertificadoService', () => {
 
   it('should generate preview with masked data', () => {
     const datos: CertificadoDatos = {
-      documento_identidad: '12345678',
-      numero_estudiante: '10236580',
-      numero_programa: '123456',
+      documento: '12345678',
+      codigo_estudiante: '10236580',
+      snies: '123456',
       tipo_certificado: 'sencillo',
-      nombreEstudiante:'Juan Pérez'
+      nombre_completo: 'Juan Pérez'
     };
 
     const preview = service.generarPreview(datos);
@@ -80,11 +80,11 @@ describe('CertificadoService', () => {
 
   it('should return placeholder for invalid tipo in preview', () => {
     const datos: CertificadoDatos = {
-      documento_identidad: '12345678',
-      numero_estudiante: '10236580',
-      numero_programa: '123456',
+      documento: '12345678',
+      codigo_estudiante: '10236580',
+      snies: '123456',
       tipo_certificado: 'invalid',
-      nombreEstudiante: 'Juan Pérez'
+      nombre_completo: 'Juan Pérez'
     };
 
     const preview = service.generarPreview(datos);
@@ -94,11 +94,11 @@ describe('CertificadoService', () => {
 
   it('should generate final certificate without masked data', () => {
     const datos: CertificadoDatos = {
-      documento_identidad: '12345678',
-      numero_estudiante: '10236580',
-      numero_programa: '123456',
+      documento: '12345678',
+      codigo_estudiante: '10236580',
+      snies: '123456',
       tipo_certificado: 'sencillo',
-      nombreEstudiante: 'Juan Pérez'
+      nombre_completo: 'Juan Pérez'
     };
 
     const certificado = service.generarCertificadoFinal(datos);
@@ -109,11 +109,11 @@ describe('CertificadoService', () => {
 
   it('should return empty string for invalid tipo in final certificate', () => {
     const datos: CertificadoDatos = {
-      documento_identidad: '12345678',
-      numero_estudiante: '10236580',
-      numero_programa: '123456',
+      documento: '12345678',
+      codigo_estudiante: '10236580',
+      snies: '123456',
       tipo_certificado: 'invalid',
-      nombreEstudiante:'Juan Pérez'
+      nombre_completo: 'Juan Pérez'
     };
 
     const certificado = service.generarCertificadoFinal(datos);

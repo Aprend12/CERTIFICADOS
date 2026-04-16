@@ -19,13 +19,21 @@ describe('LogoHeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render logo header template', () => {
+  it('should render overlay with hero structure', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.overlay')).toBeTruthy();
+    expect(compiled.querySelector('.hero-photo')).toBeTruthy();
+    expect(compiled.querySelector('.hero-fade')).toBeTruthy();
+  });
+
+  it('should render logo container', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.logo-container')).toBeTruthy();
   });
 
-  it('should contain institution name', () => {
+  it('should contain institution logo image', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.innerHTML).toContain('tecnologicadeloriente.edu.co');
+    expect(compiled.querySelector('.logo-img')).toBeTruthy();
   });
 });

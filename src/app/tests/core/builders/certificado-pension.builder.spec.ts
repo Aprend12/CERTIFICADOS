@@ -14,19 +14,21 @@ describe('CertificadoPensionBuilder', () => {
     expect(builder).toBeTruthy();
   });
 
-  it('should build certificate with correct title', () => {
+  it('should build certificate with student data', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('HACE CONSTAR');
+    expect(html).toContain('Test User');
+    expect(html).toContain('12345678');
+    expect(html).toContain('Desarrollo de Software');
   });
 
-  it('should contain pension related content', () => {
+  it('should contain footer with signature', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Matrícula Semestral');
-    expect(html).toContain('Cancelado');
+    expect(html).toContain('MAGDA CAROLINA REYES RINCÓN');
+    expect(html).toContain('Vicerrectora');
   });
 
   it('should contain student information', () => {

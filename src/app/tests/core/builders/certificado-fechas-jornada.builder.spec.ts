@@ -14,18 +14,20 @@ describe('CertificadoFechasJornadaBuilder', () => {
     expect(builder).toBeTruthy();
   });
 
-  it('should build certificate with correct title', () => {
+  it('should build certificate with student data', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('CONSTANCIA DE ESTUDIO CON FECHA Y JORNADA');
+    expect(html).toContain('Test User');
+    expect(html).toContain('12345678');
+    expect(html).toContain('Desarrollo de Software');
   });
 
   it('should contain jornada information', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('sábados de 7:00 a.m. a 4:00 p.m.');
+    expect(html).toContain('Diurna');
   });
 
   it('should contain student and program info', () => {

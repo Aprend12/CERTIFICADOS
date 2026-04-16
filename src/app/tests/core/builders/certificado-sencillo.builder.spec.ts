@@ -18,7 +18,7 @@ describe('CertificadoSencilloBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('CONSTANCIA DE ESTUDIO');
+    expect(html).toContain('Constancia de Estudio');
     expect(html).toContain('CORPORACIÓN ESCUELA TECNOLÓGICA DEL ORIENTE');
     expect(html).toContain('804.006.527-3');
   });
@@ -38,7 +38,7 @@ describe('CertificadoSencilloBuilder', () => {
     const html = builder.build(datos, false);
     
     expect(html).toContain('12345');
-    expect(html).toContain('Snies');
+    expect(html).toContain('SNIES');
   });
 
   it('should contain footer with signature', () => {
@@ -62,7 +62,7 @@ describe('CertificadoSencilloBuilder', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('HACE CONSTAR');
+    expect(html).toContain('Hace Constar');
   });
 
   function createMockDatos(): DatosCertificado {

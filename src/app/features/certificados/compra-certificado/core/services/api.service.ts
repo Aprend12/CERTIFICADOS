@@ -1,11 +1,16 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { switchMap, catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { PeriodoAcademico } from '../models/certificado.model';
+
+const API_CONFIG = {
+  baseUrl: '/certificado',
+  downloadUrl: '/certificado/descargar'
+};
 
 export interface Estudiante {
   codigo_estudiante: string;
-  documento: string;
+  documento_estudiante: string;
   nombre: string;
   codigo: string;
   carreras: Carrera[];
@@ -13,23 +18,38 @@ export interface Estudiante {
 }
 
 export interface Carrera {
-  nivel: any;
+  nivel: string;
   snies: string;
   nombre: string;
   programa: string;
 }
 
-export interface Seccion {
-  id: string;
-  nombre: string;
+export interface DatosCertificadoApi {
+  codigo_estudiante: string;
+  documento_estudiante: string;
+  hash_code: string;
+  nombre_estudiante: string;
+  programa_academico: string;
+  snies_programa: string;
+  tipo_certificado: string;
+  jornada?: string;
+  modalidad?: string;
+  nivel_academico?: string;
+  periodo_activo?: string;
+  semestre_academico?: string;
+  historial_notas?: PeriodoAcademico[];
+  horario_clases?: string[];
+  fecha_inicio_periodo?: string;
+  fecha_fin_periodo?: string;
 }
 
 export interface ValidarEstudianteResponse {
   action_code: string;
-  mensaje: string;
-  programas_disponibles: Carrera[];
-  programas?: any[];
-  success: boolean;
+  mensaje?: string;
+  success?: boolean;
+  datos_certificado?: DatosCertificadoApi;
+  programas_disponibles?: Carrera[];
+  programas?: Carrera[];
   nombre_completo?: string;
   estudiante?: {
     codigo_estudiante?: string;
@@ -40,43 +60,55 @@ export interface ValidarEstudianteResponse {
     nombre_completo?: string;
     codigo_estudiante?: string;
     documento_identidad?: string;
-    programas?: any[];
+    programas?: Carrera[];
     nombre_pdf?: string;
   };
 }
 
-export interface GenerarCertificadoRequest {
-  documento_identidad: string;
-  tipo_certificado: string[];
-  snies?: string;
+export interface ValidarPagoRequest {
+  hash_code: string;
+  documento_estudiante: string;
+  numero_desprendible: string;
 }
 
-// Response when the server provides a download descriptor.
+export interface ValidarPagoResponse {
+  action_code: string;
+  mensaje?: string;
+}
+
+export interface GenerarCertificadoRequest {
+  hash_code: string;
+  documento_estudiante: string;
+}
+
 export interface DescargarCertificado {
   mensaje: string;
   nombre_pdf: string;
 }
+
+export interface CertificadosDataResponse {
+  codigo_verificacion?: string;
+  hash?: string;
+  fecha_expedicion?: string;
+  secciones_incluidas?: Record<string, unknown>;
+  ruta_pdf?: string;
+  nombre_pdf?: string;
+}
+
 export interface GenerarCertificadoResponse {
-  success?: boolean;               // new backend wraps result
-  mensaje: string;
-  // legacy fields kept for compatibility
+  action_code?: string;
+  mensaje?: string;
+  success?: boolean;
+  certificado_pdf?: string;
   pdf?: string;
   hash?: string;
-  data?: {
-    codigo_verificacion?: string;
-    hash?: string;
-    fecha_expedicion?: string;
-    secciones_incluidas?: any;
-    ruta_pdf?: string;
-    nombre_pdf?: string;
-    [key: string]: any;
-  };
+  data?: CertificadosDataResponse;
 }
 
 export interface VerificarCertificadoResponse {
   valido: boolean;
   mensaje: string;
-  certificado?: any;
+  certificado?: Record<string, unknown>;
 }
 
 @Injectable({
@@ -85,8 +117,8 @@ export interface VerificarCertificadoResponse {
 
 export class ApiService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = '/api';
-  private readonly baseDownloadUrl = 'https://georgiann-cleanable-axel.ngrok-free.dev/api/descargar/certificado';
+  private readonly baseUrl = API_CONFIG.baseUrl;
+  private readonly baseDownloadUrl = API_CONFIG.downloadUrl;
 
   getDownloadUrl(filename: string): string {
     if (filename.startsWith('http')) {
@@ -95,33 +127,43 @@ export class ApiService {
     return `${this.baseDownloadUrl}/${filename}`;
   }
 
-  validarEstudiante(documento: string, codigoEstudiante: string, tipoCertificado: string): Observable<ValidarEstudianteResponse> {
-    return this.http.post<ValidarEstudianteResponse>(`${this.baseUrl}/estudiante`, {
-      documento,
+  validarEstudiante(
+    documento_estudiante: string,
+    codigoEstudiante: string,
+    tipoCertificado: string,
+    snies_programa?: string
+  ): Observable<ValidarEstudianteResponse> {
+    return this.http.post<ValidarEstudianteResponse>(`${this.baseUrl}/preparar`, {
       tipo_certificado: tipoCertificado,
-      codigo_estudiante: codigoEstudiante
-
+      documento_estudiante,
+      codigo_estudiante: codigoEstudiante,
+      snies_programa: snies_programa || ''
     });
   }
 
-  getSeccionesDisponibles(): Observable<Seccion[]> {
-    return this.http.get<Seccion[]>(`${this.baseUrl}/secciones/disponibles`);
+  validarPago(request: ValidarPagoRequest): Observable<ValidarPagoResponse> {
+    return this.http.post<ValidarPagoResponse>(`${this.baseUrl}/pagar`, request);
   }
 
   generarCertificado(data: GenerarCertificadoRequest): Observable<GenerarCertificadoResponse> {
-    return this.http.post<GenerarCertificadoResponse>(`${this.baseUrl}/generar/certificado`, data);
+    return this.http.post<GenerarCertificadoResponse>(`${this.baseUrl}/generar`, data);
   }
 
-  /**
-   * First step: ask the backend for a download descriptor that contains the
-   * filename or token to fetch the actual PDF.
-   */
-  descargarCertificado(nombre_pdf: string): Observable<DescargarCertificado> {
-    return this.http.get<DescargarCertificado>( `${this.baseUrl}/descargar/certificado/${nombre_pdf}`
-    );
+  descargarCertificado(hash_code: string, documento_estudiante: string): Observable<DescargarCertificado> {
+    return this.http.post<DescargarCertificado>(`${this.baseUrl}/descargar`, {
+      hash_code,
+      documento_estudiante
+    });
+  }
+
+  descargarCertificadoPdf(hash_code: string, documento_estudiante: string): Observable<Blob> {
+    return this.http.post(`${this.baseUrl}/descargar`, {
+      hash_code,
+      documento_estudiante
+    }, { responseType: 'blob' });
   }
 
   verificarCertificado(hash: string): Observable<VerificarCertificadoResponse> {
-    return this.http.get<VerificarCertificadoResponse>(`${this.baseUrl}/verificar/certificado/${hash}`);
+    return this.http.get<VerificarCertificadoResponse>(`${this.baseUrl}/verificar`);
   }
 }

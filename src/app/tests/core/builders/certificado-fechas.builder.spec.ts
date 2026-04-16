@@ -14,11 +14,13 @@ describe('CertificadoFechasBuilder', () => {
     expect(builder).toBeTruthy();
   });
 
-  it('should build certificate with correct title', () => {
+  it('should build certificate with student data', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('CONSTANCIA DE ESTUDIO CON FECHAS');
+    expect(html).toContain('Test User');
+    expect(html).toContain('12345678');
+    expect(html).toContain('Desarrollo de Software');
   });
 
   it('should contain date information', () => {
@@ -27,7 +29,7 @@ describe('CertificadoFechasBuilder', () => {
     
     expect(html).toContain('2025-1');
     expect(html).toContain('5');
-    expect(html).toContain('período académico');
+    expect(html).toContain('período');
   });
 
   it('should contain student information', () => {

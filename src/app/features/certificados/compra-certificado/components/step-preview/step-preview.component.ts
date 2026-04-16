@@ -8,7 +8,8 @@ import {
   Input,
   AfterViewInit,
   ChangeDetectorRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -19,7 +20,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   imports: [CommonModule],
   templateUrl: './step-preview.component.html',
   styleUrls: ['./step-preview.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepPreviewComponent implements AfterViewInit {
 
@@ -28,23 +30,15 @@ export class StepPreviewComponent implements AfterViewInit {
     this._certHTML = val;
     this.certSafe = this.sanitizer.bypassSecurityTrustHtml(val);
   }
-  get certificadoHTML(): string { return this._certHTML; }
-  private _certHTML: string = '';
 
-  /** HTML sanitizado para el [innerHTML] */
-  certSafe: SafeHtml = '';
-
-  /** Título del certificado según el tipo seleccionado */
+  private _certHTML = '';
+  
   @Input() titulo: string = '';
-
-  /** Nombre completo del estudiante */
   @Input() nombreEstudiante: string = '';
-
-  /** Número de documento de identidad del estudiante */
   @Input() documentoIdentidad: string = '';
-
-  /** Número de código estudiantil */
   @Input() numeroEstudiante: string = '';
+
+  certSafe: SafeHtml = '' as SafeHtml;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -53,5 +47,9 @@ export class StepPreviewComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
+  }
+
+  get certHTML(): string {
+    return this._certHTML;
   }
 }

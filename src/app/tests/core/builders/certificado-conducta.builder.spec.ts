@@ -14,26 +14,27 @@ describe('CertificadoConductaBuilder', () => {
     expect(builder).toBeTruthy();
   });
 
-  it('should build certificate with correct title', () => {
-    const datos: DatosCertificado = createMockDatos();
-    const html = builder.build(datos, false);
-    
-    expect(html).toContain('CONSTANCIA DE BUENA CONDUCTA');
-  });
-
-  it('should contain conducta information', () => {
-    const datos: DatosCertificado = createMockDatos();
-    const html = builder.build(datos, false);
-    
-    expect(html).toContain('CONDUCTA');
-  });
-
-  it('should contain student information', () => {
+  it('should build certificate with student data', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
     expect(html).toContain('Test User');
     expect(html).toContain('12345678');
+  });
+
+  it('should contain footer with signature', () => {
+    const datos: DatosCertificado = createMockDatos();
+    const html = builder.build(datos, false);
+    
+    expect(html).toContain('MAGDA CAROLINA REYES RINCÓN');
+    expect(html).toContain('Vicerrectora');
+  });
+
+  it('should contain program information', () => {
+    const datos: DatosCertificado = createMockDatos();
+    const html = builder.build(datos, false);
+    
+    expect(html).toContain('Desarrollo de Software');
   });
 
   it('should mask data when preview is true', () => {

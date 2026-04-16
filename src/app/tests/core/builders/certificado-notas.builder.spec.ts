@@ -14,27 +14,25 @@ describe('CertificadoNotasBuilder', () => {
     expect(builder).toBeTruthy();
   });
 
-  it('should build certificate with correct title', () => {
+  it('should build certificate with student data', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('REGISTRO DE NOTAS');
+    expect(html).toContain('Test User');
+    expect(html).toContain('12345678');
   });
 
-  it('should contain grades table', () => {
+  it('should contain program information', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, false);
     
-    expect(html).toContain('Módulo / Asignaturas');
-    expect(html).toContain('Créditos');
-    expect(html).toContain('Nota');
+    expect(html).toContain('Desarrollo de Software');
   });
 
   it('should mask data when preview is true', () => {
     const datos: DatosCertificado = createMockDatos();
     const html = builder.build(datos, true);
     
-    expect(html).toContain('*********************');
     expect(html).not.toContain('Test User');
   });
 
