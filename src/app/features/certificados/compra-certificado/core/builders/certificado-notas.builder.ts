@@ -35,7 +35,7 @@ export class CertificadoNotasBuilder extends CertificadoPlantillaBase implements
       ${periodosHTML}
 
       <div style="margin-top: 30px; text-align: left; font-size: 11pt; color: ${this.COLOR_TEXT};">
-        <p>Se expide a solicitud del interesado(a) en Bucaramanga, a los 10 días de abril de 2026.</p>
+        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${o.fecha_expedicion || this.formatFechaCompleta(datos.fecha_expedicion)}.</p>
       </div>
 
       ${this.getFirma()}
@@ -120,7 +120,7 @@ export class CertificadoNotasBuilder extends CertificadoPlantillaBase implements
     return { creditosCursados: cursados, creditosAprobados: aprobados, promedio };
   }
 
-  private getOcultos(datos: DatosCertificado, esPreview?: boolean) {
+  private getOcultos(datos: DatosCertificado, esPreview: boolean) {
     if (esPreview) {
       return {
         numero: '*******',
@@ -136,14 +136,14 @@ export class CertificadoNotasBuilder extends CertificadoPlantillaBase implements
       };
     }
     return {
-      numero: ' ' + this.sanitize(datos.codigo || '1 123ad32'),
-      nombre: this.sanitize(datos.nombre_completo || datos.nombre || 'Nombre Estudiante'),
+      numero: this.sanitize(datos.codigo || ''),
+      nombre: this.sanitize(datos.nombre_completo || datos.nombre || ''),
       documento: this.sanitize(datos.documento),
       programa: this.sanitize(datos.programa),
       snies: this.sanitize(datos.snies),
       semestre: this.getNumeroRomano(datos.semestre),
       periodo: this.sanitize(datos.periodo),
-      fecha_expedicion: this.formatFecha(datos.fecha_expedicion),
+      fecha_expedicion: this.formatFechaCompleta(datos.fecha_expedicion),
       codigo_verificacion: this.sanitize(datos.codigo_verificacion || datos.hash_code || ''),
       hash_code: this.sanitize(datos.hash_code || ''),
     };
@@ -151,12 +151,8 @@ export class CertificadoNotasBuilder extends CertificadoPlantillaBase implements
 
   private getNumeroRomano(semestre: string): string {
     const romanos = ['I','II','III','IV','V','VI','VII','VIII','IX','X'];
-    return romanos[parseInt(semestre) - 1] || semestre;
-  }
-
-  private formatFecha(fecha: string): string {
-    if (!fecha) return '';
-    const [y, m, d] = fecha.split('-');
-    return (y && m && d) ? `${y} ${m} ${d}` : fecha;
+    const num = parseInt(semestre);
+    if (isNaN(num) || num < 1 || num > 10) return semestre;
+    return romanos[num - 1];
   }
 }

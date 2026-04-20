@@ -10,6 +10,7 @@ export class CertificadoPracticaBuilder extends CertificadoPlantillaBase impleme
   build(datos: DatosCertificado, esPreview: boolean): string {
     const o = this.getOcultos(datos, esPreview);
     const hashCode = esPreview ? '' : (o.hash_code || o.numero || 'No disponible');
+    const tablaPracticas = this.getTablaPracticas(datos);
 
     const contenido = `
       ${this.getEncabezado('Constancia de Prácticas', hashCode)}
@@ -20,48 +21,7 @@ export class CertificadoPracticaBuilder extends CertificadoPlantillaBase impleme
         </p>
         <p style="margin-bottom: 15px; text-indent: 1.5cm;">Que, <strong style="color: ${this.COLOR_TEXT};">${o.nombre}</strong>, identificado(a) con número de cédula <strong>${o.documento}</strong>, cursó y aprobó el ciclo de prácticas integrales, asociadas al programa <strong style="color: ${this.COLOR_TEXT};">${o.programa}</strong>, según código SNIES <strong>${o.snies}</strong>.</p>
       </div>
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 9.5pt; border: 1px solid ${this.COLOR_PRIMARY};">
-        <tr style="background: ${this.COLOR_PRIMARY}; color: white;">
-          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: left; font-weight: 600;">Asignatura</th>
-          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">HP</th>
-          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">HA</th>
-          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">CRÉDITOS</th>
-          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">SEMESTRE</th>
-          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">PERIODO</th>
-        </tr>
-        <tr>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">Práctica Integral I</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">3</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">6</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">3</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">VI</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">2023-1</td>
-        </tr>
-        <tr style="background: #f7fafc;">
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">Práctica Integral II</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">3</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">6</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">3</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">VII</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">2023-2</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">Práctica Integral III</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">3</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">6</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">3</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">VIII</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">2024-1</td>
-        </tr>
-        <tr style="background: #f7fafc;">
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">Práctica Integral IV</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">3</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">6</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">3</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">IX</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">2024-1</td>
-        </tr>
-      </table>
+      ${tablaPracticas}
       <div style="margin-top: 40px; text-align: left; font-size: 11pt; color: ${this.COLOR_MUTED};">
         <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${o.fecha}.</p>
       </div>
@@ -70,6 +30,43 @@ export class CertificadoPracticaBuilder extends CertificadoPlantillaBase impleme
     `;
 
     return this.getWrapper(contenido);
+  }
+
+  private getTablaPracticas(datos: DatosCertificado): string {
+    const materias = datos.materias || [];
+    
+    if (materias.length === 0) {
+      return '<p style="text-align: center; color: #888;">No hay prácticas registradas.</p>';
+    }
+
+    let html = `
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 9.5pt; border: 1px solid ${this.COLOR_PRIMARY};">
+        <tr style="background: ${this.COLOR_PRIMARY}; color: white;">
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: left; font-weight: 600;">Asignatura</th>
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">HP</th>
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">HA</th>
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">CRÉDITOS</th>
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">SEMESTRE</th>
+          <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">PERIODO</th>
+        </tr>`;
+
+    for (let i = 0; i < materias.length; i++) {
+      const m = materias[i];
+      const hp = m.creditos || 0;
+      const ha = (m.creditos || 0) * 2;
+      html += `
+        <tr style="background: ${i % 2 === 1 ? '#f7fafc' : 'white'};">
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">${this.sanitize(m.nombre || '')}</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">${hp}</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">${ha}</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">${m.creditos || 0}</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">${this.sanitize(m.nivel || '')}</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">${this.sanitize(m.periodo || '')}</td>
+        </tr>`;
+    }
+
+    html += '</table>';
+    return html;
   }
 
   private getOcultos(datos: DatosCertificado, esPreview: boolean) {
@@ -88,8 +85,8 @@ export class CertificadoPracticaBuilder extends CertificadoPlantillaBase impleme
       };
     }
     return {
-      numero: this.sanitize(datos.codigo || '1234HHZS1'),
-      nombre: this.sanitize(datos.nombre_completo || datos.nombre || 'Nombre Estudiante'),
+      numero: this.sanitize(datos.codigo || ''),
+      nombre: this.sanitize(datos.nombre_completo || datos.nombre || ''),
       documento: this.sanitize(datos.documento),
       programa: this.sanitize(datos.programa),
       snies: this.sanitize(datos.snies),

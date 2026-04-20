@@ -20,7 +20,7 @@ export class CertificadoSencilloBuilder extends CertificadoPlantillaBase impleme
         <p style="margin-bottom: 20px; text-indent: 2cm;">Que, <strong style="color: ${this.COLOR_TEXT}; font-size: 13pt;">${o.nombre}</strong>, identificado(a) con número de documento <strong>${o.documento}</strong>, se encuentra matriculado(a) actualmente en el programa de <strong style="color: ${this.COLOR_TEXT};">${o.programa}</strong>, aprobado por el Ministerio de Educación según SNIES <strong>${o.snies}</strong>. El estudiante cursa actualmente el <strong>${o.semestre}</strong> semestre en el período académico <strong>${o.periodo}</strong>.</p>
       </div>
       <div style="margin-top: 60px; text-align: left; font-size: 11pt; color: ${this.COLOR_MUTED};">
-        <p>Se expide a solicitud del interesado(a) en Bucaramanga, a los 9 días de abril de 2026.</p>
+        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${o.fecha || this.formatFechaCompleta(datos.fecha_expedicion)}.</p>
       </div>
       ${this.getFirma()}
       ${this.getFooter(o.codigo_verificacion || o.hash_code)}
@@ -45,8 +45,8 @@ export class CertificadoSencilloBuilder extends CertificadoPlantillaBase impleme
       };
     }
     return {
-      numero: this.sanitize(datos.codigo || '1234HHZS1'),
-      nombre: this.sanitize(datos.nombre_completo || datos.nombre || 'Nombre Estudiante'),
+      numero: this.sanitize(datos.codigo || ''),
+      nombre: this.sanitize(datos.nombre_completo || datos.nombre || ''),
       documento: this.sanitize(datos.documento),
       programa: this.sanitize(datos.programa),
       snies: this.sanitize(datos.snies),

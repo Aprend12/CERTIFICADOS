@@ -62,7 +62,7 @@ export class CertificadoPracticaBuilder extends CertificadoPlantillaBase impleme
         </tr>
       </table>
       <div style="margin-top: 40px; text-align: left; font-size: 11pt; color: ${this.COLOR_MUTED};">
-        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${this.formatFechaCompleta(new Date().toISOString())}.</p>
+        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${this.formatFechaCompleta(new Date().toISOString().split('T')[0])}.</p>
       </div>
       ${this.getFirma()}
       ${this.getFooter('PREVIEW-2024-****')}

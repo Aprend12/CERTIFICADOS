@@ -12,7 +12,7 @@ export class CertificadoPensionBuilder extends CertificadoPlantillaBase implemen
     const totales = this.getTotales(datos);
     const hashCode = esPreview ? '' : (o.hash_code || o.numero || 'No disponible');
 
-const contenido = `
+    const contenido = `
       ${this.getEncabezado('Constancia de Pensión', hashCode)}
       ${this.getTituloPrincipal()}
       <div style="margin-bottom: 20px; text-align: justify; font-size: 11pt; line-height: 1.8; color: ${this.COLOR_TEXT};">
@@ -44,7 +44,6 @@ const contenido = `
     const materias = datos.materias || [];
     const periodoActivo = datos.periodo;
     const materiasPeriodo = materias.filter(m => m.periodo === periodoActivo);
-    const cellHead = `background:${this.COLOR_PRIMARY}; color:white; font-weight:600; text-align:center; padding:8px 6px; border:1px solid ${this.COLOR_PRIMARY}; font-size:9pt;`;
     const cellData = `text-align:center; padding:8px 4px; border:1px solid ${this.COLOR_PRIMARY}; font-size:9pt;`;
 
     let html = `
@@ -120,15 +119,15 @@ const contenido = `
       };
     }
     return {
-      numero: this.sanitize(datos.codigo || '1234HHZS1'),
-      nombre: this.sanitize(datos.nombre_completo || datos.nombre || 'Nombre Estudiante'),
+      numero: this.sanitize(datos.codigo || ''),
+      nombre: this.sanitize(datos.nombre_completo || datos.nombre || ''),
       documento: this.sanitize(datos.documento),
       programa: this.sanitize(datos.programa),
       snies: this.sanitize(datos.snies),
       semestre: this.sanitize(datos.semestre),
       periodo: this.sanitize(datos.periodo),
-      fecha_inicio: this.sanitize(datos.fecha_inicio || 'NO REGISTRO'),
-      fecha_fin: this.sanitize(datos.fecha_fin || 'NO REGISTRO'),
+      fecha_inicio: this.formatFechaCompleta(datos.fecha_inicio_periodo || datos.fecha_inicio || ''),
+      fecha_fin: this.formatFechaCompleta(datos.fecha_fin_periodo || datos.fecha_fin || ''),
       fecha: this.formatFechaCompleta(datos.fecha_expedicion),
       codigo_verificacion: this.sanitize(datos.codigo_verificacion || datos.hash_code || ''),
       hash_code: this.sanitize(datos.hash_code || ''),

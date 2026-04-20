@@ -33,11 +33,6 @@ export class StepPreviewComponent implements AfterViewInit {
 
   private _certHTML = '';
   
-  @Input() titulo: string = '';
-  @Input() nombreEstudiante: string = '';
-  @Input() documentoIdentidad: string = '';
-  @Input() numeroEstudiante: string = '';
-
   certSafe: SafeHtml = '' as SafeHtml;
 
   constructor(

@@ -43,7 +43,7 @@
         <div class="res-title">Resumen de compra</div>
         <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
-        <div class="res-total"><span class="lbl">Total</span><span class="val">$ 18.000</span></div>
+        <div class="res-total"><span class="lbl">Total</span><span class="val">{{ PRECIO_CERTIFICADO | number }}</span></div>
       </div>
     </div>
   </div>
@@ -89,7 +89,7 @@
         <div class="res-title">Resumen de compra</div>
         <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
-        <div class="res-total"><span class="lbl">Total</span><span class="val">$ 18.000</span></div>
+        <div class="res-total"><span class="lbl">Total</span><span class="val">{{ PRECIO_CERTIFICADO | number }}</span></div>
       </div>
     </div>
   </div>
@@ -157,7 +157,7 @@
         <div class="res-title">Resumen de compra</div>
         <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
-        <div class="res-total"><span class="lbl">Total</span><span class="val">$ 18.000</span></div>
+        <div class="res-total"><span class="lbl">Total</span><span class="val">{{ PRECIO_CERTIFICADO | number }}</span></div>
       </div>
     </div>
   </div>
@@ -237,7 +237,7 @@
         <div class="res-title">Resumen de compra</div>
         <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
-        <div class="res-total"><span class="lbl">Total</span><span class="val">$ 18.000</span></div>
+        <div class="res-total"><span class="lbl">Total</span><span class="val">{{ PRECIO_CERTIFICADO | number }}</span></div>
       </div>
     </div>
   </div>
@@ -290,7 +290,7 @@
             <div class="res-divider"></div>
             <div class="res-total">
               <span class="lbl">Total a pagar</span>
-              <span class="val">$ 18.000</span>
+              <span class="val">{{ PRECIO_CERTIFICADO | number }}</span>
             </div>
           </div>
         </div>
@@ -306,7 +306,7 @@
         <div class="res-title">Resumen de compra</div>
         <div class="res-row"><span>Certificado</span><span>{{nombreCertificado}}</span></div>
         <div class="res-divider"></div>
-        <div class="res-total"><span class="lbl">Pagas</span><span class="val">$ 18.000</span></div>
+        <div class="res-total"><span class="lbl">Pagas</span><span class="val">{{ PRECIO_CERTIFICADO | number }}</span></div>
       </div>
     </div>
   </div>
@@ -334,7 +334,7 @@
       <div class="e-sub">Tu pago fue procesado exitosamente. Recibirás un correo con los detalles.</div>
       <div class="e-ref">Referencia: EPY-2026-{{refPago}}</div>
       <table class="e-tbl">
-        <tr><td>Total pagado</td><td class="c-green">$ 18.000</td></tr>
+        <tr><td>Total pagado</td><td class="c-green">{{ PRECIO_CERTIFICADO | number }}</td></tr>
         <tr><td>Medio de pago</td><td>{{getMetodoNombre()}}</td></tr>
         <tr><td>Estado</td><td class="c-green">Aprobado</td></tr>
       </table>

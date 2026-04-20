@@ -1,37 +1,36 @@
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { VerificarService } from '../core/services/verificar.service';
-import { CertificadoData, Programa } from '../core/models/verificar.model';
 import { ValidarCodigoComponent } from '../components/validar-codigo/validar-codigo.component';
-import { MostrarResultadoComponent } from '../components/mostrar-resultado/mostrar-resultado.component';
+import { CertificadoPreviewComponent } from '../components/certificado-preview/certificado-preview.component';
 
 @Component({
   selector: 'app-verificar-certificado',
   standalone: true,
-  imports: [CommonModule, ValidarCodigoComponent, MostrarResultadoComponent, FormsModule],
+  imports: [CommonModule, ValidarCodigoComponent, CertificadoPreviewComponent],
   templateUrl: './verificar-certificado.component.html',
   styleUrls: ['./verificar-certificado.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerificarCertificadoComponent implements OnInit {
   verificarService: VerificarService = inject(VerificarService);
+  private cdr = inject(ChangeDetectorRef);
+  private sanitizer = inject(DomSanitizer);
 
   stepActual = signal(1);
-  totalPasos = 2;
 
-  certificadoData: CertificadoData | null = null;
-  certificadoHTML: string = '';
+  hashCode: string = '';
+  documentoEstudiante: string = '';
   certificadoValido: boolean = false;
   mostrarError: boolean = false;
   mensajeError: string = '';
   verificando: boolean = false;
-  downloadUrl: string = '';
+  descargando: boolean = false;
 
-  programasDisponibles: Programa[] = [];
-  carreraElegida: string = '';
-  mostrarModalCarreras: boolean = false;
-  tieneMultiplesCarreras: boolean = false;
+  pdfSrc: SafeResourceUrl | null = null;
+  private pdfUrl: string | null = null;
+  cargandoPdf: boolean = false;
 
   ngOnInit() {
     this.reset();
@@ -52,94 +51,92 @@ export class VerificarCertificadoComponent implements OnInit {
     this.verificando = true;
     this.mostrarError = false;
     this.mensajeError = '';
+    this.hashCode = codigo.trim();
+    this.documentoEstudiante = documento.trim();
 
-    const body = {
-      hash_code: codigo.trim(),
-      documento_estudiante: documento.trim()
-    };
-
-    this.verificarService.verificarCertificado(body).subscribe({
-      next: (response: any) => {
+    this.verificarService.verificarCertificado({
+      hash_code: this.hashCode,
+      documento_estudiante: this.documentoEstudiante
+    }).subscribe({
+      next: (response) => {
         this.verificando = false;
 
-        if (response.action_code === 'CERTIFICADO_VALIDO') {
+        if (response?.action_code === 'CERTIFICADO_VALIDO') {
           this.certificadoValido = true;
-          let hash = codigo.trim();
-          if (!hash.endsWith('.pdf')) {
-            hash = hash + '.pdf';
-          }
-          this.downloadUrl = `/api/descargar/certificado/${hash}`;
-          this.certificadoData = {
-            tipo_certificado: '',
-            nombre_completo: '',
-            documento: documento.trim(),
-            codigo_estudiante: '',
-            programa: '',
-            snies: '',
-            fecha_expedicion: '',
-            hash: hash,
-            nombre_pdf: hash,
-            html: ''
-          };
           this.stepActual.set(2);
-        } else if (response.action_code === 'HASH_INVALIDO') {
-          this.certificadoValido = false;
-          this.mostrarError = true;
-          this.mensajeError = response.mensaje;
+          this.cargarPdf();
         } else {
           this.certificadoValido = false;
           this.mostrarError = true;
-          this.mensajeError = response.mensaje;
+          this.mensajeError = response?.mensaje || 'Certificado no encontrado';
         }
+        this.cdr.markForCheck();
       },
       error: (err) => {
+        console.error('Error en verificación:', err);
         this.verificando = false;
         this.certificadoValido = false;
         this.mostrarError = true;
-        if (err.status === 404) {
+        if (err.name === 'TimeoutError') {
+          this.mensajeError = 'La solicitud tardó demasiado. Intente de nuevo.';
+        } else if (err.status === 404) {
           this.mensajeError = 'Este certificado no corresponde al documento o no existe.';
         } else if (err.status === 400) {
           this.mensajeError = 'Datos inválidos. Verifique el código y documento.';
+        } else if (err.status === 0) {
+          this.mensajeError = 'No se pudo conectar con el servidor. Verifique su conexión.';
         } else {
           this.mensajeError = 'Error de conexión. Intente más tarde.';
         }
+        this.cdr.markForCheck();
       }
     });
   }
 
-  seleccionarCarrera(hash: string) {
-    if (!this.carreraElegida) {
+  private cargarPdf() {
+    this.cargandoPdf = true;
+
+    this.verificarService.descargarCertificado(this.hashCode, this.documentoEstudiante).subscribe({
+      next: (blob) => {
+        this.cargandoPdf = false;
+        this.cdr.markForCheck();
+      },
+      error: (err) => {
+        this.cargandoPdf = false;
+        this.cdr.markForCheck();
+      }
+    });
+  }
+
+  descargarCertificado() {
+    if (!this.hashCode || !this.documentoEstudiante) {
       return;
     }
 
-    const programa = this.programasDisponibles.find(p => p.snies === this.carreraElegida);
-    if (programa) {
-      this.certificadoData = {
-        tipo_certificado: '',
-        nombre_completo: this.certificadoData?.nombre_completo || '',
-        documento: '',
-        codigo_estudiante: '',
-        programa: programa.nombre,
-        snies: programa.snies,
-        fecha_expedicion: '',
-        hash: hash,
-        nombre_pdf: this.certificadoData?.nombre_pdf || '',
-        html: '',
-        programas: this.programasDisponibles
-      };
-    }
+    this.descargando = true;
 
-    this.mostrarModalCarreras = false;
-    this.stepActual.set(2);
-  }
-
-  cerrarModal() {
-    this.mostrarModalCarreras = false;
-    this.carreraElegida = '';
-    this.programasDisponibles = [];
-    this.tieneMultiplesCarreras = false;
-    this.certificadoValido = false;
-    this.reset();
+    this.verificarService.descargarCertificado(this.hashCode, this.documentoEstudiante).subscribe({
+      next: (blob) => {
+        this.descargando = false;
+        const url = window.URL.createObjectURL(blob);
+        const pdfUrlWithParams = url + '#toolbar=0&navpanes=0&scrollbar=0&view=FitV';
+        const link = document.createElement('a');
+        link.href = pdfUrlWithParams;
+        link.target = '_blank';
+        link.download = 'certificado.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.descargando = false;
+        this.mostrarError = true;
+        this.mensajeError = 'Error al descargar el certificado. Intente más tarde.';
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   isStepActive(step: number): boolean {
@@ -157,18 +154,20 @@ export class VerificarCertificadoComponent implements OnInit {
   }
 
   reset() {
+    if (this.pdfUrl) {
+      window.URL.revokeObjectURL(this.pdfUrl);
+    }
     this.stepActual.set(1);
-    this.certificadoData = null;
-    this.certificadoHTML = '';
+    this.hashCode = '';
+    this.documentoEstudiante = '';
     this.certificadoValido = false;
     this.mostrarError = false;
     this.mensajeError = '';
     this.verificando = false;
-    this.downloadUrl = '';
-    this.programasDisponibles = [];
-    this.carreraElegida = '';
-    this.mostrarModalCarreras = false;
-    this.tieneMultiplesCarreras = false;
+    this.descargando = false;
+    this.pdfSrc = null;
+    this.pdfUrl = null;
+    this.cargandoPdf = false;
     this.verificarService.limpiar();
   }
 

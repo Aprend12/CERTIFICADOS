@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter, Input, inject, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Output, EventEmitter, Input, inject, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../core/services/api.service';
 import { catchError, timeout } from 'rxjs/operators';
@@ -19,31 +19,27 @@ interface Banco {
 @Component({
   selector: 'app-step-pagos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DecimalPipe],
   templateUrl: './step-pagos.component.html',
   styleUrls: ['./step-pagos.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepPagosComponent implements OnDestroy {
+export class StepPagosComponent {
   @Output() goToDownload = new EventEmitter<{ hash_code: string; documento_estudiante: string; validado: boolean }>();
   @Input() nombreCertificado: string = '';
-  @Input() epaycoPublicKey: string = '';
   @Input() hashCode: string = '';
   @Input() documentoEstudiante: string = '';
 
   private apiService = inject(ApiService);
 
-  ngOnDestroy() {}
-
   step: number = 1;
-  wizardStep: number = 3;
   bancoSeleccionado: boolean = false;
   procesandoPago: boolean = false;
   mostrarError: boolean = false;
 
+  readonly PRECIO_CERTIFICADO = 18000;
+
   metodoPago: string = '';
-  tipoPse: string = 'banco';
-  tipoCuenta: string = 'ahorros';
   tipoTarjeta: string = 'credito';
   nombreCompleto: string = '';
   email: string = '';
@@ -54,8 +50,6 @@ export class StepPagosComponent implements OnDestroy {
   refPago: string = '';
 
   selBanco: Banco | null = null;
-  selBilletera: string = '';
-  telefonoBilletera: string = '';
   bancosFiltrados: Banco[] = [];
 
   numeroTarjeta: string = '';
@@ -128,25 +122,9 @@ export class StepPagosComponent implements OnDestroy {
     return labels[this.step] || '';
   }
 
-  getProgress(): string {
-    const progress: { [key: number]: string } = {
-      1: '20%',
-      2: '45%',
-      3: '70%',
-      4: '85%'
-    };
-    return progress[this.step] || '0%';
-  }
-
   getMetodoNombre(): string {
     if (this.metodoPago === 'epayco') {
       return 'Epayco';
-    }
-    if (this.metodoPago === 'pse') {
-      if (this.tipoPse === 'billetera') {
-        return this.selBilletera === 'nequi' ? 'Nequi' : 'Daviplata';
-      }
-      return 'PSE';
     }
     return 'Tarjeta';
   }
@@ -160,16 +138,6 @@ export class StepPagosComponent implements OnDestroy {
 
   resetRef(): void {
     this.refPago = '';
-  }
-
-  getFechaActual(): string {
-    const now = new Date();
-    const dia = String(now.getDate()).padStart(2, '0');
-    const mes = String(now.getMonth() + 1).padStart(2, '0');
-    const anio = now.getFullYear();
-    const hora = String(now.getHours()).padStart(2, '0');
-    const min = String(now.getMinutes()).padStart(2, '0');
-    return `${dia}/${mes}/${anio} – ${hora}:${min}`;
   }
 
   getNumeroTarjetaOculto(): string {
@@ -269,11 +237,11 @@ export class StepPagosComponent implements OnDestroy {
 
   iniciarPagoEpayco() {
     const refPago = 'CERT-' + this.refPago;
-    const valor = 18000;
+    const valor = this.PRECIO_CERTIFICADO;
     const iva = Math.round(valor * 0.19);
     const valorTotal = valor + iva;
 
-    const dataEpayco: any = {
+    const dataEpayco = {
       name: 'Certificado Académico',
       description: 'Certificado académico - Universidad',
       invoice: refPago,
@@ -295,7 +263,6 @@ export class StepPagosComponent implements OnDestroy {
 
     if (typeof ePayco !== 'undefined') {
       ePayco.checkout.open({
-        key: this.epaycoPublicKey,
         test: true,
         data: dataEpayco,
         onConfirm: (response: any) => {
@@ -331,7 +298,7 @@ export class StepPagosComponent implements OnDestroy {
 
   irADescarga() {
     if (!this.hashCode || !this.documentoEstudiante) {
-      alert('Faltan datos para validar el pago');
+      this.mostrarError = true;
       return;
     }
 
@@ -344,10 +311,9 @@ export class StepPagosComponent implements OnDestroy {
       timeout(15000),
       catchError((err) => {
         if (err.name === 'TimeoutError') {
-          alert('La validación del pago tardó demasiado. Por favor, intenta nuevamente.');
+          this.mostrarError = true;
         }
         this.procesandoPago = false;
-        this.wizardStep = 4;
         this.goToDownload.emit({
           hash_code: this.hashCode,
           documento_estudiante: this.documentoEstudiante,
@@ -360,7 +326,6 @@ export class StepPagosComponent implements OnDestroy {
         if (!response) return;
         this.procesandoPago = false;
         const pagoValidado = response.action_code === 'PAGO_APROBADO';
-        this.wizardStep = 4;
         this.goToDownload.emit({
           hash_code: this.hashCode,
           documento_estudiante: this.documentoEstudiante,
@@ -369,7 +334,6 @@ export class StepPagosComponent implements OnDestroy {
       },
       error: (err) => {
         this.procesandoPago = false;
-        this.wizardStep = 4;
         this.goToDownload.emit({
           hash_code: this.hashCode,
           documento_estudiante: this.documentoEstudiante,

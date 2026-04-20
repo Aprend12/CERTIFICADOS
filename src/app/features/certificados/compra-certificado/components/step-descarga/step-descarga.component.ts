@@ -1,24 +1,23 @@
-import { Component, Input, inject, OnChanges, NgZone, ViewEncapsulation, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, inject, OnChanges, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CertificadoService } from '../../core/services/certificado.service';
-import { ApiService, GenerarCertificadoResponse } from '../../core/services/api.service';
+import { ApiService } from '../../core/services/api.service';
 import { CertificadoDatos, DatosCertificado, Materia } from '../../core/models/certificado.model';
-import { switchMap, tap, catchError, timeout } from 'rxjs/operators';
-import { throwError, of } from 'rxjs';
+import { tap, catchError, timeout } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-step-descarga',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule],
   templateUrl: './step-descarga.component.html',
   styleUrls: ['./step-descarga.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepDescargaComponent implements OnChanges, OnDestroy {
+export class StepDescargaComponent implements OnChanges {
   @Input() datos: CertificadoDatos = {
     documento: '',
     codigo_estudiante: '',
@@ -32,35 +31,16 @@ export class StepDescargaComponent implements OnChanges, OnDestroy {
     semestre_academico: ''
   };
 
-  form: FormGroup;
-
   certificadoFinal: string = '';
   certificadoFinalSafe: SafeHtml = '' as SafeHtml;
   generando = false;
   descargado = false;
   error: string | null = null;
 
-  lastJsonResponse: GenerarCertificadoResponse | null = null;
-  jsonHistory: { step: string; data: GenerarCertificadoResponse }[] = [];
-  certificadoJson: GenerarCertificadoResponse | null = null;
-  fileName: string | null = null;
-  lastRequestedUrl: string | null = null;
-
-  scale: number = 0.5;
-
   private certificadoService = inject(CertificadoService);
   private apiService = inject(ApiService);
   private sanitizer = inject(DomSanitizer);
-  private ngZone = inject(NgZone);
   private router = inject(Router);
-  private fb = inject(FormBuilder);
-
-  constructor() {
-    this.form = this.fb.group({
-      formato: ['pdf', Validators.required],
-      email: ['', [Validators.email]]
-    });
-  }
 
   ngOnChanges() {
     if (this.datos.documento && this.datos.tipo_certificado) {
@@ -152,9 +132,6 @@ export class StepDescargaComponent implements OnChanges, OnDestroy {
     this.apiService.generarCertificado(request).pipe(
       timeout(30000),
       tap((resp) => {
-        this.lastJsonResponse = resp;
-        this.jsonHistory.push({ step: 'generarCertificado', data: resp });
-
         if (resp.certificado_pdf) {
           const binaryString = atob(resp.certificado_pdf);
           const bytes = new Uint8Array(binaryString.length);
@@ -206,6 +183,4 @@ export class StepDescargaComponent implements OnChanges, OnDestroy {
   nuevoCertificado() {
     this.router.navigate(['/compra-certificado']);
   }
-
-  ngOnDestroy() {}
 }

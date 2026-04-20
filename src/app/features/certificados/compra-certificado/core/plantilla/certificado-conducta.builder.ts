@@ -24,7 +24,7 @@ export class CertificadoConductaBuilder extends CertificadoPlantillaBase impleme
         <p style="margin-bottom: 20px;">Durante el tiempo de permanencia en nuestra institución, el/la estudiante presentó una <strong style="color: ${this.COLOR_TEXT};">excelente conducta académica y personal</strong>, demostrando valores éticos y profesionales destacados.</p>
       </div>
       <div style="margin-top: 60px; text-align: left; font-size: 11pt; color: ${this.COLOR_MUTED};">
-        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${this.formatFechaCompleta(new Date().toISOString())}.</p>
+        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${this.formatFechaCompleta(new Date().toISOString().split('T')[0])}.</p>
       </div>
       ${this.getFirma()}
       ${this.getFooter('PREVIEW-2024-****')}

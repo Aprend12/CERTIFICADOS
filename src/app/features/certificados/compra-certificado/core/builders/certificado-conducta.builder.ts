@@ -52,7 +52,7 @@ export class CertificadoConductaBuilder extends CertificadoPlantillaBase impleme
       numero: hashCode,
       certificado: { hash_code: hashCode },
       hash_code: hashCode,
-      nombre: this.sanitize(datos.nombre_completo || datos.nombre || 'Nombre Estudiante'),
+      nombre: this.sanitize(datos.nombre_completo || datos.nombre || ''),
       documento: this.sanitize(datos.documento || ''),
       programa: this.sanitize(datos.programa || ''),
       snies: this.sanitize(datos.snies || ''),

@@ -1,5 +1,5 @@
 export interface VerificarCertificadoResponse {
-  valido: boolean;
+  action_code: string;
   mensaje: string;
   certificado?: CertificadoData;
 }

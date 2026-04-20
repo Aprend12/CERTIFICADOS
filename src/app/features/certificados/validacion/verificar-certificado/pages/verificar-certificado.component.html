@@ -36,37 +36,62 @@
     </div>
   </div>
 
-  <!-- Paso 2: Mostrar resultado -->
+  <!-- Paso 2: Mostrar certificado -->
   <div class="step-content" [class.active]="isStepActive(2)">
-    <app-mostrar-resultado
-      [certificadoData]="certificadoData"
-      [certificadoHTML]="certificadoHTML"
-      [esValido]="certificadoValido"
-      [downloadUrl]="downloadUrl"
-      (volver)="volverABuscar()">
-    </app-mostrar-resultado>
-  </div>
-</div>
+    <div class="resultado-container">
+      
+      <!-- Título y badge -->
+      <h3 class="preview-title">Resultado de Verificación</h3>
+      <div class="badge-valido">
+        <span class="badge-icon">✓</span>
+        Certificado válido
+      </div>
 
-<!-- Modal de selección de carrera -->
-<div class="modal-overlay" *ngIf="mostrarModalCarreras" (click)="cerrarModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <h3 style="color: #ff8800; text-align: center; margin-bottom: 20px;">Seleccione una carrera</h3>
-    <p style="margin-bottom: 20px; text-align: center;">El certificado contiene información de múltiples programas. Seleccione el programa del cual desea ver el certificado.</p>
-    
-    <div class="form-group">
-      <label for="carrera">Programa académico <span class="required">*</span></label>
-      <select id="carrera" [(ngModel)]="carreraElegida" name="carrera">
-        <option value="">Seleccione una carrera...</option>
-        <option *ngFor="let programa of programasDisponibles" [value]="programa.snies">
-          {{ programa.nombre }}
-        </option>
-      </select>
-    </div>
+      <!-- Preview del certificado -->
+      <div class="preview-section">
+        <div class="cert-stage">
+          <div class="cert-frame">
+            <div class="cert-scroll-area">
+              <div *ngIf="cargandoPdf" class="loading">
+                Cargando certificado...
+              </div>
+              <div *ngIf="certificadoValido && !cargandoPdf" class="preview-placeholder">
+                <div class="preview-icon">✅</div>
+                <p class="preview-text">Certificado verificado exitosamente</p>
+                <p class="preview-subtext">Haz clic en "Descargar" para ver el certificado</p>
+              </div>
+              <div *ngIf="!certificadoValido && !cargandoPdf" class="no-pdf">
+                No se pudo cargar el certificado
+              </div>
+            </div>
+          </div>
+          <div class="cert-info-strip">
+            <span>📄</span>
+            <span>Tamaño real: Carta (21.59 × 27.94 cm)</span>
+            <span>·</span>
+            <span>PDF listo para imprimir</span>
+          </div>
+        </div>
+      </div>
 
-    <div class="buttons-container" style="display: flex; gap: 10px; margin-top: 20px;">
-      <button type="button" class="btn btn-secondary" (click)="cerrarModal()" style="flex: 1;">Cancelar</button>
-      <button type="button" class="btn btn-primary" (click)="seleccionarCarrera(certificadoData?.hash || '')" [disabled]="!carreraElegida" style="flex: 1;">Aceptar</button>
+      <!-- Botones -->
+      <div class="buttons-container">
+        <button 
+          type="button" 
+          class="btn btn-primary" 
+          (click)="descargarCertificado()"
+          [disabled]="descargando">
+          {{ descargando ? 'Descargando...' : 'Descargar Certificado' }}
+        </button>
+        
+        <button 
+          type="button" 
+          class="btn btn-secondary" 
+          (click)="volverABuscar()">
+          Buscar otro certificado
+        </button>
+      </div>
+
     </div>
   </div>
 </div>

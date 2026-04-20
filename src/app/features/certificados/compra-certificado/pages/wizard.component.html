@@ -1,7 +1,5 @@
-<!--Este es el manejo de los indicadores-->
 <div class="steps-indicator">
 
-<!--Primer manejo apartado de ingreso codigo -->
   <div class="step-wrapper">
     <div class="step-indicator"
         [class.active]="isStepActive(1)"
@@ -55,7 +53,7 @@
   <!-- Paso 1: Datos -->
     <div class="wizard-content-1">
   <div class="step-content" [class.active]="isStepActive(1)">
-    <app-step-datos (datosSubmitted)="onDatosSubmitted($event)" (goToStep2)="onGoToStep2($event)"></app-step-datos>
+    <app-step-datos (datosSubmitted)="onDatosSubmitted($event)"></app-step-datos>
   </div>
 
   <!-- Paso 2: Preview - Datos y Preview lado a lado -->
@@ -84,23 +82,19 @@
       <!-- Panel derecho: Preview -->
       <div class="caja__preview">
         <app-step-preview
-          [certificadoHTML]="getCertificadoHTML()"
-          [titulo]="getCertificadoTitulo()"
-          [nombreEstudiante]="datosUsuario.nombre_completo || ''"
-          [documentoIdentidad]="datosUsuario.documento || ''"
-          [numeroEstudiante]="datosUsuario.codigo_estudiante || ''">
+          [certificadoHTML]="getCertificadoHTML()">
         </app-step-preview>
       </div>
     </div>
     <div style="text-align: center; margin-top: 20px; width: 100%; display: flex; justify-content: center; gap: 10px;">
       <button class="btn btn-secondary" (click)="setStep(1)">Atrás</button>
-      <button class="btn btn-primary" (click)="setStep(3)">Continuar</button>
+      <button class="btn btn-primary" (click)="continuarDesdePreview()">Continuar</button>
     </div>
   </div>
 
   <!-- Paso 3: Pagar -->
   <div class="step-content" [class.active]="isStepActive(3)">
-    <app-step-pagos (goToDownload)="onPagoCompletado($event)" [nombreCertificado]="getCertificadoTitulo()" [epaycoPublicKey]="epaycoPublicKey" [hashCode]="datosUsuario.hash_code || ''" [documentoEstudiante]="datosUsuario.documento || ''"></app-step-pagos>
+    <app-step-pagos (goToDownload)="onPagoCompletado($event)" [nombreCertificado]="getCertificadoTitulo()" [hashCode]="datosUsuario.hash_code || ''" [documentoEstudiante]="datosUsuario.documento || ''"></app-step-pagos>
   </div>
 
   <!-- Paso 4: Descargar -->

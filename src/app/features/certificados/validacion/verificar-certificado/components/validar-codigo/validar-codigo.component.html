@@ -1,36 +1,45 @@
-<div class="validation-container">
-  <div class="validation-content">
-    <div class="validation-title">validar certificado</div>
+<div class="step-datos">
+  <div class="form-container">
+    <h2 style="color: #ff8800; text-align: center; margin-top: 60px; margin-bottom: 15px; font-size: 1rem;">Validar Certificado</h2>
 
-    <div class="form-group">
-      <label for="codigoCertificado">Código del certificado</label>
-      <input 
-        type="text" 
-        id="codigoCertificado" 
-        placeholder="Ingrese el código" 
-        maxlength="50"
-        [(ngModel)]="codigo"
-        (keyup.enter)="onValidar()"
-        [disabled]="verificando">
-    </div>
+    <form class="content-medio">
+      <div class="form-group">
+        <label for="codigoCertificado">Código del certificado</label>
+        <input 
+          type="text" 
+          id="codigoCertificado" 
+          placeholder="Ingrese el código" 
+          maxlength="50"
+          [(ngModel)]="codigo"
+          name="codigo"
+          [ngModelOptions]="{standalone: true}"
+          (keyup.enter)="onValidar()"
+          [disabled]="verificando">
+      </div>
 
-    <div class="form-group">
-      <label for="documentoEstudiante">Documento del estudiante</label>
-      <input 
-        type="text" 
-        id="documentoEstudiante" 
-        placeholder="Ingrese el documento" 
-        maxlength="20"
-        [(ngModel)]="documento"
-        (keyup.enter)="onValidar()"
-        [disabled]="verificando">
-    </div>
+      <div class="form-group">
+        <label for="documentoEstudiante">Documento del estudiante</label>
+        <input 
+          type="text" 
+          id="documentoEstudiante" 
+          placeholder="Ingrese el documento" 
+          maxlength="20"
+          [(ngModel)]="documento"
+          name="documento"
+          [ngModelOptions]="{standalone: true}"
+          (keyup.enter)="onValidar()"
+          [disabled]="verificando">
+      </div>
 
-    <button 
-      class="btn-validar" 
-      (click)="onValidar()"
-      [disabled]="verificando || !codigo.trim() || !documento.trim()">
-      {{ verificando ? 'verificando...' : 'validar' }}
-    </button>
+      <div class="buttons-container">
+        <button 
+          type="button"
+          class="btn btn-primary" 
+          (click)="onValidar()"
+          [disabled]="verificando">
+          INGRESAR
+        </button>
+      </div>
+    </form>
   </div>
 </div>

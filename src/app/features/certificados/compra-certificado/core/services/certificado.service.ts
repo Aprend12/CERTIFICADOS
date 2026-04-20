@@ -63,14 +63,6 @@ export class CertificadoService {
     };
   }
 
-  generarCertificadoFinal(datos: CertificadoDatos): string {
-    if (!datos.tipo_certificado || !this.esTipoValido(datos.tipo_certificado)) {
-      return '';
-    }
-    const datosCertificado = this.mapearDatos(datos);
-    return this.htmlBuilder.build(datos.tipo_certificado as TipoCertificado, datosCertificado, false);
-  }
-
   generarCertificadoConDatos(datos: DatosCertificado, tipoCertificado: string): string {
     if (!tipoCertificado || !this.esTipoValido(tipoCertificado)) {
       return '';
@@ -116,14 +108,4 @@ export class CertificadoService {
     }));
   }
 
-  private calcularFechaInicio(): string {
-    const fecha = new Date();
-    const semestre = this.datos?.semestre_academico || '5';
-    fecha.setMonth(fecha.getMonth() - (parseInt(semestre.split(' ')[0]) || 5) * 6);
-    return fecha.toISOString().split('T')[0];
-  }
-
-  private calcularFechaFin(): string {
-    return new Date().toISOString().split('T')[0];
-  }
 }

@@ -8,15 +8,6 @@ const API_CONFIG = {
   downloadUrl: '/certificado/descargar'
 };
 
-export interface Estudiante {
-  codigo_estudiante: string;
-  documento_estudiante: string;
-  nombre: string;
-  codigo: string;
-  carreras: Carrera[];
-  nombre_completo: string;
-}
-
 export interface Carrera {
   nivel: string;
   snies: string;
@@ -81,11 +72,6 @@ export interface GenerarCertificadoRequest {
   documento_estudiante: string;
 }
 
-export interface DescargarCertificado {
-  mensaje: string;
-  nombre_pdf: string;
-}
-
 export interface CertificadosDataResponse {
   codigo_verificacion?: string;
   hash?: string;
@@ -103,12 +89,6 @@ export interface GenerarCertificadoResponse {
   pdf?: string;
   hash?: string;
   data?: CertificadosDataResponse;
-}
-
-export interface VerificarCertificadoResponse {
-  valido: boolean;
-  mensaje: string;
-  certificado?: Record<string, unknown>;
 }
 
 @Injectable({
@@ -147,23 +127,5 @@ export class ApiService {
 
   generarCertificado(data: GenerarCertificadoRequest): Observable<GenerarCertificadoResponse> {
     return this.http.post<GenerarCertificadoResponse>(`${this.baseUrl}/generar`, data);
-  }
-
-  descargarCertificado(hash_code: string, documento_estudiante: string): Observable<DescargarCertificado> {
-    return this.http.post<DescargarCertificado>(`${this.baseUrl}/descargar`, {
-      hash_code,
-      documento_estudiante
-    });
-  }
-
-  descargarCertificadoPdf(hash_code: string, documento_estudiante: string): Observable<Blob> {
-    return this.http.post(`${this.baseUrl}/descargar`, {
-      hash_code,
-      documento_estudiante
-    }, { responseType: 'blob' });
-  }
-
-  verificarCertificado(hash: string): Observable<VerificarCertificadoResponse> {
-    return this.http.get<VerificarCertificadoResponse>(`${this.baseUrl}/verificar`);
   }
 }

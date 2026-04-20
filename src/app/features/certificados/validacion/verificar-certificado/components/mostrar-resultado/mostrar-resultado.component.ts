@@ -25,14 +25,4 @@ export class MostrarResultadoComponent {
   onVolver() {
     this.volver.emit();
   }
-
-  formatearFecha(fecha: string): string {
-    if (!fecha) return '';
-    const date = new Date(fecha);
-    return date.toLocaleDateString('es-CO', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  }
 }

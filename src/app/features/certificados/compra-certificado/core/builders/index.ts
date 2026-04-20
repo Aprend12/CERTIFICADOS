@@ -42,14 +42,13 @@ export function getCertificadoWrapper(contenido: string): string {
   return `
     <div style="
       width: 100%;
-      max-width: 21.59cm;
       min-height: 27.94cm;
-      padding: 1.5cm 1.5cm;
+      padding: 40px 50px;
       box-sizing: border-box;
       background: white;
       margin: 0 auto;
       position: relative;
-      overflow: visible;
+      overflow: hidden;
       font-family: 'Times New Roman', serif;
     ">
       <div style="position: relative; z-index: 1;">

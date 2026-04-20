@@ -38,15 +38,15 @@ export class CertificadoHomologacionBuilder extends CertificadoPlantillaBase imp
 
   private getOcultos(datos: DatosCertificado, esPreview: boolean) {
     return {
-      numero: esPreview ? '*******' : this.sanitize(datos.codigo || '1234HHZS1'),
-      nombre: esPreview ? '*********************' : this.sanitize(datos.nombre_completo || datos.nombre || 'Nombre Estudiante'),
+      numero: esPreview ? '*******' : this.sanitize(datos.codigo || ''),
+      nombre: esPreview ? '*********************' : this.sanitize(datos.nombre_completo || datos.nombre || ''),
       documento: esPreview ? '**************' : this.sanitize(datos.documento),
       programa: esPreview ? '***************' : this.sanitize(datos.programa),
       snies: esPreview ? '**********' : this.sanitize(datos.snies),
       semestre: esPreview ? '***' : this.sanitize(datos.semestre),
       periodo: esPreview ? '****-*' : this.sanitize(datos.periodo),
-      fecha_inicio: esPreview ? '**** de *** de ****' : this.sanitize(datos.fecha_inicio || '15 de septiembre de 2025'),
-      fecha_fin: esPreview ? '**** de *** de ****' : this.sanitize(datos.fecha_fin || '10 de enero de 2026'),
+      fecha_inicio: esPreview ? '**** de *** de ****' : this.formatFechaCompleta(datos.fecha_inicio_periodo || datos.fecha_inicio || new Date().toISOString().split('T')[0]),
+      fecha_fin: esPreview ? '**** de *** de ****' : this.formatFechaCompleta(datos.fecha_fin_periodo || datos.fecha_fin || new Date().toISOString().split('T')[0]),
       fecha: esPreview ? '*********************' : this.formatFechaCompleta(datos.fecha_expedicion),
       codigo_verificacion: esPreview ? 'PREVIEW-2024-****' : this.sanitize(datos.codigo_verificacion || datos.hash_code || ''),
       hash_code: esPreview ? '**************' : this.sanitize(datos.hash_code || ''),

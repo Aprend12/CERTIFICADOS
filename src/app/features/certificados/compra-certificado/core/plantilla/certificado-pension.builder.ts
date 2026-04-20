@@ -18,7 +18,7 @@ export class CertificadoPensionBuilder extends CertificadoPlantillaBase implemen
           <span style="font-size: 12pt; font-weight: 700; color: ${this.COLOR_TEXT}; text-transform: uppercase; letter-spacing: 1px;">Hace Constar</span>
         </p>
         <p style="margin-bottom: 15px; text-indent: 1cm;">Que, ${nombre}, identificado(a) con número de documento ${documento}, se encuentra matriculado(a) en el programa de *********************, SNIES *****.</p>
-        <p style="margin-bottom: 15px;">El semestre académico inicia el <strong>28 de julio de 2025</strong> y finaliza el <strong>29 de noviembre de 2025</strong>.</p>
+        <p style="margin-bottom: 15px;">El semestre académico inicia el <strong>${this.maskValue(datos.fecha_inicio_periodo || datos.fecha_inicio, '**** de **** de ****')}</strong> y finaliza el <strong>${this.maskValue(datos.fecha_fin_periodo || datos.fecha_fin, '**** de **** de ****')}</strong>.</p>
       </div>
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 9.5pt; border: 1px solid ${this.COLOR_PRIMARY};">
         <tr style="background: ${this.COLOR_PRIMARY}; color: white;">
@@ -46,7 +46,7 @@ export class CertificadoPensionBuilder extends CertificadoPlantillaBase implemen
         <p>El estudiante se encuentra(a) a paz y salvo con todos los pagos correspondientes al período académico ****-*.</p>
       </div>
       <div style="margin-top: 40px; text-align: left; font-size: 11pt; color: ${this.COLOR_MUTED};">
-        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${this.formatFechaCompleta(new Date().toISOString())}.</p>
+        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${this.formatFechaCompleta(new Date().toISOString().split('T')[0])}.</p>
       </div>
       ${this.getFirma()}
       ${this.getFooter('PREVIEW-2024-****')}

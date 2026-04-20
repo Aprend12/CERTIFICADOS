@@ -50,8 +50,8 @@ export class CertificadoFechasJornadaBuilder extends CertificadoPlantillaBase im
       };
     }
     return {
-      numero: this.sanitize(datos.codigo || '1234HHZS1'),
-      nombre: this.sanitize(datos.nombre_completo || datos.nombre || 'Nombre Estudiante'),
+      numero: this.sanitize(datos.codigo || ''),
+      nombre: this.sanitize(datos.nombre_completo || datos.nombre || ''),
       documento: this.sanitize(datos.documento),
       programa: this.sanitize(datos.programa),
       snies: this.sanitize(datos.snies),

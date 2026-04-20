@@ -25,7 +25,7 @@ export class CertificadoSencilloBuilder extends CertificadoPlantillaBase impleme
         <p style="margin-bottom: 20px;">El estudiante cursa actualmente el <strong>${semestre}</strong> semestre en el período académico <strong>${periodo}</strong>.</p>
       </div>
       <div style="margin-top: 60px; text-align: left; font-size: 11pt; color: ${this.COLOR_MUTED};">
-        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${this.formatFechaCompleta(new Date().toISOString())}.</p>
+        <p>Se expide a solicitud del interesado(a) en ${this.DIRECCION.split(',')[0]}, a los ${this.formatFechaCompleta(new Date().toISOString().split('T')[0])}.</p>
       </div>
       ${this.getFirma()}
       ${this.getFooter('PREVIEW-2024-****')}

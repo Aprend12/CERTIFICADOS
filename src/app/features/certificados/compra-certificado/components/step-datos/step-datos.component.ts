@@ -1,14 +1,10 @@
-import { Component, EventEmitter, Output, inject, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Output, inject, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { catchError, timeout } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CertificadoDatos, PeriodoAcademico } from '../../core/models/certificado.model';
 import { ApiService } from '../../core/services/api.service';
-
-function mapTipoACertificado(tipo: string): string {
-  return tipo;
-}
 
 interface CarreraEstudiante {
   nombre: string;
@@ -46,16 +42,12 @@ interface HistorialPeriodo {
   styleUrls: ['./step-datos.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepDatosComponent implements OnDestroy {
+export class StepDatosComponent {
   @Output() datosSubmitted = new EventEmitter<CertificadoDatos>();
-  @Output() goToStep2 = new EventEmitter<{ estudiante: EstudianteCertificado; carreras: CarreraEstudiante[]; tipoCertificado: string; documento: string; numeroEstudiante: string; codigoCarrera: string }>();
-  @Output() resetComponent = new EventEmitter<void>();
 
   form: FormGroup;
   private fb = inject(FormBuilder);
   private apiService = inject(ApiService);
-
-  ngOnDestroy() {}
 
   estudianteEncontrado: EstudianteCertificado | null = null;
   ultimoDocumentoVerificado: string = '';
@@ -119,21 +111,13 @@ export class StepDatosComponent implements OnDestroy {
 
     this.verificando = true;
 
-    console.log('Enviando request verificarCertificado:', {
-      tipo_certificacion: tipoCertificado,
-      documento_estudiante,
-      codigo_estudiante: codigoEstudiante
-    });
-
-this.apiService.validarEstudiante(documento_estudiante, codigoEstudiante, mapTipoACertificado(tipoCertificado)).pipe(
-        timeout(30000),
+    this.apiService.validarEstudiante(documento_estudiante, codigoEstudiante, tipoCertificado).pipe(
+      timeout(30000),
       catchError((err) => {
-        console.error('Error en verificarCertificado:', err);
         if (err.name === 'TimeoutError') {
           this.mostrarErrorTimeout();
           this.mostrarErrorUsuario = true;
         } else if (err.status === 400) {
-          console.error('Bad Request:', err.error);
           this.errorUsuarioNoEncontrado = true;
           this.mostrarErrorUsuario = true;
         } else if (err.status === 404) {
@@ -308,21 +292,12 @@ this.apiService.validarEstudiante(documento_estudiante, codigoEstudiante, mapTip
       this.verificando = true;
       const sniesSeleccionado = this.carreraSeleccionada?.snies || '';
       
-      console.log('Enviando request:', {
-        tipo_certificacion: mapTipoACertificado(tipoCertificado),
-        documento_estudiante,
-        codigo_estudiante: codigoEstudiante,
-        snies_programa: sniesSeleccionado
-      });
-      
-      this.apiService.validarEstudiante(documento_estudiante, codigoEstudiante, mapTipoACertificado(tipoCertificado), sniesSeleccionado).pipe(
+      this.apiService.validarEstudiante(documento_estudiante, codigoEstudiante, tipoCertificado, sniesSeleccionado).pipe(
         timeout(30000),
         catchError((err) => {
-          console.error('Error en validarEstudiante:', err);
           if (err.name === 'TimeoutError') {
             this.mostrarErrorTimeout();
           } else if (err.status === 400) {
-            console.error('Bad Request - Datos inválidos:', err.error);
             this.errorUsuarioNoEncontrado = true;
             this.mostrarErrorUsuario = true;
             this.camposVacios = true;
@@ -368,7 +343,6 @@ this.apiService.validarEstudiante(documento_estudiante, codigoEstudiante, mapTip
           }
         },
         error: (err) => {
-          
           if (err.status === 409 && err.error?.action_code === 'SELECCIONAR_PROGRAMA') {
             this.procesarRespuestaValidar(err.error, documento_estudiante, codigoEstudiante);
             if (this.carrerasDisponibles.length > 1) {
@@ -523,6 +497,5 @@ this.apiService.validarEstudiante(documento_estudiante, codigoEstudiante, mapTip
     this.errorModalCarreraNoSeleccionada = false;
     this.mostrarErrorCampos = false;
     this.mostrarErrorUsuario = false;
-    this.resetComponent.emit();
   }
 }
