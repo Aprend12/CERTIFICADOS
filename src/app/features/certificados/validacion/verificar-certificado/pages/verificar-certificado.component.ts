@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { VerificarService } from '../core/services/verificar.service';
 import { ValidarCodigoComponent } from '../components/validar-codigo/validar-codigo.component';
-import { CertificadoPreviewComponent } from '../components/certificado-preview/certificado-preview.component';
 
 @Component({
   selector: 'app-verificar-certificado',
   standalone: true,
-  imports: [CommonModule, ValidarCodigoComponent, CertificadoPreviewComponent],
+  imports: [CommonModule, ValidarCodigoComponent],
   templateUrl: './verificar-certificado.component.html',
   styleUrls: ['./verificar-certificado.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -99,10 +98,17 @@ export class VerificarCertificadoComponent implements OnInit {
     this.verificarService.descargarCertificado(this.hashCode, this.documentoEstudiante).subscribe({
       next: (blob) => {
         this.cargandoPdf = false;
+        if (this.pdfUrl) {
+          window.URL.revokeObjectURL(this.pdfUrl);
+        }
+        this.pdfUrl = window.URL.createObjectURL(blob);
+        this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfUrl);
         this.cdr.markForCheck();
       },
       error: (err) => {
         this.cargandoPdf = false;
+        this.mostrarError = true;
+        this.mensajeError = 'Error al cargar el certificado. Puede descargarlo usando el botón.';
         this.cdr.markForCheck();
       }
     });

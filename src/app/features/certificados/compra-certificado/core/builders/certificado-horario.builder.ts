@@ -1,6 +1,6 @@
 /**
- * Constructor del Certificado con Horario.
- * Formato profesional institucional para descarga.
+ * Schedule Certificate Constructor.
+ * Professional institutional format for download.
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 import { CertificadoPlantillaBase } from './certificado-base.builder';

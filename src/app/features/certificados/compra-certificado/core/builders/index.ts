@@ -51,8 +51,7 @@ export function getCertificadoWrapper(contenido: string): string {
       overflow: hidden;
       font-family: 'Times New Roman', serif;
     ">
-      <div style="position: relative; z-index: 1;">
-        ${contenido}
+      <div style="position: relative; z-index: 1;"> ${contenido}
       </div>
     </div>
   `;

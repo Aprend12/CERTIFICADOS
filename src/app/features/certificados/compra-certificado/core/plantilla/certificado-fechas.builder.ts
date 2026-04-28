@@ -1,5 +1,5 @@
 /**
- * Plantilla de Certificado con Fechas Académicas (para preview).
+ * Academic Dates Certificate Template (for preview).
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 import { CertificadoPlantillaBase } from './certificado-base.builder';
@@ -7,14 +7,14 @@ import { CertificadoPlantillaBase } from './certificado-base.builder';
 export class CertificadoFechasBuilder extends CertificadoPlantillaBase implements CertificadoBuilder {
 
   build(datos: DatosCertificado): string {
-    const nombre = this.maskValue(datos.nombre_completo || datos.nombre, '*********************');
-    const documento = this.maskValue(datos.documento, '**************');
-    const programa = this.maskValue(datos.programa, '*********************');
-    const snies = this.maskValue(datos.snies, '**********');
-    const semestre = this.maskValue(datos.semestre, '***');
-    const periodo = this.maskValue(datos.periodo, '****-*');
-    const fecha_inicio = this.maskValue(datos.fecha_inicio_periodo, '*********************');
-    const fecha_fin = this.maskValue(datos.fecha_fin_periodo, '*********************');
+    const nombre = datos.nombre_completo || datos.nombre || 'Carlos Eduardo Martínez Soto';
+    const documento = datos.documento || '8.765.432';
+    const programa = datos.programa || 'Ingeniería Industrial';
+    const snies = datos.snies || '107654';
+    const semestre = datos.semestre || '6';
+    const periodo = datos.periodo || '2025-1';
+    const fecha_inicio = datos.fecha_inicio_periodo || datos.fecha_inicio || '15 de enero de 2025';
+    const fecha_fin = datos.fecha_fin_periodo || datos.fecha_fin || '15 de junio de 2025';
 
     const contenido = `
       ${this.getEncabezado('Constancia de Fechas', 'PREVIEW-2024-****')}

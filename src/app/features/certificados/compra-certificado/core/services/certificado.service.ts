@@ -2,13 +2,23 @@ import { Injectable, inject } from '@angular/core';
 import { CertificadoDatos, DatosCertificado, TITULOS_CERTIFICADO, TipoCertificado, Materia } from '../models/certificado.model';
 import { HtmlBuilderService } from './html-builder.service';
 
+/**
+ * Service for managing certificate data and generation.
+ * Handles data mapping between API response and certificate builder input.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class CertificadoService {
+  /** Current certificate request data */
   private datos!: CertificadoDatos;
+  /** Service for building HTML certificate content */
   private htmlBuilder = inject(HtmlBuilderService);
 
+  /**
+   * Stores the certificate request data.
+   * @param data - The certificate data from the user input
+   */
   setDatos(data: CertificadoDatos) {
     this.datos = data;
   }

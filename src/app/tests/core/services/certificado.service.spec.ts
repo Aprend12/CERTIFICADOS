@@ -101,7 +101,25 @@ describe('CertificadoService', () => {
       nombre_completo: 'Juan Pérez'
     };
 
-    const certificado = service.generarCertificadoFinal(datos);
+    const certificado = service.generarCertificadoConDatos({
+      documento: '12345678',
+      nombre_completo: 'Juan Pérez',
+      nombre: 'Juan Pérez',
+      programa: '',
+      snies: '123456',
+      semestre: '',
+      periodo: '',
+      fecha_expedicion: '',
+      fecha_inicio: '',
+      fecha_fin: '',
+      jornada: '',
+      codigo: '10236580',
+      hash_code: '',
+      codigo_verificacion: '',
+      materias: [],
+      fecha_inicio_periodo: '',
+      fecha_fin_periodo: ''
+    }, 'sencillo');
 
     expect(htmlBuilderSpy.build).toHaveBeenCalled();
     expect(certificado).toBe('<div>Certificado HTML</div>');
@@ -116,7 +134,25 @@ describe('CertificadoService', () => {
       nombre_completo: 'Juan Pérez'
     };
 
-    const certificado = service.generarCertificadoFinal(datos);
+    const certificado = service.generarCertificadoConDatos({
+      documento: '12345678',
+      nombre_completo: 'Juan Pérez',
+      nombre: 'Juan Pérez',
+      programa: '',
+      snies: '123456',
+      semestre: '',
+      periodo: '',
+      fecha_expedicion: '',
+      fecha_inicio: '',
+      fecha_fin: '',
+      jornada: '',
+      codigo: '10236580',
+      hash_code: '',
+      codigo_verificacion: '',
+      materias: [],
+      fecha_inicio_periodo: '',
+      fecha_fin_periodo: ''
+    }, 'sencillo');
 
     expect(certificado).toBe('');
   });

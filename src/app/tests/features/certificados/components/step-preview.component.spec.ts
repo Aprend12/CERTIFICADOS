@@ -25,8 +25,6 @@ describe('StepPreviewComponent', () => {
 
   it('should display certificate HTML when set', () => {
     component.certificadoHTML = '<div class="certificado">Test Content</div>';
-    component.titulo = 'Test Title';
-    component.nombreEstudiante = 'Test User';
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;

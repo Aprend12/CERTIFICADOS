@@ -1,7 +1,7 @@
 /**
- * Componente que muestra la vista previa del certificado.
- * El certificado se escala visualmente para caber en el contenedor
- * manteniendo sus proporciones reales (tamaño carta).
+ * Component that displays the certificate preview.
+ * The certificate is visually scaled to fit in the container
+ * while maintaining its real proportions (letter size).
  */
 import {
   Component,

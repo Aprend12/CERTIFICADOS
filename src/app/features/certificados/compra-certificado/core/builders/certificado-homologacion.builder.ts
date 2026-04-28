@@ -1,6 +1,6 @@
 /**
- * Constructor del Certificado de Homologación.
- * Formato profesional institucional para descarga.
+ * Transfer Certificate Constructor.
+ * Professional institutional format for download.
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 import { CertificadoPlantillaBase } from './certificado-base.builder';

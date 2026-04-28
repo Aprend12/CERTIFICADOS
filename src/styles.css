@@ -173,7 +173,7 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Título del panel preview (del original) ── */
+/* ── Preview panel title (from original) ── */
 .caja__preview h2 {
   color: #ffffff;
   margin: 0 0 4px;
@@ -287,7 +287,7 @@ body {
   flex: 1;
 }
 
-/* Hojas apiladas detrás */
+/* Stacked papers behind */
 .paper-stack {
   position: absolute;
   border-radius: 4px;

@@ -2,11 +2,14 @@ import { Component, Output, EventEmitter, Input, inject, ChangeDetectionStrategy
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../core/services/api.service';
+import { NotificationService } from '../../../../../shared/services/notification.service';
 import { catchError, timeout } from 'rxjs/operators';
 import { of } from 'rxjs';
 
+/** External ePayco payment gateway global object */
 declare var ePayco: any;
 
+/** Bank or payment method information. */
 interface Banco {
   c: string;
   n: string;
@@ -16,6 +19,10 @@ interface Banco {
   tipo?: string;
 }
 
+/**
+ * Component for handling payment step in the certificate purchase wizard.
+ * Supports multiple payment methods including credit cards and digital wallets.
+ */
 @Component({
   selector: 'app-step-pagos',
   standalone: true,
@@ -25,38 +32,60 @@ interface Banco {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepPagosComponent {
+  /** Event emitted when payment is completed and user can proceed to download */
   @Output() goToDownload = new EventEmitter<{ hash_code: string; documento_estudiante: string; validado: boolean }>();
   @Input() nombreCertificado: string = '';
   @Input() hashCode: string = '';
   @Input() documentoEstudiante: string = '';
 
   private apiService = inject(ApiService);
+  private notificationService = inject(NotificationService);
 
+  /** Current payment step (1-7) */
   step: number = 1;
+  /** Whether a bank has been selected */
   bancoSeleccionado: boolean = false;
+  /** Processing payment state */
   procesandoPago: boolean = false;
+  /** Error display flag */
   mostrarError: boolean = false;
 
+  /** Certificate price in COP */
   readonly PRECIO_CERTIFICADO = 18000;
 
+  /** Payment method selection */
   metodoPago: string = '';
+  /** Card type (credit/debit) */
   tipoTarjeta: string = 'credito';
+  /** Cardholder full name */
   nombreCompleto: string = '';
+  /** Payer email */
   email: string = '';
+  /** Payer phone number */
   telefono: string = '';
+  /** Document type (CC, CE, etc.) */
   tipoDocumento: string = 'CC';
+  /** Payer document number */
   numeroDocumento: string = '';
 
+  /** Payment reference number */
   refPago: string = '';
 
+  /** Selected bank/wallet */
   selBanco: Banco | null = null;
+  /** Filtered bank list for search */
   bancosFiltrados: Banco[] = [];
 
+  /** Credit card number */
   numeroTarjeta: string = '';
+  /** Card expiration date (MM/YY) */
   fechaExpiracion: string = '';
+  /** Card CVV code */
   cvv: string = '';
+  /** Name on card */
   nombreTarjeta: string = '';
 
+  /** Available banks and digital wallets */
   bancos: Banco[] = [
     { c: '1007', n: 'Bancolombia', e: 'B', bg: '#f4a024', cl: '#000', tipo: 'banco' },
     { c: '1022', n: 'Banco de Bogotá', e: 'BB', bg: '#003f87', cl: '#fff', tipo: 'banco' },
@@ -299,6 +328,7 @@ export class StepPagosComponent {
   irADescarga() {
     if (!this.hashCode || !this.documentoEstudiante) {
       this.mostrarError = true;
+      this.notificationService.error('Faltan datos del certificado. No se puede continuar.');
       return;
     }
 
@@ -311,7 +341,10 @@ export class StepPagosComponent {
       timeout(15000),
       catchError((err) => {
         if (err.name === 'TimeoutError') {
-          this.mostrarError = true;
+          this.notificationService.error('Tiempo de espera agotado. Intente nuevamente.');
+        } else {
+          const mensaje = err.error?.mensaje || 'Error al validar el pago';
+          this.notificationService.error(mensaje);
         }
         this.procesandoPago = false;
         this.goToDownload.emit({
@@ -326,6 +359,11 @@ export class StepPagosComponent {
         if (!response) return;
         this.procesandoPago = false;
         const pagoValidado = response.action_code === 'PAGO_APROBADO';
+        if (!pagoValidado) {
+          this.notificationService.error(response.mensaje || 'El pago no fue aprobado');
+        } else {
+          this.notificationService.success('Pago aprobado correctamente');
+        }
         this.goToDownload.emit({
           hash_code: this.hashCode,
           documento_estudiante: this.documentoEstudiante,
@@ -334,6 +372,8 @@ export class StepPagosComponent {
       },
       error: (err) => {
         this.procesandoPago = false;
+        const mensaje = err.error?.mensaje || 'Error al validar el pago';
+        this.notificationService.error(mensaje);
         this.goToDownload.emit({
           hash_code: this.hashCode,
           documento_estudiante: this.documentoEstudiante,

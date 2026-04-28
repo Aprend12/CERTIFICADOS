@@ -67,7 +67,7 @@
 }
 
 .step-datos .form-group input:disabled {
-  background: #e9ecef !important;
+  background: #ffffff !important;
   cursor: not-allowed;
 }
 

@@ -81,7 +81,7 @@ export class StepDescargaComponent implements OnChanges {
 
       if (this.datos.historial_notas && this.datos.historial_notas.length > 0) {
         const todasLasMaterias: Materia[] = [];
-        
+
         for (const periodo of this.datos.historial_notas) {
           if (periodo.materias && Array.isArray(periodo.materias)) {
             for (const m of periodo.materias) {

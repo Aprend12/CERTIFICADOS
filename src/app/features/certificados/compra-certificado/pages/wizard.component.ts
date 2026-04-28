@@ -6,7 +6,12 @@ import { StepDescargaComponent } from '../components/step-descarga/step-descarga
 import { WizardService } from '../core/services/wizard.service';
 import { CertificadoService } from '../core/services/certificado.service';
 import { CertificadoDatos } from '../core/models/certificado.model';
+import { NotificationService } from '../../../../shared/services/notification.service';
 
+/**
+ * Wizard component that manages the certificate purchase flow.
+ * Handles navigation between steps: data entry, preview, payment, and download.
+ */
 @Component({
   selector: 'app-wizard',
   standalone: true,
@@ -16,15 +21,22 @@ import { CertificadoDatos } from '../core/models/certificado.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardComponent implements OnInit {
+  ngOnInit(): void {}
+
+  private notificationService = inject(NotificationService);
+
+  /** Reference to the step-datos child component */
   @ViewChild(StepDatosComponent) stepDatos?: StepDatosComponent;
   
+  /** Service for managing wizard step navigation */
   wizardService: WizardService = inject(WizardService);
+  /** Service for generating certificate HTML */
   private certificadoService: CertificadoService = inject(CertificadoService);
 
-  ngOnInit() {
-    this.resetWizard();
-  }
-
+  /**
+   * Current user data and certificate request information.
+   * Contains document ID, student code, program details, etc.
+   */
   datosUsuario: CertificadoDatos = {
     documento: '',
     codigo_estudiante: '',
@@ -82,10 +94,12 @@ export class WizardComponent implements OnInit {
   }
 
   onPagoCompletado(data: { hash_code: string; documento_estudiante: string; validado: boolean }) {
-    if (data.validado) {
-      this.datosUsuario.hash_code = data.hash_code;
-      this.certificadoService.setDatos(this.datosUsuario);
+    if (!data.validado) {
+      this.notificationService.error('El pago no ha sido aprobado. No se puede continuar.');
+      return;
     }
+    this.datosUsuario.hash_code = data.hash_code;
+    this.certificadoService.setDatos(this.datosUsuario);
     this.setStep(4);
   }
 

@@ -3,7 +3,7 @@
     <h2 style="color: #ff8800; text-align: center; margin-top: 40px; margin-bottom: 20px; font-size: 1.2rem;">Ingresar Datos del Estudiante</h2>
 
     <form [formGroup]="form" class="content-medio" [class.disabled]="verificando">
-      
+
       <div *ngIf="verificando" class="loading-overlay">
         <div class="spinner"></div>
         <p>Verificando estudiante...</p>
@@ -53,7 +53,7 @@
       <div class="modal-content" (click)="$event.stopPropagation()">
         <form class="content-medio" style="max-width: 500px;">
           <h3 style="color: #ff8800; text-align: center; margin-bottom: 20px; font-size: 1.1rem;">Seleccione una carrera</h3>
-          <p style="margin-bottom: 20px; color: #fff; text-align: center;">Hemos identificado que se encuentra en múltiples programas académicos. Ingrese el programa en el que desea realizar la compra del certificado.</p>
+          <p style="margin-bottom: 20px; color: #fff; text-align: center;">Hemos identificado que se encuentra en múltiples programas académicos.Seleccione el programa en el que desea realizar la compra del certificado.</p>
 
           <div class="form-group" [class.form-group-error]="errorModalCarreraNoSeleccionada">
             <label for="carrera">Carrera <span class="required">*</span></label>

@@ -1,5 +1,5 @@
 /**
- * Plantilla de Certificado de Notas (para preview).
+ * Grades Certificate Template (for preview).
  */
 import { DatosCertificado, CertificadoBuilder, Materia } from '../models/certificado.model';
 import { CertificadoPlantillaBase } from './certificado-base.builder';
@@ -142,22 +142,77 @@ export class CertificadoNotasBuilder extends CertificadoPlantillaBase implements
             <td style="width:20%; ${cellHead} font-size:9pt;">Nota</td>
           </tr>
           <tr style="background: white;">
-            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">***********************</td>
-            <td style="${cellData}">***</td>
-            <td style="${cellData}">*</td>
-            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">*.*</td>
+            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">Fundamentos de Programación</td>
+            <td style="${cellData}">1</td>
+            <td style="${cellData}">4</td>
+            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">4.2</td>
           </tr>
           <tr style="background:#f7fafc;">
-            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">***********************</td>
-            <td style="${cellData}">***</td>
-            <td style="${cellData}">*</td>
-            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">*.*</td>
+            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">Matemáticas Discretas</td>
+            <td style="${cellData}">1</td>
+            <td style="${cellData}">3</td>
+            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">3.8</td>
+          </tr>
+          <tr style="background: white;">
+            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">Introducción a la Ingeniería</td>
+            <td style="${cellData}">1</td>
+            <td style="${cellData}">2</td>
+            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">4.5</td>
+          </tr>
+          <tr style="background:#f7fafc;">
+            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">Comunicación y Lenguaje</td>
+            <td style="${cellData}">1</td>
+            <td style="${cellData}">2</td>
+            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">4.0</td>
           </tr>
           <tr style="background:#e8f4fd;">
             <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt; font-weight:600;">Totales del período</td>
             <td style="${cellData} font-weight:600;"></td>
-            <td style="${cellData} font-weight:600;">**</td>
-            <td style="${cellData} font-weight:700; color:${this.COLOR_TEXT};">0.0</td>
+            <td style="${cellData} font-weight:600;">11</td>
+            <td style="${cellData} font-weight:700; color:${this.COLOR_TEXT};">4.1</td>
+          </tr>
+        </table>
+      </div>
+      <div style="margin-bottom: 20px; border: 1px solid ${this.COLOR_BORDER}; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+        <div style="background:${this.COLOR_PRIMARY}; color:white; font-weight:600; padding:8px 12px; font-size:10pt; letter-spacing: 1px;">
+          Período: 2024-2
+        </div>
+        <table style="width:100%; border-collapse:collapse;">
+          <tr>
+            <td style="width:55%; ${cellHead} font-size:9pt;">Módulo / Asignatura</td>
+            <td style="width:12%; ${cellHead} font-size:9pt;">Nivel</td>
+            <td style="width:13%; ${cellHead} font-size:9pt;">Créditos</td>
+            <td style="width:20%; ${cellHead} font-size:9pt;">Nota</td>
+          </tr>
+          <tr style="background: white;">
+            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">Álgebra Lineal</td>
+            <td style="${cellData}">1</td>
+            <td style="${cellData}">3</td>
+            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">3.5</td>
+          </tr>
+          <tr style="background:#f7fafc;">
+            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">Cálculo Diferencial</td>
+            <td style="${cellData}">1</td>
+            <td style="${cellData}">4</td>
+            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">4.0</td>
+          </tr>
+          <tr style="background: white;">
+            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">Física General</td>
+            <td style="${cellData}">1</td>
+            <td style="${cellData}">3</td>
+            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">3.7</td>
+          </tr>
+          <tr style="background:#f7fafc;">
+            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt;">Ética y Valores</td>
+            <td style="${cellData}">1</td>
+            <td style="${cellData}">2</td>
+            <td style="${cellData} font-weight:bold; color:${this.COLOR_TEXT};">4.8</td>
+          </tr>
+          <tr style="background:#e8f4fd;">
+            <td style="padding:8px 10px; border:1px solid ${this.COLOR_BORDER}; font-size:9pt; font-weight:600;">Totales del período</td>
+            <td style="${cellData} font-weight:600;"></td>
+            <td style="${cellData} font-weight:600;">12</td>
+            <td style="${cellData} font-weight:700; color:${this.COLOR_TEXT};">3.9</td>
           </tr>
         </table>
       </div>

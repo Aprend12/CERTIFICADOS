@@ -1,6 +1,6 @@
 /**
- * Constructor del Certificado con Fechas y Jornada.
- * Formato profesional institucional para descarga.
+ * Dates and Schedule Certificate Constructor.
+ * Professional institutional format for download.
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 import { CertificadoPlantillaBase } from './certificado-base.builder';

@@ -1,3 +1,10 @@
+/**
+ * Data models for certificate generation and purchase flow.
+ */
+
+/**
+ * Represents a single subject/course in a student's record.
+ */
 export interface Materia {
   nombre: string;
   codigo?: string;
@@ -7,11 +14,13 @@ export interface Materia {
   periodo?: string;
 }
 
+/** Academic period with its corresponding subjects. */
 export interface PeriodoAcademico {
   periodo: string;
   materias: Materia[];
 }
 
+/** Initial data received from the API when user requests certificate info. */
 export interface CertificadoDatos {
   documento: string;
   codigo_estudiante: string;
@@ -28,6 +37,7 @@ export interface CertificadoDatos {
   jornada?: string;
 }
 
+/** Processed data used for building the certificate HTML. */
 export interface DatosCertificado {
   documento: string;
   nombre?: string;
@@ -48,6 +58,7 @@ export interface DatosCertificado {
   fecha_fin_periodo?: string;
 }
 
+/** Available certificate types that can be requested. */
 export type TipoCertificado =
   | 'sencillo'
   | 'notas'
@@ -60,6 +71,7 @@ export type TipoCertificado =
   | 'horario'
   | 'practica';
 
+/** Mapping of certificate types to their display titles. */
 export const TITULOS_CERTIFICADO: Record<TipoCertificado, string> = {
   sencillo: 'Certificado de Estudio Sencillo',
   notas: 'Certificado de Notas',
@@ -73,6 +85,7 @@ export const TITULOS_CERTIFICADO: Record<TipoCertificado, string> = {
   practica: 'Certificado de Práctica'
 };
 
+/** Builder interface for generating certificate HTML content. */
 export interface CertificadoBuilder {
   build(datos: DatosCertificado, esPreview: boolean): string;
 }

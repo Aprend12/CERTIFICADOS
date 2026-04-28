@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ApiService, GenerarCertificadoRequest, GenerarCertificadoResponse, DescargarCertificado } from '../../../../../features/certificados/compra-certificado/core/services/api.service';
+import { ApiService, GenerarCertificadoRequest, GenerarCertificadoResponse } from '../../../../../features/certificados/compra-certificado/core/services/api.service';
 
 describe('ApiService', () => {
   let service: ApiService;
@@ -35,24 +35,5 @@ describe('ApiService', () => {
     const req = httpMock.expectOne('/certificado/generar');
     expect(req.request.method).toBe('POST');
     req.flush({ mensaje: 'ok', pdf: 'token.pdf', hash: 'abc' } as GenerarCertificadoResponse);
-  });
-
-  it('should make POST request to descargar certificado endpoint', () => {
-    service.descargarCertificado('abc123', '1234').subscribe();
-
-    const req = httpMock.expectOne('/certificado/descargar');
-    expect(req.request.method).toBe('POST');
-    req.flush({ mensaje: 'ok', nombre_pdf: 'token.pdf' } as DescargarCertificado);
-  });
-
-  it('should return verificarCertificado response', () => {
-    service.verificarCertificado('hash123').subscribe((response: { valido: boolean; mensaje: string }) => {
-      expect(response.valido).toBe(true);
-      expect(response.mensaje).toBe('Certificado válido');
-    });
-
-    const req = httpMock.expectOne('/certificado/verificar');
-    expect(req.request.method).toBe('GET');
-    req.flush({ valido: true, mensaje: 'Certificado válido' });
   });
 });

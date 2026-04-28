@@ -5,7 +5,9 @@ import { catchError, timeout } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CertificadoDatos, PeriodoAcademico } from '../../core/models/certificado.model';
 import { ApiService } from '../../core/services/api.service';
+import { NotificationService } from '../../../../../shared/services/notification.service';
 
+/** Represents a career/program available to a student. */
 interface CarreraEstudiante {
   nombre: string;
   snies: string;
@@ -14,6 +16,7 @@ interface CarreraEstudiante {
   modalidad?: string;
 }
 
+/** Student certificate data from API response. */
 interface EstudianteCertificado {
   documento_estudiante: string;
   codigo_estudiante: string;
@@ -29,11 +32,16 @@ interface EstudianteCertificado {
   jornada?: string;
 }
 
+/** Academic period with subjects. */
 interface HistorialPeriodo {
   periodo: string;
   materias: any[];
 }
 
+/**
+ * Component for the first step of the wizard - entering student data.
+ * Handles form validation, student verification, and program selection.
+ */
 @Component({
   selector: 'app-step-datos',
   standalone: true,
@@ -43,31 +51,46 @@ interface HistorialPeriodo {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepDatosComponent {
+  /** Event emitted when form data is submitted successfully */
   @Output() datosSubmitted = new EventEmitter<CertificadoDatos>();
 
+  /** Main form for student data entry */
   form: FormGroup;
   private fb = inject(FormBuilder);
   private apiService = inject(ApiService);
+  private notificationService = inject(NotificationService);
 
+  /** Verified student data */
   estudianteEncontrado: EstudianteCertificado | null = null;
+  /** Last verified document number */
   ultimoDocumentoVerificado: string = '';
+  /** Last verified student code */
   ultimoCodigoVerificado: string = '';
+  /** Flag for student not found error */
   estudianteNoEncontrado = false;
+  /** Loading state during verification */
   verificando = false;
+  /** Student's full name after verification */
   nombreEstudiante: string = '';
 
+  /** Available programs for student with multiple enrollments */
   carrerasDisponibles: CarreraEstudiante[] = [];
+  /** Selected program when student has multiple */
   carreraSeleccionada: CarreraEstudiante | null = null;
 
+  /** Modal visibility flag */
   mostrarModalCarreras = false;
+  /** Selected program from modal */
   carreraElegida: string = '';
 
+  /** Error state flags */
   camposVacios = false;
   errorUsuarioNoEncontrado = false;
   errorModalCarreraNoSeleccionada = false;
   mostrarErrorCampos = false;
   mostrarErrorUsuario = false;
 
+  /** Current verification hash code */
   private hashCodeActual: string = '';
   private cdr = inject(ChangeDetectorRef);
 
@@ -124,8 +147,10 @@ export class StepDatosComponent {
           this.estudianteNoEncontrado = true;
           this.errorUsuarioNoEncontrado = true;
           this.mostrarErrorUsuario = true;
+          this.notificationService.error('Estudiante no encontrado');
         } else {
           this.mostrarErrorUsuario = true;
+          this.notificationService.error('Error de conexión con el servidor');
         }
         this.verificando = false;
         this.cdr.detectChanges();
@@ -161,6 +186,7 @@ export class StepDatosComponent {
 
   private procesarRespuestaValidar(response: any, documento_estudiante: string, codigoEstudiante: string) {
     const actionCode = response.action_code;
+    const mensajeError = response.mensaje || 'Error al procesar la solicitud';
 
     if (actionCode === 'DATOS_PREPARADOS' && response.datos_certificado) {
       const datos = response.datos_certificado;
@@ -260,6 +286,7 @@ export class StepDatosComponent {
       this.estudianteEncontrado = null;
       this.estudianteNoEncontrado = true;
       this.mostrarErrorUsuario = true;
+      this.notificationService.error(mensajeError);
       this.carrerasDisponibles = [];
       this.ultimoDocumentoVerificado = '';
       this.ultimoCodigoVerificado = '';
@@ -281,6 +308,7 @@ export class StepDatosComponent {
     if (!documento_estudiante || !codigoEstudiante || !tipoCertificado) {
       this.mostrarErrorCampos = true;
       this.camposVacios = true;
+      this.notificationService.error('Por favor complete todos los campos obligatorios');
       return;
     }
 
@@ -305,6 +333,7 @@ export class StepDatosComponent {
             this.estudianteNoEncontrado = true;
             this.errorUsuarioNoEncontrado = true;
             this.mostrarErrorUsuario = true;
+            this.notificationService.error('Estudiante no encontrado');
           } else if (err.status === 409) {
             this.procesarRespuestaValidar(err.error, documento_estudiante, codigoEstudiante);
             if (this.carrerasDisponibles.length > 1) {
@@ -319,6 +348,7 @@ export class StepDatosComponent {
           } else {
             this.errorUsuarioNoEncontrado = true;
             this.mostrarErrorUsuario = true;
+            this.notificationService.error('Error al procesar la solicitud');
           }
           this.verificando = false;
           this.cdr.detectChanges();
@@ -366,6 +396,7 @@ export class StepDatosComponent {
           this.errorUsuarioNoEncontrado = true;
           this.camposVacios = true;
           this.verificando = false;
+          this.notificationService.error(mensajeError);
           this.cdr.detectChanges();
         }
       });

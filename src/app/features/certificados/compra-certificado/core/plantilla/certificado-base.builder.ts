@@ -1,5 +1,5 @@
 /**
- * Plantilla base para certificados (versión preview).
+ * Base template for certificates (preview version).
  */
 import { CONSTANTES_CERTIFICADO_PREVIEW } from '../constants';
 
@@ -19,7 +19,13 @@ export class CertificadoPlantillaBase {
   protected readonly COLOR_BORDER = CONSTANTES_CERTIFICADO_PREVIEW.COLOR_BORDER;
 
   protected getMarcosDecorativos(): string {
-    return '';
+    return `
+      <div style="position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 2px solid ${this.COLOR_PRIMARY}; pointer-events: none;"></div>
+      <div style="position: absolute; top: 22px; left: 22px; right: 22px; bottom: 22px; border: 1px solid ${this.COLOR_BORDER}; pointer-events: none;"></div>
+      <div style="position: absolute; top: 30px; left: 30px; width: 80px; height: 80px; border-top: 3px solid ${this.COLOR_PRIMARY}; border-left: 3px solid ${this.COLOR_PRIMARY}; pointer-events: none;"></div>
+      <div style="position: absolute; top: 30px; right: 30px; width: 80px; height: 80px; border-top: 3px solid ${this.COLOR_PRIMARY}; border-right: 3px solid ${this.COLOR_PRIMARY}; pointer-events: none;"></div>
+      <div style="position: absolute; bottom: 30px; left: 30px; width: 80px; height: 80px; border-bottom: 3px solid ${this.COLOR_PRIMARY}; border-left: 3px solid ${this.COLOR_PRIMARY}; pointer-events: none;"></div>
+      <div style="position: absolute; bottom: 30px; right: 30px; width: 80px; height: 80px; border-bottom: 3px solid ${this.COLOR_PRIMARY}; border-right: 3px solid ${this.COLOR_PRIMARY}; pointer-events: none;"></div>`;
   }
 
   protected getEncabezado(titulo: string, hashCode: string): string {

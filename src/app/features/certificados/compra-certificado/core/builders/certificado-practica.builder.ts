@@ -1,6 +1,6 @@
 /**
- * Constructor del Certificado de Práctica.
- * Formato profesional institucional para descarga.
+ * Practice Certificate Constructor.
+ * Professional institutional format for download.
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 import { CertificadoPlantillaBase } from './certificado-base.builder';

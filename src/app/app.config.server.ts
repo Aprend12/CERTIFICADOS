@@ -1,4 +1,4 @@
-/**Configuración específica para el servidor (SSR) de la aplicación Angular.*/
+/**Server-specific configuration for Angular SSR.*/
 import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
 import { provideServerRendering, withRoutes } from '@angular/ssr';
 import { appConfig } from './app.config';

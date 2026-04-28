@@ -24,7 +24,7 @@
 
 <!-- Contenido de los pasos -->
 <div class="wizard-content">
-  <!-- Paso 1: Validar código -->
+  <!-- Step 1: Validate code -->
   <div class="step-content" [class.active]="isStepActive(1)">
     <app-validar-codigo 
       (codigoIngresado)="onCodigoIngresado($event)"
@@ -36,17 +36,10 @@
     </div>
   </div>
 
-  <!-- Paso 2: Mostrar certificado -->
+  <!-- Step 2: Show certificate -->
   <div class="step-content" [class.active]="isStepActive(2)">
     <div class="resultado-container">
       
-      <!-- Título y badge -->
-      <h3 class="preview-title">Resultado de Verificación</h3>
-      <div class="badge-valido">
-        <span class="badge-icon">✓</span>
-        Certificado válido
-      </div>
-
       <!-- Preview del certificado -->
       <div class="preview-section">
         <div class="cert-stage">
@@ -55,11 +48,12 @@
               <div *ngIf="cargandoPdf" class="loading">
                 Cargando certificado...
               </div>
-              <div *ngIf="certificadoValido && !cargandoPdf" class="preview-placeholder">
-                <div class="preview-icon">✅</div>
-                <p class="preview-text">Certificado verificado exitosamente</p>
-                <p class="preview-subtext">Haz clic en "Descargar" para ver el certificado</p>
-              </div>
+              <iframe
+                *ngIf="pdfSrc && !cargandoPdf"
+                [src]="pdfSrc"
+                class="pdf-iframe"
+                title="Certificado">
+              </iframe>
               <div *ngIf="!certificadoValido && !cargandoPdf" class="no-pdf">
                 No se pudo cargar el certificado
               </div>

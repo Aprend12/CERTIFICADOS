@@ -126,7 +126,7 @@
   align-items: flex-start;
 }
 
-/* Estilo específico para step-datos en el wizard */
+/* Specific style for step-datos in the wizard */
 .step-content.active app-step-datos {
   width: 100%;
   max-width: 100%;
@@ -136,7 +136,7 @@
   box-sizing: border-box;
 }
 
-/* Estilo específico para step-pagos en el wizard */
+/* Specific style for step-pagos in the wizard */
 .step-content.active app-step-pagos {
   width: 100%;
   max-width: 100%;
@@ -422,7 +422,7 @@
   }
 }
 
-/* Estilos específicos para step-descarga en el wizard */
+/* Specific styles for step-descarga in the wizard */
 .step-content.active app-step-descarga {
   width: 100%;
   display: flex;

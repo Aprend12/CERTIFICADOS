@@ -1,4 +1,4 @@
-/**Configuración de rutas de la aplicación Angular.*/
+/**Route configuration for the Angular application.*/
 import { Routes } from '@angular/router';
 import { WizardComponent } from './features/certificados/compra-certificado/pages/wizard.component';
 import { VerificarCertificadoComponent } from './features/certificados/validacion/verificar-certificado/pages/verificar-certificado.component';

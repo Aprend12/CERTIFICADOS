@@ -1,4 +1,4 @@
-/**Punto de entrada principal para el bootstrapping de la aplicación Angular en el navegador.*/
+/**Main entry point for bootstrapping the Angular application in the browser.*/
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { App } from './app/app';

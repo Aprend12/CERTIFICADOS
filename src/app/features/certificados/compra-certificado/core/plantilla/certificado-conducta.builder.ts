@@ -1,5 +1,5 @@
 /**
- * Plantilla de Certificado de Buena Conducta (para preview).
+ * Good Conduct Certificate Template (for preview).
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 import { CertificadoPlantillaBase } from './certificado-base.builder';
@@ -7,11 +7,11 @@ import { CertificadoPlantillaBase } from './certificado-base.builder';
 export class CertificadoConductaBuilder extends CertificadoPlantillaBase implements CertificadoBuilder {
 
   build(datos: DatosCertificado): string {
-    const nombre = this.maskValue(datos.nombre_completo || datos.nombre, '*********************');
-    const documento = this.maskValue(datos.documento, '**************');
-    const programa = this.maskValue(datos.programa, '*********************');
-    const snies = this.maskValue(datos.snies, '**********');
-    const semestre = this.maskValue(datos.semestre, '***');
+    const nombre = datos.nombre_completo || datos.nombre || 'Andrés Felipe Herrera Cruz';
+    const documento = datos.documento || '3.456.789';
+    const programa = datos.programa || 'Ingeniería Mecánica';
+    const snies = datos.snies || '104321';
+    const semestre = datos.semestre || '8';
 
     const contenido = `
       ${this.getEncabezado('Constancia de Buena Conducta', 'PREVIEW-2024-****')}

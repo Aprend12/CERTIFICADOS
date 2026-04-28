@@ -1,5 +1,5 @@
 /**
- * Plantilla de Certificado de Práctica (para preview).
+ * Practice Certificate Template (for preview).
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 import { CertificadoPlantillaBase } from './certificado-base.builder';
@@ -7,8 +7,10 @@ import { CertificadoPlantillaBase } from './certificado-base.builder';
 export class CertificadoPracticaBuilder extends CertificadoPlantillaBase implements CertificadoBuilder {
 
   build(datos: DatosCertificado): string {
-    const nombre = datos.nombre_completo || datos.nombre || '*********************';
-    const documento = datos.documento || '**************';
+    const nombre = datos.nombre_completo || datos.nombre || 'Felipe Ignacio Navarro Stiles';
+    const documento = datos.documento || '7.654.321';
+    const programa = datos.programa || 'Medicina Veterinaria';
+    const snies = datos.snies || '105678';
 
     const contenido = `
       ${this.getEncabezado('Constancia de Prácticas', 'PREVIEW-2024-****')}
@@ -17,7 +19,7 @@ export class CertificadoPracticaBuilder extends CertificadoPlantillaBase impleme
         <p style="margin-bottom: 15px; text-align: center;">
           <span style="font-size: 12pt; font-weight: 700; color: ${this.COLOR_TEXT}; text-transform: uppercase; letter-spacing: 1px;">Hace Constar</span>
         </p>
-        <p style="margin-bottom: 15px; text-indent: 1.5cm;">Que, <strong style="color: ${this.COLOR_TEXT};">${nombre}</strong>, identificado(a) con número de cédula <strong>${documento}</strong>, cursó y aprobó el ciclo de prácticas integrales, asociadas al programa <strong style="color: ${this.COLOR_TEXT};">*********************</strong>, según código SNIES <strong>**********</strong>.</p>
+        <p style="margin-bottom: 15px; text-indent: 1.5cm;">Que, <strong style="color: ${this.COLOR_TEXT};">${nombre}</strong>, identificado(a) con número de cédula <strong>${documento}</strong>, cursó y aprobó el ciclo de prácticas integrales, asociadas al programa <strong style="color: ${this.COLOR_TEXT};">${programa}</strong>, según código SNIES <strong>${snies}</strong>.</p>
       </div>
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 9.5pt; border: 1px solid ${this.COLOR_PRIMARY};">
         <tr style="background: ${this.COLOR_PRIMARY}; color: white;">
@@ -29,36 +31,20 @@ export class CertificadoPracticaBuilder extends CertificadoPlantillaBase impleme
           <th style="padding: 10px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center; font-weight: 600;">PERIODO</th>
         </tr>
         <tr>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">***********************</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">***</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">****-*</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">Práctica Profesional I</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">160</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">320</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">12</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">9</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">2024-2</td>
         </tr>
         <tr style="background: #f7fafc;">
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">***********************</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">***</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">****-*</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">***********************</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">***</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">****-*</td>
-        </tr>
-        <tr style="background: #f7fafc;">
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">***********************</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">*</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">***</td>
-          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">****-*</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY};">Práctica Profesional II</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">192</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">384</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">14</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">10</td>
+          <td style="padding: 8px; border: 1px solid ${this.COLOR_PRIMARY}; text-align: center;">2025-1</td>
         </tr>
       </table>
       <div style="margin-top: 40px; text-align: left; font-size: 11pt; color: ${this.COLOR_MUTED};">

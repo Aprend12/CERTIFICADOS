@@ -1,6 +1,6 @@
 /**
- * Plantilla base para certificados.
- * Contiene la estructura y estilos profesionales.
+ * Base template for certificates.
+ * Contains professional structure and styles.
  */
 import { CONSTANTES_CERTIFICADO } from '../constants';
 
@@ -12,7 +12,7 @@ export class CertificadoPlantillaBase {
   protected readonly FIRMA_NOMBRE = CONSTANTES_CERTIFICADO.FIRMA_NOMBRE;
   protected readonly FIRMA_CARGO = CONSTANTES_CERTIFICADO.FIRMA_CARGO;
   protected readonly LOGO = CONSTANTES_CERTIFICADO.LOGO;
-  
+
   protected readonly COLOR_PRIMARY = CONSTANTES_CERTIFICADO.COLOR_PRIMARY;
   protected readonly COLOR_ACCENT = CONSTANTES_CERTIFICADO.COLOR_ACCENT;
   protected readonly COLOR_TEXT = CONSTANTES_CERTIFICADO.COLOR_TEXT;
@@ -78,7 +78,19 @@ export class CertificadoPlantillaBase {
   protected getWrapper(contenido: string): string {
     return `
       <div style="width: 21.59cm; min-height: 27.94cm; margin: 0 auto; position: relative; overflow: hidden; background: white; font-family: 'Calibri', 'Times New Roman', serif;">
-        ${this.getMarcosDecorativos()}
+        <div style="
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 800px;
+          height: auto;
+          opacity: 0.25;
+          z-index: 0;
+          pointer-events: none;
+        ">
+          <img src="assets/images/marca_agua.webp" alt="" style="width: 100%; height: auto;">
+        </div>
         <div style="position: relative; z-index: 1; padding: 3cm 3cm 2.5cm 3cm;">
           ${contenido}
         </div>

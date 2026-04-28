@@ -1,6 +1,6 @@
 /**
- * Constructor del Certificado de Estudio Sencillo.
- * Formato profesional institucional para descarga.
+ * Simple Study Certificate Constructor.
+ * Professional institutional format for download.
  */
 import { DatosCertificado, CertificadoBuilder } from '../models/certificado.model';
 import { CertificadoPlantillaBase } from './certificado-base.builder';
@@ -44,6 +44,7 @@ export class CertificadoSencilloBuilder extends CertificadoPlantillaBase impleme
         hash_code: '**************',
       };
     }
+
     return {
       numero: this.sanitize(datos.codigo || ''),
       nombre: this.sanitize(datos.nombre_completo || datos.nombre || ''),

@@ -1,4 +1,4 @@
-/** Servidor Express para Angular Universal (SSR - Server Side Rendering).*/
+/** Express server for Angular Universal (SSR - Server Side Rendering).*/
 import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
@@ -8,16 +8,16 @@ import {
 import express from 'express';
 import { join } from 'node:path';
 
-/**Ruta a la carpeta de archivos estáticos del navegador */
+/**Path to the browser static files folder */
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
-/**Instancia de la aplicación Express*/
+/**Express application instance*/
 const app = express();
 
-/**Motor de aplicación Angular para SSR*/
+/**Angular application engine for SSR*/
 const angularApp = new AngularNodeAppEngine();
 
-/**Servir archivos estáticos desde la carpeta /browserConfiguración optimizada para caché a largo plazo*/
+/**Serve static files from /browser folder with long-term cache configuration*/
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -26,7 +26,7 @@ app.use(
   }),
 );
 
-/**Manejar todas las demás solicitudes renderizando la aplicación Angular.*/
+/**Handle all other requests by rendering the Angular application.*/
 app.use((req, res, next) => {
   angularApp
     .handle(req)
@@ -36,7 +36,7 @@ app.use((req, res, next) => {
     .catch(next);
 });
 
-/**Iniciar el servidor si este módulo es el punto de entrada principalo si se ejecuta a través de PM2.*/
+/**Start the server if this module is the main entry point or if running via PM2.*/
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
   const port = process.env['PORT'] || 4000;
   app.listen(port, (error) => {
